@@ -129,13 +129,13 @@
     >
       <el-row style="margin-bottom: 3px;">
         <el-col :span="8">
-          <span>白班早下班时间区间：</span>
+          <el-input v-model="dayTimeText" class="textBtn" placeholder="请输入内容" />
         </el-col>
         <el-col :span="8">
-          <span>夜班早下班时间区间：</span>
+          <el-input v-model="nightTimeText" class="textBtn" placeholder="请输入内容" />
         </el-col>
         <el-col :span="8">
-          <span>白班保养时间区间：</span>
+          <el-input v-model="maintainTimeText" class="textBtn" placeholder="请输入内容" />
         </el-col>
       </el-row>
       <el-row>
@@ -172,10 +172,10 @@
       </el-row>
       <el-row style="margin-bottom: 3px;">
         <el-col :span="8">
-          <span>自定义时间(方式一)：</span>
+          <el-input v-model="customTimeText" class="textBtn" placeholder="请输入内容" />
         </el-col>
         <el-col :span="16">
-          <span>自定义时间(方式二)：</span>
+          <el-input v-model="customTime2Text" class="textBtn" placeholder="请输入内容" />
         </el-col>
       </el-row>
       <el-row>
@@ -215,27 +215,27 @@
         <el-table-column prop="line_name" label="维护线体" width="100" />
         <el-table-column prop="dayTime" label="白班早下班" :render-header="renderHeaderDay">
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.dayTime">白班早下班</el-checkbox>
+            <el-checkbox v-model="scope.row.dayTime">{{ dayTimeText }}</el-checkbox>
           </template>
         </el-table-column>
         <el-table-column prop="nightTime" label="夜班早下班" :render-header="renderHeaderNight">
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.nightTime">夜班早下班</el-checkbox>
+            <el-checkbox v-model="scope.row.nightTime">{{ nightTimeText }}</el-checkbox>
           </template>
         </el-table-column>
         <el-table-column prop="maintainTime" label="白班保养" :render-header="renderHeaderMaintain">
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.maintainTime" style="margin-top: 5px;">白班保养</el-checkbox>
+            <el-checkbox v-model="scope.row.maintainTime" style="margin-top: 5px;">{{ maintainTimeText }}</el-checkbox>
           </template>
         </el-table-column>
         <el-table-column prop="customTime" label="自定义时间(方式一)" :render-header="renderHeaderCustom">
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.customTime" style="margin-top: 5px;">自定义时间(方式一)</el-checkbox>
+            <el-checkbox v-model="scope.row.customTime" style="margin-top: 5px;">{{ customTimeText }}</el-checkbox>
           </template>
         </el-table-column>
         <el-table-column prop="customTime2" label="自定义时间(方式二)" :render-header="renderHeaderCustom2">
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.customTime2" style="margin-top: 5px;">自定义时间(方式二)</el-checkbox>
+            <el-checkbox v-model="scope.row.customTime2" style="margin-top: 5px;">{{ customTime2Text }}</el-checkbox>
           </template>
         </el-table-column>
       </el-table>
@@ -544,6 +544,11 @@ export default {
       tableDataMulti: [],
       customDateTime: [],
       customHourTime: [],
+      dayTimeText: '白班早下班',
+      nightTimeText: '夜班早下班',
+      maintainTimeText: '白班保养',
+      customTimeText: '自定义时间(方式一)',
+      customTime2Text: '自定义时间(方式二)',
       // 表单相关数据
       forms: ['$form'],
       model: {
@@ -884,6 +889,13 @@ export default {
       this.dialogMultiVisible = true
     },
     addMultiData() {
+      const map_name = {
+        'day_time_text': this.dayTimeText,
+        'night_time_text': this.nightTimeText,
+        'maintain_time_text': this.maintainTimeText,
+        'custom_time_text': this.customTimeText,
+        'custom_time_text2': this.customTime2Text
+      }
       const data = {
         'user_name': this.name,
         'day_time': this.dayTime,
@@ -892,9 +904,9 @@ export default {
         'custom_time': this.customTime,
         'custom_date_time': this.customDateTime,
         'custom_hour_time': this.customHourTime,
-        'block_time_data': this.tableDataMulti
+        'block_time_data': this.tableDataMulti,
+        'map_name': map_name
       }
-      console.log('时间数据:', data)
       AddMultiData(data).then(res => {
         if (res.code === 20000) {
           this.$notify({
@@ -1355,5 +1367,8 @@ export default {
 .el-table .warning-row {
   color: #E6A23C;
 }
-
+.textBtn .el-input__inner{
+  border: none;
+  height: 16px;
+}
 </style>

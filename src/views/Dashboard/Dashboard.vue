@@ -138,10 +138,10 @@ export default {
   methods: {
     // 一些快捷路由跳转
     toCompute() {
-      this.$router.push({ path: 'Control/schedulepanel' })
+      this.$router.push({ path: 'control/schedulepanel' })
     },
     toAnalysis() {
-      this.$router.push({ path: 'Control/onlinetable' })
+      this.$router.push({ path: 'control/onlinetable' })
     },
     toLoggingdb() {
       this.$router.push({ path: 'historylog/historyrun' })
@@ -150,10 +150,10 @@ export default {
       this.$router.push({ path: 'historylog/historyopera' })
     },
     toConfig() {
-      this.$router.push({ path: 'Control/config' })
+      this.$router.push({ path: 'control/config' })
     },
     toBlockTimeData() {
-      this.$router.push({ path: 'dayconfig/blocktimedata' })
+      this.$router.push({ path: 'dayconfig/blocktimetata' })
     },
     toOutsource() {
       this.$router.push({ path: 'Control/outsourcecontrol' })
