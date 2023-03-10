@@ -479,9 +479,6 @@ export default {
     // 导入排程
     async submitUploadFile() {
       this.loadingInstance = Loading.service(this.importLoading)
-      setTimeout(() => {
-        this.handleCloseImport()
-      }, 1000)
       await ImportFiles(this.formData).then(res => {
         this.loadingInstance.close()
         this.$message({
@@ -491,6 +488,9 @@ export default {
         SaveStepNow({ 'step_now': 1 }).then(res => {
           this.stepNow = 1
         })
+        setTimeout(() => {
+          this.handleCloseImport()
+        }, 1000)
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
         this.$alert(err, '错误', {
@@ -508,25 +508,38 @@ export default {
         })
         return
       }
-      const loadingMessage = {
-        text: '组件筛选中...',
-        background: 'rgba(0, 0, 0, 0.5)'
-      }
-      this.loadingInstance = Loading.service(loadingMessage)
-      DoFilterRules().then(res => {
-        this.loadingInstance.close()
-        this.$alert(res.message, res.message_title, {
-          confirmButtonText: '确定',
-          type: res.message_type
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要进行组件筛选？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loadingMessage = {
+          text: '组件筛选中...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        }
+        this.loadingInstance = Loading.service(loadingMessage)
+        DoFilterRules().then(res => {
+          this.loadingInstance.close()
+          this.$alert(res.message, res, '提示', {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+          SaveStepNow({ 'step_now': 2 }).then(res => {
+            this.stepNow = 2
+          })
+        }).catch(err => {
+          this.loadingInstance.close()
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
         })
-        SaveStepNow({ 'step_now': 2 }).then(res => {
-          this.stepNow = 2
-        })
-      }).catch(err => {
-        this.loadingInstance.close()
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
-          type: 'error'
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
         })
       })
     },
@@ -539,25 +552,38 @@ export default {
         })
         return
       }
-      const loadingMessage = {
-        text: '更新新机种中...',
-        background: 'rgba(0, 0, 0, 0.5)'
-      }
-      this.loadingInstance = Loading.service(loadingMessage)
-      UpdateNewModels().then(res => {
-        this.loadingInstance.close()
-        this.$alert(res.message, res.message_title, {
-          confirmButtonText: '确定',
-          type: res.message_type
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要更新新机种？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loadingMessage = {
+          text: '更新新机种中...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        }
+        this.loadingInstance = Loading.service(loadingMessage)
+        UpdateNewModels().then(res => {
+          this.loadingInstance.close()
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+          SaveStepNow({ 'step_now': 3 }).then(res => {
+            this.stepNow = 3
+          })
+        }).catch(err => {
+          this.loadingInstance.close()
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
         })
-        SaveStepNow({ 'step_now': 3 }).then(res => {
-          this.stepNow = 3
-        })
-      }).catch(err => {
-        this.loadingInstance.close()
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
-          type: 'error'
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
         })
       })
     },
@@ -593,20 +619,33 @@ export default {
         })
         return
       }
-      this.listenProgress()
-      GnerateDivisions().then(res => {
-        this.clearListenProgress()
-        this.$alert(res.message, res.message_title, {
-          confirmButtonText: '确定',
-          type: res.message_type
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要生成分工单？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.listenProgress()
+        GnerateDivisions().then(res => {
+          this.clearListenProgress()
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+          SaveStepNow({ 'step_now': 4 }).then(res => {
+            this.stepNow = 4
+          })
+        }).catch(err => {
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
         })
-        SaveStepNow({ 'step_now': 4 }).then(res => {
-          this.stepNow = 4
-        })
-      }).catch(err => {
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
-          type: 'error'
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
         })
       })
     },
@@ -659,7 +698,7 @@ export default {
       }, 1000)
       DoOutsourceDistribute(form).then(res => {
         this.loadingInstance.close()
-        this.$alert(res.message, res.message_title, {
+        this.$alert(res.message, '提示', {
           confirmButtonText: '确定',
           type: res.message_type
         })
