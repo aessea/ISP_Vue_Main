@@ -137,3 +137,25 @@ export function UpdateConfigurableParams(data) {
     data
   })
 }
+// 清空每日产能
+export function ClearDayCapacityConfig() {
+  return request({
+    method: 'get',
+    url: '/OutsourcingPriority/daycapacityconfig/clear_data/'
+  })
+}
+// 添加每日产能
+export function AppendDayCapacityConfig(data) {
+  return request({
+    method: 'post',
+    url: '/OutsourcingPriority/daycapacityconfig/add_data/',
+    data
+  })
+}
+// 获取每日产能
+export function GetDayCapacityConfig() {
+  return request({
+    method: 'get',
+    url: '/OutsourcingPriority/daycapacityconfig/get_table_data/'
+  })
+}

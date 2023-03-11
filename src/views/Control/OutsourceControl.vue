@@ -304,7 +304,7 @@
       </span>
     </el-dialog>
     <el-row :gutter="10" style="margin: 10px;">
-      <el-col :span="16">
+      <el-col :span="12">
         <el-card class="card-config">
           <div slot="header" class="clearfix">
             <span>参数配置</span>
@@ -315,7 +315,7 @@
             <el-table
               id="mytable"
               :header-cell-style="{color:'#606266'}"
-              :data="table_data_config"
+              :data="table_data_params_config"
             >
               <el-table-column prop="param_desc" label="参数描述" />
               <el-table-column prop="param_value" label="参数值">
@@ -332,14 +332,68 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="12">
         <el-card class="card-config">
           <div slot="header" class="clearfix">
-            <span>其它</span>
+            <span>每日产能配置</span>
+            <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0" type="text" @click="showDayCapacityConfigDialog">添加数据</el-button>
+            <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0;" type="text" @click="clearDayCapacityConfig">清空数据</el-button>
+          </div>
+          <div class="table-box">
+            <el-table
+              id="mytable"
+              :header-cell-style="{color:'#606266'}"
+              :data="table_data_day_capacity_config"
+            >
+              <el-table-column prop="component_type" label="组件类型" />
+              <el-table-column prop="date_info" label="日期" />
+              <el-table-column prop="capacity" label="产能" />
+            </el-table>
           </div>
         </el-card>
       </el-col>
     </el-row>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="添加每日产能"
+      :visible.sync="dayCapacityConfigDialogVisible"
+      width="60%"
+      :before-close="handleDayCapacityConfigClose"
+      @dragDialog="handleDrag"
+    >
+      <el-form ref="$form" :model="model" label-position="left" size="small">
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.component_type" prop="component_type" label="组件类型">
+              <el-input v-model="model.component_type" placeholder="请输入数字" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.date_info" prop="date_info" label="日期">
+              <el-date-picker
+                v-model="model.date_info"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.capacity" prop="capacity" label="产能">
+              <el-input-number v-model="model.capacity" placeholder="请输入产能" :step="1" :style="{width: '100%'}" clearable />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleDayCapacityConfigClose">关闭</el-button>
+        <el-button type="primary" @click="appendDayCapacityConfig">确认添加</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -349,7 +403,8 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
-  DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams } from '@/api/Control/OutsourceControl'
+  DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
+  GetDayCapacityConfig } from '@/api/Control/OutsourceControl'
 export default {
   name: 'OutsourceControl',
   directives: { elDragDialog },
@@ -397,9 +452,35 @@ export default {
       updateOutsourceMeshBoardTip: '未更新',
       updateNewModelsTip: '未更新',
       dialogVisibleDoFilterRules: false,
-      table_data_config: [],
-      isUpdateConfig: false
-
+      table_data_params_config: [],
+      isUpdateConfig: false,
+      table_data_day_capacity_config: [],
+      dayCapacityConfigDialogVisible: false,
+      // 表单相关数据
+      forms: ['$form'],
+      model: {
+        id: '',
+        component_type: '',
+        date_info: '',
+        capacity: ''
+      },
+      rules: {
+        component_type: [{
+          required: true,
+          message: '组件类型不能为空',
+          trigger: 'blur'
+        }],
+        date_info: [{
+          required: true,
+          message: '日期不能为空',
+          trigger: 'blur'
+        }],
+        capacity: [{
+          required: true,
+          message: '产能不能为空',
+          trigger: 'blur'
+        }]
+      }
     }
   },
   computed: {
@@ -410,28 +491,98 @@ export default {
   created() {
     this.listenProgress()
     this.getBaseData()
-    this.getParamConfig()
+    this.getParamsConfigData()
+    this.getDayCapacityConfig()
   },
   mounted() {
 
   },
   methods: {
+    // 打开添加每日产能数据窗口
+    showDayCapacityConfigDialog() {
+      this.dayCapacityConfigDialogVisible = true
+    },
+    // 关闭添加每日产能数据窗口
+    handleDayCapacityConfigClose() {
+      this.dayCapacityConfigDialogVisible = false
+    },
+    // 添加每日产能数据
+    appendDayCapacityConfig() {
+      const data = this.model
+      data['user_name'] = this.name
+      this.$refs['$form'].validate((valid) => {
+        if (valid) {
+          AppendDayCapacityConfig(data).then(res => {
+            if (res.code === 20000) {
+              this.$alert(res.message, '提示', {
+                confirmButtonText: '确定',
+                type: res.message_type
+              })
+              this.getDayCapacityConfig()
+            }
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '提交失败，请按照要求填写数据！'
+          })
+        }
+      })
+    },
+    // 清空每日产能数据
+    clearDayCapacityConfig() {
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定清空每日产能数据？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        ClearDayCapacityConfig().then(res => {
+          this.$message({
+            message: res.message,
+            type: res.message_type
+          })
+          this.getDayCapacityConfig()
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
+    },
     // 点击修改配置
     modifyParamsConfig() {
       this.isUpdateConfig = true
     },
     // 保存更新配置
     saveParamsConfig() {
-      const data = {
-        data: this.table_data_config
-      }
-      UpdateConfigurableParams(data).then(res => {
-        // 修改update状态为不可编辑
-        this.isUpdateConfig = false
-        this.$message({
-          message: res.message,
-          type: res.message_type
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定修改配置？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const data = {
+          data: this.table_data_params_config
+        }
+        UpdateConfigurableParams(data).then(res => {
+          // 修改update状态为不可编辑
+          this.isUpdateConfig = false
+          this.$message({
+            message: res.message,
+            type: res.message_type
+          })
+          this.getParamsConfigData()
         })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+        this.isUpdateConfig = false
       })
     },
     // 获取当前外包计算进行到哪一步
@@ -524,9 +675,14 @@ export default {
       this.progress_refresh = null
     },
     // 获取配置
-    getParamConfig() {
+    getParamsConfigData() {
       GetParamConfig().then(res => {
-        this.table_data_config = res.table_data
+        this.table_data_params_config = res.table_data
+      })
+    },
+    getDayCapacityConfig() {
+      GetDayCapacityConfig().then(res => {
+        this.table_data_day_capacity_config = res.table_data
       })
     },
     handleCloseCompute() {
