@@ -1081,8 +1081,8 @@ export default {
       form['run_mode'] = this.runMode // ["自制优先", "外包优先"]
       GenerateOutput(form).then(res => {
         this.clearListenProgress()
-        this.$message({
-          message: res.message,
+        this.$alert(res.message, '提示', {
+          confirmButtonText: '确定',
           type: 'success'
         })
         SaveStepNow({ 'step_now': 5 }).then(res => {
