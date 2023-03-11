@@ -55,7 +55,7 @@
                 <el-step title="导入文件" />
                 <el-step title="组件筛选" />
                 <el-step title="生成分工单" />
-                <el-step title="计算排程" />
+                <el-step title="开始计算" />
                 <el-step title="输出文件" />
               </el-steps>
               <div class="box-button">
@@ -259,19 +259,20 @@
       :before-close="handleCloseDoFilterRules"
       @dragDialog="handleDrag"
     >
-      <p>组件筛选相关操作</p>
+      <p>进行组件筛选后，可“下载筛选结果”进行查看</p>
+      <p>进行组件筛选后，可进行“更新新机种”</p>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="doFilterRules">
           进行组件筛选
+        </el-button>
+        <el-button type="stopBtn" @click="downloadFilterOutputFiles">
+          下载筛选结果
         </el-button>
         <el-tooltip class="item" effect="dark" :content="updateNewModelsTip" placement="top">
           <el-button type="stopBtn" @click="updateNewModels">
             更新新机种
           </el-button>
         </el-tooltip>
-        <el-button type="stopBtn" @click="downloadFilterOutputFiles">
-          下载筛选结果
-        </el-button>
         <el-button @click="handleCloseDoFilterRules">
           关闭
         </el-button>
@@ -744,9 +745,6 @@ export default {
         SaveStepNow({ 'step_now': 1 }).then(res => {
           this.stepNow = 1
         })
-        setTimeout(() => {
-          this.handleCloseImport()
-        }, 1000)
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
         this.$alert(err, '错误', {
@@ -786,7 +784,7 @@ export default {
         this.loadingInstance = Loading.service(loadingMessage)
         DoFilterRules().then(res => {
           this.loadingInstance.close()
-          this.$alert(res.message, res, '提示', {
+          this.$alert(res.message, res.message_title, {
             confirmButtonText: '确定',
             type: res.message_type
           })
@@ -820,7 +818,7 @@ export default {
         if (res.file_list.length === 0) {
           this.$message({
             type: 'warning',
-            message: '文件数量为空'
+            message: '获取到文件数量为空'
           })
           return
         }
@@ -879,10 +877,7 @@ export default {
           this.loadingInstance.close()
           this.$alert(res.message, '提示', {
             confirmButtonText: '确定',
-            type: res.message_type
-          })
-          SaveStepNow({ 'step_now': 3 }).then(res => {
-            this.stepNow = 3
+            type: 'success'
           })
           this.updateNewModelsTip = '已更新'
         }).catch(err => {
@@ -915,13 +910,20 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        const loadingMessage = {
+          text: '更新旧工单网板状态中...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        }
+        this.loadingInstance = Loading.service(loadingMessage)
         UpdateOutsourceMeshBoard().then(res => {
+          this.loadingInstance.close()
           this.$alert(res.message, '提示', {
             confirmButtonText: '确定',
             type: res.message_type
           })
           this.updateOutsourceMeshBoardTip = '已更新'
         }).catch(err => {
+          this.loadingInstance.close()
           this.$alert(err, '错误', {
             confirmButtonText: '确定',
             type: 'error'
@@ -945,10 +947,6 @@ export default {
       ShowFilterRules().then(res => {
         this.table_data_rules = res.components
         this.loadingInstance.close()
-        this.$message({
-          message: res.message,
-          type: res.message_type
-        })
       }).catch(err => {
         this.loadingInstance.close()
         this.$alert(err, '错误', {
@@ -959,9 +957,9 @@ export default {
     },
     // 生成分工单
     generateDivisions() {
-      if (this.stepNow < 3) {
+      if (this.stepNow < 2) {
         this.$message({
-          message: '请先更新新机种',
+          message: '请先进行组件筛选',
           type: 'warning'
         })
         return
@@ -974,14 +972,18 @@ export default {
         type: 'warning'
       }).then(() => {
         this.listenProgress()
+        this.$message({
+          type: 'success',
+          message: '开始生成分工单，请关注第一个进度条'
+        })
         GnerateDivisions().then(res => {
           this.clearListenProgress()
           this.$alert(res.message, '提示', {
             confirmButtonText: '确定',
             type: res.message_type
           })
-          SaveStepNow({ 'step_now': 4 }).then(res => {
-            this.stepNow = 4
+          SaveStepNow({ 'step_now': 3 }).then(res => {
+            this.stepNow = 3
           })
         }).catch(err => {
           this.$alert(err, '错误', {
@@ -998,7 +1000,7 @@ export default {
     },
     // 计算之前的确认
     beforeDoOutsourceDistribute() {
-      if (this.stepNow < 4) {
+      if (this.stepNow < 3) {
         this.$message({
           message: '请先生成分工单',
           type: 'warning'
@@ -1019,7 +1021,7 @@ export default {
         title: '提示',
         message: '请确认以下配置项：' + map_1[this.componentType] + '、' + map_2[this.runMode],
         confirmButtonText: '确定',
-        cancelButtonText: '重新选择',
+        cancelButtonText: '重新选择配置',
         type: 'warning'
       }).then(() => {
         this.doOutsourceDistribute()
@@ -1049,8 +1051,8 @@ export default {
           confirmButtonText: '确定',
           type: res.message_type
         })
-        SaveStepNow({ 'step_now': 5 }).then(res => {
-          this.stepNow = 5
+        SaveStepNow({ 'step_now': 4 }).then(res => {
+          this.stepNow = 4
         })
       }).catch(err => {
         this.loadingInstance.close()
@@ -1062,7 +1064,7 @@ export default {
     },
     // 输出文件
     generateOutput() {
-      if (this.stepNow < 5) {
+      if (this.stepNow < 4) {
         this.$message({
           message: '计算未完成，无法输出',
           type: 'warning'
@@ -1070,6 +1072,10 @@ export default {
         return
       }
       this.listenProgress()
+      this.$message({
+        type: 'success',
+        message: '开始输出文件，请关注第二个进度条'
+      })
       const form = {}
       form['component_type'] = this.componentType // ["SMT主板", "SMT小板", "AI", "SMT点胶"]
       form['run_mode'] = this.runMode // ["自制优先", "外包优先"]
@@ -1079,8 +1085,8 @@ export default {
           message: res.message,
           type: 'success'
         })
-        SaveStepNow({ 'step_now': 6 }).then(res => {
-          this.stepNow = 6
+        SaveStepNow({ 'step_now': 5 }).then(res => {
+          this.stepNow = 5
         })
       }).catch(err => {
         this.$alert(err, '错误', {
