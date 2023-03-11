@@ -122,3 +122,18 @@ export function DownloadFilterOutputFiles() {
     url: '/OutsourcingPriority/getfilteroutput/'
   })
 }
+// 获取配置
+export function GetParamConfig() {
+  return request({
+    method: 'get',
+    url: '/OutsourcingPriority/paramconfig/get_all_data/'
+  })
+}
+// 更新配置
+export function UpdateConfigurableParams(data) {
+  return request({
+    method: 'post',
+    url: '/OutsourcingPriority/paramconfig/update_configurable_params/',
+    data
+  })
+}

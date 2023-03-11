@@ -117,3 +117,7 @@ border-color:#1276c2;
 border-radius: 3px;
 color: #fff;
 }
+.card-config{
+  height: 500px;
+  overflow-y:auto; // 开启滚动显示溢出内容
+}

@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <el-row :gutter="16" style="margin-right: 10px;margin-top: 16px;">
+    <el-row :gutter="10" style="margin-right: 10px;margin-top: 16px;">
       <el-col :span="8">
         <el-card class="card-progress">
           <div slot="header" class="clearfix">
@@ -303,7 +303,43 @@
         </el-button>
       </span>
     </el-dialog>
-
+    <el-row :gutter="10" style="margin: 10px;">
+      <el-col :span="16">
+        <el-card class="card-config">
+          <div slot="header" class="clearfix">
+            <span>参数配置</span>
+            <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0" type="text" @click="modifyParamsConfig">修改配置</el-button>
+            <el-button v-else-if="isUpdateConfig === true" style="float: right; padding: 3px 0" type="text" @click="saveParamsConfig">保存修改</el-button>
+          </div>
+          <div class="table-box">
+            <el-table
+              id="mytable"
+              :header-cell-style="{color:'#606266'}"
+              :data="table_data_config"
+            >
+              <el-table-column prop="param_desc" label="参数描述" />
+              <el-table-column prop="param_value" label="参数值">
+                <template slot-scope="scope">
+                  <el-input
+                    v-model="scope.row.param_value"
+                    placeholder="请输入内容"
+                    :disabled="!isUpdateConfig"
+                    style="width:75%"
+                  />
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card class="card-config">
+          <div slot="header" class="clearfix">
+            <span>其它</span>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -313,7 +349,7 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
-  DownloadFilterOutputFiles } from '@/api/Control/OutsourceControl'
+  DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams } from '@/api/Control/OutsourceControl'
 export default {
   name: 'OutsourceControl',
   directives: { elDragDialog },
@@ -360,7 +396,9 @@ export default {
       table_data_rules: [], // 显示筛选规则
       updateOutsourceMeshBoardTip: '未更新',
       updateNewModelsTip: '未更新',
-      dialogVisibleDoFilterRules: false
+      dialogVisibleDoFilterRules: false,
+      table_data_config: [],
+      isUpdateConfig: false
 
     }
   },
@@ -372,11 +410,31 @@ export default {
   created() {
     this.listenProgress()
     this.getBaseData()
+    this.getParamConfig()
   },
   mounted() {
 
   },
   methods: {
+    // 点击修改配置
+    modifyParamsConfig() {
+      this.isUpdateConfig = true
+    },
+    // 保存更新配置
+    saveParamsConfig() {
+      const data = {
+        data: this.table_data_config
+      }
+      UpdateConfigurableParams(data).then(res => {
+        // 修改update状态为不可编辑
+        this.isUpdateConfig = false
+        this.$message({
+          message: res.message,
+          type: res.message_type
+        })
+      })
+    },
+    // 获取当前外包计算进行到哪一步
     getBaseData() {
       GetBaseData().then(res => {
         this.stepNow = res.step_now
@@ -464,6 +522,12 @@ export default {
     clearListenProgress() {
       clearInterval(this.progress_refresh)
       this.progress_refresh = null
+    },
+    // 获取配置
+    getParamConfig() {
+      GetParamConfig().then(res => {
+        this.table_data_config = res.table_data
+      })
     },
     handleCloseCompute() {
       this.dialogVisibleCompute = false
