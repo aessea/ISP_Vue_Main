@@ -108,4 +108,17 @@ export function DownloadFile(data) {
     data
   })
 }
-
+export function UpdateOutsourceMeshBoard(data) {
+  return request({
+    method: 'post',
+    url: '/OutsourcingPriority/updatemeshboard/',
+    data
+  })
+}
+// 获取组件筛选下载文件的路径
+export function DownloadFilterOutputFiles() {
+  return request({
+    method: 'get',
+    url: '/OutsourcingPriority/getfilteroutput/'
+  })
+}

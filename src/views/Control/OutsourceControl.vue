@@ -54,7 +54,6 @@
               <el-steps :active="stepNow" :align-center="false" finish-status="success" simple>
                 <el-step title="导入文件" />
                 <el-step title="组件筛选" />
-                <el-step title="更新新机种" />
                 <el-step title="生成分工单" />
                 <el-step title="计算排程" />
                 <el-step title="输出文件" />
@@ -65,20 +64,20 @@
                     <el-button type="primary" plain @click="importDialog">
                       1.导入输入文件
                     </el-button>
-                    <el-button type="primary" plain @click="doFilterRules">
+                    <el-button type="primary" plain @click="doFilterRulesDialog">
                       2.组件筛选
                     </el-button>
-                    <el-button type="primary" plain @click="updateNewModels">
+                    <!-- <el-button type="primary" plain @click="updateNewModels">
                       3.更新新机种
-                    </el-button>
+                    </el-button> -->
                     <el-button type="primary" plain @click="generateDivisions">
-                      4.生成分工单
+                      3.生成分工单
                     </el-button>
                     <el-button type="primary" plain @click="computeDialog">
-                      5.开始计算
+                      4.开始计算
                     </el-button>
                     <el-button type="success" @click="generateOutput">
-                      6.输出文件
+                      5.输出文件
                     </el-button>
                     <el-button plain @click="showFilterRules">
                       显示筛选规则
@@ -202,6 +201,11 @@
         <el-button type="primary" style="margin-left:10px;" @click="beforeImport">
           导入文件
         </el-button>
+        <el-tooltip class="item" effect="dark" :content="updateOutsourceMeshBoardTip" placement="top">
+          <el-button type="stopBtn" style="margin-left:10px;" @click="updateOutsourceMeshBoard">
+            更新旧工单网板状态
+          </el-button>
+        </el-tooltip>
         <el-button @click="handleCloseImport">
           关闭
         </el-button>
@@ -248,6 +252,34 @@
 
     <el-dialog
       v-el-drag-dialog
+      title="组件筛选"
+      :visible.sync="dialogVisibleDoFilterRules"
+      width="30%"
+      :close-on-click-modal="false"
+      :before-close="handleCloseDoFilterRules"
+      @dragDialog="handleDrag"
+    >
+      <p>组件筛选相关操作</p>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="doFilterRules">
+          进行组件筛选
+        </el-button>
+        <el-tooltip class="item" effect="dark" :content="updateNewModelsTip" placement="top">
+          <el-button type="stopBtn" @click="updateNewModels">
+            更新新机种
+          </el-button>
+        </el-tooltip>
+        <el-button type="stopBtn" @click="downloadFilterOutputFiles">
+          下载筛选结果
+        </el-button>
+        <el-button @click="handleCloseDoFilterRules">
+          关闭
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
       title="筛选规则"
       :visible.sync="dialogVisibleRules"
       width="60%"
@@ -280,7 +312,8 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
-  ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData } from '@/api/Control/OutsourceControl'
+  ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
+  DownloadFilterOutputFiles } from '@/api/Control/OutsourceControl'
 export default {
   name: 'OutsourceControl',
   directives: { elDragDialog },
@@ -324,7 +357,10 @@ export default {
       formData: new FormData(),
       dialogVisibleCompute: false,
       dialogVisibleRules: false,
-      table_data_rules: [] // 显示筛选规则
+      table_data_rules: [], // 显示筛选规则
+      updateOutsourceMeshBoardTip: '未更新',
+      updateNewModelsTip: '未更新',
+      dialogVisibleDoFilterRules: false
 
     }
   },
@@ -499,6 +535,14 @@ export default {
         })
       })
     },
+    // 关闭组件筛选弹窗
+    handleCloseDoFilterRules() {
+      this.dialogVisibleDoFilterRules = false
+    },
+    // 组件筛选弹窗
+    doFilterRulesDialog() {
+      this.dialogVisibleDoFilterRules = true
+    },
     // 组件筛选
     doFilterRules() {
       if (this.stepNow < 1) {
@@ -543,6 +587,53 @@ export default {
         })
       })
     },
+    // 下载筛选结果
+    downloadFilterOutputFiles() {
+      if (this.stepNow < 2) {
+        this.$message({
+          type: 'warning',
+          message: '未进行组件筛选，无法下载'
+        })
+        return
+      }
+      DownloadFilterOutputFiles().then(res => {
+        if (res.file_list.length === 0) {
+          this.$message({
+            type: 'warning',
+            message: '文件数量为空'
+          })
+          return
+        }
+        this.$confirm('提示', {
+          title: '提示',
+          message: '确定要下载全部文件（本次共有 ' + res.file_list.length + ' 个文件）？',
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          for (const key in res.file_list) {
+            DownloadFile({ 'file_path': res.file_list[key] }).then(resp => {
+              this.downloadFile(resp)
+            }).catch(err => {
+              console.log(err)
+              this.$message({
+                message: '下载失败，文件不存在',
+                type: 'error'
+              })
+            })
+          }
+          this.$alert('本次共下载了 ' + res.file_list.length + ' 个文件', '提示', {
+            confirmButtonText: '确定',
+            type: 'success'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消下载'
+          })
+        })
+      })
+    },
     // 更新新机种
     updateNewModels() {
       if (this.stepNow < 2) {
@@ -573,8 +664,44 @@ export default {
           SaveStepNow({ 'step_now': 3 }).then(res => {
             this.stepNow = 3
           })
+          this.updateNewModelsTip = '已更新'
         }).catch(err => {
           this.loadingInstance.close()
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
+    },
+    // 更新旧工单网板状态
+    updateOutsourceMeshBoard() {
+      if (this.fileListOldOrder.length < 1 || this.stepNow < 1) {
+        this.$message({
+          type: 'warning',
+          message: '未导入旧工单文件，无需进行更新'
+        })
+        return
+      }
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要更新旧工单网板状态？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        UpdateOutsourceMeshBoard().then(res => {
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+          this.updateOutsourceMeshBoardTip = '已更新'
+        }).catch(err => {
           this.$alert(err, '错误', {
             confirmButtonText: '确定',
             type: 'error'
@@ -759,6 +886,13 @@ export default {
     // 下载所有文件
     downloadAllFile() {
       DownloadAllFile().then(res => {
+        if (res.file_list.length === 0) {
+          this.$message({
+            type: 'warning',
+            message: '文件数量为空'
+          })
+          return
+        }
         this.$confirm('提示', {
           title: '提示',
           message: '确定要下载全部输出文件（本次共有 ' + res.file_list.length + ' 个输出文件）？',
