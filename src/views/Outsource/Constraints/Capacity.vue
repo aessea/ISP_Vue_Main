@@ -206,6 +206,7 @@ export default {
   directives: { elDragDialog },
   data() {
     return {
+      table_name: '',
       loading: true, // 表格加载动画
       importLoading: {
         text: '拼命导入中...',
@@ -274,6 +275,7 @@ export default {
         this.modelOriginal = res.form_data
         this.el_form_data = res.el_form_data
         this.row_el_form_data = res.row_el_form_data
+        this.table_name = res.table_name
       })
     },
     // 分页展示表格数据
@@ -643,7 +645,7 @@ export default {
     },
     // 下载导入示范文件
     downloadExamleImportFile() {
-      DownloadExamleImportFile('产能限制').then(res => {
+      DownloadExamleImportFile(this.table_name).then(res => {
         this.downloadFile(res)
         this.$message({
           message: '开始下载',

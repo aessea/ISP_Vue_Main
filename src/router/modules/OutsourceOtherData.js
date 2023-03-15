@@ -66,6 +66,60 @@ const OutsourceOtherDataRouter = {
         title: '业务排程汇总',
         roles: ['admin', 'common']
       }
+    },
+    {
+      path: 'paramconfig',
+      component: () => import('@/views/Outsource/OtherData/ParamConfig'),
+      name: 'ParamConfig',
+      meta: {
+        title: '参数配置',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'columnNameconfig',
+      component: () => import('@/views/Outsource/OtherData/ColumnNameConfig'),
+      name: 'ColumnNameConfig',
+      meta: {
+        title: '列名配置',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'sheetnameconfig',
+      component: () => import('@/views/Outsource/OtherData/SheetNameConfig'),
+      name: 'SheetNameConfig',
+      meta: {
+        title: '表名配置',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'tablecolumnconfig',
+      component: () => import('@/views/Outsource/OtherData/TableColumnConfig'),
+      name: 'TableColumnConfig',
+      meta: {
+        title: '读取列名配置',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'motherboard',
+      component: () => import('@/views/Outsource/OtherData/MotherBoard'),
+      name: 'MotherBoard',
+      meta: {
+        title: '外协主板信息',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'smallboard',
+      component: () => import('@/views/Outsource/OtherData/SmallBoard'),
+      name: 'SmallBoard',
+      meta: {
+        title: '外协小板信息',
+        roles: ['admin', 'common']
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@ import request from '../../../utils/request'
 // 获取表格数据 分页获取
 export function GetTableData(data) {
   return request({
-    url: '/OutsourcingPriority/customer/get_table_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/get_table_data/',
     method: 'post',
     data
   })
@@ -10,7 +10,7 @@ export function GetTableData(data) {
 // 添加数据
 export function AddData(data) {
   return request({
-    url: '/OutsourcingPriority/customer/add_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/add_data/',
     method: 'post',
     data
   })
@@ -18,7 +18,7 @@ export function AddData(data) {
 // 修改数据
 export function ModifyData(data) {
   return request({
-    url: '/OutsourcingPriority/customer/modify_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/modify_data/',
     method: 'post',
     data
   })
@@ -26,7 +26,7 @@ export function ModifyData(data) {
 // 删除勾选的数据
 export function DeleteData(data) {
   return request({
-    url: '/OutsourcingPriority/customer/delete_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/delete_data/',
     method: 'post',
     data
   })
@@ -34,7 +34,7 @@ export function DeleteData(data) {
 // 删除一条数据
 export function HandleDelete(data) {
   return request({
-    url: '/OutsourcingPriority/customer/handle_delete/',
+    url: '/OutsourcingPriority/packagelinerestrictions/handle_delete/',
     method: 'post',
     data
   })
@@ -42,7 +42,7 @@ export function HandleDelete(data) {
 // 确认导入数据
 export function ImportData(data) {
   return request({
-    url: '/OutsourcingPriority/customer/import_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/import_data/',
     method: 'post',
     data
   })
@@ -50,14 +50,15 @@ export function ImportData(data) {
 // 确认导出数据
 export function ExportData() {
   return request({
-    url: '/OutsourcingPriority/customer/export_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/export_data/',
     method: 'get'
   })
 }
 // 获取列名
 export function GetBaseData() {
   return request({
-    url: '/OutsourcingPriority/customer/get_base_data/',
+    url: '/OutsourcingPriority/packagelinerestrictions/get_base_data/',
     method: 'get'
   })
 }
+

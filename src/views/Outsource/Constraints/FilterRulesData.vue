@@ -199,10 +199,10 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/Constraints/ModelNameRestrictions'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/Constraints/FilterRulesData'
 import { DownloadExamleImportFile } from '@/api/Public'
 export default {
-  name: 'ModelNameRestrictions',
+  name: 'FilterRulesData',
   directives: { elDragDialog },
   data() {
     return {

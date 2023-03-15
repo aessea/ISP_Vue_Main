@@ -251,8 +251,8 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.repair_mode" prop="repair_mode" label="repair_mode">
-                <el-input v-model="model.repair_mode" placeholder="请输入" clearable />
+              <el-form-item :rules="rules.repair_mode" prop="repair_mode" label="是否开启双面修">
+                <el-input v-model="model.repair_mode" placeholder="1否2是" clearable />
               </el-form-item>
             </el-col>
           </el-row>

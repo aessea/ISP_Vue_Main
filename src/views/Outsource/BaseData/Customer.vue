@@ -10,9 +10,9 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <!-- <el-button @click="importDataDialog">
+            <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
-            </el-button> -->
+            </el-button>
             <el-button @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
@@ -51,8 +51,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="package_name" label="包装线" sortable />
-          <el-table-column prop="customer" label="客户" sortable />
+          <el-table-column v-for="col in cols" :key="col.prop" :prop="col.prop" :label="col.label" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -93,15 +92,14 @@
       @dragDialog="handleDrag"
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.package_name" prop="package_name" label="机种">
-              <el-input v-model="model.package_name" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.customer" prop="customer" label="客户">
-              <el-input v-model="model.customer" placeholder="请输入" clearable />
+        <el-row v-for="row_el_form in row_el_form_data" :key="row_el_form.index" :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col v-for="el_form in row_el_form" :key="el_form.index" :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="el_form.rule" :prop="el_form.prop" :label="el_form.label">
+              <el-input-number v-if="el_form.type === 1" v-model="model[el_form.prop]" placeholder="请输入" :style="{width: '100%'}" clearable />
+              <el-date-picker v-else-if="el_form.type === 2" v-model="model[el_form.prop]" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
+              <el-date-picker v-else-if="el_form.type === 3" v-model="model[el_form.prop]" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-switch v-else-if="el_form.type === 4" v-model="model.need_repair" />
+              <el-input v-else v-model="model[el_form.prop]" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -135,18 +133,12 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="package_name" label="机种" />
-        <el-table-column prop="customer" label="客户" />
-      </el-table>
+      <span style="font-size:16px;margin-bottom: 16px;">
+        请下载导入示例（仅支持.xlsx文件，列名需保持名称一致）：
+      </span>
+      <el-button style="margin-left: 10px;" @click="downloadExamleImportFile">
+        点击下载导入示例文件
+      </el-button>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -207,13 +199,14 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Outsource/BaseData/Customer'
-import { LineOptions } from '@/utils/items'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/BaseData/Customer'
+import { DownloadExamleImportFile } from '@/api/Public'
 export default {
   name: 'Customer',
   directives: { elDragDialog },
   data() {
     return {
+      table_name: '',
       loading: true, // 表格加载动画
       importLoading: {
         text: '拼命导入中...',
@@ -221,15 +214,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          package_name: '',
-          customer: ''
-        }, {
-          package_name: '(必填)',
-          customer: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -247,35 +231,18 @@ export default {
       isClick: false, // 是否点击了保存或者提交
       // 表单相关数据
       forms: ['$form'],
-      model: {
-        id: '',
-        package_name: '',
-        customer: ''
-      },
+      model: {},
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
-      modelOriginal: {
-        id: '',
-        package_name: '',
-        customer: ''
-      },
-      rules: {
-        package_name: [{
-          required: true,
-          message: '机种不能为空',
-          trigger: 'blur'
-        }],
-        customer: [{
-          required: true,
-          message: '客户不能为空',
-          trigger: 'blur'
-        }]
-      },
-      line_name_data: LineOptions, // 维护线别
+      modelOriginal: {},
+      rules: {},
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      dataTableSelections: [] // 表格选中的数据
+      dataTableSelections: [], // 表格选中的数据
+      cols: [],
+      el_form_data: [],
+      row_el_form_data: []
     }
   },
   computed: {
@@ -284,29 +251,32 @@ export default {
     ])
   },
   created() {
+    this.getBaseData()
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
-    // this.getTableData(this.currentPage, this.pageSize)
+
   },
   methods: {
     // dialog可拖拽
     handleDrag() {
-      // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 2) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
+
     },
     // 分页
     handlePageChange(val) {
       this.currentPage = val
       this.getTableData(val, this.pageSize) // 翻页
+    },
+    // 获取列名
+    getBaseData() {
+      GetBaseData().then(res => {
+        this.cols = res.col_data
+        this.model = res.form_data
+        this.modelOriginal = res.form_data
+        this.el_form_data = res.el_form_data
+        this.row_el_form_data = res.row_el_form_data
+        this.table_name = res.table_name
+      })
     },
     // 分页展示表格数据
     getTableData(currentPage, pageSize) {
@@ -533,7 +503,7 @@ export default {
       }).then(() => {
         const data = {}
         data['id'] = row.id
-        data['customer'] = row.customer
+        data['manufacturer'] = row.manufacturer
         data['user_name'] = this.name
         HandleDelete(data).then(res => {
           if (res.code === 20000) {
@@ -658,12 +628,42 @@ export default {
     // 帮助提示按钮
     helpTips() {
       this.helpDialogVisible = true
+    },
+    // 下载文件
+    downloadFile(res) {
+      const link = document.createElement('a')
+      const blob = new Blob([res.data])
+      link.style.display = 'none'
+      link.href = URL.createObjectURL(blob)
+      const temp = res.headers['content-disposition'].split('attachment;filename=')[1]
+      const file_name = decodeURIComponent(temp)
+      link.download = file_name
+      document.body.appendChild(link)
+      link.click()
+      URL.revokeObjectURL(link.href) // 释放URL对象
+      document.body.removeChild(link)
+    },
+    // 下载导入示范文件
+    downloadExamleImportFile() {
+      DownloadExamleImportFile(this.table_name).then(res => {
+        this.downloadFile(res)
+        this.$message({
+          message: '开始下载',
+          type: 'success'
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$message({
+          message: '下载失败，文件不存在',
+          type: 'error'
+        })
+      })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/css/Outsource/BaseData/Customer';
+  @import '../../../assets/css/public/TablePage';
 </style>
 <style>
 .btnDanger{

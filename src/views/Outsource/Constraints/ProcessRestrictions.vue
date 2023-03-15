@@ -202,7 +202,8 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/Constraints/ModelNameRestrictions'
 import { DownloadExamleImportFile } from '@/api/Public'
 export default {
-  name: 'ModelNameRestrictions',
+  table_name: '',
+  name: 'ProcessRestrictions',
   directives: { elDragDialog },
   data() {
     return {
