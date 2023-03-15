@@ -337,8 +337,8 @@
         <el-card class="card-config">
           <div slot="header" class="clearfix">
             <span>每日产能配置</span>
-            <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0" type="text" @click="showDayCapacityConfigDialog">添加数据</el-button>
-            <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0;" type="text" @click="clearDayCapacityConfig">清空数据</el-button>
+            <el-button style="float: right; padding: 3px 0" type="text" @click="showDayCapacityConfigDialog">添加数据</el-button>
+            <el-button style="float: right; padding: 3px 0;" type="text" @click="clearDayCapacityConfig">清空数据</el-button>
           </div>
           <div class="table-box">
             <el-table
