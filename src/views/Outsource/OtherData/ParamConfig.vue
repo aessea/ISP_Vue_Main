@@ -10,6 +10,12 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
+            <el-button type="primary" @click="updateConfig">
+              导入配置
+            </el-button>
+            <el-button type="primary" @click="loadFromConfig">
+              加载配置
+            </el-button>
             <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button>
@@ -199,7 +205,8 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/OtherData/ParamConfig'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData,
+  UpdateConfig, LoadFromConfig } from '@/api/Outsource/OtherData/ParamConfig'
 import { DownloadExamleImportFile } from '@/api/Public'
 export default {
   name: 'ParamConfig',
@@ -656,6 +663,45 @@ export default {
         this.$message({
           message: '下载失败，文件不存在',
           type: 'error'
+        })
+      })
+    },
+    updateConfig() {
+      this.$confirm('确定要更新配置到后台？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        UpdateConfig().then(res => {
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消导入'
+        })
+      })
+    },
+    loadFromConfig() {
+      this.$confirm('确定要从后台加载配置？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        LoadFromConfig().then(res => {
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+          this.refreshTableData()
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消导入'
         })
       })
     }

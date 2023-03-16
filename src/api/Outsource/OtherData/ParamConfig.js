@@ -61,3 +61,18 @@ export function GetBaseData() {
     method: 'get'
   })
 }
+// 更新配置
+export function UpdateConfig() {
+  return request({
+    url: '/OutsourcingPriority/updateconfig/',
+    method: 'get'
+  })
+}
+// 加载配置
+export function LoadFromConfig() {
+  return request({
+    url: '/OutsourcingPriority/loadfromconfig/',
+    method: 'get'
+  })
+}
+
