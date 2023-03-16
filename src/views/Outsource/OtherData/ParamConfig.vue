@@ -4,24 +4,24 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="primary" @click="addDataDialog">
+            <!-- <el-button type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
-            </el-button>
+            </el-button> -->
             <el-button type="primary" @click="updateConfig">
               导入配置
             </el-button>
             <el-button type="primary" @click="loadFromConfig">
               加载配置
             </el-button>
-            <el-button @click="importDataDialog">
+            <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button>
             <el-button @click="exportDataDialog">
               <i class="el-icon-download" />导出
-            </el-button>
+            </el-button> -->
           </div>
         </el-col>
         <el-col :span="8">
@@ -67,13 +67,13 @@
                 circle
                 @click="handleModify(scope.$index, scope.row)"
               />
-              <el-button
+              <!-- <el-button
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
                 circle
                 @click="handleDelete(scope.$index, scope.row)"
-              />
+              /> -->
             </template>
           </el-table-column>
         </el-table>
