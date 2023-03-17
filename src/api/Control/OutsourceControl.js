@@ -156,6 +156,6 @@ export function AppendDayCapacityConfig(data) {
 export function GetDayCapacityConfig() {
   return request({
     method: 'get',
-    url: '/OutsourcingPriority/daycapacityconfig/get_table_data/'
+    url: '/OutsourcingPriority/daycapacityconfig/get_table_data_control/'
   })
 }
