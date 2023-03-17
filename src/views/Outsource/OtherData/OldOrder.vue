@@ -617,7 +617,7 @@ export default {
     },
     deleteAllData() {
       this.$confirm('确定要清空所有数据？', '警告', {
-        confirmButtonText: '确定删除',
+        confirmButtonText: '确定清空',
         cancelButtonText: '取消',
         confirmButtonClass: 'btnDanger',
         type: 'warning'
