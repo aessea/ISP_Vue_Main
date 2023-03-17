@@ -54,3 +54,10 @@ export function ExportData() {
     method: 'get'
   })
 }
+// 清空所有数据
+export function DeleteAllData() {
+  return request({
+    url: '/OutsourcingPriority/oldorder/clear_all/',
+    method: 'get'
+  })
+}

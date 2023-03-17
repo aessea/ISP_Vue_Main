@@ -10,6 +10,9 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
+            <el-button type="danger" @click="deleteAllData">
+              <i class="el-icon-delete" />清空旧工单数据
+            </el-button>
             <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
@@ -288,7 +291,7 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Outsource/OtherData/OldOrder'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, DeleteAllData } from '@/api/Outsource/OtherData/OldOrder'
 import { LineOptions } from '@/utils/items'
 export default {
   name: 'OldOrder',
@@ -345,7 +348,7 @@ export default {
       uploadFileName: '', // 上传的文件名
       uploadFileList: [], // 上传的文件列表
       uploadFile: null, // 上传的文件
-      importMode: 'add', // 导入方式选择:追加或替换（方便以后扩展）
+      importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
       // 表单相关数据
@@ -600,6 +603,29 @@ export default {
             this.$notify({
               title: '删除成功',
               message: '成功删除选中的 ' + dataLength + ' 条数据',
+              type: 'success'
+            })
+            this.refreshTableData() // 刷新表格数据
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消删除'
+        })
+      })
+    },
+    deleteAllData() {
+      this.$confirm('确定要清空所有数据？', '警告', {
+        confirmButtonText: '确定删除',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btnDanger',
+        type: 'warning'
+      }).then(() => {
+        DeleteAllData().then(res => {
+          if (res.code === 20000) {
+            this.$alert(res.message, '提示', {
+              confirmButtonText: '确定',
               type: 'success'
             })
             this.refreshTableData() // 刷新表格数据
