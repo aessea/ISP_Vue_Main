@@ -49,4 +49,10 @@ const lineOptions = [
 ]
 const lockedList = ['锁定', '新增锁定', '新上锁定', '插入锁定']
 const unLockedList = ['未锁定', '新上排程', '未上排程']
-export { LineOptions, ProcessOptions, PermissionOptions, lineOptions, lockedList, unLockedList }
+const componentTypeOptions = [
+  { label: 'SMT主板', value: 1 },
+  { label: 'SMT小板', value: 2 },
+  { label: 'AI', value: 3 },
+  { label: 'SMT点胶', value: 4 }
+]
+export { LineOptions, ProcessOptions, PermissionOptions, lineOptions, lockedList, unLockedList, componentTypeOptions }

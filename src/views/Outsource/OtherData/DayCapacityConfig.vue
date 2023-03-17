@@ -51,7 +51,14 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="component_type" label="组件类型" sortable />
+          <el-table-column prop="component_type" label="组件类型">
+            <template slot-scope="scope">
+              <span v-if="scope.row.component_type === 1" size="small">SMT主板</span>
+              <span v-else-if="scope.row.component_type === 2" size="small">SMT小板</span>
+              <span v-else-if="scope.row.component_type === 3" size="small">AI</span>
+              <span v-else-if="scope.row.component_type === 4" size="small">SMT点胶</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="date_info" label="日期" sortable />
           <el-table-column prop="capacity" label="产能" sortable />
           <el-table-column width="110" fixed="right" label="操作">
@@ -97,17 +104,31 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.component_type" prop="component_type" label="组件类型">
-              <el-input v-model="model.component_type" placeholder="请输入" clearable />
+              <el-select v-model="model.component_type" placeholder="请选择">
+                <el-option
+                  v-for="item in componentTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.date_info" prop="date_info" label="日期">
-              <el-date-picker v-model="model.date_info" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-date-picker
+                v-model="model.date_info"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.capacity" prop="capacity" label="产能">
-              <el-input-number v-model="model.capacity" placeholder="请输入" :step="0.1" :style="{width: '100%'}" />
+              <el-input-number v-model="model.capacity" placeholder="请输入产能" :step="1" :style="{width: '100%'}" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -157,7 +178,7 @@
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
-            <el-radio label="add">追加数据</el-radio>
+            <el-radio label="append">追加数据</el-radio>
             <el-radio label="replace">替换数据</el-radio>
           </el-radio-group>
         </el-col>
@@ -215,7 +236,7 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Outsource/OtherData/DayCapacityConfig'
-import { LineOptions } from '@/utils/items'
+import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'DayCapacityConfig',
   directives: { elDragDialog },
@@ -254,6 +275,7 @@ export default {
       importMode: 'add', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
+      componentTypeOptions: componentTypeOptions,
       // 表单相关数据
       forms: ['$form'],
       model: {
@@ -286,7 +308,6 @@ export default {
           trigger: 'blur'
         }]
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页

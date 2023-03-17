@@ -77,7 +77,7 @@ const OutsourceOtherDataRouter = {
       }
     },
     {
-      path: 'columnNameconfig',
+      path: 'columnnameconfig',
       component: () => import('@/views/Outsource/OtherData/ColumnNameConfig'),
       name: 'ColumnNameConfig',
       meta: {

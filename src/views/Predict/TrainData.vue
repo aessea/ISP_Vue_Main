@@ -288,7 +288,7 @@
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
-            <el-radio label="add">追加数据</el-radio>
+            <el-radio label="append">追加数据</el-radio>
             <el-radio label="replace">替换数据</el-radio>
           </el-radio-group>
         </el-col>

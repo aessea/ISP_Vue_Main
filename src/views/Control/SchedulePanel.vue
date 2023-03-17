@@ -185,10 +185,12 @@
                       终止计算排程
                     </el-button>
                   </el-col>
-                  <el-button type="pushBtn" plain @click="post_statistics">
-                    <i class="el-icon-upload2" />
-                    推送量化结果
-                  </el-button>
+                  <el-col :span="8">
+                    <el-button type="pushBtn" plain @click="post_statistics">
+                      <i class="el-icon-upload2" />
+                      推送量化结果
+                    </el-button>
+                  </el-col>
                 </el-row>
               </div>
             </el-col>

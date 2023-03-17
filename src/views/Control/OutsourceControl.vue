@@ -346,7 +346,14 @@
               :header-cell-style="{color:'#606266'}"
               :data="table_data_day_capacity_config"
             >
-              <el-table-column prop="component_type" label="组件类型" />
+              <el-table-column prop="component_type" label="组件类型">
+                <template slot-scope="scope">
+                  <span v-if="scope.row.component_type === 1" size="small">SMT主板</span>
+                  <span v-else-if="scope.row.component_type === 2" size="small">SMT小板</span>
+                  <span v-else-if="scope.row.component_type === 3" size="small">AI</span>
+                  <span v-else-if="scope.row.component_type === 4" size="small">SMT点胶</span>
+                </template>
+              </el-table-column>
               <el-table-column prop="date_info" label="日期" />
               <el-table-column prop="capacity" label="产能" />
             </el-table>
@@ -359,7 +366,7 @@
       v-el-drag-dialog
       title="添加每日产能"
       :visible.sync="dayCapacityConfigDialogVisible"
-      width="60%"
+      width="65%"
       :before-close="handleDayCapacityConfigClose"
       @dragDialog="handleDrag"
     >
@@ -367,7 +374,14 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.component_type" prop="component_type" label="组件类型">
-              <el-input v-model="model.component_type" placeholder="请输入数字" clearable />
+              <el-select v-model="model.component_type" placeholder="请选择">
+                <el-option
+                  v-for="item in componentTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -406,6 +420,7 @@ import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, Gnerate
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
   DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
   GetDayCapacityConfig } from '@/api/Control/OutsourceControl'
+import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'OutsourceControl',
   directives: { elDragDialog },
@@ -457,6 +472,7 @@ export default {
       isUpdateConfig: false,
       table_data_day_capacity_config: [],
       dayCapacityConfigDialogVisible: false,
+      componentTypeOptions: componentTypeOptions,
       // 表单相关数据
       forms: ['$form'],
       model: {
