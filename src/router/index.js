@@ -113,11 +113,20 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'config',
-        component: () => import('@/views/Control/Config'),
-        name: 'Config',
+        path: 'configmain',
+        component: () => import('@/views/Control/ConfigMain'),
+        name: 'ConfigMain',
         meta: {
-          title: '排程配置',
+          title: '主板排程配置',
+          roles: ['admin', 'common']
+        }
+      },
+      {
+        path: 'configsmall',
+        component: () => import('@/views/Control/ConfigSmall'),
+        name: 'ConfigSmall',
+        meta: {
+          title: '小板排程配置',
           roles: ['admin', 'common']
         }
       },
