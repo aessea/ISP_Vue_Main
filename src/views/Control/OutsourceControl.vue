@@ -931,7 +931,7 @@ export default {
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(loadingMessage)
-        UpdateOutsourceMeshBoard().then(res => {
+        UpdateOutsourceMeshBoard({}).then(res => {
           this.loadingInstance.close()
           this.$alert(res.message, '提示', {
             confirmButtonText: '确定',

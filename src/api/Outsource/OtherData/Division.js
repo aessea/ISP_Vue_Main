@@ -54,3 +54,11 @@ export function ExportData() {
     method: 'get'
   })
 }
+// 获取列名
+export function GetBaseData() {
+  return request({
+    url: '/OutsourcingPriority/division/get_base_data/',
+    method: 'get'
+  })
+}
+

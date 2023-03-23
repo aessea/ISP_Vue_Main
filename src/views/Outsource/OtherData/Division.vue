@@ -51,22 +51,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="run_mode" width="100" label="分配模式" />
-          <el-table-column prop="component_type" width="100" label="组件类型" />
-          <el-table-column prop="job_no" width="90" label="工单号" />
-          <el-table-column prop="job_quantity" width="90" label="工单量" />
-          <el-table-column prop="process" width="80" label="制程" />
-          <el-table-column prop="workmanship" width="80" label="工艺" />
-          <el-table-column prop="top_points" width="100" label="上板点数" />
-          <el-table-column prop="bottom_points" width="100" label="下板点数" />
-          <el-table-column prop="program_line_type" width="200" label="程序线别" />
-          <el-table-column prop="connect_plates" width="90" label="联板数" />
-          <el-table-column prop="priority_manufacturer" width="140" label="优先分配厂商" />
-          <el-table-column prop="secondly_manufacturer" width="140" label="其次分配厂商" />
-          <el-table-column prop="points" width="100" label="单片点数" />
-          <el-table-column prop="jorder_type" width="100" label="工单类型" />
-          <el-table-column prop="job_no_type" width="80" label="厂别" />
-          <el-table-column prop="manufacturer_status" width="100" label="分配状态" />
+          <el-table-column v-for="col in cols" :key="col.prop" :prop="col.prop" :label="col.label" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -106,98 +91,21 @@
       :before-close="handleFormClose"
       @dragDialog="handleDrag"
     >
-      <el-form ref="$form" :model="model" label-position="left" size="small">
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.run_mode" prop="run_mode" label="分配模式">
-              <el-input v-model="model.run_mode" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.component_type" prop="component_type" label="组件类型">
-              <el-input v-model="model.component_type" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.job_no" prop="job_no" label="工单号">
-              <el-input v-model="model.job_no" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.job_quantity" prop="job_quantity" label="工单量">
-              <el-input-number v-model="model.job_quantity" placeholder="请输入" :style="{width: '100%'}" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.process" prop="process" label="制程">
-              <el-input v-model="model.process" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.workmanship" prop="workmanship" label="工艺">
-              <el-input v-model="model.workmanship" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.top_points" prop="top_points" label="上板点数">
-              <el-input-number v-model="model.top_points" placeholder="请输入" :step="0.1" :style="{width: '100%'}" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.bottom_points" prop="bottom_points" label="下板点数">
-              <el-input-number v-model="model.bottom_points" placeholder="请输入" :step="0.1" :style="{width: '100%'}" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.program_line_type" prop="program_line_type" label="程序线别">
-              <el-input v-model="model.program_line_type" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.connect_plates" prop="connect_plates" label="联板数">
-              <el-input-number v-model="model.connect_plates" placeholder="请输入" :step="0.1" :style="{width: '100%'}" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.priority_manufacturer" prop="priority_manufacturer" label="优先分配厂商">
-              <el-input v-model="model.priority_manufacturer" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.secondly_manufacturer" prop="secondly_manufacturer" label="其次分配厂商">
-              <el-input v-model="model.secondly_manufacturer" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.points" prop="points" label="单片点数">
-              <el-input-number v-model="model.points" placeholder="请输入" :step="0.1" :style="{width: '100%'}" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.order_type" prop="order_type" label="工单类型">
-              <el-input v-model="model.order_type" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.factory_type" prop="factory_type" label="厂别">
-              <el-input v-model="model.factory_type" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.manufacturer_status" prop="manufacturer_status" label="分配状态">
-              <el-input v-model="model.manufacturer_status" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
+      <el-card class="card-form">
+        <el-form ref="$form" :model="model" label-position="left" size="small">
+          <el-row v-for="row_el_form in row_el_form_data" :key="row_el_form.index" :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col v-for="el_form in row_el_form" :key="el_form.index" :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="el_form.rule" :prop="el_form.prop" :label="el_form.label">
+                <el-input-number v-if="el_form.type === 1" v-model="model[el_form.prop]" placeholder="请输入" :style="{width: '100%'}" clearable />
+                <el-date-picker v-else-if="el_form.type === 2" v-model="model[el_form.prop]" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
+                <el-date-picker v-else-if="el_form.type === 3" v-model="model[el_form.prop]" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+                <el-switch v-else-if="el_form.type === 4" v-model="model.need_repair" />
+                <el-input v-else v-model="model[el_form.prop]" placeholder="请输入" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-card>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">关闭</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="addDataAndContinue">添加并继续</el-button>
@@ -227,19 +135,12 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="run_mode" label="分配模式" />
-        <el-table-column prop="component_type" label="组件类型" />
-        <el-table-column prop="job_no" label="工单号" />
-      </el-table>
+      <span style="font-size:16px;margin-bottom: 16px;">
+        请下载导入示例（仅支持.xlsx文件，列名需保持名称一致）：
+      </span>
+      <el-button style="margin-left: 10px;" @click="downloadExamleImportFile">
+        点击下载导入示例文件
+      </el-button>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -300,13 +201,14 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Outsource/OtherData/Division'
-import { LineOptions } from '@/utils/items'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/OtherData/Division'
+import { DownloadExamleImportFile } from '@/api/Public'
 export default {
-  name: 'Division',
+  name: 'Capacity',
   directives: { elDragDialog },
   data() {
     return {
+      table_name: '',
       loading: true, // 表格加载动画
       importLoading: {
         text: '拼命导入中...',
@@ -314,45 +216,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          id: '',
-          run_mode: '',
-          component_type: '',
-          job_no: '',
-          job_quantity: 0,
-          process: '',
-          workmanship: '',
-          top_points: 0,
-          bottom_points: 0,
-          program_line_type: '',
-          connect_plates: 0,
-          priority_manufacturer: '',
-          secondly_manufacturer: '',
-          points: 0,
-          order_type: '',
-          factory_type: '',
-          manufacturer_status: ''
-        }, {
-          id: '',
-          run_mode: '',
-          component_type: '',
-          job_no: '',
-          job_quantity: 0,
-          process: '',
-          workmanship: '',
-          top_points: 0,
-          bottom_points: 0,
-          program_line_type: '',
-          connect_plates: 0,
-          priority_manufacturer: '',
-          secondly_manufacturer: '',
-          points: 0,
-          order_type: '',
-          factory_type: '',
-          manufacturer_status: ''
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -370,133 +233,18 @@ export default {
       isClick: false, // 是否点击了保存或者提交
       // 表单相关数据
       forms: ['$form'],
-      model: {
-        id: '',
-        run_mode: '',
-        component_type: '',
-        job_no: '',
-        job_quantity: 0,
-        process: '',
-        workmanship: '',
-        top_points: 0,
-        bottom_points: 0,
-        program_line_type: '',
-        connect_plates: 0,
-        priority_manufacturer: '',
-        secondly_manufacturer: '',
-        points: 0,
-        order_type: '',
-        factory_type: '',
-        manufacturer_status: ''
-      },
+      model: {},
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
-      modelOriginal: {
-        id: '',
-        run_mode: '',
-        component_type: '',
-        job_no: '',
-        job_quantity: 0,
-        process: '',
-        workmanship: '',
-        top_points: 0,
-        bottom_points: 0,
-        program_line_type: '',
-        connect_plates: 0,
-        priority_manufacturer: '',
-        secondly_manufacturer: '',
-        points: 0,
-        order_type: '',
-        factory_type: '',
-        manufacturer_status: ''
-      },
-      rules: {
-        run_mode: [{
-          required: true,
-          message: '分配模式不能为空',
-          trigger: 'blur'
-        }],
-        component_type: [{
-          required: true,
-          message: '组件类型不能为空',
-          trigger: 'blur'
-        }],
-        job_no: [{
-          required: true,
-          message: '工单号不能为空',
-          trigger: 'blur'
-        }],
-        job_quantity: [{
-          required: true,
-          message: '工单量不能为空',
-          trigger: 'blur'
-        }],
-        process: [{
-          required: true,
-          message: '制程不能为空',
-          trigger: 'blur'
-        }],
-        workmanship: [{
-          required: true,
-          message: '工艺不能为空',
-          trigger: 'blur'
-        }],
-        program_line_type: [{
-          required: true,
-          message: '程序线别不能为空',
-          trigger: 'blur'
-        }],
-        top_points: [{
-          required: true,
-          message: '上板点数不能为空',
-          trigger: 'blur'
-        }],
-        bottom_points: [{
-          required: true,
-          message: '下板点数不能为空',
-          trigger: 'blur'
-        }],
-        connect_plates: [{
-          required: true,
-          message: '联板数不能为空',
-          trigger: 'blur'
-        }],
-        priority_manufacturer: [{
-          required: true,
-          message: '优先分配厂商不能为空',
-          trigger: 'blur'
-        }],
-        secondly_manufacturer: [{
-          required: true,
-          message: '其次分配厂商不能为空',
-          trigger: 'blur'
-        }],
-        points: [{
-          required: true,
-          message: '单片点数不能为空',
-          trigger: 'blur'
-        }],
-        order_type: [{
-          required: true,
-          message: '工单类型不能为空',
-          trigger: 'blur'
-        }],
-        factory_type: [{
-          required: true,
-          message: '厂商不能为空',
-          trigger: 'blur'
-        }],
-        manufacturer_status: [{
-          required: true,
-          message: '分配状态不能为空',
-          trigger: 'blur'
-        }]
-      },
-      line_name_data: LineOptions, // 维护线别
+      modelOriginal: {},
+      rules: {},
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      dataTableSelections: [] // 表格选中的数据
+      dataTableSelections: [], // 表格选中的数据
+      cols: [],
+      el_form_data: [],
+      row_el_form_data: []
     }
   },
   computed: {
@@ -505,29 +253,32 @@ export default {
     ])
   },
   created() {
+    this.getBaseData()
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
-    // this.getTableData(this.currentPage, this.pageSize)
+
   },
   methods: {
     // dialog可拖拽
     handleDrag() {
-      // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 2) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
+
     },
     // 分页
     handlePageChange(val) {
       this.currentPage = val
       this.getTableData(val, this.pageSize) // 翻页
+    },
+    // 获取列名
+    getBaseData() {
+      GetBaseData().then(res => {
+        this.cols = res.col_data
+        this.model = res.form_data
+        this.modelOriginal = res.form_data
+        this.el_form_data = res.el_form_data
+        this.row_el_form_data = res.row_el_form_data
+        this.table_name = res.table_name
+      })
     },
     // 分页展示表格数据
     getTableData(currentPage, pageSize) {
@@ -603,16 +354,6 @@ export default {
                 this.model[key] = ''
                 this.modelOriginal[key] = ''
               }
-              this.model['job_quantity'] = 0
-              this.model['top_points'] = 0
-              this.model['bottom_points'] = 0
-              this.model['connect_plates'] = 0
-              this.model['points'] = 0
-              this.modelOriginal['job_quantity'] = 0
-              this.modelOriginal['top_points'] = 0
-              this.modelOriginal['bottom_points'] = 0
-              this.modelOriginal['connect_plates'] = 0
-              this.modelOriginal['points'] = 0
               this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
               this.refreshTableData(true)
             }
@@ -764,7 +505,7 @@ export default {
       }).then(() => {
         const data = {}
         data['id'] = row.id
-        data['run_mode'] = row.run_mode
+        data['manufacturer'] = row.manufacturer
         data['user_name'] = this.name
         HandleDelete(data).then(res => {
           if (res.code === 20000) {
@@ -889,12 +630,42 @@ export default {
     // 帮助提示按钮
     helpTips() {
       this.helpDialogVisible = true
+    },
+    // 下载文件
+    downloadFile(res) {
+      const link = document.createElement('a')
+      const blob = new Blob([res.data])
+      link.style.display = 'none'
+      link.href = URL.createObjectURL(blob)
+      const temp = res.headers['content-disposition'].split('attachment;filename=')[1]
+      const file_name = decodeURIComponent(temp)
+      link.download = file_name
+      document.body.appendChild(link)
+      link.click()
+      URL.revokeObjectURL(link.href) // 释放URL对象
+      document.body.removeChild(link)
+    },
+    // 下载导入示范文件
+    downloadExamleImportFile() {
+      DownloadExamleImportFile(this.table_name).then(res => {
+        this.downloadFile(res)
+        this.$message({
+          message: '开始下载',
+          type: 'success'
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$message({
+          message: '下载失败，文件不存在',
+          type: 'error'
+        })
+      })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/css/Outsource/OtherData/Division.scss';
+  @import '../../../assets/css/public/TablePage';
 </style>
 <style>
 .btnDanger{

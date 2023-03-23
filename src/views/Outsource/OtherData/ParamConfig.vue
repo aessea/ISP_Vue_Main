@@ -11,10 +11,10 @@
               <i class="el-icon-delete" />删除
             </el-button> -->
             <el-button type="primary" @click="updateConfig">
-              导入配置
+              应用当前配置
             </el-button>
             <el-button type="primary" @click="loadFromConfig">
-              加载配置
+              恢复默认配置
             </el-button>
             <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入

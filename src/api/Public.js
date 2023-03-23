@@ -9,3 +9,11 @@ export function DownloadExamleImportFile(file_name) {
     responseType: 'blob'
   })
 }
+export function DownloadFile(file_key) {
+  return request({
+    url: '/Control/download_file/',
+    method: 'get',
+    params: { file_key },
+    responseType: 'blob'
+  })
+}

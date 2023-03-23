@@ -230,19 +230,19 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadSchedule">
+                        <el-button type="primary" plain @click="downloadFileBackend('result_file_path_main')">
                           <i class="el-icon-download" />
                           下载主板排程
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadIdleInfo">
+                        <el-button type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
                           <i class="el-icon-download" />
                           下载idle明细
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadStatistics">
+                        <el-button type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
                           <i class="el-icon-download" />
                           下载量化结果
                         </el-button>
@@ -252,7 +252,7 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadNoProgram">
+                        <el-button type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
                           <i class="el-icon-download" />
                           下载无程序表
                         </el-button>
@@ -292,19 +292,19 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadScheduleSmall">
+                        <el-button type="primary" plain @click="downloadFileBackend('result_file_path_small')">
                           <i class="el-icon-download" />
                           下载小板排程
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadIdleInfoSmall">
+                        <el-button type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
                           <i class="el-icon-download" />
                           下载idle明细
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadStatisticsSmall">
+                        <el-button type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
                           <i class="el-icon-download" />
                           下载量化结果
                         </el-button>
@@ -344,7 +344,7 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadLatestLog">
+                        <el-button type="primary" plain @click="downloadFileBackend">
                           <i class="el-icon-download" />
                           下载最新日志
                         </el-button>
@@ -441,12 +441,12 @@
           导出小板
         </el-button>
         <el-tooltip class="item" effect="dark" :content="mainUploadName" placement="top">
-          <el-button style="margin-left: 10px;" @click="getUploadFileMain">
+          <el-button style="margin-left: 10px;" @click="downloadFileBackend('upload_file_path_main')">
             获取主板上传文件
           </el-button>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" :content="smallUploadName" placement="top">
-          <el-button style="margin-left: 10px;" @click="getUploadFileSmall">
+          <el-button style="margin-left: 10px;" @click="downloadFileBackend('upload_file_path_small')">
             获取小板上传文件
           </el-button>
         </el-tooltip>
@@ -717,13 +717,13 @@
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, DownloadSchedule, DownloadLatestLog,
-  DownloadNoProgram, GetLogSelectItem, DownloadHistoryLog, DownloadIdleInfoMain, GetRunFlag, StopTabu,
-  GeScheduleRes, StopSchedule, GetApsMtool, CheckData, ExportMainScheduleData, GetApsProgram, DownloadStatisticsMain,
-  GetExcelSelectItem, DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall, DownloadScheduleSmall,
+import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, GetLogSelectItem, DownloadHistoryLog,
+  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, GetApsMtool, CheckData, ExportMainScheduleData, GetApsProgram,
+  GetExcelSelectItem, DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall,
   GetApsMoBaseData, GetApsMoProgData, DownloadUploadFileMain, DownloadUploadFileSmall,
   GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData, GetApsDeliveryDay, SaveApsOutPutCount,
-  DownloadStatisticsSmall, DownloadIdleInfoSmall, CheckDataNew } from '@/api/Control/SchedulePanel'
+  CheckDataNew } from '@/api/Control/SchedulePanel'
+import { DownloadFile } from '@/api/Public'
 export default {
   name: 'SchedulePanel',
   directives: { elDragDialog },
@@ -2068,41 +2068,8 @@ export default {
         })
       })
     },
-    // 下载主板最新排程
-    downloadSchedule() {
-      DownloadSchedule().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载最新日志
-    downloadLatestLog() {
-      DownloadLatestLog().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载无程序表
-    downloadNoProgram() {
-      DownloadNoProgram().then(res => {
+    downloadFileBackend(file_key) {
+      DownloadFile(file_key).then(res => {
         this.downloadFile(res)
         this.$message({
           message: '开始下载',
@@ -2159,102 +2126,6 @@ export default {
     // 下载历史排程
     downloadHistoryExcel() {
       DownloadHistoryExcel({ 'filename': this.selectExcelValue }).then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载idle明细
-    downloadIdleInfo() {
-      DownloadIdleInfoMain().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载量化结果
-    downloadStatistics() {
-      DownloadStatisticsMain().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载小板最新排程
-    downloadScheduleSmall() {
-      DownloadScheduleSmall().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载小板idle明细
-    downloadIdleInfoSmall() {
-      DownloadIdleInfoSmall().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载小板量化结果
-    downloadStatisticsSmall() {
-      DownloadStatisticsSmall().then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: '开始下载',
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: '下载失败，文件不存在',
-          type: 'error'
-        })
-      })
-    },
-    // 下载小板无程序表
-    downloadNoProgramSmall() {
-      DownloadNoProgram().then(res => {
         this.downloadFile(res)
         this.$message({
           message: '开始下载',

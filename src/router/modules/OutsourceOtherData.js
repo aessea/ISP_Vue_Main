@@ -76,33 +76,33 @@ const OutsourceOtherDataRouter = {
         roles: ['admin', 'common']
       }
     },
-    {
-      path: 'columnnameconfig',
-      component: () => import('@/views/Outsource/OtherData/ColumnNameConfig'),
-      name: 'ColumnNameConfig',
-      meta: {
-        title: '列名配置',
-        roles: ['admin', 'common']
-      }
-    },
-    {
-      path: 'sheetnameconfig',
-      component: () => import('@/views/Outsource/OtherData/SheetNameConfig'),
-      name: 'SheetNameConfig',
-      meta: {
-        title: '表名配置',
-        roles: ['admin', 'common']
-      }
-    },
-    {
-      path: 'tablecolumnconfig',
-      component: () => import('@/views/Outsource/OtherData/TableColumnConfig'),
-      name: 'TableColumnConfig',
-      meta: {
-        title: '读取列名配置',
-        roles: ['admin', 'common']
-      }
-    },
+    // {
+    //   path: 'columnnameconfig',
+    //   component: () => import('@/views/Outsource/OtherData/ColumnNameConfig'),
+    //   name: 'ColumnNameConfig',
+    //   meta: {
+    //     title: '列名配置',
+    //     roles: ['admin', 'common']
+    //   }
+    // },
+    // {
+    //   path: 'sheetnameconfig',
+    //   component: () => import('@/views/Outsource/OtherData/SheetNameConfig'),
+    //   name: 'SheetNameConfig',
+    //   meta: {
+    //     title: '表名配置',
+    //     roles: ['admin', 'common']
+    //   }
+    // },
+    // {
+    //   path: 'tablecolumnconfig',
+    //   component: () => import('@/views/Outsource/OtherData/TableColumnConfig'),
+    //   name: 'TableColumnConfig',
+    //   meta: {
+    //     title: '读取列名配置',
+    //     roles: ['admin', 'common']
+    //   }
+    // },
     {
       path: 'motherboard',
       component: () => import('@/views/Outsource/OtherData/MotherBoard'),
