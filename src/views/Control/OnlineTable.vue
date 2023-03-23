@@ -403,13 +403,14 @@ import LuckyExcel from 'luckyexcel'
 import FileSaver from 'file-saver'
 import XLSX from 'xlsx'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { AnalysisExcel, GenerateAnaExcel, DownloadAnaExcel, ClearAnaProgress, GetAnaProgress,
+import { AnalysisExcel, GenerateAnaExcel, ClearAnaProgress, GetAnaProgress,
   GetHistoryAnaItem, GetHistoryAnaData, GetHistoryExcelItem, GetHistoryExcelData,
   StatisticsSchedule, SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled,
   AiPrescheduled, AiScheduled, GetRunFlag, ImportPushSchedule, SaveApiCustweekSelfcreate,
   CheckData
 } from '@/api/Control/OnlineTable'
 import { lineOptions, lockedList, unLockedList } from '@/utils/items'
+import { DownloadFile } from '@/api/Public'
 export default {
   name: 'OnlineTable',
   directives: { elDragDialog },
@@ -1003,7 +1004,7 @@ export default {
     },
     // 下载表格
     downloadAnaExcel() {
-      DownloadAnaExcel().then(res => {
+      DownloadFile('analysis_file_path').then(res => {
         this.stepNow = 4
         this.$message({
           type: 'success',
