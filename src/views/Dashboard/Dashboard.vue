@@ -26,18 +26,18 @@
           </el-row>
           <el-row>
             <el-col :span="12">
-              <div @click="toConfig">
+              <div @click="toConfigMain">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-setting" /></span>
-                  <span style="margin-left: 10px;">查看排程配置</span>
+                  <span style="margin-left: 10px;">查看主板配置</span>
                 </el-card>
               </div>
             </el-col>
             <el-col :span="12">
-              <div @click="toBlockTimeData">
+              <div @click="toConfigSmall">
                 <el-card shadow="hover" class="btn-card">
-                  <span class="btn-icon"><i class="el-icon-s-data" /></span>
-                  <span style="margin-left: 10px;">维护时间表</span>
+                  <span class="btn-icon"><i class="el-icon-setting" /></span>
+                  <span style="margin-left: 10px;">查看小板配置</span>
                 </el-card>
               </div>
             </el-col>
@@ -61,6 +61,14 @@
             </el-col>
           </el-row>
           <el-row>
+            <el-col :span="12">
+              <div @click="toBlockTimeData">
+                <el-card shadow="hover" class="btn-card">
+                  <span class="btn-icon"><i class="el-icon-s-data" /></span>
+                  <span style="margin-left: 10px;">维护时间表</span>
+                </el-card>
+              </div>
+            </el-col>
             <el-col :span="12">
               <div @click="toOutsource">
                 <el-card shadow="hover" class="btn-card">
@@ -149,8 +157,11 @@ export default {
     toHistory() {
       this.$router.push({ path: 'historylog/historyopera' })
     },
-    toConfig() {
-      this.$router.push({ path: 'control/config' })
+    toConfigMain() {
+      this.$router.push({ path: 'control/configmain' })
+    },
+    toConfigSmall() {
+      this.$router.push({ path: 'control/configsmall' })
     },
     toBlockTimeData() {
       this.$router.push({ path: 'dayconfig/blocktimetata' })

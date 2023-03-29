@@ -2,7 +2,7 @@
   <div id="main">
     <el-card>
       <div>
-        <el-descriptions class="margin-top" title="主板排程配置" :column="4" :label-style="{'font-weight':'bold'}" border>
+        <el-descriptions class="margin-top" title="小板排程配置" :column="4" :label-style="{'font-weight':'bold'}" border>
           <template slot="extra">
             <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
               <el-button
@@ -45,8 +45,11 @@
           </el-descriptions-item>
 
           <el-descriptions-item label="hold单">{{ modelOriginal.default_unknown_require_day }}天</el-descriptions-item>
-          <el-descriptions-item label="大小穿插时间">{{ modelOriginal.large_small_punctuated }}秒</el-descriptions-item>
-          <el-descriptions-item label="repair_mode">{{ modelOriginal.repair_mode }}</el-descriptions-item>
+          <el-descriptions-item label="大小穿插惩罚值(秒)">{{ modelOriginal.large_small_punctuated }}秒</el-descriptions-item>
+          <el-descriptions-item label="是否开启双面修">
+            <el-tag v-if="modelOriginal.repair_mode === 1" size="small" type="success">开启</el-tag>
+            <el-tag v-else-if="modelOriginal.repair_mode === 0" size="small" type="danger">关闭</el-tag>
+          </el-descriptions-item>
           <el-descriptions-item label="未上排程状态">{{ modelOriginal.unschedule_state_str }}</el-descriptions-item>
           <el-descriptions-item label="n天需求日期参数">{{ modelOriginal.threshold_duedate }}天</el-descriptions-item>
           <el-descriptions-item label="n天物料到达时间参数">{{ modelOriginal.threshold_release }}天</el-descriptions-item>
@@ -115,10 +118,10 @@
             <el-tag v-else-if="modelOriginal.deep_search === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="小板线单面点数阈值(大于此值去SM12)">
-            {{ modelOriginal.small_board_single_points_threshold }}
+            {{ modelOriginal.board_single_points_threshold }}
           </el-descriptions-item>
           <el-descriptions-item label="小板线大小工单阈值">
-            {{ modelOriginal.small_board_total_points_threshold }}
+            {{ modelOriginal.board_total_points_threshold }}
           </el-descriptions-item>
           <el-descriptions-item label="后工序为AI提前时间">
             {{ modelOriginal.ai_post_process }}天
@@ -128,37 +131,107 @@
             <el-tag v-else-if="modelOriginal.is_run_recognize_ignore_overdue_jobs === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
 
-          <el-descriptions-item label="大工单线线体(顿号隔开)" :span="2">{{ modelOriginal.big_lines }}</el-descriptions-item>
-          <el-descriptions-item label="优先排大工单线体(顿号隔开)" :span="2">{{ modelOriginal.Big_lines_remove22 }}</el-descriptions-item>
-          <el-descriptions-item label="该线体工单优先排大工单线(顿号隔开)" :span="2">{{ modelOriginal.Non_big_lines }}</el-descriptions-item>
-          <el-descriptions-item label="西门子线体配置(顿号隔开)" :span="2">{{ modelOriginal.ximenzi_lines }}</el-descriptions-item>
-          <el-descriptions-item label="不能绑定的线体配置(顿号隔开)" :span="2">{{ modelOriginal.cannot_binding_lines }}</el-descriptions-item>
-          <el-descriptions-item label="BPR线体(顿号隔开)" :span="2">{{ modelOriginal.Four_SR_lines }}</el-descriptions-item>
-          <el-descriptions-item label="安必昂不能绑定线体(顿号隔开)" :span="4">{{ modelOriginal.AX_lines }}</el-descriptions-item>
+          <el-descriptions-item label="大工单线线体" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.big_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="优先排大工单线体" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.Big_lines_remove22"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="该线体工单优先排大工单线" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.Non_big_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="西门子线体配置" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.ximenzi_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="不能绑定的线体配置" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.cannot_binding_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="BPR线体" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.Four_SR_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="安必昂不能绑定线体" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.AX_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
 
-          <el-descriptions-item label="西门子特殊板宽宽度配置(单位:毫米)">{{ modelOriginal.board_width }}</el-descriptions-item>
-          <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}</el-descriptions-item>
-          <el-descriptions-item label="小工单打板时间(单位:小时)">{{ modelOriginal.small_processing_time }}</el-descriptions-item>
-          <el-descriptions-item label="预排可插入时间节点(单位:小时)">{{ modelOriginal.insert_time_before }}</el-descriptions-item>
-          <el-descriptions-item label="正排可插入时间节点(单位:小时)">{{ modelOriginal.insert_time_after }}</el-descriptions-item>
-          <el-descriptions-item label="预排锁定时间节点(单位:小时)">{{ modelOriginal.locked_time_before }}</el-descriptions-item>
-          <el-descriptions-item label="正排锁定时间节点(单位:小时)">{{ modelOriginal.locked_time_after }}</el-descriptions-item>
-          <el-descriptions-item label="超大单参数(单位:小时)">{{ modelOriginal.split_overdue_group_date }}</el-descriptions-item>
+          <el-descriptions-item label="西门子特殊板宽宽度配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
+          <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}万</el-descriptions-item>
+          <el-descriptions-item label="小工单打板时间(单位:时)">{{ modelOriginal.small_processing_time }}</el-descriptions-item>
+          <el-descriptions-item label="预排可插入时间节点(单位:时)">{{ modelOriginal.insert_time_before }}</el-descriptions-item>
+          <el-descriptions-item label="正排可插入时间节点(单位:时)(从当天零点开始累加)">{{ modelOriginal.insert_time_after }}</el-descriptions-item>
+          <el-descriptions-item label="预排锁定时间节点(单位:时)(从当天零点开始累加)">{{ modelOriginal.locked_time_before }}</el-descriptions-item>
+          <el-descriptions-item label="正排锁定时间节点(单位:时)">{{ modelOriginal.locked_time_after }}</el-descriptions-item>
+          <el-descriptions-item label="超大单参数(单位:时)">{{ modelOriginal.split_overdue_group_date }}</el-descriptions-item>
           <el-descriptions-item label="包装点限制参数(单位:天)">{{ modelOriginal.require_datetime_offset }}</el-descriptions-item>
           <el-descriptions-item label="LED工单是否特殊处理">
             <el-tag v-if="modelOriginal.use_LED === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.use_LED === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="点料可插入锁定小工单时间(当天20点，单位:小时)" :span="2">{{ modelOriginal.point_material_lock_time }}</el-descriptions-item>
+          <el-descriptions-item label="排白班开始时间(单位:时)">{{ modelOriginal.day_shift_start_time }}</el-descriptions-item>
+          <el-descriptions-item label="排白班结束时间(单位:时)">{{ modelOriginal.day_shift_end_time }}</el-descriptions-item>
+          <el-descriptions-item label="排夜班开始时间(单位:时)">{{ modelOriginal.day_night_start_time }}</el-descriptions-item>
+          <el-descriptions-item label="排夜班结束时间(第二天)(单位:时)">{{ modelOriginal.day_night_end_time }}</el-descriptions-item>
+
+          <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
+          <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item>
 
           <el-descriptions-item label="输入的列" :span="4">{{ modelOriginal.input_col }}</el-descriptions-item>
           <el-descriptions-item label="导出的列" :span="4">{{ modelOriginal.output_col }}</el-descriptions-item>
           <el-descriptions-item label="导出线体顺序" :span="4">{{ modelOriginal.output_line_order }}</el-descriptions-item>
 
-          <el-descriptions-item label="创建人">{{ modelOriginal.CREATED_BY }}</el-descriptions-item>
+          <!-- <el-descriptions-item label="创建人">{{ modelOriginal.CREATED_BY }}</el-descriptions-item>
           <el-descriptions-item label="创建时间">{{ modelOriginal.CREATED_TIME }}</el-descriptions-item>
           <el-descriptions-item label="修改人">{{ modelOriginal.UPDATED_BY }}</el-descriptions-item>
-          <el-descriptions-item label="修改时间">{{ modelOriginal.UPDATED_TIME }}</el-descriptions-item>
+          <el-descriptions-item label="修改时间">{{ modelOriginal.UPDATED_TIME }}</el-descriptions-item> -->
         </el-descriptions>
       </div>
     </el-card>
@@ -264,7 +337,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.repair_mode" prop="repair_mode" label="是否开启双面修">
+              <el-form-item :rules="rules.repair_mode" prop="repair_mode" label="是否开启双面修(1否2是)">
                 <el-input v-model="model.repair_mode" placeholder="1否2是" clearable />
               </el-form-item>
             </el-col>
@@ -300,13 +373,13 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.small_board_single_points_threshold" prop="small_board_single_points_threshold" label="小板线单面点数阈值(大于此值去SM12)">
-                <el-input-number v-model="model.small_board_single_points_threshold" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
+              <el-form-item :rules="rules.board_single_points_threshold" prop="board_single_points_threshold" label="小板线单面点数阈值(大于此值去SM12)">
+                <el-input-number v-model="model.board_single_points_threshold" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.small_board_total_points_threshold" prop="small_board_total_points_threshold" label="小板线大小工单阈值">
-                <el-input-number v-model="model.small_board_total_points_threshold" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
+              <el-form-item :rules="rules.board_total_points_threshold" prop="board_total_points_threshold" label="小板线大小工单阈值">
+                <el-input-number v-model="model.board_total_points_threshold" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -404,45 +477,65 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.big_lines" prop="big_lines" label="大工单线线体(线体用顿号隔开)">
-                <el-input v-model="model.big_lines" placeholder="请输入" :rows="1" type="textarea" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.Big_lines_remove22" prop="Big_lines_remove22" label="优先排大工单线体(线体用顿号隔开)">
-                <el-input v-model="model.Big_lines_remove22" placeholder="请输入" :rows="1" type="textarea" clearable />
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.big_lines" prop="big_lines" label="大工单线线体">
+                <el-checkbox-group v-model="model.big_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.Non_big_lines" prop="Non_big_lines" label="该线体工单优先排大工单线(线体用顿号隔开)">
-                <el-input v-model="model.Non_big_lines" placeholder="请输入" :rows="1" type="textarea" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.ximenzi_lines" prop="ximenzi_lines" label="西门子线体配置(线体用顿号隔开)">
-                <el-input v-model="model.ximenzi_lines" placeholder="请输入" :rows="1" type="textarea" clearable />
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.Big_lines_remove22" prop="Big_lines_remove22" label="优先排大工单线体">
+                <el-checkbox-group v-model="model.Big_lines_remove22">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.cannot_binding_lines" prop="cannot_binding_lines" label="不能绑定的线体配置(线体用顿号隔开)">
-                <el-input v-model="model.cannot_binding_lines" placeholder="请输入" :rows="1" type="textarea" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.Four_SR_lines" prop="Four_SR_lines" label="BPR线体(线体用顿号隔开)">
-                <el-input v-model="model.Four_SR_lines" placeholder="请输入" :rows="1" type="textarea" clearable />
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.Non_big_lines" prop="Non_big_lines" label="该线体工单优先排大工单线">
+                <el-checkbox-group v-model="model.Non_big_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.AX_lines" prop="AX_lines" label="安必昂不能绑定线体(线体用顿号隔开)">
-                <el-input v-model="model.AX_lines" placeholder="请输入" :rows="1" type="textarea" clearable />
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.ximenzi_lines" prop="ximenzi_lines" label="西门子线体配置">
+                <el-checkbox-group v-model="model.ximenzi_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.cannot_binding_lines" prop="cannot_binding_lines" label="不能绑定的线体配置">
+                <el-checkbox-group v-model="model.cannot_binding_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.Four_SR_lines" prop="Four_SR_lines" label="BPR线体">
+                <el-checkbox-group v-model="model.Four_SR_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.AX_lines" prop="AX_lines" label="安必昂不能绑定线体">
+                <el-checkbox-group v-model="model.AX_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
               </el-form-item>
             </el-col>
           </el-row>
@@ -458,36 +551,36 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.small_processing_time" prop="small_processing_time" label="小工单打板时间(单位:小时)">
+              <el-form-item :rules="rules.small_processing_time" prop="small_processing_time" label="小工单打板时间(单位:时)">
                 <el-input v-model="model.small_processing_time" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.insert_time_before" prop="insert_time_before" label="预排可插入时间节点(单位:小时)">
+              <el-form-item :rules="rules.insert_time_before" prop="insert_time_before" label="预排可插入时间节点(单位:时)">
                 <el-input v-model="model.insert_time_before" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.insert_time_after" prop="insert_time_after" label="正排可插入时间节点(单位:小时)">
+              <el-form-item :rules="rules.insert_time_after" prop="insert_time_after" label="正排可插入时间节点(单位:时)">
                 <el-input v-model="model.insert_time_after" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.locked_time_before" prop="locked_time_before" label="预排锁定时间节点(单位:小时)">
+              <el-form-item :rules="rules.locked_time_before" prop="locked_time_before" label="预排锁定时间节点(单位:时)">
                 <el-input v-model="model.locked_time_before" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.locked_time_after" prop="locked_time_after" label="正排锁定时间节点(单位:小时)">
+              <el-form-item :rules="rules.locked_time_after" prop="locked_time_after" label="正排锁定时间节点(单位:时)">
                 <el-input v-model="model.locked_time_after" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.split_overdue_group_date" prop="split_overdue_group_date" label="超大单参数(单位:小时)">
+              <el-form-item :rules="rules.split_overdue_group_date" prop="split_overdue_group_date" label="超大单参数(单位:时)">
                 <el-input v-model="model.split_overdue_group_date" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -504,8 +597,42 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.point_material_lock_time" prop="point_material_lock_time" label="点料可插入锁定小工单时间(当天20点，单位:小时)">
+              <el-form-item :rules="rules.point_material_lock_time" prop="point_material_lock_time" label="点料可插入锁定小工单时间(当天20点，单位:时)">
                 <el-input v-model="model.point_material_lock_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.day_shift_start_time" prop="day_shift_start_time" label="排白班开始时间(单位:时)">
+                <el-input v-model="model.day_shift_start_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.day_shift_end_time" prop="day_shift_end_time" label="排白班结束时间(单位:时)">
+                <el-input v-model="model.day_shift_end_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.day_night_start_time" prop="day_night_start_time" label="排夜班开始时间(单位:时)">
+                <el-input v-model="model.day_night_start_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.day_night_end_time" prop="day_night_end_time" label="排夜班结束时间(第二天)(单位:时)">
+                <el-input v-model="model.day_night_end_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.buffer_up_down_time" prop="buffer_up_down_time" label="锁定内上下板间隔(单位:时)">
+                <el-input v-model="model.buffer_up_down_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.buffer_up_down_time_bpr" prop="buffer_up_down_time_bpr" label="BPR锁定内上下板间隔(单位:时)">
+                <el-input v-model="model.buffer_up_down_time_bpr" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -543,6 +670,7 @@
 import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog' // base on element-ui
 import { GetTableData, ModifyData } from '@/api/Control/ConfigMain'
+import { GetLineProcess } from '@/api/Public'
 export default {
   name: 'ConfigMain',
   directives: { elDragDialog },
@@ -553,6 +681,7 @@ export default {
       isClick: false, // 是否点击了确认修改
       forms: ['$form'],
       pack_holiday_interval: '',
+      all_line_list: [],
       modelOriginal: {
         schedule_date: '',
         schedule_time: '',
@@ -590,8 +719,8 @@ export default {
         use_tabu: true,
         use_parallel: true,
         deep_search: true,
-        small_board_single_points_threshold: '',
-        small_board_total_points_threshold: '',
+        board_single_points_threshold: '',
+        board_total_points_threshold: '',
         ai_post_process: '',
         is_run_recognize_ignore_overdue_jobs: true,
         big_lines: '',
@@ -612,6 +741,12 @@ export default {
         require_datetime_offset: '',
         use_LED: false,
         point_material_lock_time: '',
+        day_shift_start_time: '',
+        day_shift_end_time: '',
+        day_night_start_time: '',
+        day_night_end_time: '',
+        buffer_up_down_time: '',
+        buffer_up_down_time_bpr: '',
         input_col: '',
         output_col: '',
         output_line_order: '',
@@ -657,17 +792,17 @@ export default {
         use_tabu: true,
         use_parallel: true,
         deep_search: true,
-        small_board_single_points_threshold: '',
-        small_board_total_points_threshold: '',
+        board_single_points_threshold: '',
+        board_total_points_threshold: '',
         ai_post_process: '',
         is_run_recognize_ignore_overdue_jobs: true,
-        big_lines: '',
-        Big_lines_remove22: '',
-        Non_big_lines: '',
-        ximenzi_lines: '',
-        cannot_binding_lines: '',
-        Four_SR_lines: '',
-        AX_lines: '',
+        big_lines: [],
+        Big_lines_remove22: [],
+        Non_big_lines: [],
+        ximenzi_lines: [],
+        cannot_binding_lines: [],
+        Four_SR_lines: [],
+        AX_lines: [],
         board_width: 0,
         small_order_total_points: '',
         small_processing_time: '',
@@ -679,6 +814,12 @@ export default {
         require_datetime_offset: '',
         use_LED: false,
         point_material_lock_time: '',
+        day_shift_start_time: '',
+        day_shift_end_time: '',
+        day_night_start_time: '',
+        day_night_end_time: '',
+        buffer_up_down_time: '',
+        buffer_up_down_time_bpr: '',
         input_col: '',
         output_col: '',
         output_line_order: '',
@@ -760,16 +901,16 @@ export default {
         }],
         large_small_punctuated: [{
           required: true,
-          message: '大小穿插时间不能为空',
+          message: '该项不能为空',
           trigger: 'blur'
         }],
         repair_mode: [{
           required: true,
-          message: 'repair_mode不能为空',
+          message: '不能为空',
           trigger: 'blur'
         }, {
           type: 'number',
-          message: 'repair_mode格式不正确',
+          message: '格式不正确',
           trigger: 'blur'
         }],
         block_time_rule: [{
@@ -867,12 +1008,12 @@ export default {
           message: '开放搜索解不能为空',
           trigger: 'change'
         }],
-        small_board_single_points_threshold: [{
+        board_single_points_threshold: [{
           required: true,
           message: '该项不能为空',
           trigger: 'change'
         }],
-        small_board_total_points_threshold: [{
+        board_total_points_threshold: [{
           required: true,
           message: '该项不能为空',
           trigger: 'change'
@@ -887,11 +1028,41 @@ export default {
           message: '该项不能为空',
           trigger: 'change'
         }],
-        big_lines: [{
-          required: true,
-          message: '该项不能为空',
-          trigger: 'change'
-        }],
+        // buffer_up_down_time: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
+        // buffer_up_down_time_bpr: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
+        // day_shift_start_time: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
+        // day_shift_end_time: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
+        // day_night_start_time: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
+        // day_night_end_time: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
+        // big_lines: [{
+        //   required: true,
+        //   message: '该项不能为空',
+        //   trigger: 'change'
+        // }],
         // AX_lines: [{
         //   required: true,
         //   message: '该项不能为空',
@@ -1001,6 +1172,7 @@ export default {
     ])
   },
   created() {
+    this.getLineProcess()
     this.getTableData()
   },
   mounted() {
@@ -1014,6 +1186,11 @@ export default {
     modifyDataDialog() {
       this.isClick = false
       this.dialogVisible = true
+    },
+    getLineProcess() {
+      GetLineProcess().then(res => {
+        this.all_line_list = res.all_line_list
+      })
     },
     getTableData() {
       GetTableData().then(res => {

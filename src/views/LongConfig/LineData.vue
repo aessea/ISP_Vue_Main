@@ -74,6 +74,23 @@
             </template>
           </el-table-column> -->
           <!-- <el-table-column prop="offset_threshold" label="阈值偏差" width="85" /> -->
+          <el-table-column prop="enable_process_list" label="可生产制程">
+            <template slot-scope="scope">
+              <el-tag
+                v-for="(val, key) in scope.row.enable_process_list"
+                :key="key"
+                style="margin-right: 5px;"
+              >
+                {{ val }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <!-- <el-table-column prop="T_AD_unable" label="可否制程T-AD" width="120">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.T_AD_unable === 1" size="small" type="info">×</el-tag>
+              <el-tag v-else-if="scope.row.T_AD_unable === 0" size="small" type="success">✔</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="T_unable" label="可否制程T" width="95">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.T_unable === 1" size="small" type="info">×</el-tag>
@@ -121,7 +138,7 @@
               <el-tag v-if="scope.row.S_THR_unable === 1" size="small" type="info">×</el-tag>
               <el-tag v-else-if="scope.row.S_THR_unable === 0" size="small" type="success">✔</el-tag>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <!-- <el-table-column prop="is_burn_in" label="是否烧录" width="85">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_burn_in === 1" size="small" type="info">×</el-tag>
@@ -242,6 +259,15 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-form-item :rules="rules.enable_process_list" prop="enable_process_list" label="可生产制程">
+              <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+                <el-checkbox-group v-model="model.enable_process_list">
+                  <el-checkbox v-for="process in all_process_list" :key="process.index" :label="process" />
+                </el-checkbox-group>
+              </el-col>
+            </el-form-item>
+          </el-row>
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.T_unable" prop="T_unable" label="可否制程T">
                 <el-input v-model="model.T_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
@@ -257,8 +283,8 @@
                 <el-input v-model="model.T_BPR_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
-          </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          </el-row> -->
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.B_BPR_unable" prop="B_BPR_unable" label="可否制程B-BPR">
                 <el-input v-model="model.B_BPR_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
@@ -274,8 +300,8 @@
                 <el-input v-model="model.S_BPR_M_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
-          </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          </el-row> -->
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.S_unable" prop="S_unable" label="可否制程S">
                 <el-input v-model="model.S_unable" placeholder="1表示否，0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
@@ -291,8 +317,8 @@
                 <el-input v-model="model.is_burn_in" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
-          </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          </el-row> -->
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" label="创建人">
                 <el-input v-model="model.CREATED_BY" disabled />
@@ -313,7 +339,7 @@
                 <el-input v-model="model.UPDATED_TIME" disabled />
               </el-form-item>
             </el-col>
-          </el-row>
+          </el-row> -->
         </el-form>
       </el-card>
       <span slot="footer" class="dialog-footer">
@@ -437,6 +463,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/LineData'
 import { LineOptions } from '@/utils/items'
+import { GetLineProcess } from '@/api/Public'
 export default {
   name: 'LineData',
   directives: { elDragDialog },
@@ -511,6 +538,7 @@ export default {
       importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
+      all_process_list: ['B', 'T', 'S'],
       // 表单相关数据
       forms: ['$form'],
       model: {
@@ -533,9 +561,11 @@ export default {
         B_BPR_unable: '',
         S_BPR_unable: '',
         S_BPR_M_unable: '',
+        T_AD_unable: '',
         S_unable: '',
         S_THR_unable: '',
         is_burn_in: '',
+        enable_process_list: [],
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -565,6 +595,8 @@ export default {
         S_unable: '',
         S_THR_unable: '',
         is_burn_in: '',
+        T_AD_unable: '',
+        enable_process_list: [],
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -675,13 +707,18 @@ export default {
           required: true,
           message: '是否烧录不能为空',
           trigger: 'blur'
+        }],
+        enable_process_list: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
         }]
       },
       line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
-      pageSize: 20, // 每页多少条数据
+      pageSize: 30, // 每页多少条数据
       dataTableSelections: [] // 表格选中的数据
     }
   },
@@ -691,6 +728,7 @@ export default {
     ])
   },
   created() {
+    this.getLineProcess()
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
@@ -714,6 +752,11 @@ export default {
     handlePageChange(val) {
       this.currentPage = val
       this.getTableData(val, this.pageSize) // 翻页
+    },
+    getLineProcess() {
+      GetLineProcess().then(res => {
+        this.all_process_list = res.all_process_list
+      })
     },
     // 分页展示表格数据
     getTableData(currentPage, pageSize) {
@@ -905,6 +948,8 @@ export default {
           this.modelOriginal[key] = ''
         }
       }
+      this.model['enable_process_list'] = []
+      this.modelOriginal['enable_process_list'] = []
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据

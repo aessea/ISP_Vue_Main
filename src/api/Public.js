@@ -17,3 +17,9 @@ export function DownloadFile(file_key) {
     responseType: 'blob'
   })
 }
+export function GetLineProcess() {
+  return request({
+    url: '/Control/get_line_process/',
+    method: 'get'
+  })
+}
