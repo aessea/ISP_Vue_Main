@@ -86,11 +86,20 @@ const LongConfigRouter = {
       }
     },
     {
-      path: 'processdata',
+      path: 'mainprocessdata',
       component: () => import('@/views/LongConfig/ProcessData'),
       name: 'ProcessData',
       meta: {
-        title: '制程配置表',
+        title: '主板制程配置表',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'smallprocessdata',
+      component: () => import('@/views/LongConfig/SmallProcessData'),
+      name: 'SmallProcessData',
+      meta: {
+        title: '小板制程配置表',
         roles: ['admin', 'common']
       }
     },
