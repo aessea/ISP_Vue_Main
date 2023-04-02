@@ -1637,9 +1637,9 @@ export default {
         GetApsMtool().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert('钢网信息更新成功！', '提示', {
+            this.$alert(res.message, '提示', {
               confirmButtonText: '确定',
-              type: 'success'
+              type: res.message_type
             })
             this.apsMtoolMsg = '已更新'
             if (mode === 'main') {
