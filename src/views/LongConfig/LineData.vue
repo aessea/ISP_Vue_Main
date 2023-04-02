@@ -242,19 +242,24 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值">
                 <el-input-number v-model="model.min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.max_threshold" prop="max_threshold" label="最高生产阈值">
                 <el-input-number v-model="model.max_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.offset_threshold" prop="offset_threshold" label="阈值偏差">
                 <el-input-number v-model="model.offset_threshold" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_burn_in" prop="is_burn_in" label="是否烧录">
+                <el-input v-model="model.is_burn_in" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -555,21 +560,21 @@ export default {
         min_threshold: 0,
         max_threshold: 0,
         offset_threshold: 0,
-        T_unable: '',
-        B_unable: '',
-        T_BPR_unable: '',
-        B_BPR_unable: '',
-        S_BPR_unable: '',
-        S_BPR_M_unable: '',
-        T_AD_unable: '',
-        S_unable: '',
-        S_THR_unable: '',
+        // T_unable: '',
+        // B_unable: '',
+        // T_BPR_unable: '',
+        // B_BPR_unable: '',
+        // S_BPR_unable: '',
+        // S_BPR_M_unable: '',
+        // T_AD_unable: '',
+        // S_unable: '',
+        // S_THR_unable: '',
         is_burn_in: '',
-        enable_process_list: [],
-        CREATED_BY: '',
-        CREATED_TIME: '',
-        UPDATED_BY: '',
-        UPDATED_TIME: ''
+        enable_process_list: []
+        // CREATED_BY: '',
+        // CREATED_TIME: '',
+        // UPDATED_BY: '',
+        // UPDATED_TIME: ''
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -586,21 +591,21 @@ export default {
         min_threshold: 0,
         max_threshold: 0,
         offset_threshold: 0,
-        T_unable: '',
-        B_unable: '',
-        T_BPR_unable: '',
-        B_BPR_unable: '',
-        S_BPR_unable: '',
-        S_BPR_M_unable: '',
-        S_unable: '',
-        S_THR_unable: '',
+        // T_unable: '',
+        // B_unable: '',
+        // T_BPR_unable: '',
+        // B_BPR_unable: '',
+        // S_BPR_unable: '',
+        // S_BPR_M_unable: '',
+        // S_unable: '',
+        // S_THR_unable: '',
+        // T_AD_unable: '',
         is_burn_in: '',
-        T_AD_unable: '',
-        enable_process_list: [],
-        CREATED_BY: '',
-        CREATED_TIME: '',
-        UPDATED_BY: '',
-        UPDATED_TIME: ''
+        enable_process_list: []
+        // CREATED_BY: '',
+        // CREATED_TIME: '',
+        // UPDATED_BY: '',
+        // UPDATED_TIME: ''
       },
       rules: {
         name: [{
@@ -663,46 +668,46 @@ export default {
           message: '阈值偏差不能为空',
           trigger: 'blur'
         }],
-        T_unable: [{
-          required: true,
-          message: '可否制程T不能为空',
-          trigger: 'blur'
-        }],
-        B_unable: [{
-          required: true,
-          message: '可否制程B不能为空',
-          trigger: 'blur'
-        }],
-        T_BPR_unable: [{
-          required: true,
-          message: '可否制程T-BPR不能为空',
-          trigger: 'blur'
-        }],
-        B_BPR_unable: [{
-          required: true,
-          message: '可否制程B-BPR不能为空',
-          trigger: 'blur'
-        }],
-        S_BPR_unable: [{
-          required: true,
-          message: '可否制程S-BPR不能为空',
-          trigger: 'blur'
-        }],
-        S_BPR_M_unable: [{
-          required: true,
-          message: '可否制程S-BPR-M不能为空',
-          trigger: 'blur'
-        }],
-        S_unable: [{
-          required: true,
-          message: '可否制程S不能为空',
-          trigger: 'blur'
-        }],
-        S_THR_unable: [{
-          required: true,
-          message: '可否制程S-THR不能为空',
-          trigger: 'blur'
-        }],
+        // T_unable: [{
+        //   required: true,
+        //   message: '可否制程T不能为空',
+        //   trigger: 'blur'
+        // }],
+        // B_unable: [{
+        //   required: true,
+        //   message: '可否制程B不能为空',
+        //   trigger: 'blur'
+        // }],
+        // T_BPR_unable: [{
+        //   required: true,
+        //   message: '可否制程T-BPR不能为空',
+        //   trigger: 'blur'
+        // }],
+        // B_BPR_unable: [{
+        //   required: true,
+        //   message: '可否制程B-BPR不能为空',
+        //   trigger: 'blur'
+        // }],
+        // S_BPR_unable: [{
+        //   required: true,
+        //   message: '可否制程S-BPR不能为空',
+        //   trigger: 'blur'
+        // }],
+        // S_BPR_M_unable: [{
+        //   required: true,
+        //   message: '可否制程S-BPR-M不能为空',
+        //   trigger: 'blur'
+        // }],
+        // S_unable: [{
+        //   required: true,
+        //   message: '可否制程S不能为空',
+        //   trigger: 'blur'
+        // }],
+        // S_THR_unable: [{
+        //   required: true,
+        //   message: '可否制程S-THR不能为空',
+        //   trigger: 'blur'
+        // }],
         is_burn_in: [{
           required: true,
           message: '是否烧录不能为空',
