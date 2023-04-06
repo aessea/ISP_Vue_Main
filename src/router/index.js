@@ -13,6 +13,7 @@ import OutsourceOtherDataRouter from './modules/OutsourceOtherData'
 import DayConfigRouter from './modules/DayConfig'
 import LongConfigRouter from './modules/LongConfig'
 import PredictRouter from './modules/Predict'
+import FileManageRouter from './modules/FileManage'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -157,6 +158,7 @@ export const asyncRoutes = [
   OutsourceConstraintsRouter,
   OutsourceBaseDataRouter,
   OutsourceOtherDataRouter,
+  FileManageRouter,
 
   {
     path: '/permission',
