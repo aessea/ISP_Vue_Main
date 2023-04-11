@@ -84,6 +84,15 @@ const FileManageRouter = {
         title: '接口量化文件',
         roles: ['admin', 'common']
       }
+    },
+    {
+      path: 'logfiles',
+      component: () => import('@/views/FileManage/LogFiles'),
+      name: 'LogFiles',
+      meta: {
+        title: '日志文件',
+        roles: ['admin', 'common']
+      }
     }
   ]
 }

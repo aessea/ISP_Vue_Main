@@ -24,7 +24,8 @@
           <el-descriptions-item label="idle权重">{{ modelOriginal.idle_weight }}</el-descriptions-item>
           <el-descriptions-item label="Line balance权重">{{ modelOriginal.line_balance_weight }}</el-descriptions-item>
           <el-descriptions-item label="大工单线权重">{{ modelOriginal.big_line_weight }}</el-descriptions-item>
-          <el-descriptions-item label="锁定时间节点内的idle权重" :span="4">{{ modelOriginal.lock_time_idle_weight }}</el-descriptions-item>
+          <el-descriptions-item label="锁定时间节点内的idle权重" :span="2">{{ modelOriginal.lock_time_idle_weight }}</el-descriptions-item>
+          <el-descriptions-item label="特殊客户识别" :span="2">{{ modelOriginal.special_customer_name }}</el-descriptions-item>
 
           <el-descriptions-item label="是否开启全部包装放假">
             <el-tag v-if="modelOriginal.pack_holiday_flag === true" size="small" type="success">开启</el-tag>
@@ -36,7 +37,7 @@
           </el-descriptions-item>
           <el-descriptions-item label="全部包装放假日期" :span="2">
             <el-tag
-              v-for="(val,key) in pack_holiday_interval"
+              v-for="(val,key) in modelOriginal.pack_holiday_str_list"
               :key="key"
               style="margin-right: 5px;"
             >
@@ -47,12 +48,14 @@
           <el-descriptions-item label="hold单">{{ modelOriginal.default_unknown_require_day }}天</el-descriptions-item>
           <el-descriptions-item label="大小穿插惩罚值(秒)">{{ modelOriginal.large_small_punctuated }}秒</el-descriptions-item>
           <el-descriptions-item label="是否开启双面修">
-            <el-tag v-if="modelOriginal.repair_mode === 1" size="small" type="success">开启</el-tag>
-            <el-tag v-else-if="modelOriginal.repair_mode === 0" size="small" type="danger">关闭</el-tag>
+            <el-tag v-if="modelOriginal.repair_mode === 1" size="small" type="danger">关闭</el-tag>
+            <el-tag v-else-if="modelOriginal.repair_mode === 2" size="small" type="success">开启</el-tag>
+            <el-tag v-else size="small" type="danger">无法识别</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="未上排程状态">{{ modelOriginal.unschedule_state_str }}</el-descriptions-item>
           <el-descriptions-item label="n天需求日期参数">{{ modelOriginal.threshold_duedate }}天</el-descriptions-item>
-          <el-descriptions-item label="n天物料到达时间参数">{{ modelOriginal.threshold_release }}天</el-descriptions-item>
+          <el-descriptions-item label="普通工单物料到达时间(天)">{{ modelOriginal.threshold_release }}天</el-descriptions-item>
+          <el-descriptions-item label="特殊工单物料到达时间(天)">{{ modelOriginal.gaia_threshold_release }}天</el-descriptions-item>
           <el-descriptions-item label="LED额外切换时间" :span="2">{{ modelOriginal.led_extra_setup_time }}秒</el-descriptions-item>
 
           <el-descriptions-item label="维护时间约束">
@@ -83,7 +86,7 @@
             <el-tag v-if="modelOriginal.force_night_shift_time_rule === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.force_night_shift_time_rule === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="非Gaia工单赌物料到20:00">
+          <el-descriptions-item label="普通工单赌物料到20:00">
             <el-tag v-if="modelOriginal.not_gaia_release_time_eight === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.not_gaia_release_time_eight === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
@@ -131,7 +134,7 @@
             <el-tag v-else-if="modelOriginal.is_run_recognize_ignore_overdue_jobs === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
 
-          <el-descriptions-item label="大工单线线体" :span="4">
+          <!-- <el-descriptions-item label="大工单线线体" :span="4">
             <el-tag
               v-for="(val, key) in modelOriginal.big_lines"
               :key="key"
@@ -200,7 +203,7 @@
             >
               {{ val }}
             </el-tag>
-          </el-descriptions-item>
+          </el-descriptions-item> -->
 
           <el-descriptions-item label="西门子特殊板宽宽度配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
           <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}万</el-descriptions-item>
@@ -221,8 +224,8 @@
           <el-descriptions-item label="排夜班开始时间(单位:时)">{{ modelOriginal.day_night_start_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班结束时间(第二天)(单位:时)">{{ modelOriginal.day_night_end_time }}</el-descriptions-item>
 
-          <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
-          <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item>
+          <!-- <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
+          <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item> -->
 
           <el-descriptions-item label="输入的列" :span="4">{{ modelOriginal.input_col }}</el-descriptions-item>
           <el-descriptions-item label="导出的列" :span="4">{{ modelOriginal.output_col }}</el-descriptions-item>
@@ -296,10 +299,9 @@
               </el-form-item>
             </el-col>
             <el-col :span="16" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.pack_holiday_interval_str" prop="pack_holiday_interval_str" label="全部包装放假日期">
-                <!-- <el-date-picker v-model="model.pack_holiday_interval_str" type="daterange" start-placeholder="请选择" end-placeholder="请选择" format="yyyy-MM-dd" :style="{width: '100%'}" /> -->
+              <el-form-item :rules="rules.pack_holiday_str_list" prop="pack_holiday_str_list" label="全部包装放假日期">
                 <el-date-picker
-                  v-model="model.pack_holiday_interval_str"
+                  v-model="model.pack_holiday_str_list"
                   type="dates"
                   placeholder="选择一个或多个放假日期"
                   :style="{width: '100%'}"
@@ -309,34 +311,44 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.default_unknown_require_day" prop="default_unknown_require_day" label="hold单">
                 <el-input-number v-model="model.default_unknown_require_day" placeholder="请输入，单位为天" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.threshold_duedate" prop="threshold_duedate" label="n天需求日期参数">
                 <el-input-number v-model="model.threshold_duedate" placeholder="请输入，单位为天" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.threshold_release" prop="threshold_release" label="n天物料到达时间参数">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.threshold_release" prop="threshold_release" label="普通工单物料到达时间(天)">
                 <el-input-number v-model="model.threshold_release" placeholder="请输入，单位为天" :step="1" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.gaia_threshold_release" prop="gaia_threshold_release" label="特殊工单物料到达时间(天)">
+                <el-input-number v-model="model.gaia_threshold_release" placeholder="请输入，单位为天" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.special_customer_name" prop="special_customer_name" label="特殊客户识别">
+                <el-input v-model="model.special_customer_name" placeholder="请输入" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.unschedule_state_str" prop="unschedule_state_str" label="未上排程状态">
                 <el-input v-model="model.unschedule_state_str" placeholder="请输入" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.large_small_punctuated" prop="large_small_punctuated" label="大小穿插时间">
                 <el-input-number v-model="model.large_small_punctuated" placeholder="请输入，单位为秒" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.repair_mode" prop="repair_mode" label="是否开启双面修(1否2是)">
                 <el-input v-model="model.repair_mode" placeholder="1否2是" clearable />
               </el-form-item>
@@ -476,7 +488,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.big_lines" prop="big_lines" label="大工单线线体">
                 <el-checkbox-group v-model="model.big_lines">
@@ -538,7 +550,7 @@
                 </el-checkbox-group>
               </el-form-item>
             </el-col>
-          </el-row>
+          </el-row> -->
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.board_width" prop="board_width" label="西门子特殊板宽宽度配置(单位:毫米)">
@@ -624,7 +636,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.buffer_up_down_time" prop="buffer_up_down_time" label="锁定内上下板间隔(单位:时)">
                 <el-input v-model="model.buffer_up_down_time" placeholder="请输入" :style="{width: '100%'}" clearable />
@@ -635,7 +647,7 @@
                 <el-input v-model="model.buffer_up_down_time_bpr" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
-          </el-row>
+          </el-row> -->
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.input_col" prop="input_col" label="输入的列">
@@ -680,7 +692,6 @@ export default {
       dialogVisible: false,
       isClick: false, // 是否点击了确认修改
       forms: ['$form'],
-      pack_holiday_interval: '',
       all_line_list: [],
       modelOriginal: {
         schedule_date: '',
@@ -691,12 +702,13 @@ export default {
         big_line_weight: '',
         lock_time_idle_weight: '',
         pack_holiday_flag: true,
-        pack_holiday_interval_str: '',
+        pack_holiday_str_list: [],
         packline_holiday_flag: true,
         led_extra_setup_time: '',
         default_unknown_require_day: '',
         threshold_duedate: '',
         threshold_release: '',
+        gaia_threshold_release: '',
         unschedule_state_str: '',
         large_small_punctuated: '',
         repair_mode: '',
@@ -723,13 +735,6 @@ export default {
         board_total_points_threshold: '',
         ai_post_process: '',
         is_run_recognize_ignore_overdue_jobs: true,
-        big_lines: '',
-        Big_lines_remove22: '',
-        Non_big_lines: '',
-        ximenzi_lines: '',
-        cannot_binding_lines: '',
-        AX_lines: '',
-        Four_SR_lines: '',
         board_width: 0,
         small_order_total_points: '',
         small_processing_time: '',
@@ -745,8 +750,7 @@ export default {
         day_shift_end_time: '',
         day_night_start_time: '',
         day_night_end_time: '',
-        buffer_up_down_time: '',
-        buffer_up_down_time_bpr: '',
+        special_customer_name: '',
         input_col: '',
         output_col: '',
         output_line_order: '',
@@ -764,12 +768,13 @@ export default {
         big_line_weight: '',
         lock_time_idle_weight: '',
         pack_holiday_flag: true,
-        pack_holiday_interval_str: '',
+        pack_holiday_str_list: [],
         packline_holiday_flag: true,
         led_extra_setup_time: '',
         default_unknown_require_day: '',
         threshold_duedate: '',
         threshold_release: '',
+        gaia_threshold_release: '',
         unschedule_state_str: '',
         large_small_punctuated: '',
         repair_mode: '',
@@ -796,13 +801,6 @@ export default {
         board_total_points_threshold: '',
         ai_post_process: '',
         is_run_recognize_ignore_overdue_jobs: true,
-        big_lines: [],
-        Big_lines_remove22: [],
-        Non_big_lines: [],
-        ximenzi_lines: [],
-        cannot_binding_lines: [],
-        Four_SR_lines: [],
-        AX_lines: [],
         board_width: 0,
         small_order_total_points: '',
         small_processing_time: '',
@@ -818,8 +816,7 @@ export default {
         day_shift_end_time: '',
         day_night_start_time: '',
         day_night_end_time: '',
-        buffer_up_down_time: '',
-        buffer_up_down_time_bpr: '',
+        special_customer_name: '',
         input_col: '',
         output_col: '',
         output_line_order: '',
@@ -864,7 +861,7 @@ export default {
           message: '是否开启全部包装放假不能为空',
           trigger: 'change'
         }],
-        pack_holiday_interval_str: [],
+        pack_holiday_str_list: [],
         packline_holiday_flag: [{
           required: true,
           message: '是否开启部分包装线放假不能为空',
@@ -882,12 +879,17 @@ export default {
         }],
         threshold_duedate: [{
           required: true,
-          message: 'n天需求日期参数不能为空',
+          message: '不能为空',
           trigger: 'blur'
         }],
         threshold_release: [{
           required: true,
-          message: 'n天物料到达时间参数不能为空',
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        gaia_threshold_release: [{
+          required: true,
+          message: '不能为空',
           trigger: 'blur'
         }],
         unschedule_state_str: [{
@@ -1028,16 +1030,11 @@ export default {
           message: '该项不能为空',
           trigger: 'change'
         }],
-        // buffer_up_down_time: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // buffer_up_down_time_bpr: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
+        special_customer_name: [{
+          required: true,
+          message: '该项不能为空',
+          trigger: 'change'
+        }],
         // day_shift_start_time: [{
         //   required: true,
         //   message: '该项不能为空',
@@ -1054,41 +1051,6 @@ export default {
         //   trigger: 'change'
         // }],
         // day_night_end_time: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // big_lines: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // AX_lines: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // Big_lines_remove22: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // Non_big_lines: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // ximenzi_lines: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // cannot_binding_lines: [{
-        //   required: true,
-        //   message: '该项不能为空',
-        //   trigger: 'change'
-        // }],
-        // Four_SR_lines: [{
         //   required: true,
         //   message: '该项不能为空',
         //   trigger: 'change'
@@ -1200,9 +1162,6 @@ export default {
             this.model[key] = data[key]
             this.modelOriginal[key] = data[key]
           }
-          // 将包装放假的字符串改为数组（为了能够在时间选择器组件上正确显示）
-          this.pack_holiday_interval = this.model.pack_holiday_interval_str.split(',')
-          this.model.pack_holiday_interval_str = this.model.pack_holiday_interval_str.split(',')
         }
       })
     },
@@ -1266,7 +1225,7 @@ export default {
       }
       this.$refs['$form'].validate((valid) => {
         if (valid) {
-          console.log('pack_holiday_interval_str:', this.model.pack_holiday_interval_str)
+          console.log('pack_holiday_str_list:', this.model.pack_holiday_str_list)
           ModifyData(data).then(res => {
             if (res.code === 20000) {
               this.$notify({

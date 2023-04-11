@@ -203,7 +203,7 @@
             <el-tab-pane label="主板下载" name="main">
               <el-row>
                 <el-col :span="24">
-                  <el-alert
+                  <!-- <el-alert
                     title="主板下载历史数据"
                     type="info"
                     :closable="false"
@@ -221,7 +221,7 @@
                       <i class="el-icon-download" />
                       下载历史排程
                     </el-button>
-                  </div>
+                  </div> -->
                   <el-alert
                     title="主板下载最新数据"
                     type="info"
@@ -265,7 +265,7 @@
             <el-tab-pane label="小板下载" name="small">
               <el-row>
                 <el-col :span="24">
-                  <el-alert
+                  <!-- <el-alert
                     title="小板下载历史数据"
                     type="info"
                     :closable="false"
@@ -283,7 +283,7 @@
                       <i class="el-icon-download" />
                       下载历史排程
                     </el-button>
-                  </div>
+                  </div> -->
                   <el-alert
                     title="小板下载最新数据"
                     type="info"
@@ -317,7 +317,7 @@
             <el-tab-pane label="日志下载" name="log">
               <el-row>
                 <el-col :span="24">
-                  <el-alert
+                  <!-- <el-alert
                     title="下载历史日志"
                     type="info"
                     :closable="false"
@@ -335,7 +335,7 @@
                       <i class="el-icon-download" />
                       下载历史日志
                     </el-button>
-                  </div>
+                  </div> -->
                   <el-alert
                     title="下载最新日志"
                     type="info"
@@ -344,7 +344,7 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend">
+                        <el-button type="primary" plain @click="downloadFileBackend('log_file_path')">
                           <i class="el-icon-download" />
                           下载最新日志
                         </el-button>

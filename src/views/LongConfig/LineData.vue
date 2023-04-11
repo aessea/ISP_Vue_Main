@@ -10,9 +10,9 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button @click="importDataDialog">
+            <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
-            </el-button>
+            </el-button> -->
             <el-button @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
@@ -51,9 +51,72 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="name" label="产线名字" width="110" sortable />
+          <el-table-column prop="name" label="产线名字" width="110" sortable fixed />
+          <el-table-column prop="line_type" label="线体类型" width="110">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">大工单线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">中工单线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">小工单线</el-tag>
+              <el-tag v-else size="small" type="info">未知</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="enable_process_list" label="可生产制程" width="400">
+            <template slot-scope="scope">
+              <el-tag
+                v-for="(val, key) in scope.row.enable_process_list"
+                :key="key"
+                style="margin-right: 5px;"
+              >
+                {{ val }}
+              </el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
+          <el-table-column prop="single_point_lower" label="单面点数下限阈值" width="140" />
+          <el-table-column prop="single_point_upper" label="单面点数上限阈值" width="140" />
+          <el-table-column prop="is_big_line" label="是否大工单线线体" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_big_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_big_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="is_AX_line" label="是否安必昂不能绑定线体" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_AX_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_AX_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="is_Big_line_remove22" label="是否为优先排大工单线" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_Big_line_remove22 === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_Big_line_remove22 === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="is_Non_big_line" label="该线体工单是否优先排大工单线" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_Non_big_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_Non_big_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="is_special_line" label="是否为满足特殊板宽优先排线体" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_special_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_special_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="is_cannot_binding_line" label="是否为不能绑定的线体" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_cannot_binding_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="is_BPR_line" label="是否为BPR线体" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_BPR_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_BPR_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
           <!-- <el-table-column prop="is_points" label="是否按点分大中小工单" width="170" /> -->
           <!-- <el-table-column prop="big_able" label="可否大工单" width="100">
             <template slot-scope="scope">
@@ -74,17 +137,6 @@
             </template>
           </el-table-column> -->
           <!-- <el-table-column prop="offset_threshold" label="阈值偏差" width="85" /> -->
-          <el-table-column prop="enable_process_list" label="可生产制程">
-            <template slot-scope="scope">
-              <el-tag
-                v-for="(val, key) in scope.row.enable_process_list"
-                :key="key"
-                style="margin-right: 5px;"
-              >
-                {{ val }}
-              </el-tag>
-            </template>
-          </el-table-column>
           <!-- <el-table-column prop="T_AD_unable" label="可否制程T-AD" width="120">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.T_AD_unable === 1" size="small" type="info">×</el-tag>
@@ -260,6 +312,62 @@
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_burn_in" prop="is_burn_in" label="是否烧录">
                 <el-input v-model="model.is_burn_in" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.single_point_lower" prop="single_point_lower" label="单面点数下限阈值">
+                <el-input-number v-model="model.single_point_lower" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.single_point_upper" prop="single_point_upper" label="单面点数上限阈值">
+                <el-input-number v-model="model.single_point_upper" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.line_type" prop="line_type" label="线体类型">
+                <el-input v-model="model.line_type" placeholder="1大工单线,2中工单线,3小工单线,0未知" oninput="this.value=this.value.replace(/[^0-3]/g, '')" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_Big_line_remove22" prop="is_Big_line_remove22" label="是否为优先排大工单线">
+                <el-switch v-model="model.is_Big_line_remove22" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_Non_big_line" prop="is_Non_big_line" label="该线体工单是否优先排大工单线">
+                <el-switch v-model="model.is_Non_big_line" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_special_line" prop="is_special_line" label="是否为满足特殊板宽优先排线体">
+                <el-switch v-model="model.is_special_line" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_AX_line" prop="is_AX_line" label="是否安必昂不能绑定线体">
+                <el-switch v-model="model.is_AX_line" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_big_line" prop="is_big_line" label="是否大工单线线体">
+                <el-switch v-model="model.is_big_line" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_cannot_binding_line" prop="is_cannot_binding_line" label="是否为不能绑定的线体">
+                <el-switch v-model="model.is_cannot_binding_line" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_BPR_line" prop="is_BPR_line" label="是否为BPR线体">
+                <el-switch v-model="model.is_BPR_line" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -570,7 +678,18 @@ export default {
         // S_unable: '',
         // S_THR_unable: '',
         is_burn_in: '',
-        enable_process_list: []
+        enable_process_list: [],
+
+        single_point_lower: 0,
+        single_point_upper: 0,
+        line_type: 0,
+        is_big_line: false,
+        is_AX_line: false,
+        is_Big_line_remove22: false,
+        is_Non_big_line: false,
+        is_special_line: false,
+        is_cannot_binding_line: false,
+        is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
         // UPDATED_BY: '',
@@ -601,7 +720,18 @@ export default {
         // S_THR_unable: '',
         // T_AD_unable: '',
         is_burn_in: '',
-        enable_process_list: []
+        enable_process_list: [],
+
+        single_point_lower: 0,
+        single_point_upper: 0,
+        line_type: 0,
+        is_big_line: false,
+        is_AX_line: false,
+        is_Big_line_remove22: false,
+        is_Non_big_line: false,
+        is_special_line: false,
+        is_cannot_binding_line: false,
+        is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
         // UPDATED_BY: '',
@@ -714,6 +844,56 @@ export default {
           trigger: 'blur'
         }],
         enable_process_list: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        single_point_lower: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        single_point_upper: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        line_type: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_big_line: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_AX_line: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_Big_line_remove22: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_Non_big_line: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_special_line: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_cannot_binding_line: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_BPR_line: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'

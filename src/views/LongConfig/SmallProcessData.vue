@@ -10,9 +10,9 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button @click="importDataDialog">
+            <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
-            </el-button>
+            </el-button> -->
             <el-button @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
@@ -51,7 +51,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="name" label="制程" width="90" sortable />
+          <el-table-column prop="name" label="制程" width="90" sortable fixed />
           <el-table-column prop="TB" label="面" width="50" />
           <el-table-column prop="paired_process" label="配对制程名" width="100" />
           <el-table-column prop="grouping_factor_day" label="第一块和第二块工单划分参数(天)" width="240" />
@@ -76,6 +76,10 @@
               <el-tag v-else-if="scope.row.is_point === false" size="small" type="danger">否</el-tag>
             </template>
           </el-table-column>
+          <el-table-column prop="locked_buffer_time" label="锁定内上下板间隔时间(时)" width="200" />
+          <el-table-column prop="netboard_buffer_time" label="网板冲突间隔时间(时)" width="180" />
+          <el-table-column prop="ct_predict_lower" label="CT预测下限" width="120" />
+          <el-table-column prop="ct_predict_upper" label="CT预测上限" width="120" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -172,6 +176,28 @@
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_point" prop="is_point" label="是否按点数">
                 <el-switch v-model="model.is_point" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.locked_buffer_time" prop="locked_buffer_time" label="锁定内上下板间隔时间(时)">
+                <el-input-number v-model="model.locked_buffer_time" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.netboard_buffer_time" prop="netboard_buffer_time" label="网板冲突间隔时间(时)">
+                <el-input-number v-model="model.netboard_buffer_time" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.ct_predict_lower" prop="ct_predict_lower" label="CT预测下限">
+                <el-input-number v-model="model.ct_predict_lower" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.ct_predict_upper" prop="ct_predict_upper" label="CT预测上限">
+                <el-input-number v-model="model.ct_predict_upper" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -351,7 +377,11 @@ export default {
         grouping_combination_flag: '',
         first_second_combination_flag: '',
         is_point: '',
-        buffer_time: 0
+        buffer_time: 0,
+        locked_buffer_time: 0,
+        netboard_buffer_time: 0,
+        ct_predict_lower: 0,
+        ct_predict_upper: 0
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -365,7 +395,11 @@ export default {
         grouping_combination_flag: '',
         first_second_combination_flag: '',
         is_point: '',
-        buffer_time: 0
+        buffer_time: 0,
+        locked_buffer_time: 0,
+        netboard_buffer_time: 0,
+        ct_predict_lower: 0,
+        ct_predict_upper: 0
       },
       rules: {
         name: [{
@@ -413,6 +447,26 @@ export default {
         buffer_time: [{
           required: true,
           message: '上下板间隔时间不能为空',
+          trigger: 'blur'
+        }],
+        locked_buffer_time: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        netboard_buffer_time: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        ct_predict_lower: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        ct_predict_upper: [{
+          required: true,
+          message: '不能为空',
           trigger: 'blur'
         }]
       },
