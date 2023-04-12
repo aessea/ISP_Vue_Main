@@ -223,6 +223,8 @@
           <el-descriptions-item label="排白班结束时间(单位:时)">{{ modelOriginal.day_shift_end_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班开始时间(单位:时)">{{ modelOriginal.day_night_start_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班结束时间(第二天)(单位:时)">{{ modelOriginal.day_night_end_time }}</el-descriptions-item>
+          <el-descriptions-item label="点料可插入锁定非小工单时间(第二天0点，单位:时)" :span="2">{{ modelOriginal.normal_point_material_lock_time }}</el-descriptions-item>
+          <el-descriptions-item label="过期参数，单位:时)" :span="2">{{ modelOriginal.expired_time }}</el-descriptions-item>
 
           <!-- <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
           <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item> -->
@@ -636,6 +638,18 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.normal_point_material_lock_time" prop="normal_point_material_lock_time" label="点料可插入锁定非小工单时间(第二天0点，单位:时)">
+                <el-input v-model="model.normal_point_material_lock_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.expired_time" prop="expired_time" label="过期参数，单位:小时)">
+                <el-input v-model="model.expired_time" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
           <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.buffer_up_down_time" prop="buffer_up_down_time" label="锁定内上下板间隔(单位:时)">
@@ -754,6 +768,8 @@ export default {
         input_col: '',
         output_col: '',
         output_line_order: '',
+        normal_point_material_lock_time: '',
+        expired_time: '',
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -820,6 +836,8 @@ export default {
         input_col: '',
         output_col: '',
         output_line_order: '',
+        normal_point_material_lock_time: '',
+        expired_time: '',
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -1031,6 +1049,16 @@ export default {
           trigger: 'change'
         }],
         special_customer_name: [{
+          required: true,
+          message: '该项不能为空',
+          trigger: 'change'
+        }],
+        normal_point_material_lock_time: [{
+          required: true,
+          message: '该项不能为空',
+          trigger: 'change'
+        }],
+        expired_time: [{
           required: true,
           message: '该项不能为空',
           trigger: 'change'
