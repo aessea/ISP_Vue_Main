@@ -74,10 +74,10 @@
             <el-tag v-if="modelOriginal.program_as_material_rule === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.program_as_material_rule === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="第一单不约束">
+          <!-- <el-descriptions-item label="第一单不约束">
             <el-tag v-if="modelOriginal.skip_first_group_rule === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.skip_first_group_rule === false" size="small" type="danger">关闭</el-tag>
-          </el-descriptions-item>
+          </el-descriptions-item> -->
           <el-descriptions-item label="排xx白班约束">
             <el-tag v-if="modelOriginal.force_day_shift_time_rule === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.force_day_shift_time_rule === false" size="small" type="danger">关闭</el-tag>
@@ -86,7 +86,7 @@
             <el-tag v-if="modelOriginal.force_night_shift_time_rule === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.force_night_shift_time_rule === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="普通工单赌物料到20:00">
+          <el-descriptions-item label="普通工单赌物料到20:00" :span="2">
             <el-tag v-if="modelOriginal.not_gaia_release_time_eight === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.not_gaia_release_time_eight === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
@@ -205,7 +205,7 @@
             </el-tag>
           </el-descriptions-item> -->
 
-          <el-descriptions-item label="西门子特殊板宽宽度配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
+          <el-descriptions-item label="特殊板宽宽度配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
           <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}万</el-descriptions-item>
           <el-descriptions-item label="小工单打板时间(单位:时)">{{ modelOriginal.small_processing_time }}</el-descriptions-item>
           <el-descriptions-item label="预排可插入时间节点(单位:时)">{{ modelOriginal.insert_time_before }}</el-descriptions-item>
@@ -423,11 +423,11 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+            <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.skip_first_group_rule" prop="skip_first_group_rule" label="第一单不约束">
                 <el-switch v-model="model.skip_first_group_rule" />
               </el-form-item>
-            </el-col>
+            </el-col> -->
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.force_day_shift_time_rule" prop="force_day_shift_time_rule" label="排xx白班约束">
                 <el-switch v-model="model.force_day_shift_time_rule" />
@@ -553,7 +553,7 @@
           </el-row> -->
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.board_width" prop="board_width" label="西门子特殊板宽宽度配置(单位:毫米)">
+              <el-form-item :rules="rules.board_width" prop="board_width" label="特殊板宽宽度配置(单位:毫米)">
                 <el-input-number v-model="model.board_width" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>

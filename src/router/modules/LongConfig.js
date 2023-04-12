@@ -117,7 +117,7 @@ const LongConfigRouter = {
       component: () => import('@/views/LongConfig/EarlyDueDateBoard8'),
       name: 'EarlyDueDateBoard8',
       meta: {
-        title: '提早交期后工序表',
+        title: '板号提早交期表',
         roles: ['admin', 'common']
       }
     },

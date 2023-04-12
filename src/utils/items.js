@@ -55,4 +55,13 @@ const componentTypeOptions = [
   { label: 'AI', value: 3 },
   { label: 'SMT点胶', value: 4 }
 ]
-export { LineOptions, ProcessOptions, PermissionOptions, lineOptions, lockedList, unLockedList, componentTypeOptions }
+const lineTypeOptions = [
+  { label: '小工单线', value: 1 },
+  { label: '中工单线', value: 2 },
+  { label: '大工单线', value: 3 },
+  { label: '中大工单线', value: 4 },
+  { label: 'BPR线', value: 5 },
+  { label: '小板线', value: 6 },
+  { label: '未知线体', value: 0 }
+]
+export { LineOptions, ProcessOptions, PermissionOptions, lineOptions, lockedList, unLockedList, componentTypeOptions, lineTypeOptions }
