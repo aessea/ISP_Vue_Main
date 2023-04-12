@@ -156,6 +156,15 @@ const LongConfigRouter = {
         title: '接口配置表',
         roles: ['admin', 'common']
       }
+    },
+    {
+      path: 'boardadvancedate',
+      component: () => import('@/views/LongConfig/BoardAdvanceDate'),
+      name: 'BoardAdvanceDate',
+      meta: {
+        title: '后工序提早交期表',
+        roles: ['admin', 'common']
+      }
     }
   ]
 }
