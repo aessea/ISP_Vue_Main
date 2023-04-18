@@ -121,7 +121,7 @@
             </template>
           </el-table-column> -->
           <!-- <el-table-column prop="is_points" label="是否按点数分大中小工单" width="170" /> -->
-          <!-- <el-table-column prop="big_able" label="可否大工单" width="100">
+          <el-table-column prop="big_able" label="可否大工单" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.big_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.big_able === 0" size="small" type="info">×</el-tag>
@@ -138,7 +138,7 @@
               <el-tag v-if="scope.row.small_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.small_able === 0" size="small" type="info">×</el-tag>
             </template>
-          </el-table-column> -->
+          </el-table-column>
           <!-- <el-table-column prop="offset_threshold" label="阈值偏差" width="85" /> -->
           <!-- <el-table-column prop="T_AD_unable" label="可否制程T-AD" width="120">
             <template slot-scope="scope">
@@ -203,7 +203,7 @@
           <el-table-column prop="capacity" label="日产能" width="80" /> -->
           <!-- <el-table-column prop="config_class" label="配置类型" width="85" /> -->
           <!-- <el-table-column prop="program_class" label="程序类型" width="85" /> -->
-          <!-- <el-table-column prop="balance_class" label="线平衡类型" width="100" /> -->
+          <el-table-column prop="balance_class" label="线平衡类型" width="100" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -270,28 +270,28 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.config_class" prop="config_class" label="配置类型">
                 <el-input v-model="model.config_class" placeholder="请输入数字" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.program_class" prop="program_class" label="程序类型">
                 <el-input v-model="model.program_class" placeholder="请输入数字" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_points" prop="is_points" label="是否按点数分大中小工单">
                 <el-input v-model="model.is_points" placeholder="1按点数，0按工单量区分大中小工单" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.balance_class" prop="balance_class" label="线平衡类型">
                 <el-input v-model="model.balance_class" placeholder="请输入数字" clearable />
               </el-form-item>
-            </el-col> -->
+            </el-col>
           </el-row>
-          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.big_able" prop="big_able" label="可否大工单">
                 <el-input v-model="model.big_able" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
@@ -307,7 +307,7 @@
                 <el-input v-model="model.small_able" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
-          </el-row> -->
+          </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值">
@@ -671,10 +671,10 @@ export default {
         capacity: 0,
         config_class: '',
         program_class: '',
-        // balance_class: '',
-        // big_able: '',
-        // middle_able: '',
-        // small_able: '',
+        balance_class: '',
+        big_able: '',
+        middle_able: '',
+        small_able: '',
         min_threshold: 0,
         max_threshold: 0,
         offset_threshold: 0,
@@ -713,10 +713,10 @@ export default {
         capacity: 0,
         config_class: '',
         program_class: '',
-        // balance_class: '',
-        // big_able: '',
-        // middle_able: '',
-        // small_able: '',
+        balance_class: '',
+        big_able: '',
+        middle_able: '',
+        small_able: '',
         min_threshold: 0,
         max_threshold: 0,
         offset_threshold: 0,

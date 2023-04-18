@@ -1188,7 +1188,7 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在运行排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+      const confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1232,7 +1232,7 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在运行排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
+      const confirmText = ['目前正在计算排程或分析排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1307,7 +1307,7 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在运行排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+      const confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1351,7 +1351,7 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在运行排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
+      const confirmText = ['目前正在计算排程或分析排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1452,7 +1452,7 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在运行排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+      const confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1519,7 +1519,7 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在运行排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
+      const confirmText = ['目前正在计算排程或分析排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {

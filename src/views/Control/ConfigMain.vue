@@ -218,13 +218,13 @@
             <el-tag v-if="modelOriginal.use_LED === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.use_LED === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="点料可插入锁定小工单时间(当天20点，单位:小时)" :span="2">{{ modelOriginal.point_material_lock_time }}</el-descriptions-item>
+          <el-descriptions-item label="点料可插入锁定小工单时间(当天20点,单位:小时)" :span="2">{{ modelOriginal.point_material_lock_time }}</el-descriptions-item>
           <el-descriptions-item label="排白班开始时间(单位:时)">{{ modelOriginal.day_shift_start_time }}</el-descriptions-item>
           <el-descriptions-item label="排白班结束时间(单位:时)">{{ modelOriginal.day_shift_end_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班开始时间(单位:时)">{{ modelOriginal.day_night_start_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班结束时间(第二天)(单位:时)">{{ modelOriginal.day_night_end_time }}</el-descriptions-item>
-          <el-descriptions-item label="点料可插入锁定非小工单时间(第二天0点，单位:时)" :span="1">{{ modelOriginal.normal_point_material_lock_time }}</el-descriptions-item>
-          <el-descriptions-item label="过期参数，单位:时)" :span="1">{{ modelOriginal.expired_time }}</el-descriptions-item>
+          <el-descriptions-item label="点料可插入锁定非小工单时间(第二天0点,单位:时)" :span="1">{{ modelOriginal.normal_point_material_lock_time }}</el-descriptions-item>
+          <el-descriptions-item label="过期参数(单位:天)" :span="1">{{ modelOriginal.expired_time }}</el-descriptions-item>
           <el-descriptions-item label="tabu运行时长限制(单位:分钟)" :span="2">{{ modelOriginal.tabu_time_limit }}</el-descriptions-item>
 
           <!-- <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
@@ -646,7 +646,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.expired_time" prop="expired_time" label="过期参数，单位:时)">
+              <el-form-item :rules="rules.expired_time" prop="expired_time" label="过期参数(单位:天)">
                 <el-input v-model="model.expired_time" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
