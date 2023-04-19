@@ -56,8 +56,8 @@
             <template slot-scope="scope">
               <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">小工单线</el-tag>
               <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">中工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">中大工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 4" size="small" type="primary">大工单线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">大工单线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 4" size="small" type="primary">中大工单线</el-tag>
               <el-tag v-else-if="scope.row.line_type === 5" size="small" type="primary">BPR线</el-tag>
               <el-tag v-else-if="scope.row.line_type === 6" size="small" type="primary">小板线</el-tag>
               <el-tag v-else size="small" type="info">未知线体</el-tag>
