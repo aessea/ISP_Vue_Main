@@ -75,12 +75,6 @@
             </template>
           </el-table-column>
           <!-- <el-table-column prop="single_point_upper" label="单面点数上限阈值" width="140" /> -->
-          <el-table-column prop="is_big_line" label="是否大工单线线体" width="160">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_big_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_big_line === false" size="small" type="info">否</el-tag>
-            </template>
-          </el-table-column>
           <el-table-column prop="is_AX_line" label="是否安必昂不能绑定线体" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_AX_line === true" size="small" type="success">是</el-tag>
@@ -363,11 +357,6 @@
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_AX_line" prop="is_AX_line" label="是否安必昂不能绑定线体">
                 <el-switch v-model="model.is_AX_line" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_big_line" prop="is_big_line" label="是否大工单线线体">
-                <el-switch v-model="model.is_big_line" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -693,7 +682,6 @@ export default {
         // single_point_lower: 0,
         // single_point_upper: 0,
         line_type: 0,
-        is_big_line: false,
         is_AX_line: false,
         is_Big_line_remove22: false,
         is_Non_big_line: false,
@@ -735,7 +723,6 @@ export default {
         // single_point_lower: 0,
         // single_point_upper: 0,
         line_type: 0,
-        is_big_line: false,
         is_AX_line: false,
         is_Big_line_remove22: false,
         is_Non_big_line: false,
@@ -869,11 +856,6 @@ export default {
         //   trigger: 'blur'
         // }],
         line_type: [{
-          required: true,
-          message: '不能为空',
-          trigger: 'blur'
-        }],
-        is_big_line: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'
