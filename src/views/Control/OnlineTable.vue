@@ -211,7 +211,7 @@
         <el-button type="primary" :disabled="beginAnaBtn" @click="beginAnalysis">
           开始分析
         </el-button>
-        <el-button type="primary" :disabled="generateAnaBtn" @click="generateAnaExcel">
+        <el-button type="primary" :disabled="generateAnaBtn" @click="beforeGenerateAnaExcel">
           生成表格
         </el-button>
         <el-button type="primary" :disabled="statisticsBtn" @click="statisticsSchedule">
