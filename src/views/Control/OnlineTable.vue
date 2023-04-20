@@ -985,6 +985,35 @@ export default {
         })
       })
     },
+    beforeGenerateAnaExcel() {
+      const confirmText = ['目前正在计算排程，确定要生成表格？', '注意：此操作将会同时影响计算排程和生成表格！']
+      const newDatas = []
+      const h = this.$createElement
+      for (const i in confirmText) {
+        newDatas.push(h('p', null, confirmText[i]))
+      }
+      GetRunFlag().then(res => {
+        if (res.run_flag === 1) {
+          this.$confirm('警告', {
+            title: '警告',
+            message: h('div', null, newDatas),
+            confirmButtonText: '继续生成表格',
+            cancelButtonText: '取消',
+            confirmButtonClass: 'btnDanger',
+            type: 'warning'
+          }).then(() => {
+            this.generateAnaExcel()
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '取消生成表格'
+            })
+          })
+        } else {
+          this.analysisExcel()
+        }
+      })
+    },
     // 生成表格
     generateAnaExcel() {
       this.$message({
