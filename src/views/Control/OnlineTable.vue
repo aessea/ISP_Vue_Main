@@ -1010,7 +1010,7 @@ export default {
             })
           })
         } else {
-          this.analysisExcel()
+          this.generateAnaExcel()
         }
       })
     },

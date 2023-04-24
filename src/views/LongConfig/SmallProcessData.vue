@@ -7,9 +7,9 @@
             <el-button type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button type="danger" @click="deleteData">
+            <!-- <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
-            </el-button>
+            </el-button> -->
             <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->

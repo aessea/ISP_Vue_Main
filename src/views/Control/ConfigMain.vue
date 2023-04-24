@@ -232,7 +232,7 @@
 
           <el-descriptions-item label="输入的列" :span="4">{{ modelOriginal.input_col }}</el-descriptions-item>
           <el-descriptions-item label="导出的列" :span="4">{{ modelOriginal.output_col }}</el-descriptions-item>
-          <el-descriptions-item label="导出线体顺序" :span="4">{{ modelOriginal.output_line_order }}</el-descriptions-item>
+          <!-- <el-descriptions-item label="导出线体顺序" :span="4">{{ modelOriginal.output_line_order }}</el-descriptions-item> -->
 
           <!-- <el-descriptions-item label="创建人">{{ modelOriginal.CREATED_BY }}</el-descriptions-item>
           <el-descriptions-item label="创建时间">{{ modelOriginal.CREATED_TIME }}</el-descriptions-item>
@@ -682,13 +682,13 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.output_line_order" prop="output_line_order" label="导出的线体顺序">
                 <el-input v-model="model.output_line_order" placeholder="请输入" :rows="3" type="textarea" clearable />
               </el-form-item>
             </el-col>
-          </el-row>
+          </el-row> -->
         </el-form>
       </el-card>
       <span slot="footer" class="dialog-footer">
@@ -773,7 +773,7 @@ export default {
         special_customer_name: '',
         input_col: '',
         output_col: '',
-        output_line_order: '',
+        // output_line_order: '',
         normal_point_material_lock_time: '',
         expired_time: '',
         tabu_time_limit: '',
@@ -842,7 +842,7 @@ export default {
         special_customer_name: '',
         input_col: '',
         output_col: '',
-        output_line_order: '',
+        // output_line_order: '',
         normal_point_material_lock_time: '',
         expired_time: '',
         tabu_time_limit: '',
@@ -1160,12 +1160,12 @@ export default {
           required: true,
           message: '导出的列不能为空',
           trigger: 'blur'
-        }],
-        output_line_order: [{
-          required: true,
-          message: '导出的线体顺序不能为空',
-          trigger: 'blur'
         }]
+        // output_line_order: [{
+        //   required: true,
+        //   message: '导出的线体顺序不能为空',
+        //   trigger: 'blur'
+        // }]
       }
     }
   },

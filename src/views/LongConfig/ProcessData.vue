@@ -7,9 +7,9 @@
             <el-button type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button type="danger" @click="deleteData">
+            <!-- <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
-            </el-button>
+            </el-button> -->
             <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
@@ -376,12 +376,13 @@ export default {
         grouping_factor_overtime: 0,
         grouping_combination_flag: '',
         first_second_combination_flag: '',
-        is_point: '',
+        is_point: false,
         buffer_time: 0,
         locked_buffer_time: 0,
         netboard_buffer_time: 0,
         ct_predict_lower: 0,
-        ct_predict_upper: 0
+        ct_predict_upper: 0,
+        onehot_code: ''
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -394,12 +395,13 @@ export default {
         grouping_factor_overtime: 0,
         grouping_combination_flag: '',
         first_second_combination_flag: '',
-        is_point: '',
+        is_point: false,
         buffer_time: 0,
         locked_buffer_time: 0,
         netboard_buffer_time: 0,
         ct_predict_lower: 0,
-        ct_predict_upper: 0
+        ct_predict_upper: 0,
+        onehot_code: ''
       },
       rules: {
         name: [{
@@ -702,6 +704,8 @@ export default {
           this.modelOriginal[key] = ''
         }
       }
+      this.model['is_point'] = false
+      this.modelOriginal['is_point'] = false
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据
