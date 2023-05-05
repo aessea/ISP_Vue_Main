@@ -226,8 +226,9 @@
           <el-descriptions-item label="点料可插入锁定非小工单时间(第二天0点,单位:时)" :span="1">{{ modelOriginal.normal_point_material_lock_time }}</el-descriptions-item>
           <el-descriptions-item label="过期参数(单位:天)" :span="1">{{ modelOriginal.expired_time }}</el-descriptions-item>
           <el-descriptions-item label="tabu运行时长限制(单位:分钟)" :span="2">{{ modelOriginal.tabu_time_limit }}</el-descriptions-item>
-          <el-descriptions-item label="预排无程序工单锁定时间节点(单位:小时)" :span="2">{{ modelOriginal.no_program_lock_time_before }}</el-descriptions-item>
-          <el-descriptions-item label="正排无程序工单锁定时间节点(单位:小时)" :span="2">{{ modelOriginal.no_program_lock_time_after }}</el-descriptions-item>
+          <el-descriptions-item label="预排无程序工单锁定时间节点(单位:小时)" :span="1">{{ modelOriginal.no_program_lock_time_before }}</el-descriptions-item>
+          <el-descriptions-item label="正排无程序工单锁定时间节点(单位:小时)" :span="1">{{ modelOriginal.no_program_lock_time_after }}</el-descriptions-item>
+          <el-descriptions-item label="LED工单识别(机种)" :span="2">{{ modelOriginal.led_job_name }}</el-descriptions-item>
 
           <!-- <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
           <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item> -->
@@ -669,6 +670,11 @@
                 <el-input v-model="model.no_program_lock_time_after" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.led_job_name" prop="led_job_name" label="LED工单识别(机种)">
+                <el-input v-model="model.led_job_name" placeholder="请输入" :style="{width: '100%'}" clearable />
+              </el-form-item>
+            </el-col>
           </el-row>
           <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -793,6 +799,7 @@ export default {
         tabu_time_limit: '',
         no_program_lock_time_before: '',
         no_program_lock_time_after: '',
+        led_job_name: '',
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -864,6 +871,7 @@ export default {
         tabu_time_limit: '',
         no_program_lock_time_before: '',
         no_program_lock_time_after: '',
+        led_job_name: '',
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -1100,6 +1108,11 @@ export default {
           trigger: 'change'
         }],
         no_program_lock_time_after: [{
+          required: true,
+          message: '该项不能为空',
+          trigger: 'change'
+        }],
+        led_job_name: [{
           required: true,
           message: '该项不能为空',
           trigger: 'change'
