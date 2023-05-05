@@ -293,4 +293,12 @@ export function SaveApsOutPutCount(data) {
     data
   })
 }
-
+// 转移扣点
+export function DoBucklePoints(data) {
+  return request({
+    url: '/Control/SchedulePanel/do_buckle_points/',
+    method: 'post',
+    timeout: 10 * 60 * 1000,
+    data
+  })
+}

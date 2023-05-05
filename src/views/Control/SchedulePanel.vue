@@ -434,6 +434,12 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 10px;">
+        <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameMain)">
+          主板转移扣点
+        </el-button>
+        <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameSmall)">
+          小板转移扣点
+        </el-button>
         <el-button @click="exportScheduleDataMain">
           导出主板
         </el-button>
@@ -544,6 +550,9 @@
             <el-button type="success" style="margin-left:10px;" @click="beforeImportMain">
               导入排程
             </el-button>
+            <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameMain)">
+              转移扣点
+            </el-button>
             <el-button @click="exportScheduleDataMain">
               导出主板
             </el-button>
@@ -638,6 +647,9 @@
             <el-button type="success" style="margin-left:10px;" @click="beforeImportSmall">
               导入排程
             </el-button>
+            <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameSmall)">
+              转移扣点
+            </el-button>
             <el-button @click="exportScheduleDataSmall">
               导出小板
             </el-button>
@@ -720,7 +732,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, GetLogSelectItem, DownloadHistoryLog,
   GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, GetApsMtool, CheckData, ExportMainScheduleData, GetApsProgram,
   GetExcelSelectItem, DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall,
-  GetApsMoBaseData, GetApsMoProgData, DownloadUploadFileMain, DownloadUploadFileSmall,
+  GetApsMoBaseData, GetApsMoProgData, DownloadUploadFileMain, DownloadUploadFileSmall, DoBucklePoints,
   GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData, GetApsDeliveryDay, SaveApsOutPutCount,
   CheckDataNew } from '@/api/Control/SchedulePanel'
 import { DownloadFile } from '@/api/Public'
@@ -2180,6 +2192,74 @@ export default {
         this.$message({
           type: 'info',
           message: '取消推送'
+        })
+      })
+    },
+    beforeDoBucklePoints(upload_file_name) {
+      if (upload_file_name.includes('主板')) {
+        if (this.isImportMain === false) {
+          this.$message({
+            type: 'warning',
+            message: '主板未导入文件，无法转移扣点'
+          })
+          return
+        }
+      }
+      if (upload_file_name.includes('小板')) {
+        if (this.isImportSmall === false) {
+          this.$message({
+            type: 'warning',
+            message: '小板未导入文件，无法转移扣点'
+          })
+          return
+        }
+      }
+      var tip_message = '确定要进行转移扣点操作？'
+      if (this.apsMoProgData !== '已更新') {
+        tip_message = '未更新工单进度，确定要转移扣点操作？'
+      }
+      this.doBucklePoints(upload_file_name, tip_message)
+    },
+    doBucklePoints(upload_file_name, tip_message) {
+      this.$confirm('提示', {
+        title: '提示',
+        message: tip_message,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const pushLoading = {
+          text: '转移扣点中，请稍等...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        } // 导入排程动画
+        this.loadingInstance = Loading.service(pushLoading)
+        const form = {
+          'file_name': upload_file_name
+        }
+        DoBucklePoints(form).then(res => {
+          if (res.code === 20000) {
+            this.$alert(res.message, '转移扣点成功', {
+              confirmButtonText: '确定',
+              type: 'success'
+            })
+          } else {
+            this.$alert('扣点失败', '错误', {
+              confirmButtonText: '确定',
+              type: 'error'
+            })
+          }
+          this.loadingInstance.close() // 清除动画
+        }).catch(err => {
+          this.loadingInstance.close() // 清除动画
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消转移扣点'
         })
       })
     }
