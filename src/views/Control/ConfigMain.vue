@@ -229,7 +229,15 @@
           <el-descriptions-item label="预排无程序工单锁定时间节点(单位:小时)" :span="1">{{ modelOriginal.no_program_lock_time_before }}</el-descriptions-item>
           <el-descriptions-item label="正排无程序工单锁定时间节点(单位:小时)" :span="1">{{ modelOriginal.no_program_lock_time_after }}</el-descriptions-item>
           <el-descriptions-item label="LED工单识别(机种)" :span="2">{{ modelOriginal.led_job_name }}</el-descriptions-item>
-
+          <el-descriptions-item label="有可排无强制时,新改大工单线体补线" :span="4">
+            <el-tag
+              v-for="(val,key) in modelOriginal.big_line_supplement_list"
+              :key="key"
+              style="margin-right: 5px;"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
           <!-- <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
           <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item> -->
 
@@ -493,6 +501,15 @@
                 <el-switch v-model="model.is_run_recognize_ignore_overdue_jobs" />
               </el-form-item>
             </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-form-item :rules="rules.big_line_supplement_list" prop="big_line_supplement_list" label="有可排无强制时,新改大工单线体补线">
+              <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+                <el-checkbox-group v-model="model.big_line_supplement_list">
+                  <el-checkbox v-for="process in all_line_list" :key="process.index" :label="process" />
+                </el-checkbox-group>
+              </el-col>
+            </el-form-item>
           </el-row>
           <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
@@ -800,6 +817,7 @@ export default {
         no_program_lock_time_before: '',
         no_program_lock_time_after: '',
         led_job_name: '',
+        big_line_supplement_list: [],
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -872,6 +890,7 @@ export default {
         no_program_lock_time_before: '',
         no_program_lock_time_after: '',
         led_job_name: '',
+        big_line_supplement_list: [],
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -1113,6 +1132,11 @@ export default {
           trigger: 'change'
         }],
         led_job_name: [{
+          required: true,
+          message: '该项不能为空',
+          trigger: 'change'
+        }],
+        big_line_supplement_list: [{
           required: true,
           message: '该项不能为空',
           trigger: 'change'
