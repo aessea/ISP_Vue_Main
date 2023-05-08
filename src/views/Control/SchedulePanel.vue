@@ -1200,14 +1200,21 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
-      const newDatas = []
-      const h = this.$createElement
-      for (const i in confirmText) {
-        newDatas.push(h('p', null, confirmText[i]))
-      }
       GetRunFlag().then(res => {
-        if (res.run_flag === 1) {
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
+          var confirmText
+          if (res.run_flag === 1) {
+            confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          } else if (res.ana_run_flag === 1) {
+            confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          } else {
+            confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          }
+          const newDatas = []
+          const h = this.$createElement
+          for (const i in confirmText) {
+            newDatas.push(h('p', null, confirmText[i]))
+          }
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -1244,14 +1251,21 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在计算排程或分析排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
-      const newDatas = []
-      const h = this.$createElement
-      for (const i in confirmText) {
-        newDatas.push(h('p', null, confirmText[i]))
-      }
       GetRunFlag().then(res => {
-        if (res.run_flag === 1) {
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
+          var confirmText
+          if (res.run_flag === 1) {
+            confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          } else if (res.ana_run_flag === 1) {
+            confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          } else {
+            confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          }
+          const newDatas = []
+          const h = this.$createElement
+          for (const i in confirmText) {
+            newDatas.push(h('p', null, confirmText[i]))
+          }
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -1319,14 +1333,21 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
-      const newDatas = []
-      const h = this.$createElement
-      for (const i in confirmText) {
-        newDatas.push(h('p', null, confirmText[i]))
-      }
       GetRunFlag().then(res => {
+        var confirmText
         if (res.run_flag === 1) {
+          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else if (res.ana_run_flag === 1) {
+          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else {
+          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        }
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -1370,7 +1391,7 @@ export default {
         newDatas.push(h('p', null, confirmText[i]))
       }
       GetRunFlag().then(res => {
-        if (res.run_flag === 1) {
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -1464,14 +1485,21 @@ export default {
         })
         return
       }
-      const confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
-      const newDatas = []
-      const h = this.$createElement
-      for (const i in confirmText) {
-        newDatas.push(h('p', null, confirmText[i]))
-      }
       GetRunFlag().then(res => {
+        var confirmText
         if (res.run_flag === 1) {
+          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else if (res.ana_run_flag === 1) {
+          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else {
+          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        }
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -1538,7 +1566,7 @@ export default {
         newDatas.push(h('p', null, confirmText[i]))
       }
       GetRunFlag().then(res => {
-        if (res.run_flag === 1) {
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),

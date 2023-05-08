@@ -925,21 +925,21 @@ export default {
     },
     // 计算前判断是否在跑排程
     beforeAnalysis() {
-      const confirmText = ['目前正在计算排程，确定要分析排程？', '注意：此操作将会同时影响计算排程和分析排程！']
-      const newDatas = []
-      const h = this.$createElement
-      for (const i in confirmText) {
-        newDatas.push(h('p', null, confirmText[i]))
-      }
-      // if (this.checkSuccess === false) {
-      //   this.$message({
-      //     type: 'error',
-      //     message: '数据未检查，无法开始分析！'
-      //   })
-      //   return
-      // }
       GetRunFlag().then(res => {
+        var confirmText
         if (res.run_flag === 1) {
+          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else if (res.ana_run_flag === 1) {
+          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else {
+          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        }
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -986,14 +986,21 @@ export default {
       })
     },
     beforeGenerateAnaExcel() {
-      const confirmText = ['目前正在计算排程，确定要生成表格？', '注意：此操作将会同时影响计算排程和生成表格！']
-      const newDatas = []
-      const h = this.$createElement
-      for (const i in confirmText) {
-        newDatas.push(h('p', null, confirmText[i]))
-      }
       GetRunFlag().then(res => {
+        var confirmText
         if (res.run_flag === 1) {
+          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else if (res.ana_run_flag === 1) {
+          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        } else {
+          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+        }
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
           this.$confirm('警告', {
             title: '警告',
             message: h('div', null, newDatas),
@@ -1076,7 +1083,7 @@ export default {
             message: '分析出错'
           })
           this.anaErrMessage = '分析出错：' + res.ana_err_message
-        } else if (run_flag === 1 && res.p2 > 0 && this.progressCount === 0) {
+        } else if (res.p2 === 25 && this.progressCount === 0) {
           this.$message({
             type: 'success',
             message: '分析完毕，可以生成表格'
@@ -1087,7 +1094,7 @@ export default {
           this.progressCount = 1
           // 显示分析排程的结果
           this.showAnaData(res, 0)
-        } else if (run_flag === 2) {
+        } else if (res.p2 === 100) {
           // 生成表格后就不再监听进度条
           this.clearListenProgress()
           this.$message({
