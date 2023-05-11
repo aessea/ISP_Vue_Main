@@ -238,6 +238,16 @@
               {{ val }}
             </el-tag>
           </el-descriptions-item>
+          <el-descriptions-item label="大小穿插线体" :span="4">
+            <el-tag
+              v-for="(val, key) in modelOriginal.small_large_lines"
+              :key="key"
+              style="margin-right: 5px;"
+              type="primary"
+            >
+              {{ val }}
+            </el-tag>
+          </el-descriptions-item>
           <!-- <el-descriptions-item label="锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time }}</el-descriptions-item>
           <el-descriptions-item label="BPR锁定内上下板间隔(单位:时)" :span="2">{{ modelOriginal.buffer_up_down_time_bpr }}</el-descriptions-item> -->
 
@@ -693,6 +703,15 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.small_large_lines" prop="small_large_lines" label="大小穿插线体">
+                <el-checkbox-group v-model="model.small_large_lines">
+                  <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
+                </el-checkbox-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
           <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.buffer_up_down_time" prop="buffer_up_down_time" label="锁定内上下板间隔(单位:时)">
@@ -818,6 +837,7 @@ export default {
         no_program_lock_time_after: '',
         led_job_name: '',
         big_line_supplement_list: [],
+        small_large_lines: [],
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -891,6 +911,7 @@ export default {
         no_program_lock_time_after: '',
         led_job_name: '',
         big_line_supplement_list: [],
+        small_large_lines: [],
         CREATED_BY: '',
         CREATED_TIME: '',
         UPDATED_BY: '',
@@ -1137,6 +1158,11 @@ export default {
           trigger: 'change'
         }],
         big_line_supplement_list: [{
+          required: true,
+          message: '该项不能为空',
+          trigger: 'change'
+        }],
+        small_large_lines: [{
           required: true,
           message: '该项不能为空',
           trigger: 'change'
