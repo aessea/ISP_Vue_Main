@@ -306,7 +306,7 @@ export default {
       model: {
         id: '',
         process: '',
-        add_feasible_line: '',
+        add_feasible_line: [],
         above_connecting_points: 0,
         under_single_points: 0,
         above_connecting_plates: 0
@@ -315,7 +315,7 @@ export default {
       modelOriginal: {
         id: '',
         process: '',
-        add_feasible_line: '',
+        add_feasible_line: [],
         above_connecting_points: 0,
         under_single_points: 0,
         above_connecting_plates: 0
