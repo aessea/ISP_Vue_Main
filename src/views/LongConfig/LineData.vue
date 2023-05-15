@@ -52,15 +52,21 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="name" label="产线名字" width="110" sortable fixed />
-          <el-table-column prop="line_type" label="线体类型" width="110">
+          <el-table-column prop="line_size_type" label="大中小" width="110">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">小工单线</el-tag>
               <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">中工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">大工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 4" size="small" type="primary">中大工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 5" size="small" type="primary">BPR线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 6" size="small" type="primary">小板线</el-tag>
-              <el-tag v-else size="small" type="info">未知线体</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">中大工单线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 4" size="small" type="primary">大工单线</el-tag>
+              <el-tag v-else size="small" type="info">未知</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="line_type" label="线体类型" width="110">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">非BPR线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">BPR线</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">小板线</el-tag>
+              <el-tag v-else size="small" type="info">未知</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="enable_process_list" label="可生产制程" width="400">
@@ -246,12 +252,12 @@
       <el-card class="card-form" shadow="never">
         <el-form ref="$form" :model="model" label-position="left" size="small">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.name" prop="name" label="产线名字">
                 <el-input v-model="model.name" placeholder="请输入" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.line_type" prop="line_type" label="线体类型">
                 <el-select v-model="model.line_type" placeholder="请选择">
                   <el-option
@@ -263,7 +269,19 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.line_size_type" prop="line_size_type" label="大中小">
+                <el-select v-model="model.line_size_type" placeholder="请选择">
+                  <el-option
+                    v-for="item in lineSizeTypeOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.capacity" prop="capacity" label="日产能">
                 <el-input-number v-model="model.capacity" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
@@ -614,7 +632,7 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/LineData'
-import { lineTypeOptions } from '@/utils/items'
+import { lineTypeOptions, lineSizeTypeOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/Public'
 export default {
   name: 'LineData',
@@ -733,7 +751,8 @@ export default {
         output_order: '',
         onehot_code: '',
         max_process_time: '',
-        max_points: ''
+        max_points: '',
+        line_size_type: 0
         // is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
@@ -781,7 +800,8 @@ export default {
         output_order: '',
         onehot_code: '',
         max_process_time: '',
-        max_points: ''
+        max_points: '',
+        line_size_type: 0
         // is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
@@ -968,6 +988,11 @@ export default {
           required: true,
           message: '不能为空',
           trigger: 'blur'
+        }],
+        line_size_type: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
         }]
         // is_BPR_line: [{
         //   required: true,
@@ -980,7 +1005,8 @@ export default {
       currentPage: 1, // 当前在第几页
       pageSize: 30, // 每页多少条数据
       dataTableSelections: [], // 表格选中的数据
-      lineTypeOptions: lineTypeOptions
+      lineTypeOptions: lineTypeOptions,
+      lineSizeTypeOptions: lineSizeTypeOptions
     }
   },
   computed: {
