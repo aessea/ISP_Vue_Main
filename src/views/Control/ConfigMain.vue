@@ -1157,16 +1157,6 @@ export default {
           message: '该项不能为空',
           trigger: 'change'
         }],
-        big_line_supplement_list: [{
-          required: true,
-          message: '该项不能为空',
-          trigger: 'change'
-        }],
-        small_large_lines: [{
-          required: true,
-          message: '该项不能为空',
-          trigger: 'change'
-        }],
         // day_shift_start_time: [{
         //   required: true,
         //   message: '该项不能为空',
