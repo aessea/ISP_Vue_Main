@@ -18,7 +18,7 @@ const OutsourceConstraintsRouter = {
       component: () => import('@/views/Outsource/Constraints/ModelNameRestrictions'),
       name: 'ModelNameRestrictions',
       meta: {
-        title: 'AI/SMT组件优先分配',
+        title: '主板历史生产厂商表',
         roles: ['admin', 'common']
       }
     },

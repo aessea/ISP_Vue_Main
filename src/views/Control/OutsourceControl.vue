@@ -102,9 +102,9 @@
                       <i class="el-icon-download" />
                       下载xx文件
                     </el-button> -->
-                    <el-button type="success" @click="doOutsourceOutputModelName">
+                    <el-button type="success" @click="computeDialog2">
                       <i class="el-icon-download" />
-                      下载外包新机种
+                      下载外包优先厂商表
                     </el-button>
                     <el-button type="success" @click="downloadAllFile">
                       <i class="el-icon-download" />
@@ -249,6 +249,44 @@
           开始计算
         </el-button>
         <el-button @click="handleCloseCompute">
+          关闭
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="下载外包优先厂商表"
+      :visible.sync="dialogVisibleCompute2"
+      width="30%"
+      :close-on-click-modal="false"
+      :before-close="handleCloseCompute2"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <el-col :span="24">
+          <el-radio-group v-model="componentType2">
+            <el-radio :label="1">SMT主板</el-radio>
+            <el-radio :label="2">SMT小板</el-radio>
+            <el-radio :label="3">AI</el-radio>
+            <el-radio :label="4">SMT点胶</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-radio-group v-model="runMode2">
+            <el-radio :label="1">自制优先</el-radio>
+            <el-radio :label="2">外包优先</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="doOutsourceOutputModelName">
+          确认输出
+        </el-button>
+        <el-button @click="handleCloseCompute2">
           关闭
         </el-button>
       </span>
@@ -485,6 +523,9 @@ export default {
         date_info: '',
         capacity: ''
       },
+      dialogVisibleCompute2: false,
+      componentType2: 2,
+      runMode2: 2,
       rules: {
         component_type: [{
           required: true,
@@ -709,6 +750,9 @@ export default {
     handleCloseCompute() {
       this.dialogVisibleCompute = false
     },
+    handleCloseCompute2() {
+      this.dialogVisibleCompute2 = false
+    },
     // 获取排程结果
     getScheduleRes() {
       GeScheduleRes().then(res => {
@@ -735,6 +779,9 @@ export default {
     },
     computeDialog() {
       this.dialogVisibleCompute = true
+    },
+    computeDialog2() {
+      this.dialogVisibleCompute2 = true
     },
     // 关闭计算主板
     handleCloseImport() {
@@ -1179,13 +1226,28 @@ export default {
       }
       this.$confirm('提示', {
         title: '提示',
-        message: '确定要下载外包新机种？',
+        message: '确定要下载外包优先厂商表？',
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        DoOutsourceOutputModelName().then(res => {
-          this.clearListenProgress()
+        const form = {}
+        form['component_type'] = this.componentType2 // ["SMT主板", "SMT小板", "AI", "SMT点胶"]
+        form['run_mode'] = this.runMode2 // ["自制优先", "外包优先"]
+        DoOutsourceOutputModelName(form).then(res => {
+          DownloadFile({ 'file_path': res.file_path }).then(resp => {
+            this.downloadFile(resp)
+            this.$alert(res.message, res.title, {
+              confirmButtonText: '确定',
+              type: 'success'
+            })
+          }).catch(err => {
+            console.log(err)
+            this.$message({
+              message: '下载失败，文件不存在',
+              type: 'error'
+            })
+          })
           this.$alert(res.message, res.title, {
             confirmButtonText: '确定',
             type: res.message_type

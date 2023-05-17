@@ -160,9 +160,10 @@ export function GetDayCapacityConfig() {
   })
 }
 // 下载外包新机种
-export function DoOutsourceOutputModelName() {
+export function DoOutsourceOutputModelName(data) {
   return request({
-    method: 'get',
-    url: '/OutsourcingPriority/daycapacityconfig/do_outsource_output_model_name/'
+    method: 'post',
+    url: '/OutsourcingPriority/do_outsource_output_model_name/',
+    data
   })
 }
