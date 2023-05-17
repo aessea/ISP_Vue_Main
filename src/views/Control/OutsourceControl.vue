@@ -1237,8 +1237,8 @@ export default {
         DoOutsourceOutputModelName(form).then(res => {
           DownloadFile({ 'file_path': res.file_path }).then(resp => {
             this.downloadFile(resp)
-            this.$alert(res.message, res.title, {
-              confirmButtonText: '确定',
+            this.$message({
+              message: '下载完成',
               type: 'success'
             })
           }).catch(err => {
