@@ -102,6 +102,10 @@
                       <i class="el-icon-download" />
                       下载xx文件
                     </el-button> -->
+                    <el-button type="success" @click="doOutsourceOutputModelName">
+                      <i class="el-icon-download" />
+                      下载外包新机种
+                    </el-button>
                     <el-button type="success" @click="downloadAllFile">
                       <i class="el-icon-download" />
                       下载全部输出文件
@@ -419,7 +423,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
   DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
-  GetDayCapacityConfig } from '@/api/Control/OutsourceControl'
+  GetDayCapacityConfig, DoOutsourceOutputModelName } from '@/api/Control/OutsourceControl'
 import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'OutsourceControl',
@@ -1162,6 +1166,40 @@ export default {
             type: 'info',
             message: '取消下载'
           })
+        })
+      })
+    },
+    doOutsourceOutputModelName() {
+      if (this.stepNow < 3) {
+        this.$message({
+          message: '请先生成分工单',
+          type: 'warning'
+        })
+        return
+      }
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要下载外包新机种？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        DoOutsourceOutputModelName().then(res => {
+          this.clearListenProgress()
+          this.$alert(res.message, res.title, {
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+        }).catch(err => {
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
         })
       })
     }

@@ -159,3 +159,10 @@ export function GetDayCapacityConfig() {
     url: '/OutsourcingPriority/daycapacityconfig/get_table_data_control/'
   })
 }
+// 下载外包新机种
+export function DoOutsourceOutputModelName() {
+  return request({
+    method: 'get',
+    url: '/OutsourcingPriority/daycapacityconfig/do_outsource_output_model_name/'
+  })
+}
