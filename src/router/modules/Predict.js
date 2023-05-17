@@ -32,11 +32,20 @@ const PredictRouter = {
       }
     },
     {
-      path: 'FixedCTData',
+      path: 'fixedctdata',
       component: () => import('@/views/Predict/FixedCTData'),
       name: 'FixedCTData',
       meta: {
         title: '车间指定CT表',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'traindatamap',
+      component: () => import('@/views/Predict/TrainDataMap'),
+      name: 'TrainDataMap',
+      meta: {
+        title: '新线体预测参考表',
         roles: ['admin', 'common']
       }
     }
