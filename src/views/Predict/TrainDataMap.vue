@@ -136,7 +136,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-form-item :rules="rules.map_line_list" prop="map_line_list" label="参考的线体">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
-              <el-checkbox-group v-model="model.map_line_list">
+              <el-checkbox-group v-model="model.map_line_list" @change="setMealSelect">
                 <el-checkbox v-for="line in all_line_list" :key="line.index" :label="line" />
               </el-checkbox-group>
             </el-col>
@@ -376,9 +376,12 @@ export default {
       }
       return ''
     },
+    setMealSelect() {
+    // 截取数组的最后一位,并从新赋值
+      this.model.map_line_list = this.model.map_line_list.slice(-1)
+    },
     getLineProcess() {
       GetLineProcess().then(res => {
-        console.log('--------------------', res)
         this.all_line_list = res.all_line_list
         this.all_process_list = res.all_process_list
       })
