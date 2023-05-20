@@ -91,10 +91,10 @@
             <el-tag v-else-if="modelOriginal.not_gaia_release_time_eight === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
 
-          <el-descriptions-item label="SM13下板新机种每班产能点数，单位为万" :span="2">{{ modelOriginal.sm13_buttom_new_machine_predict }}万</el-descriptions-item>
-          <el-descriptions-item label="SM21上板产能点数预测界限，单位为点" :span="2">{{ modelOriginal.sm21_top_led_threshold }}点</el-descriptions-item>
-          <el-descriptions-item label="SM21上板小于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_le_predict }}万</el-descriptions-item>
-          <el-descriptions-item label="SM21上板大于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_gt_predict }}万</el-descriptions-item>
+          <!-- <el-descriptions-item label="SM13下板新机种每班产能点数，单位为万" :span="2">{{ modelOriginal.sm13_buttom_new_machine_predict }}万</el-descriptions-item> -->
+          <!-- <el-descriptions-item label="SM21上板产能点数预测界限，单位为点" :span="2">{{ modelOriginal.sm21_top_led_threshold }}点</el-descriptions-item> -->
+          <el-descriptions-item label="LED上板小于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_le_predict }}万</el-descriptions-item>
+          <el-descriptions-item label="LED上板大于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_gt_predict }}万</el-descriptions-item>
 
           <el-descriptions-item label="是否执行分组">
             <el-tag v-if="modelOriginal.need_dispatch === true" size="small" type="success">开启</el-tag>
@@ -120,7 +120,7 @@
             <el-tag v-if="modelOriginal.deep_search === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.deep_search === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="小板线单面点数阈值(大于此值去SM12)">
+          <el-descriptions-item label="小板线单面点数阈值（大于此值去满足最低阈值对应线体）">
             {{ modelOriginal.board_single_points_threshold }}
           </el-descriptions-item>
           <el-descriptions-item label="小板线大小工单阈值">
@@ -378,7 +378,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.sm13_buttom_new_machine_predict" prop="sm13_buttom_new_machine_predict" label="SM13下板新机种每班产能点数，单位为万">
                 <el-input-number v-model="model.sm13_buttom_new_machine_predict" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
@@ -389,15 +389,15 @@
                 <el-input-number v-model="model.sm21_top_led_threshold" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
-          </el-row>
+          </el-row> -->
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.sm21_top_le_predict" prop="sm21_top_le_predict" label="SM21上板小于界限产能点数，单位为万">
+              <el-form-item :rules="rules.sm21_top_le_predict" prop="sm21_top_le_predict" label="LED上板小于界限产能点数，单位为万">
                 <el-input-number v-model="model.sm21_top_le_predict" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.sm21_top_gt_predict" prop="sm21_top_gt_predict" label="SM21上板大于界限产能点数，单位为万">
+              <el-form-item :rules="rules.sm21_top_gt_predict" prop="sm21_top_gt_predict" label="LED上板大于界限产能点数，单位为万">
                 <el-input-number v-model="model.sm21_top_gt_predict" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -409,7 +409,7 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.board_single_points_threshold" prop="board_single_points_threshold" label="小板线单面点数阈值(大于此值去SM12)">
+              <el-form-item :rules="rules.board_single_points_threshold" prop="board_single_points_threshold" label="小板线单面点数阈值（大于此值去满足最低阈值对应线体）">
                 <el-input-number v-model="model.board_single_points_threshold" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -1047,24 +1047,14 @@ export default {
           message: '该选项不能为空',
           trigger: 'change'
         }],
-        sm13_buttom_new_machine_predict: [{
-          required: true,
-          message: 'SM13下板新机种每班产能点数不能为空',
-          trigger: 'blur'
-        }],
-        sm21_top_led_threshold: [{
-          required: true,
-          message: 'SM21上板产能点数预测界限不能为空',
-          trigger: 'blur'
-        }],
         sm21_top_le_predict: [{
           required: true,
-          message: 'SM21上板小于界限产能点数不能为空',
+          message: '不能为空',
           trigger: 'blur'
         }],
         sm21_top_gt_predict: [{
           required: true,
-          message: 'SM21上板大于界限产能点数不能为空',
+          message: '不能为空',
           trigger: 'blur'
         }],
         need_preprocess: [{
