@@ -45,7 +45,7 @@
             </el-tag>
           </el-descriptions-item>
 
-          <el-descriptions-item label="hold单">{{ modelOriginal.default_unknown_require_day }}天</el-descriptions-item>
+          <el-descriptions-item label="hold单交期推后n天参数">{{ modelOriginal.default_unknown_require_day }}天</el-descriptions-item>
           <el-descriptions-item label="大小穿插惩罚值(秒)">{{ modelOriginal.large_small_punctuated }}秒</el-descriptions-item>
           <el-descriptions-item label="是否开启双面修">
             <el-tag v-if="modelOriginal.repair_mode === 1" size="small" type="danger">关闭</el-tag>
@@ -205,7 +205,7 @@
             </el-tag>
           </el-descriptions-item> -->
 
-          <el-descriptions-item label="特殊板宽宽度配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
+          <el-descriptions-item label="特殊板宽上限配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
           <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}万</el-descriptions-item>
           <el-descriptions-item label="小工单打板时间(单位:时)">{{ modelOriginal.small_processing_time }}</el-descriptions-item>
           <el-descriptions-item label="预排可插入时间节点(单位:时)">{{ modelOriginal.insert_time_before }}</el-descriptions-item>
@@ -218,12 +218,12 @@
             <el-tag v-if="modelOriginal.use_LED === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.use_LED === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="点料可插入锁定小工单时间(当天20点,单位:小时)" :span="2">{{ modelOriginal.point_material_lock_time }}</el-descriptions-item>
+          <el-descriptions-item label="小工单点料可插入时间节点(单位:时)" :span="2">{{ modelOriginal.point_material_lock_time }}</el-descriptions-item>
           <el-descriptions-item label="排白班开始时间(单位:时)">{{ modelOriginal.day_shift_start_time }}</el-descriptions-item>
           <el-descriptions-item label="排白班结束时间(单位:时)">{{ modelOriginal.day_shift_end_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班开始时间(单位:时)">{{ modelOriginal.day_night_start_time }}</el-descriptions-item>
           <el-descriptions-item label="排夜班结束时间(第二天)(单位:时)">{{ modelOriginal.day_night_end_time }}</el-descriptions-item>
-          <el-descriptions-item label="点料可插入锁定非小工单时间(第二天0点,单位:时)" :span="1">{{ modelOriginal.normal_point_material_lock_time }}</el-descriptions-item>
+          <el-descriptions-item label="非小工单点料可插入时间节点(单位:时)" :span="1">{{ modelOriginal.normal_point_material_lock_time }}</el-descriptions-item>
           <el-descriptions-item label="过期参数(单位:天)" :span="1">{{ modelOriginal.expired_time }}</el-descriptions-item>
           <el-descriptions-item label="tabu运行时长限制(单位:分钟)" :span="2">{{ modelOriginal.tabu_time_limit }}</el-descriptions-item>
           <el-descriptions-item label="预排无程序工单锁定时间节点(单位:小时)" :span="1">{{ modelOriginal.no_program_lock_time_before }}</el-descriptions-item>
@@ -336,7 +336,7 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.default_unknown_require_day" prop="default_unknown_require_day" label="hold单">
+              <el-form-item :rules="rules.default_unknown_require_day" prop="default_unknown_require_day" label="hold单交期推后n天参数">
                 <el-input-number v-model="model.default_unknown_require_day" placeholder="请输入，单位为天" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -586,7 +586,7 @@
           </el-row> -->
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.board_width" prop="board_width" label="特殊板宽宽度配置(单位:毫米)">
+              <el-form-item :rules="rules.board_width" prop="board_width" label="特殊板宽上限配置(单位:毫米)">
                 <el-input-number v-model="model.board_width" placeholder="请输入" :step="1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -642,7 +642,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.point_material_lock_time" prop="point_material_lock_time" label="点料可插入锁定小工单时间(当天20点，单位:时)">
+              <el-form-item :rules="rules.point_material_lock_time" prop="point_material_lock_time" label="小工单点料可插入时间节点(单位:时)">
                 <el-input v-model="model.point_material_lock_time" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -671,7 +671,7 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.normal_point_material_lock_time" prop="normal_point_material_lock_time" label="点料可插入锁定非小工单时间(第二天0点，单位:时)">
+              <el-form-item :rules="rules.normal_point_material_lock_time" prop="normal_point_material_lock_time" label="非小工单点料可插入时间节点(单位:时)">
                 <el-input v-model="model.normal_point_material_lock_time" placeholder="请输入" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -966,7 +966,7 @@ export default {
         }],
         default_unknown_require_day: [{
           required: true,
-          message: 'hold单不能为空',
+          message: 'hold单交期推后n天参数不能为空',
           trigger: 'blur'
         }],
         threshold_duedate: [{

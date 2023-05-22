@@ -66,7 +66,7 @@
               <el-tag v-else size="small" type="info">未知</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="line_size_type" label="大中小" width="110">
+          <el-table-column prop="line_size_type" label="智能阈值线体类型" width="110">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.line_size_type === 1" size="small" type="primary">小工单线</el-tag>
               <el-tag v-else-if="scope.row.line_size_type === 2" size="small" type="primary">中小工单线</el-tag>
@@ -120,7 +120,7 @@
           </el-table-column>
           <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
-          <el-table-column prop="min_min_threshold" label="点数阈值下限" width="110" />
+          <el-table-column prop="min_min_threshold" label="智能阈值点数下限" width="110" />
           <!-- <el-table-column prop="single_point_lower" label="单面点数下限阈值" width="140" /> -->
           <!-- <el-table-column prop="is_BPR_line" label="是否为BPR线体" width="160">
             <template slot-scope="scope">
@@ -283,7 +283,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.line_size_type" prop="line_size_type" label="大中小">
+              <el-form-item :rules="rules.line_size_type" prop="line_size_type" label="智能阈值线体类型">
                 <el-select v-model="model.line_size_type" placeholder="请选择">
                   <el-option
                     v-for="item in lineSizeTypeOptions"
@@ -402,7 +402,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="点数阈值下限">
+              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="智能阈值点数下限">
                 <el-input-number v-model="model.min_min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>

@@ -80,6 +80,7 @@
           <el-table-column prop="netboard_buffer_time" label="网板冲突间隔时间(时)" width="180" />
           <el-table-column prop="ct_predict_lower" label="CT预测下限" width="120" />
           <el-table-column prop="ct_predict_upper" label="CT预测上限" width="120" />
+          <el-table-column prop="process_sequence" label="先后加工顺序" width="120" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -141,19 +142,24 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_day" prop="grouping_factor_day" label="第一块和第二块工单划分参数(天)">
                 <el-input-number v-model="model.grouping_factor_day" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_hour" prop="grouping_factor_hour" label="第二块工单控制大小(时)">
                 <el-input-number v-model="model.grouping_factor_hour" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_overtime" prop="grouping_factor_overtime" label="第三块划分参数(天)">
                 <el-input-number v-model="model.grouping_factor_overtime" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.process_sequence" prop="process_sequence" label="先后加工顺序">
+                <el-input v-model="model.process_sequence" placeholder="请输入0或1或2" oninput="this.value=this.value.replace(/[^0-2]/g, '')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -382,6 +388,7 @@ export default {
         netboard_buffer_time: 0,
         ct_predict_lower: 0,
         ct_predict_upper: 0,
+        process_sequence: '',
         onehot_code: ''
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
@@ -401,6 +408,7 @@ export default {
         netboard_buffer_time: 0,
         ct_predict_lower: 0,
         ct_predict_upper: 0,
+        process_sequence: '',
         onehot_code: ''
       },
       rules: {
@@ -467,6 +475,11 @@ export default {
           trigger: 'blur'
         }],
         ct_predict_upper: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        process_sequence: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'
