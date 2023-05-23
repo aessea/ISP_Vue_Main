@@ -4,12 +4,12 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="primary" @click="addDataDialog">
+            <!-- <el-button type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
-            </el-button>
+            </el-button> -->
             <!-- <el-button @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
@@ -53,16 +53,18 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="name" label="接口函数名" sortable />
           <el-table-column prop="description" label="接口描述" />
+          <el-table-column prop="url" label="接口相对地址" sortable />
+          <el-table-column prop="remark" label="备注" />
           <el-table-column
             prop="request_test_server"
             label="请求正式服/测试服"
+            width="160"
           >
             <template slot-scope="scope">
               <el-tag v-if="scope.row.request_test_server === true" size="small" type="success">正式服</el-tag>
               <el-tag v-else-if="scope.row.request_test_server === false" size="small" type="danger">测试服</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="remark" label="备注" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -72,13 +74,13 @@
                 circle
                 @click="handleModify(scope.$index, scope.row)"
               />
-              <el-button
+              <!-- <el-button
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
                 circle
                 @click="handleDelete(scope.$index, scope.row)"
-              />
+              /> -->
             </template>
           </el-table-column>
         </el-table>
@@ -104,11 +106,11 @@
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <!-- <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.name" prop="name" label="接口函数名">
               <el-input v-model="model.name" placeholder="请输入" clearable />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.description" prop="description" label="接口描述">
               <el-input v-model="model.description" placeholder="请输入" clearable />
@@ -117,7 +119,7 @@
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.url" prop="url" label="接口地址，基地址+接口函数名">
+            <el-form-item :rules="rules.url" prop="url" label="接口相对地址">
               <el-input v-model="model.url" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
