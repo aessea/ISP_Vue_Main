@@ -86,7 +86,7 @@
             <el-tag v-if="modelOriginal.force_night_shift_time_rule === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.force_night_shift_time_rule === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="普通工单赌物料到20:00" :span="2">
+          <el-descriptions-item label="普通工单赌物料到正排锁定时间节点" :span="2">
             <el-tag v-if="modelOriginal.not_gaia_release_time_eight === true" size="small" type="success">开启</el-tag>
             <el-tag v-else-if="modelOriginal.not_gaia_release_time_eight === false" size="small" type="danger">关闭</el-tag>
           </el-descriptions-item>
@@ -463,7 +463,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.not_gaia_release_time_eight" prop="not_gaia_release_time_eight" label="非Gaia工单赌物料到20:00">
+              <el-form-item :rules="rules.not_gaia_release_time_eight" prop="not_gaia_release_time_eight" label="普通工单赌物料到正排锁定时间节点">
                 <el-switch v-model="model.not_gaia_release_time_eight" />
               </el-form-item>
             </el-col>
