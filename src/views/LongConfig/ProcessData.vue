@@ -46,7 +46,6 @@
           :data="table_data"
           :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
           :cell-style="{padding: '3px'}"
-
           stripe
           @selection-change="handleSelectionChange"
         >
@@ -81,6 +80,7 @@
           <el-table-column prop="ct_predict_lower" label="CT预测下限" width="120" />
           <el-table-column prop="ct_predict_upper" label="CT预测上限" width="120" />
           <el-table-column prop="process_sequence" label="先后加工顺序" width="120" />
+          <el-table-column prop="process_order" label="制程分配点数的优先顺序" width="120" sortable />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -123,21 +123,26 @@
       <el-card class="card-form" shadow="never">
         <el-form ref="$form" :model="model" label-position="left" size="small">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.name" prop="name" label="制程">
                 <el-input v-model="model.name" placeholder="请输入" clearable />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.TB" prop="TB" label="面">
                 <el-select v-model="model.TB" placeholder="Top面/Button面/Single面" :style="{width: '100%'}">
                   <el-option v-for="(item) in TBOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.paired_process" prop="paired_process" label="配对制程名">
                 <el-input v-model="model.paired_process" placeholder="对应的另一面，如果是单面则为空" clearable />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.process_order" prop="process_order" label="制程分配点数的优先顺序">
+                <el-input v-model="model.process_order" placeholder="请输入" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -388,6 +393,7 @@ export default {
         netboard_buffer_time: 0,
         ct_predict_lower: 0,
         ct_predict_upper: 0,
+        process_order: '',
         process_sequence: '',
         onehot_code: ''
       },
@@ -408,6 +414,7 @@ export default {
         netboard_buffer_time: 0,
         ct_predict_lower: 0,
         ct_predict_upper: 0,
+        process_order: '',
         process_sequence: '',
         onehot_code: ''
       },
@@ -480,6 +487,11 @@ export default {
           trigger: 'blur'
         }],
         process_sequence: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        process_order: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'

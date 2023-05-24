@@ -120,7 +120,7 @@
           </el-table-column>
           <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
-          <el-table-column prop="min_min_threshold" label="智能阈值点数下限" width="110" />
+          <el-table-column prop="min_min_threshold" label="智能阈值点(片)数下限" width="110" />
           <!-- <el-table-column prop="single_point_lower" label="单面点数下限阈值" width="140" /> -->
           <!-- <el-table-column prop="is_BPR_line" label="是否为BPR线体" width="160">
             <template slot-scope="scope">
@@ -402,7 +402,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="智能阈值点数下限">
+              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="智能阈值点(片)数下限">
                 <el-input-number v-model="model.min_min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>

@@ -93,8 +93,8 @@
 
           <!-- <el-descriptions-item label="SM13下板新机种每班产能点数，单位为万" :span="2">{{ modelOriginal.sm13_buttom_new_machine_predict }}万</el-descriptions-item> -->
           <!-- <el-descriptions-item label="SM21上板产能点数预测界限，单位为点" :span="2">{{ modelOriginal.sm21_top_led_threshold }}点</el-descriptions-item> -->
-          <el-descriptions-item label="LED上板小于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_le_predict }}万</el-descriptions-item>
-          <el-descriptions-item label="LED上板大于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_gt_predict }}万</el-descriptions-item>
+          <el-descriptions-item label="LED上板小于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_le_predict }}</el-descriptions-item>
+          <el-descriptions-item label="LED上板大于界限产能点数，单位为万" :span="2">{{ modelOriginal.sm21_top_gt_predict }}</el-descriptions-item>
 
           <el-descriptions-item label="是否执行分组">
             <el-tag v-if="modelOriginal.need_dispatch === true" size="small" type="success">开启</el-tag>
@@ -205,8 +205,8 @@
             </el-tag>
           </el-descriptions-item> -->
 
-          <el-descriptions-item label="特殊板宽上限配置(单位:毫米)">{{ modelOriginal.board_width }}毫米</el-descriptions-item>
-          <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}万</el-descriptions-item>
+          <el-descriptions-item label="特殊板宽上限配置(单位:毫米)">{{ modelOriginal.board_width }}</el-descriptions-item>
+          <el-descriptions-item label="小工单点数(单位:万)">{{ modelOriginal.small_order_total_points }}</el-descriptions-item>
           <el-descriptions-item label="小工单打板时间(单位:时)">{{ modelOriginal.small_processing_time }}</el-descriptions-item>
           <el-descriptions-item label="预排可插入时间节点(单位:时)">{{ modelOriginal.insert_time_before }}</el-descriptions-item>
           <el-descriptions-item label="正排可插入时间节点(单位:时)(从当天零点开始累加)">{{ modelOriginal.insert_time_after }}</el-descriptions-item>
@@ -638,7 +638,7 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.use_LED" prop="use_LED" label="LED工单是否特殊处理">
-                <el-input v-model="model.use_LED" placeholder="请输入" :style="{width: '100%'}" clearable />
+                <el-switch v-model="model.use_LED" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
