@@ -13,15 +13,7 @@ const OutsourceConstraintsRouter = {
     roles: ['admin', 'common']
   },
   children: [
-    {
-      path: 'modelnamerestrictions',
-      component: () => import('@/views/Outsource/Constraints/ModelNameRestrictions'),
-      name: 'ModelNameRestrictions',
-      meta: {
-        title: '主板历史生产厂商表',
-        roles: ['admin', 'common']
-      }
-    },
+
     {
       path: 'capacity',
       component: () => import('@/views/Outsource/Constraints/Capacity'),
@@ -82,6 +74,24 @@ const OutsourceConstraintsRouter = {
       name: 'FilterRulesData',
       meta: {
         title: '筛选规则表',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'modelnamerestrictions',
+      component: () => import('@/views/Outsource/Constraints/ModelNameRestrictions'),
+      name: 'ModelNameRestrictions',
+      meta: {
+        title: '主板历史生产厂商表',
+        roles: ['admin', 'common']
+      }
+    },
+    {
+      path: 'manufacturer',
+      component: () => import('@/views/Outsource/OtherData/Manufacturer'),
+      name: 'Manufacturer',
+      meta: {
+        title: '小板历史生产厂商表',
         roles: ['admin', 'common']
       }
     }

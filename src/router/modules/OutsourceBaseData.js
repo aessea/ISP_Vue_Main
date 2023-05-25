@@ -39,15 +39,6 @@ const OutsourceBaseDataRouter = {
         title: '工序表',
         roles: ['admin', 'common']
       }
-    },
-    {
-      path: 'manufacturer',
-      component: () => import('@/views/Outsource/BaseData/Manufacturer'),
-      name: 'Manufacturer',
-      meta: {
-        title: '小板历史生产厂商表',
-        roles: ['admin', 'common']
-      }
     }
   ]
 }

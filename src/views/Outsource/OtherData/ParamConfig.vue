@@ -245,7 +245,7 @@ export default {
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
-      pageSize: 20, // 每页多少条数据
+      pageSize: 100, // 每页多少条数据
       dataTableSelections: [], // 表格选中的数据
       cols: [],
       el_form_data: [],
@@ -434,13 +434,6 @@ export default {
     },
     // 编辑数据发送到后端保存
     modifyData() {
-      if (!this.checkFormChange()) {
-        this.$message({
-          type: 'info',
-          message: '数据未修改，无需提交'
-        })
-        return
-      }
       this.isClick = true
       const data = this.model
       data['user_name'] = this.name
