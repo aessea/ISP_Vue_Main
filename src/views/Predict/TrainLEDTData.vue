@@ -67,7 +67,7 @@
           <el-table-column prop="other_time" label="其他时间" width="110" sortable />
           <el-table-column prop="program_CT" label="程序CT" width="100" sortable />
           <el-table-column prop="average_CT" label="平均CT" width="110" sortable />
-          <el-table-column prop="data_time" label="数据时间" width="110" sortable />
+          <el-table-column prop="data_time" label="数据时间" sortable />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
