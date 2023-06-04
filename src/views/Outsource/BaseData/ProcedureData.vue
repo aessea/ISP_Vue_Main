@@ -98,7 +98,7 @@
               <el-input-number v-if="el_form.type === 1" v-model="model[el_form.prop]" placeholder="请输入" :style="{width: '100%'}" clearable />
               <el-date-picker v-else-if="el_form.type === 2" v-model="model[el_form.prop]" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
               <el-date-picker v-else-if="el_form.type === 3" v-model="model[el_form.prop]" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
-              <el-switch v-else-if="el_form.type === 4" v-model="model.need_repair" />
+              <el-switch v-else-if="el_form.type === 4" v-model="model[el_form.prop]" />
               <el-input v-else v-model="model[el_form.prop]" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
@@ -226,7 +226,7 @@ export default {
       uploadFileName: '', // 上传的文件名
       uploadFileList: [], // 上传的文件列表
       uploadFile: null, // 上传的文件
-      importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
+      importMode: 'replace', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
       // 表单相关数据

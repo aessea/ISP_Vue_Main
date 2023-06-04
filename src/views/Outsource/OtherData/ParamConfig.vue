@@ -104,7 +104,7 @@
               <el-input-number v-if="el_form.type === 1" v-model="model[el_form.prop]" placeholder="请输入" :style="{width: '100%'}" clearable />
               <el-date-picker v-else-if="el_form.type === 2" v-model="model[el_form.prop]" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
               <el-date-picker v-else-if="el_form.type === 3" v-model="model[el_form.prop]" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
-              <el-switch v-else-if="el_form.type === 4" v-model="model.need_repair" />
+              <el-switch v-else-if="el_form.type === 4" v-model="model[el_form.prop]" />
               <el-input v-else v-model="model[el_form.prop]" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>

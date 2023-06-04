@@ -8,7 +8,7 @@ const OutsourceOtherDataRouter = {
   alwaysShow: true,
   name: 'OutsourceData',
   meta: {
-    title: '外包模块',
+    title: '外包存储模块',
     icon: 'el-icon-s-data',
     roles: ['admin', 'common']
   },
