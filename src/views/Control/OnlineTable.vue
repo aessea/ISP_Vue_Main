@@ -825,18 +825,11 @@ export default {
     },
     // 上传文件
     loadExcelFile(file, fileList) {
-      const fileName = file.name
-      if (!fileName.includes('预排') && !fileName.includes('正排')) {
-        const tip = '上传的文件名未指明预排/正排，请修改后重新上传！！' + `<br/>` + '（注：文件名中需要包含正排或预排）'
-        this.$alert(tip, '错误', {
-          confirmButtonText: '确定',
-          dangerouslyUseHTMLString: true,
-          type: 'error'
-        })
-        return
-      }
-      if (!fileName.includes('主板') && !fileName.includes('小板')) {
-        const tip = '上传的文件名未指明主板/小板，请修改后重新上传！' + `<br/>` + '（注：文件名中需要包含主板/小板，例如：0901主板预排结果）'
+      const fileName = file.name.replace(/\.xlsx$/, '')
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|小板)(正排|预排)$/
+
+      if (!regex.test(fileName)) {
+        const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排）'
         this.$alert(tip, '错误', {
           confirmButtonText: '确定',
           dangerouslyUseHTMLString: true,
