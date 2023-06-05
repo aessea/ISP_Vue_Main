@@ -358,11 +358,11 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-card class="card-gantt">
+    <!-- <el-card class="card-gantt">
       <div slot="header" class="clearfix">
         <span>甘特图</span>
       </div>
-    </el-card>
+    </el-card> -->
 
     <el-dialog
       v-el-drag-dialog
