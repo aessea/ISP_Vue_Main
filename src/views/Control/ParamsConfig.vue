@@ -1,0 +1,627 @@
+<template>
+  <div id="main-box">
+    <el-card>
+      <el-row>
+        <el-col :span="16">
+          <div>
+            <el-button @click="exportDataDialog">
+              <i class="el-icon-download" />导出
+            </el-button>
+          </div>
+        </el-col>
+        <el-col :span="8">
+          <div style="float: right;">
+            <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
+              <el-button
+                size="small"
+                icon="el-icon-refresh"
+                circle
+                @click="refreshTableData"
+              />
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="查看说明" placement="top">
+              <el-button
+                size="small"
+                icon="el-icon-warning-outline"
+                circle
+                @click="helpTips"
+              />
+            </el-tooltip>
+          </div>
+        </el-col>
+      </el-row>
+      <div class="table-box">
+        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+          <el-tab-pane label="主板配置" name="first">
+            <el-table
+              id="mytable"
+              v-loading="loading"
+              :data="table_data_main"
+              :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
+              :cell-style="{padding: '3px'}"
+
+              stripe
+              @selection-change="handleSelectionChange"
+            >
+              <el-table-column type="selection" width="55" />
+              <el-table-column prop="param_type" label="配置类别" width="130" sortable>
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_type === 'main'" size="small" type="primary">主板配置</el-tag>
+                  <el-tag v-else-if="scope.row.param_type === 'small'" size="small" type="primary">小板配置</el-tag>
+                  <el-tag v-else size="small" type="info">未知</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_name_front" label="配置名" sortable>
+                <template slot-scope="scope">
+                  <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_value" label="配置值">
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else type="info">{{ scope.row.param_value }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column width="110" fixed="right" label="操作">
+                <template slot-scope="scope">
+                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      icon="el-icon-edit"
+                      circle
+                      @click="handleModify(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="恢复默认值" placement="top">
+                    <el-button
+                      type="danger"
+                      size="mini"
+                      icon="el-icon-refresh"
+                      circle
+                      @click="restoreDefault(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="小板配置" name="second">
+            <el-table
+              id="mytable"
+              v-loading="loading"
+              :data="table_data_small"
+              :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
+              :cell-style="{padding: '3px'}"
+
+              stripe
+              @selection-change="handleSelectionChange"
+            >
+              <el-table-column type="selection" width="55" />
+              <el-table-column prop="param_type" label="配置类别" width="130" sortable>
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_type === 'main'" size="small" type="primary">主板配置</el-tag>
+                  <el-tag v-else-if="scope.row.param_type === 'small'" size="small" type="primary">小板配置</el-tag>
+                  <el-tag v-else size="small" type="info">未知</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_name_front" label="配置名" sortable>
+                <template slot-scope="scope">
+                  <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_value" label="配置值">
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else type="info">{{ scope.row.param_value }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column width="110" fixed="right" label="操作">
+                <template slot-scope="scope">
+                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      icon="el-icon-edit"
+                      circle
+                      @click="handleModify(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="恢复默认值" placement="top">
+                    <el-button
+                      type="danger"
+                      size="mini"
+                      icon="el-icon-refresh"
+                      circle
+                      @click="restoreDefault(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+        </el-tabs>
+        <el-pagination
+          background
+          :hide-on-single-page="true"
+          :page-size="pageSize"
+          :current-page="currentPage"
+          layout="total, prev, pager, next, jumper"
+          :total="total_num"
+          style="margin-top: 16px;"
+          @current-change="handlePageChange"
+        />
+      </div>
+    </el-card>
+    <el-dialog
+      v-el-drag-dialog
+      :title="dialogTitle"
+      :visible.sync="dataDialogVisible"
+      width="60%"
+      :before-close="handleFormClose"
+      @dragDialog="handleDrag"
+    >
+      <el-form ref="$form" :model="model" label-position="left" size="small">
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col :span="4" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_type" prop="param_type" label="配置类别">
+              <el-select v-model="model.param_type" placeholder="请选择" style="width: 100%" disabled>
+                <el-option
+                  v-for="item in lineTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_name_front" prop="param_name_front" label="配置名">
+              <el-input v-model="model.param_name_front" placeholder="请输入" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_value" prop="param_value" label="配置值">
+              <el-input-number v-if="model.param_value_type === 'int'" v-model="model.param_value" placeholder="请输入" :style="{width: '100%'}" clearable />
+              <el-input-number v-else-if="model.param_value_type === 'float'" v-model="model.param_value" placeholder="请输入" :step="0.1" :style="{width: '100%'}" clearable />
+              <el-date-picker v-else-if="model.param_value_type === 'datetime'" v-model="model.param_value" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
+              <el-date-picker v-else-if="model.param_value_type === 'date'" v-model="model.param_value" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-time-picker v-else-if="model.param_value_type === 'time'" v-model="model.param_value" arrow-control placeholder="请选择" value-format="HH:mm:ss" :style="{width: '100%'}" />
+              <el-switch v-else-if="model.param_value_type === 'bool'" v-model="model.param_value" style="width: 100%" />
+              <el-input v-else v-model="model.param_value" placeholder="请输入" clearable />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_before_value" prop="param_before_value" label="上一次配置值">
+              <el-input v-model="model.param_before_value" placeholder="请输入" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_default_value" prop="param_default_value" label="配置默认值">
+              <el-input v-model="model.param_default_value" placeholder="请输入" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.serial_number" prop="serial_number" label="序号（用于设置配置显示顺序）">
+              <el-input v-model="model.serial_number" placeholder="请输入" clearable />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_description" prop="param_description" label="配置描述">
+              <el-input v-model="model.param_description" placeholder="请输入" :rows="1" type="textarea" clearable />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.update_user" prop="update_user" label="修改人">
+              <el-input v-model="model.update_user" placeholder="修改人" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.update_time" prop="update_time" label="修改时间">
+              <el-input v-model="model.update_time" placeholder="修改时间" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleFormClose">关闭</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addDataAndContinue">添加并继续</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">添加</el-button>
+        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">确认修改</el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="表格说明"
+      :visible.sync="helpDialogVisible"
+      width="60%"
+      @dragDialog="handleDrag"
+    >
+      <span>关于表格的各种说明可以写在这</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="helpDialogVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="导出数据"
+      :visible.sync="exportDialogVisible"
+      :before-close="handleExportClose"
+      width="45%"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <span>导出文件格式：</span>
+        <el-radio-group v-model="exportRadio">
+          <el-radio label="xlsx">.xlsx</el-radio>
+        </el-radio-group>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleExportClose">关闭</el-button>
+        <el-button type="primary" @click="exportData">确认导出</el-button>
+      </span>
+    </el-dialog>
+  </div>
+</template>
+<script>
+import XLSX from 'xlsx'
+import { mapGetters } from 'vuex'
+// import { Loading } from 'element-ui'
+import elDragDialog from '@/directive/el-drag-dialog'
+import { GetTableData, ModifyData, ExportData, RestoreDefault } from '@/api/Control/ParamsConfig'
+export default {
+  name: 'ParamsConfig',
+  directives: { elDragDialog },
+  data() {
+    return {
+      loading: true, // 表格加载动画
+      importLoading: {
+        text: '拼命导入中...',
+        background: 'rgba(0, 0, 0, 0.5)'
+      }, // 导入动画
+      loadingInstance: null,
+      table_data_main: [], // 主板配置
+      table_data_small: [], // 小板配置
+      activeName: 'first',
+      dialogTitle: '', // 表单dialog标题
+      dataDialogVisible: false, // 表单dialog显示
+      dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
+      helpDialogVisible: false, // 帮助提示dialog
+      scopeIndex: '', // 表格行数index
+      scopeRow: '', // 表格行数据
+      importDialogVisible: false, // 导入数据dialog
+      exportDialogVisible: false, // 导出dialog
+      importType: false, // false为替换数据 true为添加数据
+      uploadFileName: '', // 上传的文件名
+      uploadFileList: [], // 上传的文件列表
+      uploadFile: null, // 上传的文件
+      importMode: 'add', // 导入方式选择:追加或替换（方便以后扩展）
+      exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
+      isClick: false, // 是否点击了保存或者提交
+      // 表单相关数据
+      forms: ['$form'],
+      model: {
+        id: '',
+        param_type: '',
+        param_name_backend: '',
+        param_name_front: '',
+        param_value: '',
+        param_value_type: '',
+        param_default_value: '',
+        param_before_value: '',
+        update_time: '',
+        update_user: '',
+        serial_number: '',
+        param_description: '',
+        show_in_front: ''
+      },
+      // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
+      modelOriginal: {
+        id: '',
+        param_type: '',
+        param_name_backend: '',
+        param_name_front: '',
+        param_value: '',
+        param_value_type: '',
+        param_default_value: '',
+        param_before_value: '',
+        update_time: '',
+        update_user: '',
+        serial_number: '',
+        param_description: '',
+        show_in_front: ''
+      },
+      rules: {
+        param_name_front: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        param_value: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        param_type: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }]
+      },
+      // 分页相关
+      total_num: 0, // 总共有多少条数据(后端返回)
+      currentPage: 1, // 当前在第几页
+      pageSize: 100, // 每页多少条数据
+      dataTableSelections: [], // 表格选中的数据
+      lineTypeOptions: [
+        { label: '主板配置', value: 'main' },
+        { label: '小板配置', value: 'small' }
+      ]
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'name'
+    ])
+  },
+  created() {
+    this.getTableData(this.currentPage, this.pageSize)
+  },
+  mounted() {
+    // this.getTableData(this.currentPage, this.pageSize)
+  },
+  methods: {
+    // dialog可拖拽
+    handleDrag() {
+      // this.$refs.select.blur()
+    },
+    // 示例表格行颜色
+    setCellColor({ row, column, rowIndex, columnIndex }) {
+      if (rowIndex === 1 && columnIndex <= 2) {
+        return 'color: #F56C6C;font-weight: bold;'
+      } else if (rowIndex === 1 && columnIndex > 2) {
+        return 'color: #E6A23C;font-weight: bold;'
+      }
+      return ''
+    },
+    // 分页
+    handlePageChange(val) {
+      this.currentPage = val
+      this.getTableData(val, this.pageSize) // 翻页
+    },
+    // 分页展示表格数据
+    getTableData(currentPage, pageSize) {
+      this.loading = true
+      const data = { 'current_page': currentPage, 'page_size': pageSize }
+      GetTableData(data).then(res => {
+        if (res.code === 20000) {
+          this.table_data_main = res.table_data_main
+          this.table_data_small = res.table_data_small
+          this.total_num = res.total_num
+          this.loading = false
+        }
+      })
+    },
+    // 刷新表格数据
+    refreshTableData(isAddData = false) {
+      if (isAddData) { // 如果是导入/添加/点击刷新按钮，刷新时返回第一页
+        this.currentPage = 1
+        this.getTableData(1, this.pageSize)
+      } else { // 否则只刷新当前页
+        this.getTableData(this.currentPage, this.pageSize)
+      }
+    },
+    // 获取表格勾选数据
+    handleSelectionChange(val) {
+      this.dataTableSelections = val
+    },
+    // 修改数据
+    handleModify(index, row) {
+      // 修改dialog
+      this.dialogTitle = '修改数据'
+      this.dialogBtnType = false
+      this.scopeIndex = index
+      this.scopeRow = row
+      // 显示表单数据
+      for (const key in this.model) {
+        this.model[key] = row[key]
+      }
+      // 保存原来的表单数据，用于对比变化
+      for (const key in this.modelOriginal) {
+        this.modelOriginal[key] = this.model[key]
+      }
+      // 显示dialog
+      this.dataDialogVisible = true
+      this.isClick = false
+    },
+    // 恢复默认值
+    restoreDefault() {
+      this.$confirm('确定要该配置恢复到默认值？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const data = this.model
+        data['user_name'] = this.name
+        RestoreDefault(data).then(res => {
+          if (res.code === 20000) {
+            this.$notify({
+              title: '提示',
+              message: res.message,
+              type: res.message_type
+            })
+            this.refreshTableData()
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
+    },
+    // 编辑数据发送到后端保存
+    modifyData() {
+      if (!this.checkFormChange()) {
+        this.$message({
+          type: 'info',
+          message: '数据未修改，无需提交'
+        })
+        return
+      }
+      this.isClick = true
+      const data = this.model
+      data['user_name'] = this.name
+      this.$refs['$form'].validate((valid) => {
+        if (valid) {
+          ModifyData(data).then(res => {
+            if (res.code === 20000) {
+              this.$notify({
+                title: res.message,
+                message: '数据已修改',
+                type: 'success'
+              })
+              this.refreshTableData()
+            }
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '提交失败，请按照要求填写数据！'
+          })
+        }
+      })
+    },
+    // 检测表单数据是否发生变化，用于提示
+    checkFormChange() {
+      let isChange = false
+      for (const key in this.model) {
+        if (this.model[key] !== this.modelOriginal[key]) {
+          isChange = true
+          break
+        }
+      }
+      return isChange
+    },
+    // 表单dialog关闭前提示
+    handleFormClose() {
+      if (this.checkFormChange() && !this.isClick) {
+        this.$confirm('数据未提交，确定要关闭窗口？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.closeFormDialog()
+        }).catch(() => {
+
+        })
+      } else {
+        this.closeFormDialog()
+      }
+    },
+    // 关闭表单dialog的一些操作
+    closeFormDialog() {
+      this.dataDialogVisible = false
+      for (const key in this.model) {
+        this.model[key] = ''
+        this.modelOriginal[key] = ''
+      }
+      this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
+    },
+    // 获取上传文件
+    handleChange(file, fileList) {
+      if (fileList.length > 0) {
+        this.uploadFileList = [fileList[fileList.length - 1]] // 选择最后一次选择文件
+        this.uploadFileName = this.uploadFileList[0].name // 更新文件名
+        this.uploadFile = this.uploadFileList[0].raw // 更新文件
+      }
+    },
+    // 数据库导出到Excel
+    exportDataDialog() {
+      this.exportDialogVisible = true
+    },
+    // 确认导出
+    exportData() {
+      ExportData().then(res => {
+        if (res.code === 20000) {
+          const dataCount = res.data_count
+          const sheetData = res.table_data
+          const fields = res.fields
+          const tableName = res.table_name
+          const fields_display = res.fields_display
+          const newData = [fields_display, ...sheetData]
+          const sheet = XLSX.utils.json_to_sheet(newData, { header: fields, skipHeader: true })
+          const wb = XLSX.utils.book_new()
+          XLSX.utils.book_append_sheet(wb, sheet, tableName)
+          XLSX.writeFile(wb, tableName + '.xlsx')
+          this.$notify({
+            title: '导出成功',
+            message: '本次共导出了 ' + dataCount + ' 条数据',
+            type: 'success'
+          })
+          // 1秒后自动关闭窗口
+          setTimeout(() => {
+            this.handleExportClose() // 导出后自动关闭窗口
+          }, 1000)
+        }
+      })
+    },
+    // 导入数据窗口关闭
+    handleExportClose() {
+      this.exportDialogVisible = false
+    },
+    // 帮助提示按钮
+    helpTips() {
+      this.helpDialogVisible = true
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+  @import '../../assets/css/Control/ParamsConfig.scss';
+</style>
+<style>
+.btnDanger{
+  background-color: #F56C6C !important;
+  border-color: #F56C6C !important;
+}
+.btnDanger:hover{
+  background-color: #f04747 !important;
+  border-color: #f04747 !important;
+}
+.el-pagination {
+    text-align: center;
+}
+
+.upload-demo {
+  display: flex;
+ }
+.el-list-enter-active,
+.el-list-leave-active {
+  transition: none;
+}
+.el-list-enter,
+.el-list-leave-active {
+  opacity: 0;
+}
+.el-upload-list {
+  height: 40px;
+ }
+
+.el-table .warning-row {
+  color: #E6A23C;
+}
+
+</style>

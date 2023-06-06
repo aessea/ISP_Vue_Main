@@ -26,18 +26,18 @@
           </el-row>
           <el-row>
             <el-col :span="12">
-              <div @click="toConfigMain">
+              <div @click="toParamsConfig">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-setting" /></span>
-                  <span style="margin-left: 10px;">查看主板配置</span>
+                  <span style="margin-left: 10px;">查看排程配置</span>
                 </el-card>
               </div>
             </el-col>
             <el-col :span="12">
-              <div @click="toConfigSmall">
+              <div @click="toLineConfig">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-setting" /></span>
-                  <span style="margin-left: 10px;">查看小板配置</span>
+                  <span style="margin-left: 10px;">查看产线配置</span>
                 </el-card>
               </div>
             </el-col>
@@ -157,11 +157,11 @@ export default {
     toHistory() {
       this.$router.push({ path: 'historylog/historyopera' })
     },
-    toConfigMain() {
-      this.$router.push({ path: 'control/configmain' })
+    toParamsConfig() {
+      this.$router.push({ path: 'control/paramsconfig' })
     },
-    toConfigSmall() {
-      this.$router.push({ path: 'control/configsmall' })
+    toLineConfig() {
+      this.$router.push({ path: 'longconfig/linedata' })
     },
     toBlockTimeData() {
       this.$router.push({ path: 'dayconfig/blocktimetata' })

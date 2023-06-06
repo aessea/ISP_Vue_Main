@@ -113,21 +113,30 @@ export const asyncRoutes = [
           roles: ['admin', 'common']
         }
       },
+      // {
+      //   path: 'configmain',
+      //   component: () => import('@/views/Control/ConfigMain'),
+      //   name: 'ConfigMain',
+      //   meta: {
+      //     title: '主板排程配置',
+      //     roles: ['admin', 'common']
+      //   }
+      // },
+      // {
+      //   path: 'configsmall',
+      //   component: () => import('@/views/Control/ConfigSmall'),
+      //   name: 'ConfigSmall',
+      //   meta: {
+      //     title: '小板排程配置',
+      //     roles: ['admin', 'common']
+      //   }
+      // },
       {
-        path: 'configmain',
-        component: () => import('@/views/Control/ConfigMain'),
-        name: 'ConfigMain',
+        path: 'paramsconfig',
+        component: () => import('@/views/Control/ParamsConfig'),
+        name: 'ParamsConfig',
         meta: {
-          title: '主板排程配置',
-          roles: ['admin', 'common']
-        }
-      },
-      {
-        path: 'configsmall',
-        component: () => import('@/views/Control/ConfigSmall'),
-        name: 'ConfigSmall',
-        meta: {
-          title: '小板排程配置',
+          title: '排程配置表',
           roles: ['admin', 'common']
         }
       },
