@@ -118,6 +118,12 @@
               <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
+          <el-table-column prop="is_big_small_line" label="是否进行大小穿插" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_big_small_line === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.is_big_small_line === false" size="small" type="info">否</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
           <el-table-column prop="min_min_threshold" label="智能阈值点(片)数下限" width="110" />
@@ -361,44 +367,37 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.single_point_lower" prop="single_point_lower" label="单面点数下限阈值">
-                <el-input-number v-model="model.single_point_lower" placeholder="请输入" :style="{width: '100%'}" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.single_point_upper" prop="single_point_upper" label="单面点数上限阈值">
-                <el-input-number v-model="model.single_point_upper" placeholder="请输入" :style="{width: '100%'}" />
-              </el-form-item>
-            </el-col>
-          </el-row> -->
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_Big_line_remove22" prop="is_Big_line_remove22" label="是否为优先排大工单线">
-                <el-switch v-model="model.is_Big_line_remove22" />
+                <el-switch v-model="model.is_Big_line_remove22" style="width: 100%" />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_Non_big_line" prop="is_Non_big_line" label="该线体工单是否优先排大工单线">
-                <el-switch v-model="model.is_Non_big_line" />
+                <el-switch v-model="model.is_Non_big_line" style="width: 100%" />
               </el-form-item>
             </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_special_line" prop="is_special_line" label="是否为满足特殊板宽优先排线体">
-                <el-switch v-model="model.is_special_line" />
+                <el-switch v-model="model.is_special_line" style="width: 100%" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_big_small_line" prop="is_big_small_line" label="是否进行大小穿插">
+                <el-switch v-model="model.is_big_small_line" style="width: 100%" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_AX_line" prop="is_AX_line" label="是否安必昂不能绑定线体">
-                <el-switch v-model="model.is_AX_line" />
+                <el-switch v-model="model.is_AX_line" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_cannot_binding_line" prop="is_cannot_binding_line" label="是否为不能绑定的线体">
-                <el-switch v-model="model.is_cannot_binding_line" />
+                <el-switch v-model="model.is_cannot_binding_line" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -406,11 +405,6 @@
                 <el-input-number v-model="model.min_min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_BPR_line" prop="is_BPR_line" label="是否为BPR线体">
-                <el-switch v-model="model.is_BPR_line" />
-              </el-form-item>
-            </el-col> -->
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-form-item :rules="rules.enable_process_list" prop="enable_process_list" label="可生产制程">
@@ -455,79 +449,6 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.T_unable" prop="T_unable" label="可否制程T">
-                <el-input v-model="model.T_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.B_unable" prop="B_unable" label="可否制程B">
-                <el-input v-model="model.B_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.T_BPR_unable" prop="T_BPR_unable" label="可否制程T-BPR">
-                <el-input v-model="model.T_BPR_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-          </el-row> -->
-          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.B_BPR_unable" prop="B_BPR_unable" label="可否制程B-BPR">
-                <el-input v-model="model.B_BPR_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.S_BPR_unable" prop="S_BPR_unable" label="可否制程S-BPR">
-                <el-input v-model="model.S_BPR_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.S_BPR_M_unable" prop="S_BPR_M_unable" label="可否制程S-BPR-M">
-                <el-input v-model="model.S_BPR_M_unable" placeholder="1表示否。0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-          </el-row> -->
-          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.S_unable" prop="S_unable" label="可否制程S">
-                <el-input v-model="model.S_unable" placeholder="1表示否，0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.S_THR_unable" prop="S_THR_unable" label="可否制程S-THR">
-                <el-input v-model="model.S_THR_unable" placeholder="1表示否，0表示是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_burn_in" prop="is_burn_in" label="是否烧录">
-                <el-input v-model="model.is_burn_in" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col>
-          </el-row> -->
-          <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" label="创建人">
-                <el-input v-model="model.CREATED_BY" disabled />
-              </el-form-item>
-            </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" label="创建时间">
-                <el-input v-model="model.CREATED_TIME" disabled />
-              </el-form-item>
-            </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" label="修改人">
-                <el-input v-model="model.UPDATED_BY" disabled />
-              </el-form-item>
-            </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" label="修改时间">
-                <el-input v-model="model.UPDATED_TIME" disabled />
-              </el-form-item>
-            </el-col>
-          </el-row> -->
         </el-form>
       </el-card>
       <span slot="footer" class="dialog-footer">
@@ -772,7 +693,8 @@ export default {
         max_points: '',
         line_size_type: 0,
         enable: false,
-        min_min_threshold: 0
+        min_min_threshold: 0,
+        is_big_small_line: false
         // is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
@@ -823,7 +745,8 @@ export default {
         max_process_time: '',
         max_points: '',
         line_size_type: 0,
-        min_min_threshold: 0
+        min_min_threshold: 0,
+        is_big_small_line: false
         // is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
@@ -977,6 +900,11 @@ export default {
           trigger: 'blur'
         }],
         is_cannot_binding_line: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        is_big_small_line: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'

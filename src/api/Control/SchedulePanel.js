@@ -302,3 +302,11 @@ export function DoBucklePoints(data) {
     data
   })
 }
+// 修改放假日期
+export function ModifyHoliday(data) {
+  return request({
+    url: '/Control/SchedulePanel/modify_holiday/',
+    method: 'post',
+    data
+  })
+}
