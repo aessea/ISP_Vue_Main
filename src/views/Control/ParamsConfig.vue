@@ -32,7 +32,7 @@
       </el-row>
       <div class="table-box">
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-          <el-tab-pane label="主板配置" name="first">
+          <el-tab-pane label="主板配置" name="main">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -48,6 +48,7 @@
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_type === 'main'" size="small" type="primary">主板配置</el-tag>
                   <el-tag v-else-if="scope.row.param_type === 'small'" size="small" type="primary">小板配置</el-tag>
+                  <el-tag v-else-if="scope.row.param_type === 'other'" size="small" type="primary">其它配置</el-tag>
                   <el-tag v-else size="small" type="info">未知</el-tag>
                 </template>
               </el-table-column>
@@ -88,7 +89,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="小板配置" name="second">
+          <el-tab-pane label="小板配置" name="small">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -104,6 +105,64 @@
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_type === 'main'" size="small" type="primary">主板配置</el-tag>
                   <el-tag v-else-if="scope.row.param_type === 'small'" size="small" type="primary">小板配置</el-tag>
+                  <el-tag v-else-if="scope.row.param_type === 'other'" size="small" type="primary">其它配置</el-tag>
+                  <el-tag v-else size="small" type="info">未知</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_name_front" label="配置名" sortable>
+                <template slot-scope="scope">
+                  <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_value" label="配置值">
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else type="info">{{ scope.row.param_value }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column width="110" fixed="right" label="操作">
+                <template slot-scope="scope">
+                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      icon="el-icon-edit"
+                      circle
+                      @click="handleModify(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="恢复默认值" placement="top">
+                    <el-button
+                      type="danger"
+                      size="mini"
+                      icon="el-icon-refresh"
+                      circle
+                      @click="restoreDefault(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="其它配置" name="other">
+            <el-table
+              id="mytable"
+              v-loading="loading"
+              :data="table_data_other"
+              :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
+              :cell-style="{padding: '3px'}"
+
+              stripe
+              @selection-change="handleSelectionChange"
+            >
+              <el-table-column type="selection" width="55" />
+              <el-table-column prop="param_type" label="配置类别" width="130" sortable>
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_type === 'main'" size="small" type="primary">主板配置</el-tag>
+                  <el-tag v-else-if="scope.row.param_type === 'small'" size="small" type="primary">小板配置</el-tag>
+                  <el-tag v-else-if="scope.row.param_type === 'other'" size="small" type="primary">其它配置</el-tag>
                   <el-tag v-else size="small" type="info">未知</el-tag>
                 </template>
               </el-table-column>
@@ -294,7 +353,8 @@ export default {
       loadingInstance: null,
       table_data_main: [], // 主板配置
       table_data_small: [], // 小板配置
-      activeName: 'first',
+      table_data_other: [], // 其它配置
+      activeName: 'main',
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -367,7 +427,8 @@ export default {
       dataTableSelections: [], // 表格选中的数据
       lineTypeOptions: [
         { label: '主板配置', value: 'main' },
-        { label: '小板配置', value: 'small' }
+        { label: '小板配置', value: 'small' },
+        { label: '其它配置', value: 'other' }
       ]
     }
   },
@@ -409,6 +470,7 @@ export default {
         if (res.code === 20000) {
           this.table_data_main = res.table_data_main
           this.table_data_small = res.table_data_small
+          this.table_data_other = res.table_data_other
           this.total_num = res.total_num
           this.loading = false
         }
