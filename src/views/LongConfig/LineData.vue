@@ -87,7 +87,6 @@
               </el-tag>
             </template>
           </el-table-column>
-          <!-- <el-table-column prop="single_point_upper" label="单面点数上限阈值" width="140" /> -->
           <el-table-column prop="is_AX_line" label="是否安必昂不能绑定线体" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_AX_line === true" size="small" type="success">是</el-tag>
@@ -127,14 +126,6 @@
           <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
           <el-table-column prop="min_min_threshold" label="智能阈值点(片)数下限" width="110" />
-          <!-- <el-table-column prop="single_point_lower" label="单面点数下限阈值" width="140" /> -->
-          <!-- <el-table-column prop="is_BPR_line" label="是否为BPR线体" width="160">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_BPR_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_BPR_line === false" size="small" type="info">否</el-tag>
-            </template>
-          </el-table-column> -->
-          <!-- <el-table-column prop="is_points" label="是否按点数分大中小工单" width="170" /> -->
           <el-table-column prop="big_able" label="可否大工单" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.big_able === 1" size="small" type="success">✔</el-tag>
@@ -153,70 +144,6 @@
               <el-tag v-else-if="scope.row.small_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <!-- <el-table-column prop="offset_threshold" label="阈值偏差" width="85" /> -->
-          <!-- <el-table-column prop="T_AD_unable" label="可否制程T-AD" width="120">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.T_AD_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.T_AD_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="T_unable" label="可否制程T" width="95">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.T_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.T_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="B_unable" label="可否制程B" width="95">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.B_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.B_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="T_BPR_unable" label="可否制程T-BPR" width="125">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.T_BPR_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.T_BPR_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="B_BPR_unable" label="可否制程B-BPR" width="130">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.B_BPR_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.B_BPR_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="S_BPR_unable" label="可否制程S-BPR" width="130">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.S_BPR_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.S_BPR_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="S_BPR_M_unable" label="可否制程S-BPR-M" width="145">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.S_BPR_M_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.S_BPR_M_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="S_unable" label="可否制程S" width="95">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.S_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.S_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="S_THR_unable" label="可否制程S-THR" width="130">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.S_THR_unable === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.S_THR_unable === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column> -->
-          <!-- <el-table-column prop="is_burn_in" label="是否烧录" width="85">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_burn_in === 1" size="small" type="info">×</el-tag>
-              <el-tag v-else-if="scope.row.is_burn_in === 0" size="small" type="success">✔</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="capacity" label="日产能" width="80" /> -->
-          <!-- <el-table-column prop="config_class" label="配置类型" width="85" /> -->
-          <!-- <el-table-column prop="program_class" label="程序类型" width="85" /> -->
           <el-table-column prop="balance_class" label="线平衡类型" width="100" />
           <el-table-column prop="big_setup" label="大切换" />
           <el-table-column prop="small_setup" label="小切换" />
