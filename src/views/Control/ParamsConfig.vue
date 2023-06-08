@@ -516,7 +516,10 @@ export default {
       this.isClick = false
     },
     // 恢复默认值
-    restoreDefault() {
+    restoreDefault(index, row) {
+      for (const key in this.model) {
+        this.model[key] = row[key]
+      }
       this.$confirm('确定要该配置恢复到默认值？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
