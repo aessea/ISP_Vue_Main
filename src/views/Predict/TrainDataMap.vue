@@ -52,7 +52,7 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="line_name" label="新线体" width="120" sortable />
-          <el-table-column prop="map_line_list" label="补充的可排线别">
+          <el-table-column prop="map_line_list" label="参考的线体">
             <template slot-scope="scope">
               <el-tag
                 v-for="(val, key) in scope.row.map_line_list"
@@ -63,7 +63,7 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="map_process_list" label="补充的可排线别">
+          <el-table-column prop="map_process_list" label="参考的制程">
             <template slot-scope="scope">
               <el-tag
                 v-for="(val, key) in scope.row.map_process_list"
