@@ -258,17 +258,17 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_before_value" prop="param_before_value" label="上一次配置值">
-              <el-input v-model="model.param_before_value" placeholder="请输入" disabled />
+              <el-input v-model="model.param_before_value" placeholder="" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_value" prop="param_default_value" label="配置默认值">
-              <el-input v-model="model.param_default_value" placeholder="请输入" disabled />
+              <el-input v-model="model.param_default_value" placeholder="" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_name" prop="param_default_name" label="默认配置名">
-              <el-input v-model="model.param_default_name" placeholder="请输入" disabled />
+              <el-input v-model="model.param_default_name" placeholder="" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
