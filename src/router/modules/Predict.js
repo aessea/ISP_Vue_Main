@@ -13,15 +13,15 @@ const PredictRouter = {
     roles: ['admin', 'common']
   },
   children: [
-    // {
-    //   path: 'trainledtdata',
-    //   component: () => import('@/views/Predict/TrainLEDTData'),
-    //   name: 'TrainLEDTData',
-    //   meta: {
-    //     title: 'LED训练数据',
-    //     roles: ['admin', 'common']
-    //   }
-    // },
+    {
+      path: 'trainledtdata',
+      component: () => import('@/views/Predict/TrainLEDTData'),
+      name: 'TrainLEDTData',
+      meta: {
+        title: 'LED训练数据',
+        roles: ['admin', 'common']
+      }
+    },
     {
       path: 'traindata',
       component: () => import('@/views/Predict/TrainData'),

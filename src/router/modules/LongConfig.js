@@ -13,15 +13,15 @@ const LongConfigRouter = {
     roles: ['admin', 'common']
   },
   children: [
-    {
-      path: 'ledctata',
-      component: () => import('@/views/LongConfig/LEDCTData'),
-      name: 'LEDCTData',
-      meta: {
-        title: 'LED经验数据',
-        roles: ['admin', 'common']
-      }
-    },
+    // {
+    //   path: 'ledctata',
+    //   component: () => import('@/views/LongConfig/LEDCTData'),
+    //   name: 'LEDCTData',
+    //   meta: {
+    //     title: 'LED经验数据',
+    //     roles: ['admin', 'common']
+    //   }
+    // },
     {
       path: 'mp1addlinedata',
       component: () => import('@/views/LongConfig/MP1AddLineData'),
