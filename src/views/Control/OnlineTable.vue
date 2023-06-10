@@ -829,7 +829,7 @@ export default {
       const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|小板)(正排|预排).*$/
 
       if (!regex.test(fileName)) {
-        const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排结果）'
+        const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排）'
         this.$alert(tip, '错误', {
           confirmButtonText: '确定',
           dangerouslyUseHTMLString: true,
@@ -921,11 +921,11 @@ export default {
       GetRunFlag().then(res => {
         var confirmText
         if (res.run_flag === 1) {
-          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = ['目前正在计算排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         } else if (res.ana_run_flag === 1) {
-          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = ['目前正在分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = ['目前正在计算排程或分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         }
         const newDatas = []
         const h = this.$createElement
@@ -982,11 +982,11 @@ export default {
       GetRunFlag().then(res => {
         var confirmText
         if (res.run_flag === 1) {
-          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = ['目前正在计算排程，确定要继续生成表格？', '注意：此操作将会影响当前运行的排程结果！']
         } else if (res.ana_run_flag === 1) {
-          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = ['目前正在分析排程，确定要继续生成表格？', '注意：此操作将会影响当前运行的排程结果！']
         } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = ['目前正在计算排程或分析排程，确定要继续生成表格？', '注意：此操作将会影响当前运行的排程结果！']
         }
         const newDatas = []
         const h = this.$createElement
@@ -1405,14 +1405,18 @@ export default {
     getSheetJs(download_flag) {
       const today_schedule_name = '今日排程'
       const unschedule_name = '未上排程'
+      const newschedule_name = '新上排程'
       let today_schedule_sheet = null
       let unschedule_sheet = null
+      let newshedule_sheet = null
       const allSheetData = window.luckysheet.getAllSheets()
       for (let i = 0; i < allSheetData.length; i++) {
         if (allSheetData[i].name === today_schedule_name) {
           today_schedule_sheet = allSheetData[i]
         } else if (allSheetData[i].name === unschedule_name) {
           unschedule_sheet = allSheetData[i]
+        } else if (allSheetData[i].name === newschedule_name) {
+          newshedule_sheet = allSheetData[i]
         }
       }
       const sheets = {}
@@ -1422,9 +1426,11 @@ export default {
       if (unschedule_sheet) {
         sheets[[unschedule_name]] = Object.assign({}, this.sheetDataToJs(unschedule_sheet.data))
       }
-
+      if (newshedule_sheet) {
+        sheets[[newschedule_name]] = Object.assign({}, this.sheetDataToJs(newshedule_sheet.data))
+      }
       const workbook = {
-        SheetNames: [today_schedule_name, unschedule_name],
+        SheetNames: [today_schedule_name, unschedule_name, newschedule_name],
         Sheets: sheets
       }
       if (download_flag === false) {
