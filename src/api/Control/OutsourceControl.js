@@ -167,3 +167,12 @@ export function DoOutsourceOutputModelName(data) {
     data
   })
 }
+// 重新调整
+export function ReAdjustInput(data) {
+  return request({
+    url: '/OutsourcingPriority/readjust_input/',
+    method: 'post',
+    timeout: 100 * 60 * 1000,
+    data
+  })
+}

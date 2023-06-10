@@ -79,6 +79,9 @@
                     <el-button type="success" @click="generateOutput">
                       5.输出文件
                     </el-button>
+                    <el-button type="pushBtn" plain @click="rejustInputDialog">
+                      重新输入文件
+                    </el-button>
                     <el-button plain @click="showFilterRules">
                       显示筛选规则
                     </el-button>
@@ -119,6 +122,60 @@
       </el-col>
     </el-row>
 
+    <el-dialog
+      v-el-drag-dialog
+      title="重新输入调整文件"
+      :visible.sync="dialogVisibleReInputDivision"
+      width="60%"
+      :close-on-click-modal="false"
+      :before-close="handleCloseReInputDivision"
+      @dragDialog="handleDrag"
+    >
+      <el-upload
+        class="upload-demo"
+        action=""
+        accept=".xlsx,.xls"
+        :auto-upload="false"
+        multiple
+        :limit="1"
+        :on-exceed="handleExceed_1"
+        :on-remove="handleRemoveReInputDivision"
+        :on-change="handleChangeReInputDivision"
+        :file-list="fileListReInputDivision"
+      >
+        <el-button type="primary">点击上传表格</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传.xlsx文件，最多可上传1份</div>
+      </el-upload>
+      <el-row style="margin-top: 20px;">
+        <el-col :span="24">
+          <el-radio-group v-model="componentType3">
+            <el-radio :label="1">SMT主板</el-radio>
+            <el-radio :label="2">SMT小板</el-radio>
+            <el-radio :label="3">AI</el-radio>
+            <el-radio :label="4">SMT点胶</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-radio-group v-model="runMode3">
+            <el-radio :label="1">自制优先</el-radio>
+            <el-radio :label="2">外包优先</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" style="margin-left:10px;" @click="reAdjustInput">
+          导入文件
+        </el-button>
+        <el-button type="success" @click="generateOutput">
+          输出文件
+        </el-button>
+        <el-button @click="handleCloseReInputDivision">
+          关闭
+        </el-button>
+      </span>
+    </el-dialog>
     <el-dialog
       v-el-drag-dialog
       title="导入输入文件"
@@ -461,7 +518,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
   DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
-  GetDayCapacityConfig, DoOutsourceOutputModelName } from '@/api/Control/OutsourceControl'
+  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput } from '@/api/Control/OutsourceControl'
 import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'OutsourceControl',
@@ -501,9 +558,13 @@ export default {
       fileListCustomer: [], // 客户表
       fileListSchedule: [], // 业务排程明细
       fileListOldOrder: [], // 旧工单
+      fileListReInputDivision: [], // 重新调整输入
       componentType: 1,
       runMode: 1,
+      componentType3: 1,
+      runMode3: 1,
       formData: new FormData(),
+      formDataReAdjust: new FormData(),
       dialogVisibleCompute: false,
       dialogVisibleRules: false,
       table_data_rules: [], // 显示筛选规则
@@ -514,6 +575,7 @@ export default {
       isUpdateConfig: false,
       table_data_day_capacity_config: [],
       dayCapacityConfigDialogVisible: false,
+      dialogVisibleReInputDivision: false,
       componentTypeOptions: componentTypeOptions,
       // 表单相关数据
       forms: ['$form'],
@@ -1262,6 +1324,44 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消'
+        })
+      })
+    },
+    rejustInputDialog() {
+      this.dialogVisibleReInputDivision = true
+    },
+    handleCloseReInputDivision() {
+      this.dialogVisibleReInputDivision = false
+    },
+    handleRemoveReInputDivision(file, fileList) {
+      for (var key of this.formDataReAdjust.keys()) {
+        const dict = this.formDataReAdjust.get(key)
+        if ((dict.name.indexOf(file.name) !== -1)) {
+          this.formDataReAdjust.delete(key)
+        }
+      }
+      this.fileListReInputDivision = fileList
+    },
+    handleChangeReInputDivision(files, fileList) {
+      var file = new File([files.raw], `ReInputDivision-${files.name}`)
+      this.formDataReAdjust.append('files', file)
+      this.fileListReInputDivision = fileList
+    },
+    async reAdjustInput() {
+      this.loadingInstance = Loading.service(this.importLoading)
+      this.formDataReAdjust.append('component_type', this.componentType3)
+      this.formDataReAdjust.append('run_mode', this.runMode3)
+      await ReAdjustInput(this.formDataReAdjust).then(res => {
+        this.loadingInstance.close()
+        this.$message({
+          message: res.message,
+          type: 'success'
+        })
+      }).catch(err => {
+        this.loadingInstance.close() // 清除动画
+        this.$alert(err, '错误', {
+          confirmButtonText: '确定',
+          type: 'error'
         })
       })
     }
