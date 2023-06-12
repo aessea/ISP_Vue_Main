@@ -1193,13 +1193,13 @@ export default {
     },
     // 输出文件
     generateOutput() {
-      if (this.stepNow < 4) {
-        this.$message({
-          message: '计算未完成，无法输出',
-          type: 'warning'
-        })
-        return
-      }
+      // if (this.stepNow < 4) {
+      //   this.$message({
+      //     message: '计算未完成，无法输出',
+      //     type: 'warning'
+      //   })
+      //   return
+      // }
       this.listenProgress()
       this.$message({
         type: 'success',
