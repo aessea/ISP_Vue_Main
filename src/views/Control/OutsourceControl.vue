@@ -76,7 +76,7 @@
                     <el-button type="primary" plain @click="computeDialog">
                       4.开始计算
                     </el-button>
-                    <el-button type="success" @click="generateOutput">
+                    <el-button type="success" @click="generateOutput('compute')">
                       5.输出文件
                     </el-button>
                     <el-button type="pushBtn" plain @click="rejustInputDialog">
@@ -168,7 +168,7 @@
         <el-button type="primary" style="margin-left:10px;" @click="reAdjustInput">
           导入文件
         </el-button>
-        <el-button type="success" @click="generateOutput">
+        <el-button type="success" @click="generateOutput('readjust')">
           输出文件
         </el-button>
         <el-button @click="handleCloseReInputDivision">
@@ -1192,7 +1192,7 @@ export default {
       })
     },
     // 输出文件
-    generateOutput() {
+    generateOutput(mode) {
       // if (this.stepNow < 4) {
       //   this.$message({
       //     message: '计算未完成，无法输出',
@@ -1206,8 +1206,14 @@ export default {
         message: '开始输出文件，请关注第二个进度条'
       })
       const form = {}
-      form['component_type'] = this.componentType // ["SMT主板", "SMT小板", "AI", "SMT点胶"]
-      form['run_mode'] = this.runMode // ["自制优先", "外包优先"]
+      if (mode === 'readjust') { // 重新调整输入
+        form['component_type'] = this.componentType3 // ["SMT主板", "SMT小板", "AI", "SMT点胶"]
+        form['run_mode'] = this.runMode3 // ["自制优先", "外包优先"]
+      } else {
+        form['component_type'] = this.componentType
+        form['run_mode'] = this.runMode
+      }
+
       GenerateOutput(form).then(res => {
         this.clearListenProgress()
         this.$alert(res.message, '提示', {
