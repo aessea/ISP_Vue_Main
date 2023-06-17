@@ -867,9 +867,11 @@ export default {
       this.loadingInstance = Loading.service(this.importLoading)
       await ImportFiles(this.formData).then(res => {
         this.loadingInstance.close()
-        this.$message({
-          message: res.message,
-          type: 'success'
+        this.$alert(res.message, '提示', {
+          customClass: 'checkAlertBox',
+          dangerouslyUseHTMLString: true,
+          confirmButtonText: '确定',
+          type: res.message_type
         })
         SaveStepNow({ 'step_now': 1 }).then(res => {
           this.stepNow = 1
