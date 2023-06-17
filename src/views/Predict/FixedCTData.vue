@@ -226,7 +226,7 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Predict/FixedCTData'
-import { LineOptions, ProcessOptions } from '@/utils/items'
+import { GetLineProcess } from '@/api/Public'
 export default {
   name: 'FixedCTData',
   directives: { elDragDialog },
@@ -310,8 +310,8 @@ export default {
           trigger: 'blur'
         }]
       },
-      lineOptions: LineOptions, // 维护线别
-      processOptions: ProcessOptions, // 制程
+      lineOptions: [], // 维护线别
+      processOptions: [], // 制程
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -325,6 +325,7 @@ export default {
     ])
   },
   created() {
+    this.getLineProcess()
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
@@ -348,6 +349,16 @@ export default {
     handlePageChange(val) {
       this.currentPage = val
       this.getTableData(val, this.pageSize) // 翻页
+    },
+    getLineProcess() {
+      GetLineProcess().then(res => {
+        for (const key in res.all_line_list) {
+          this.lineOptions.push({ value: res.all_line_list[key], label: res.all_line_list[key] })
+        }
+        for (const key in res.all_process_list) {
+          this.processOptions.push({ value: res.all_process_list[key], label: res.all_process_list[key] })
+        }
+      })
     },
     // 分页展示表格数据
     getTableData(currentPage, pageSize) {

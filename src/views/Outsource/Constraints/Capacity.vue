@@ -272,7 +272,7 @@ export default {
       GetBaseData().then(res => {
         this.cols = res.col_data
         this.model = res.form_data
-        this.modelOriginal = res.form_data
+        this.modelOriginal = { ...this.model }
         this.el_form_data = res.el_form_data
         this.row_el_form_data = res.row_el_form_data
         this.table_name = res.table_name
@@ -419,8 +419,10 @@ export default {
       }
       // 保存原来的表单数据，用于对比变化
       for (const key in this.modelOriginal) {
-        this.modelOriginal[key] = this.model[key]
+        this.modelOriginal[key] = row[key]
       }
+      console.log('--------------------------', this.model)
+      console.log('==========================', this.modelOriginal)
       // 显示dialog
       this.dataDialogVisible = true
       this.isClick = false
@@ -461,6 +463,8 @@ export default {
     checkFormChange() {
       let isChange = false
       for (const key in this.model) {
+        console.log('---', this.model[key])
+        console.log('===', this.modelOriginal[key])
         if (this.model[key] !== this.modelOriginal[key]) {
           isChange = true
           break

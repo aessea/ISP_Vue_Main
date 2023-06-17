@@ -273,7 +273,7 @@ export default {
       GetBaseData().then(res => {
         this.cols = res.col_data
         this.model = res.form_data
-        this.modelOriginal = res.form_data
+        this.modelOriginal = { ...this.model }
         this.el_form_data = res.el_form_data
         this.row_el_form_data = res.row_el_form_data
         this.table_name = res.table_name
