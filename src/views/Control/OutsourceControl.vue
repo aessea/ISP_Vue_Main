@@ -107,7 +107,7 @@
                     </el-button> -->
                     <el-button type="success" @click="computeDialog2">
                       <i class="el-icon-download" />
-                      下载外包优先厂商表
+                      下载外包优先新机种表
                     </el-button>
                     <el-button type="success" @click="downloadAllFile">
                       <i class="el-icon-download" />
@@ -313,7 +313,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="下载外包优先厂商表"
+      title="下载外包优先新机种表"
       :visible.sync="dialogVisibleCompute2"
       width="30%"
       :close-on-click-modal="false"
@@ -1296,7 +1296,7 @@ export default {
       }
       this.$confirm('提示', {
         title: '提示',
-        message: '确定要下载外包优先厂商表？',
+        message: '确定要下载外包优先新机种表？',
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
