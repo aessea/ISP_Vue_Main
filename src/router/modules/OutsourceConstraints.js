@@ -10,7 +10,7 @@ const OutsourceConstraintsRouter = {
   meta: {
     title: '外包约束数据',
     icon: 'el-icon-s-data',
-    roles: ['admin', 'common']
+    roles: ['admin', 'outsource']
   },
   children: [
 
@@ -20,7 +20,7 @@ const OutsourceConstraintsRouter = {
       name: 'Capacity',
       meta: {
         title: '产能限制表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -29,7 +29,7 @@ const OutsourceConstraintsRouter = {
       name: 'ProcessRestrictions',
       meta: {
         title: '制程约束表',
-        roles: ['admin', 'common']
+        roles: ['admin']
       }
     },
     {
@@ -38,7 +38,7 @@ const OutsourceConstraintsRouter = {
       name: 'PackageLineRestrictions',
       meta: {
         title: '包装线限制表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -47,7 +47,7 @@ const OutsourceConstraintsRouter = {
       name: 'CustomerRestrictions',
       meta: {
         title: '客户约束表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -56,7 +56,7 @@ const OutsourceConstraintsRouter = {
       name: 'JobOrderTypeRestrictions',
       meta: {
         title: '工单类型限制表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -65,7 +65,7 @@ const OutsourceConstraintsRouter = {
       name: 'BoardNoRestrictions',
       meta: {
         title: '板号限制表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -74,7 +74,7 @@ const OutsourceConstraintsRouter = {
       name: 'FilterRulesData',
       meta: {
         title: '筛选规则表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -83,7 +83,7 @@ const OutsourceConstraintsRouter = {
       name: 'ModelNameRestrictions',
       meta: {
         title: '主板历史生产厂商表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -92,7 +92,7 @@ const OutsourceConstraintsRouter = {
       name: 'Manufacturer',
       meta: {
         title: '小板历史生产厂商表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     }
   ]

@@ -45,7 +45,9 @@
           <el-table-column prop="roles" label="用户权限" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.roles === 'admin'" size="small">超级管理员</el-tag>
+              <el-tag v-else-if="scope.row.roles === 'senioradmin'" size="small">高级管理员</el-tag>
               <el-tag v-else-if="scope.row.roles === 'common'" size="small">普通管理员</el-tag>
+              <el-tag v-else-if="scope.row.roles === 'outsource'" size="small">外包管理员</el-tag>
               <el-tag v-else-if="scope.row.roles === 'program'" size="small">程序员</el-tag>
             </template>
           </el-table-column>

@@ -10,7 +10,7 @@ const OutsourceBaseDataRouter = {
   meta: {
     title: '外包基本数据',
     icon: 'el-icon-s-data',
-    roles: ['admin', 'common']
+    roles: ['admin', 'outsource']
   },
   children: [
     {
@@ -19,7 +19,7 @@ const OutsourceBaseDataRouter = {
       name: 'Customer',
       meta: {
         title: '客户表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -28,7 +28,7 @@ const OutsourceBaseDataRouter = {
       name: 'FactoryType',
       meta: {
         title: '厂别表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -37,7 +37,7 @@ const OutsourceBaseDataRouter = {
       name: 'ProcedureData',
       meta: {
         title: '工序表',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     }
   ]

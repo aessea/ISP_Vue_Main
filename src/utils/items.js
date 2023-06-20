@@ -39,7 +39,9 @@ const ProcessOptions = [
 // 用户权限
 const PermissionOptions = [
   { value: 'admin', label: '超级管理员' },
+  { value: 'senioradmin', label: '高级管理员' },
   { value: 'common', label: '普通管理员' },
+  { value: 'outsource', label: '外包管理员' },
   { value: 'program', label: '程序员' }
 ]
 const lineOptions = [

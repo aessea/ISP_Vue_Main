@@ -10,7 +10,7 @@ const OutsourceOtherDataRouter = {
   meta: {
     title: '外包存储模块',
     icon: 'el-icon-s-data',
-    roles: ['admin', 'common']
+    roles: ['admin', 'outsource']
   },
   children: [
     {
@@ -19,7 +19,7 @@ const OutsourceOtherDataRouter = {
       name: 'Schedule',
       meta: {
         title: '业务排程明细',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -28,7 +28,7 @@ const OutsourceOtherDataRouter = {
       name: 'DayCapacityConfig',
       meta: {
         title: '每日产能配置',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -37,7 +37,7 @@ const OutsourceOtherDataRouter = {
       name: 'Division',
       meta: {
         title: '分工单格式',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -46,7 +46,7 @@ const OutsourceOtherDataRouter = {
       name: 'OldOrder',
       meta: {
         title: '旧工单',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -55,7 +55,7 @@ const OutsourceOtherDataRouter = {
       name: 'OutputFiles',
       meta: {
         title: '输出文件',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -64,7 +64,7 @@ const OutsourceOtherDataRouter = {
       name: 'Summary',
       meta: {
         title: '业务排程汇总',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -73,7 +73,7 @@ const OutsourceOtherDataRouter = {
       name: 'ParamConfig',
       meta: {
         title: '参数配置',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     // {
@@ -82,7 +82,7 @@ const OutsourceOtherDataRouter = {
     //   name: 'ColumnNameConfig',
     //   meta: {
     //     title: '列名配置',
-    //     roles: ['admin', 'common']
+    //     roles: ['admin']
     //   }
     // },
     // {
@@ -91,7 +91,7 @@ const OutsourceOtherDataRouter = {
     //   name: 'SheetNameConfig',
     //   meta: {
     //     title: '表名配置',
-    //     roles: ['admin', 'common']
+    //     roles: ['admin']
     //   }
     // },
     // {
@@ -100,7 +100,7 @@ const OutsourceOtherDataRouter = {
     //   name: 'TableColumnConfig',
     //   meta: {
     //     title: '读取列名配置',
-    //     roles: ['admin', 'common']
+    //     roles: ['admin']
     //   }
     // },
     {
@@ -109,7 +109,7 @@ const OutsourceOtherDataRouter = {
       name: 'MotherBoard',
       meta: {
         title: '外协主板信息',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     },
     {
@@ -118,7 +118,7 @@ const OutsourceOtherDataRouter = {
       name: 'SmallBoard',
       meta: {
         title: '外协小板信息',
-        roles: ['admin', 'common']
+        roles: ['admin', 'outsource']
       }
     }
   ]
