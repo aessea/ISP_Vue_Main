@@ -10,6 +10,9 @@
             <el-button type="danger" @click="deleteBeforeFiles">
               <i class="el-icon-delete" />删除三个月前的文件
             </el-button>
+            <el-button type="primary" @click="resetAllFileList">
+              <i class="el-icon-refresh" />重置文件列表
+            </el-button>
           </div>
         </el-col>
         <el-col :span="8">
@@ -91,7 +94,7 @@
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetFilesList, DeleteFiles, DownloadFile, DeleteBeforeFiles } from '@/api/FileManage/LogFiles'
+import { GetFilesList, DeleteFiles, DownloadFile, DeleteBeforeFiles, ResetAllFileList } from '@/api/FileManage/LogFiles'
 export default {
   name: 'LogFiles',
   directives: { elDragDialog },
@@ -266,6 +269,26 @@ export default {
     // 帮助提示按钮
     helpTips() {
       this.helpDialogVisible = true
+    },
+    resetAllFileList() {
+      this.$confirm('确定要重置文件列表？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        ResetAllFileList().then(res => {
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: 'success'
+          })
+          this.refreshTableData() // 刷新表格数据
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
     }
   }
 }

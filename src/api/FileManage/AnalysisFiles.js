@@ -31,4 +31,11 @@ export function DeleteBeforeFiles() {
     method: 'get'
   })
 }
+// 查找文件重置文件表
+export function ResetAllFileList() {
+  return request({
+    url: '/FileManage/AnalysisFiles/reset_all_file_list/',
+    method: 'get'
+  })
+}
 
