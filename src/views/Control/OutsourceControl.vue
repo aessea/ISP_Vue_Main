@@ -1139,6 +1139,9 @@ export default {
         const form = {
           'date_key': this.date_key
         }
+        setTimeout(() => {
+          this.handleCloseGenerateDivisions()
+        }, 1000)
         GnerateDivisions(form).then(res => {
           this.clearListenProgress()
           this.$alert(res.message, '提示', {
