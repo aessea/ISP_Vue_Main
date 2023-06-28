@@ -70,7 +70,7 @@
                     <!-- <el-button type="primary" plain @click="updateNewModels">
                       3.更新新机种
                     </el-button> -->
-                    <el-button type="primary" plain @click="generateDivisions">
+                    <el-button type="primary" plain @click="generateDivisionsDialog">
                       3.生成分工单
                     </el-button>
                     <el-button type="primary" plain @click="computeDialog">
@@ -121,6 +121,33 @@
         </el-card>
       </el-col>
     </el-row>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="生成分工单"
+      :visible.sync="dialogGenerateDivisionsDivision"
+      width="40%"
+      :close-on-click-modal="false"
+      :before-close="handleCloseGenerateDivisions"
+      @dragDialog="handleDrag"
+    >
+      <el-row style="margin-top: 20px;">
+        <el-col :span="24">
+          <el-radio-group v-model="date_key">
+            <el-radio label="default_date">当天日期</el-radio>
+            <el-radio label="config_date">配置日期</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" style="margin-left:10px;" @click="generateDivisions">
+          生成分工单
+        </el-button>
+        <el-button @click="handleCloseGenerateDivisions">
+          关闭
+        </el-button>
+      </span>
+    </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
@@ -577,6 +604,8 @@ export default {
       dayCapacityConfigDialogVisible: false,
       dialogVisibleReInputDivision: false,
       componentTypeOptions: componentTypeOptions,
+      date_key: 'default_date',
+      dialogGenerateDivisionsDivision: false,
       // 表单相关数据
       forms: ['$form'],
       model: {
@@ -1107,7 +1136,10 @@ export default {
           type: 'success',
           message: '开始生成分工单，请关注第一个进度条'
         })
-        GnerateDivisions().then(res => {
+        const form = {
+          'date_key': this.date_key
+        }
+        GnerateDivisions(form).then(res => {
           this.clearListenProgress()
           this.$alert(res.message, '提示', {
             confirmButtonText: '确定',
@@ -1338,6 +1370,9 @@ export default {
     rejustInputDialog() {
       this.dialogVisibleReInputDivision = true
     },
+    generateDivisionsDialog() {
+      this.dialogGenerateDivisionsDivision = true
+    },
     handleCloseReInputDivision() {
       this.dialogVisibleReInputDivision = false
     },
@@ -1372,6 +1407,9 @@ export default {
           type: 'error'
         })
       })
+    },
+    handleCloseGenerateDivisions() {
+      this.dialogGenerateDivisionsDivision = false
     }
   }
 }
