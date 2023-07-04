@@ -172,3 +172,12 @@ export function SaveApiCustweekSelfcreate(data) {
     data
   })
 }
+// 分析排程+生成表格
+export function AnalysisSchedule(data) {
+  return request({
+    url: '/Control/OnlineTable/do_analysis_schedule/',
+    method: 'post',
+    timeout: 10 * 60 * 1000,
+    data
+  })
+}

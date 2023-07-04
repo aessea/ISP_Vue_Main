@@ -208,6 +208,9 @@
         <el-button @click="handleCloseAnalysis">
           关 闭
         </el-button>
+        <el-button type="primary" :disabled="doAnaBtn" @click="doAnalysis">
+          分析并生成表格
+        </el-button>
         <el-button type="primary" :disabled="beginAnaBtn" @click="beginAnalysis">
           开始分析
         </el-button>
@@ -407,7 +410,7 @@ import { AnalysisExcel, GenerateAnaExcel, ClearAnaProgress, GetAnaProgress,
   GetHistoryAnaItem, GetHistoryAnaData, GetHistoryExcelItem, GetHistoryExcelData,
   StatisticsSchedule, SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled,
   AiPrescheduled, AiScheduled, GetRunFlag, ImportPushSchedule, SaveApiCustweekSelfcreate,
-  CheckData
+  CheckData, AnalysisSchedule
 } from '@/api/Control/OnlineTable'
 import { lineOptions, lockedList, unLockedList } from '@/utils/items'
 import { DownloadFile } from '@/api/Public'
@@ -448,6 +451,7 @@ export default {
       generateAnaBtn: true, // 生成表格禁用按钮
       statisticsBtn: true, // 获取量化禁用按钮
       downloadAnaBtn: true, // 下载表格禁用按钮
+      doAnaBtn: false,
       ana_progress_refresh: null, // 分析排程刷新进度条
       ana_error_refresh: null, // 分析排程刷新提示信息
       // 分析排程进度条相关
@@ -490,7 +494,6 @@ export default {
       line_idx: 2, // 排线线别列数
 
       saveApiCustweekSelfcreateTip: '未推送' // 是否推送量化结果
-
     }
   },
   computed: {
@@ -868,6 +871,7 @@ export default {
     analysisDialog() {
       this.analysisDialogVisible = true
       this.beginAnaBtn = false
+      this.doAnaBtn = false
       this.generateAnaBtn = true
       // this.clearAnaProgress()
       this.getHistoryAnaItem()
@@ -1148,6 +1152,7 @@ export default {
       this.generateAnaBtn = true
       this.downloadAnaBtn = true
       this.statisticsBtn = true
+      this.doAnaBtn = true
       // 清空上一份排程结果
       this.schedule_time = ''
       this.schedule_mode = ''
@@ -1534,6 +1539,102 @@ export default {
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
         this.$alert('检查出现错误：' + err, '错误', {
+          confirmButtonText: '确定',
+          type: 'error'
+        })
+      })
+    },
+    doAnalysis() {
+      // 表格为空
+      if (!window.luckysheet.getCellValue(0, 0)) {
+        this.$message({
+          type: 'warning',
+          message: '未检测到数据，无法分析排程'
+        })
+        return
+      }
+      // 上传格式错误
+      if (window.luckysheet.getAllSheets()[0].name !== '今日排程' && window.luckysheet.getAllSheets()[1].name !== '未上排程') {
+        this.$message({
+          type: 'warning',
+          message: '排程表格Sheet命名错误，无法分析排程'
+        })
+        return
+      }
+      if (this.alertType !== 'success') {
+        this.$confirm('数据检查未通过，确定要开始分析排程?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.beforeDoAnalysis()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消分析'
+          })
+        })
+      } else {
+        this.beforeAnalysis()
+      }
+    },
+    // 计算前判断是否在跑排程
+    beforeDoAnalysis() {
+      GetRunFlag().then(res => {
+        var confirmText
+        if (res.run_flag === 1) {
+          confirmText = ['目前正在计算排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
+        } else if (res.ana_run_flag === 1) {
+          confirmText = ['目前正在分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
+        } else {
+          confirmText = ['目前正在计算排程或分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
+        }
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
+          this.$confirm('警告', {
+            title: '警告',
+            message: h('div', null, newDatas),
+            confirmButtonText: '确定分析',
+            cancelButtonText: '取消',
+            confirmButtonClass: 'btnDanger',
+            type: 'warning'
+          }).then(() => {
+            this.analysisSchedule()
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '取消分析'
+            })
+          })
+        } else {
+          this.analysisSchedule()
+        }
+      })
+    },
+    analysisSchedule() {
+      this.clearAnaProgress() // 清空进度条
+      this.resetShowAnaData() // 重置所有显示信息
+      this.generateAnaBtn = true
+      const wb = this.getSheetJs(false) // luckysheet获取sheet，并且转化为SheetJS的格式
+      const blob = this.workbook2blob(wb) // SheetJS转化为文件流
+      const form_data = new FormData() // 新建表单
+      form_data.append('files', blob) // 在线表格文件流
+      form_data.append('file_name', this.uploadFileName) // 在线表格文件流
+      form_data.append('user_name', this.name) // 在线表格文件流
+      this.$message({
+        type: 'success',
+        message: '开始分析'
+      })
+      this.listenProgress()
+      this.stepNow = 3
+      AnalysisSchedule(form_data).then(res => {
+        this.isAnalysis = true // 分析完成
+      }).catch(err => {
+        this.$alert(err, '错误', {
           confirmButtonText: '确定',
           type: 'error'
         })
