@@ -273,14 +273,14 @@
             accept=".xlsx,.xls"
             :auto-upload="false"
             multiple
-            :limit="5"
-            :on-exceed="handleExceed_5"
+            :limit="10"
+            :on-exceed="handleExceed_10"
             :on-remove="handleRemoveOldOrder"
             :on-change="handleChangeOldOrder"
             :file-list="fileListOldOrder"
           >
             <el-button type="primary">点击上传“旧工单”</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传.xlsx文件，最多可上传5份</div>
+            <div slot="tip" class="el-upload__tip">只能上传.xlsx文件，最多可上传10份</div>
           </el-upload>
         </el-col>
       </el-row>
@@ -753,8 +753,8 @@ export default {
       this.$message.warning(`限制上传 1 个文件，本次上传了 ${files.length} 个文件，共上传了 ${files.length + fileList.length} 个文件`)
     },
     // 文件超过5
-    handleExceed_5(files, fileList) {
-      this.$message.warning(`限制上传 5 个文件，本次上传了 ${files.length} 个文件，共上传了 ${files.length + fileList.length} 个文件`)
+    handleExceed_10(files, fileList) {
+      this.$message.warning(`限制上传 10 个文件，本次上传了 ${files.length} 个文件，共上传了 ${files.length + fileList.length} 个文件`)
     },
     handleChangeSummary(files, fileList) {
       var file = new File([files.raw], `Summary-${files.name}`)
