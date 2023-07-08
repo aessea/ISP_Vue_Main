@@ -574,6 +574,7 @@ export default {
     // 以下函数都是推送排程相关
     pushSchedule() {
       if (this.isAnalysis === true) {
+        this.stepNow = 4
         this.pushDialogVisible = true
       } else {
         this.$message({
@@ -734,6 +735,7 @@ export default {
         type: 'success',
         message: '开始分析排程，请关注进度条'
       })
+      this.stepNow = 3
       const form = new FormData()
       form.append('file', this.uploadFile)
       form.append('file_name', this.uploadFileName)
@@ -744,7 +746,6 @@ export default {
       this.listenProgress()
       await ImportPushSchedule(form).then(res => {
         this.isAnalysis = true // 分析完成
-        this.stepNow = 3
         this.$alert(res.message, '提示', {
           confirmButtonText: '确定',
           type: 'success'
