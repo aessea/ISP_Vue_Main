@@ -9,7 +9,7 @@
       >
         <template slot="title">
           <div id="checkMessage">
-            <div>排程文件检查结果</div>
+            <div>数据检查提示信息：还未进行数据检查</div>
           </div>
         </template>
       </el-alert>
@@ -134,8 +134,11 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-button type="success" @click="generateOutput('compute')">
-                下载分析结果文件
+              <el-button type="success" @click="downloadAnaExcel">
+                下载最新分析结果文件
+              </el-button>
+              <el-button type="primary" @click="statisticsSchedule">
+                获取量化结果
               </el-button>
             </el-col>
           </el-row>
@@ -178,7 +181,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row :gutter="10" style="margin: 10px;">
+    <!-- <el-row :gutter="10" style="margin: 10px;">
       <el-col :span="24">
         <el-card class="card-config">
           <div slot="header" class="clearfix">
@@ -200,7 +203,7 @@
           </div>
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
     <el-dialog
       v-el-drag-dialog
       title="推送排程"
@@ -234,7 +237,7 @@
           </el-tooltip>
         </el-col>
       </el-row>
-      <el-alert
+      <!-- <el-alert
         title="推送AI"
         type="info"
         :closable="false"
@@ -258,10 +261,112 @@
             </el-button>
           </el-tooltip>
         </el-col>
-      </el-row>
+      </el-row> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="handlePushClose">
           关闭
+        </el-button>
+      </span>
+    </el-dialog>
+    <el-dialog
+      :title="statisticsTitle"
+      :visible.sync="statisticsDialogVisible"
+      width="60%"
+      :before-close="handleCloseStatistics"
+      class="statistics-dialog"
+    >
+      <el-tabs>
+        <el-tab-pane label="量化结果1">
+          <el-table
+            id="table1"
+            v-loading="loading_table1"
+            :data="tableData_1"
+            :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+            height="460"
+            border
+          >
+            <el-table-column
+              prop="line"
+              label="线体"
+            />
+            <el-table-column
+              prop="points_type"
+              label="点数类别"
+            />
+            <el-table-column
+              prop="points"
+              label="点数"
+            />
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="量化结果2">
+          <el-table
+            id="table2"
+            v-loading="loading_table2"
+            :data="tableData_2"
+            :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+            height="460"
+            border
+          >
+            <el-table-column
+              prop="type"
+              label="量化类型"
+            />
+            <el-table-column
+              prop="hours"
+              label="量化结果(小时)"
+            />
+            <el-table-column
+              prop="days"
+              label="量化结果(天)"
+            />
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="量化结果3">
+          <el-table
+            id="table3"
+            v-loading="loading_table3"
+            :data="tableData_3"
+            :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+            height="460"
+            border
+          >
+            <el-table-column
+              prop="type"
+              label="量化类型"
+            />
+            <el-table-column
+              prop="points"
+              label="值"
+            />
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="量化结果4">
+          <el-table
+            id="table4"
+            v-loading="loading_table4"
+            :data="tableData_4"
+            :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+            height="460"
+            border
+          >
+            <el-table-column
+              prop="line"
+              label="线体"
+            />
+            <el-table-column
+              prop="time"
+              label="线体完工时间"
+            />
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleCloseStatistics">
+          关 闭
+        </el-button>
+        <el-button type="primary" @click="exportStatisticsExcel">
+          导出Excel
         </el-button>
       </span>
     </el-dialog>
@@ -274,8 +379,11 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import {} from '@/api/Control/AnalysisControl'
 import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled,
   AiPrescheduled, AiScheduled, CheckData, GetHistoryAnaItem, GetHistoryAnaData,
-  ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress
+  ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
 } from '@/api/Control/OnlineTable'
+import { DownloadFile } from '@/api/Public'
+import XLSX from 'xlsx'
+import FileSaver from 'file-saver'
 export default {
   name: 'AnalysisControl',
   directives: { elDragDialog },
@@ -317,7 +425,19 @@ export default {
       analysisAlertType: 'info',
       stepNow: 0,
       ana_progress_refresh: null, // 分析排程刷新进度条
-      analysisMessage: '分析排程提示信息'
+      analysisMessage: '分析排程提示信息：未完成分析排程',
+      progressCount: 0,
+      selectAnaTime: '', // 根据选中的分析时间获取历史分析结果
+      tableData_1: [],
+      tableData_2: [],
+      tableData_3: [],
+      tableData_4: [],
+      loading_table1: true,
+      loading_table2: true,
+      loading_table3: true,
+      loading_table4: true,
+      statisticsTitle: '量化结果', // 量化的dialog名称
+      statisticsDialogVisible: false // 量化结果dialog显示
     }
   },
   computed: {
@@ -326,12 +446,15 @@ export default {
     ])
   },
   created() {
-
+    this.getHistoryAnaItem()
   },
   mounted() {
 
   },
   methods: {
+    handleDrag() {
+      // this.$refs.select.blur()
+    },
     // 监听进度条
     listenProgress() {
       this.ana_progress_refresh = setInterval(() => { // 每隔2秒监听进度条
@@ -352,29 +475,10 @@ export default {
         this.progress_text_1 = res.p0text
         this.progress_text_2 = res.p1text
         this.progress_text_3 = res.p2text
-        const run_flag = res.run_flag
-        if (run_flag === -1) {
-          this.clearListenProgress()
-          this.$message({
-            type: 'error',
-            message: '分析出错'
-          })
-          const anaErrMessage = '分析出错：' + res.ana_err_message
-          this.showAnalysisAlertMessage(anaErrMessage, 'error')
-        } else if (res.p2 === 25 && this.progressCount === 0) {
-          this.$message({
-            type: 'success',
-            message: '分析完毕，正在生成表格'
-          })
+        if (res.p2 >= 25 && this.progressCount === 0) {
+          this.progressCount = 1
           // 显示分析排程的结果
           this.showAnaData(res, 0)
-        } else if (res.p2 === 100) {
-          // 生成表格后就不再监听进度条
-          this.clearListenProgress()
-          this.$message({
-            type: 'success',
-            message: '生成表格完毕，可以下载表格和获取量化'
-          })
         }
       }).catch(err => {
         console.log(err)
@@ -428,7 +532,7 @@ export default {
         alert_div.removeChild(alert_div.firstChild)
       }
       const div_text = document.createElement('div')
-      div_text.innerHTML = '提示信息'
+      div_text.innerHTML = '数据检查提示信息：未进行数据检查'
       alert_div.appendChild(div_text) // 将标签插入到指定标签中
     },
     showAnalysisAlertMessage(message_info, message_type) {
@@ -437,7 +541,7 @@ export default {
     },
     resetAnalysisAlertMessage() {
       this.analysisAlertType = 'info'
-      this.analysisMessage = '分析排程提示信息'
+      this.analysisMessage = '分析排程提示信息：未完成分析排程'
     },
     // 后端数据检查
     async checkData() {
@@ -472,9 +576,9 @@ export default {
       if (this.isAnalysis === true) {
         this.pushDialogVisible = true
       } else {
-        this.$alert('未完成分析排程，无法进行推送！', '警告', {
-          confirmButtonText: '确定',
-          type: 'warning'
+        this.$message({
+          type: 'warning',
+          message: '未完成分析排程，无法进行推送！'
         })
       }
     },
@@ -531,6 +635,7 @@ export default {
       this.three_days_points = ''
       // 清空错误提示
       this.analysisMessage = ''
+      this.progressCount = 0
     },
     // 获取分析排程历史选择项
     getHistoryAnaItem() {
@@ -626,23 +731,31 @@ export default {
       form.append('file', this.uploadFile)
       form.append('file_name', this.uploadFileName)
       form.append('user_name', this.name)
+      this.clearAnaProgress()
       this.resetShowAnaData()
       this.resetAnalysisAlertMessage()
       this.listenProgress()
-      this.stepNow = 3
       await ImportPushSchedule(form).then(res => {
         this.isAnalysis = true // 分析完成
+        this.stepNow = 3
         this.$alert(res.message, '提示', {
           confirmButtonText: '确定',
           type: 'success'
         })
         this.showAnalysisAlertMessage(res.message, 'success')
+        setTimeout(() => {
+          this.clearListenProgress()
+        }, 5000)
       }).catch(err => {
+        this.stepNow = 2
         this.$alert(err, '错误', {
           confirmButtonText: '确定',
           type: 'error'
         })
         this.showAnalysisAlertMessage(err, 'error')
+        setTimeout(() => {
+          this.clearListenProgress()
+        }, 5000)
       })
     },
     post_unscheduled() {
@@ -806,6 +919,111 @@ export default {
           type: 'error'
         })
       })
+    },
+    // 下载表格
+    downloadAnaExcel() {
+      DownloadFile('analysis_file_path').then(res => {
+        this.stepNow = 4
+        this.$message({
+          type: 'success',
+          message: '开始下载'
+        })
+        this.downloadFile(res)
+      }).catch(err => {
+        console.log(err)
+        this.$message({
+          type: 'error',
+          message: '下载请求出错'
+        })
+      })
+    },
+    // 从后端下载表格
+    downloadFile(res) {
+      const link = document.createElement('a')
+      const blob = new Blob([res.data])
+      link.style.display = 'none'
+      link.href = URL.createObjectURL(blob)
+      const temp = res.headers['content-disposition'].split('attachment;filename=')[1]
+      const file_name = decodeURIComponent(temp)
+      link.download = file_name
+      document.body.appendChild(link)
+      link.click()
+      URL.revokeObjectURL(link.href) // 释放URL对象
+      document.body.removeChild(link)
+    },
+    // 量化结果 TODO
+    statisticsSchedule() {
+      if (this.isAnalysis !== true) {
+        this.$message({
+          type: 'warning',
+          message: '未完成分析排程，无法获取量化结果！'
+        })
+        return
+      }
+      if (this.uploadFileName !== '') {
+        this.statisticsTitle = '量化结果 - ' + this.uploadFileName
+      } else {
+        this.statisticsTitle = '量化结果'
+      }
+      this.statisticsDialogVisible = true
+      this.stepNow = 4
+      StatisticsSchedule().then(res => {
+        this.$message({
+          type: 'success',
+          message: '量化成功'
+        })
+        this.tableData_1 = res.table_data1
+        this.tableData_2 = res.table_data2
+        this.tableData_3 = res.table_data3
+        this.tableData_4 = res.table_data4
+        this.loading_table1 = false
+        this.loading_table2 = false
+        this.loading_table3 = false
+        this.loading_table4 = false
+      })
+    },
+    // 量化结果导出到Excel TODO
+    exportStatisticsExcel() {
+      var xlsxParam = {
+        raw: true
+      } // 转换成excel时，使用原始的格式，这样导出的时候数字过长不会变成科学计数法
+      const workbook = XLSX.utils.book_new()
+      // 添加多个sheet页
+      const ws1 = XLSX.utils.table_to_sheet(document.querySelector('#table1'), xlsxParam)
+      XLSX.utils.book_append_sheet(workbook, ws1, 'table1')
+      const ws2 = XLSX.utils.table_to_sheet(document.querySelector('#table2'), xlsxParam)
+      XLSX.utils.book_append_sheet(workbook, ws2, 'table2')
+      const ws3 = XLSX.utils.table_to_sheet(document.querySelector('#table3'), xlsxParam)
+      XLSX.utils.book_append_sheet(workbook, ws3, 'table3')
+      const ws4 = XLSX.utils.table_to_sheet(document.querySelector('#table4'), xlsxParam)
+      XLSX.utils.book_append_sheet(workbook, ws4, 'table4')
+      const wbout = XLSX.write(workbook, {
+        bookType: 'xlsx',
+        bookSST: true,
+        type: 'array'
+      })
+      try {
+        FileSaver.saveAs(
+          new Blob([wbout], {
+            type: 'application/octet-stream;charset=utf-8"'
+          }), '量化结果.xlsx')
+      } catch (e) {
+        if (typeof console !== 'undefined') console.log(e, wbout)
+      }
+      return wbout
+    },
+    handlePushClose() {
+      this.pushDialogVisible = false
+    },
+    // 是否关闭量化结果
+    handleCloseStatistics() {
+      this.$confirm('确认关闭量化窗口？', '提示', {
+        type: 'warning',
+        confirmButtonText: '确认',
+        cancelButtonText: '取消'
+      }).then(_ => {
+        this.statisticsDialogVisible = false
+      }).catch(_ => {})
     }
   }
 }
