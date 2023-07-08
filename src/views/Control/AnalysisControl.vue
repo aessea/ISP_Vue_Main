@@ -548,7 +548,7 @@ export default {
       if (this.uploadFileName === '') {
         this.$message({
           type: 'warning',
-          message: '未上传文件'
+          message: '请先上传文件'
         })
         return
       }
@@ -671,6 +671,13 @@ export default {
       })
     },
     analysisSchedule() {
+      if (this.uploadFileName === '') {
+        this.$message({
+          type: 'warning',
+          message: '请先上传文件'
+        })
+        return
+      }
       if (this.checkAlertType !== 'success') {
         this.$confirm('数据检查未通过，确定要开始分析排程?', '提示', {
           confirmButtonText: '确定',
