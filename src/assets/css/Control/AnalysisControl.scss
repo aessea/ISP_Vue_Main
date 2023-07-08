@@ -1,0 +1,47 @@
+.control-button{
+  display: flex;
+  .el-input{
+      width: 200px;
+      // margin-top: 10px;
+  }
+  .el-button{
+      // margin-bottom: 10px;
+      margin-left: 10px;
+  }
+  .history{
+      .el-select{
+          margin-left: 10px;
+      }
+  }
+}
+.card-progress{
+  margin-left:16px;
+  height: 340px;
+}
+.control{
+  height: 340px;
+}
+.card-result{
+  height: 340px;
+}
+.card-tip{
+  margin: 16px;
+}
+.box-button{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.el-button--apiBtn {
+  background-color: #3b5998;
+  font-family: "STHeiti";
+  border-radius: 5px;
+  border-color:#3b5998;
+  color: #fff;
+}
+.el-button--apiBtn:hover {
+  background-color: #4f6da9;
+  border-color:#4f6da9;
+  border-radius: 5px;
+  color: #fff;
+}
