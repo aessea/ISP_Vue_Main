@@ -468,6 +468,11 @@ export default {
           // 显示分析排程的结果
           this.showAnaData(res, 0)
         }
+        if (res.p2 === 100) {
+          setTimeout(() => {
+            this.clearListenProgress()
+          }, 2000)
+        }
       }).catch(err => {
         console.log(err)
       })
@@ -752,9 +757,9 @@ export default {
           type: 'success'
         })
         this.showAnalysisAlertMessage(res.message, 'success')
-        setTimeout(() => {
-          this.clearListenProgress()
-        }, 5000)
+        // setTimeout(() => {
+        //   this.clearListenProgress()
+        // }, 5000)
       }).catch(err => {
         this.stepNow = 2
         this.$alert(err, '错误', {
