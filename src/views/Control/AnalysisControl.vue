@@ -212,12 +212,6 @@
       :before-close="handlePushClose"
       @dragDialog="handleDrag"
     >
-      <el-alert
-        title="推送主板"
-        type="info"
-        :closable="false"
-        style="margin-top: 10px;margin-bottom: 10px;"
-      />
       <el-row style="text-align: center;">
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="smtUnscheduledTip" placement="top">
@@ -237,13 +231,7 @@
           </el-tooltip>
         </el-col>
       </el-row>
-      <!-- <el-alert
-        title="推送AI"
-        type="info"
-        :closable="false"
-        style="margin-top: 10px;margin-bottom: 10px;"
-      />
-      <el-row style="text-align: center;">
+      <!-- <el-row style="text-align: center;">
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="aiUnscheduledTip" placement="top">
             <el-button type="apiBtn" style="padding-left: 28px;padding-right: 28px" disabled @click="post_ai_unscheduled">
@@ -561,6 +549,19 @@ export default {
       form.append('file', this.uploadFile)
       this.stepNow = 2
       await CheckData(form).then(res => {
+        if (res.message_type === 'success') {
+          this.$alert(res.message, '检查结果', {
+            confirmButtonText: '确定',
+            type: 'success'
+          })
+        } else {
+          this.$alert(res.message, '检查结果', {
+            customClass: 'checkAlertBox',
+            dangerouslyUseHTMLString: true,
+            confirmButtonText: '确定',
+            type: res.message_type
+          })
+        }
         this.showCheckAlertMessage(res.data_list, res.message_type)
         this.loadingInstance.close()
       }).catch(err => {
