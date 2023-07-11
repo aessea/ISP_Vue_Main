@@ -928,8 +928,6 @@ export default {
           confirmText = ['目前正在计算排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         } else if (res.ana_run_flag === 1) {
           confirmText = ['目前正在分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
-        } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         }
         const newDatas = []
         const h = this.$createElement
@@ -989,8 +987,6 @@ export default {
           confirmText = ['目前正在计算排程，确定要继续生成表格？', '注意：此操作将会影响当前运行的排程结果！']
         } else if (res.ana_run_flag === 1) {
           confirmText = ['目前正在分析排程，确定要继续生成表格？', '注意：此操作将会影响当前运行的排程结果！']
-        } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要继续生成表格？', '注意：此操作将会影响当前运行的排程结果！']
         }
         const newDatas = []
         const h = this.$createElement
@@ -1586,8 +1582,6 @@ export default {
           confirmText = ['目前正在计算排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         } else if (res.ana_run_flag === 1) {
           confirmText = ['目前正在分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
-        } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
         }
         const newDatas = []
         const h = this.$createElement
