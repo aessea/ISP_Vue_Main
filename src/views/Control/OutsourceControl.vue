@@ -61,28 +61,28 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="24">
-                    <el-button type="primary" plain @click="importDialog">
+                    <el-button v-if="importDialogDisable === true" type="primary" plain @click="importDialog">
                       1.导入输入文件
                     </el-button>
-                    <el-button type="primary" plain @click="doFilterRulesDialog">
+                    <el-button v-if="doFilterRulesDialogDisable === true" type="primary" plain @click="doFilterRulesDialog">
                       2.组件筛选
                     </el-button>
                     <!-- <el-button type="primary" plain @click="updateNewModels">
                       3.更新新机种
                     </el-button> -->
-                    <el-button type="primary" plain @click="generateDivisionsDialog">
+                    <el-button v-if="generateDivisionsDialogDisable === true" type="primary" plain @click="generateDivisionsDialog">
                       3.生成分工单
                     </el-button>
-                    <el-button type="primary" plain @click="computeDialog">
+                    <el-button v-if="computeDialogDisable === true" type="primary" plain @click="computeDialog">
                       4.开始计算
                     </el-button>
-                    <el-button type="success" @click="generateOutput('compute')">
+                    <el-button v-if="generateOutputDisable === true" type="success" @click="generateOutput('compute')">
                       5.输出文件
                     </el-button>
-                    <el-button type="pushBtn" plain @click="rejustInputDialog">
+                    <el-button v-if="rejustInputDialogDisable === true" type="pushBtn" plain @click="rejustInputDialog">
                       重新输入文件
                     </el-button>
-                    <el-button plain @click="showFilterRules">
+                    <el-button v-if="showFilterRulesDisable === true" plain @click="showFilterRules">
                       显示筛选规则
                     </el-button>
                   </el-col>
@@ -105,13 +105,35 @@
                       <i class="el-icon-download" />
                       下载xx文件
                     </el-button> -->
-                    <el-button type="success" @click="computeDialog2">
+                    <el-button v-if="downloadAllFileDisable === true" type="success" @click="computeDialog2">
                       <i class="el-icon-download" />
                       下载外包优先新机种表
                     </el-button>
-                    <el-button type="success" @click="downloadAllFile">
+                    <el-button v-if="computeDialog2Disable === true" type="success" @click="downloadAllFile">
                       <i class="el-icon-download" />
                       下载全部输出文件
+                    </el-button>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-alert
+                title="外包接口相关"
+                type="info"
+                :closable="false"
+                style="margin-bottom: 10px;"
+              />
+              <div class="box-button">
+                <el-row>
+                  <el-col :span="24">
+                    <el-button v-if="saveApsSelfMoDisable === true" type="stopBtn" @click="saveApsSelfMo">
+                      自制工单信息写入接口
+                    </el-button>
+                    <el-button v-if="saveApsOutsoutceMoDisable === true" type="stopBtn" @click="saveApsOutsoutceMo">
+                      外包结果信息写入接口
                     </el-button>
                   </el-col>
                 </el-row>
@@ -545,7 +567,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
   DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
-  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput } from '@/api/Control/OutsourceControl'
+  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput, SaveApsSelfMo, SaveApsOutsoutceMo } from '@/api/Control/OutsourceControl'
 import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'OutsourceControl',
@@ -633,7 +655,18 @@ export default {
           message: '产能不能为空',
           trigger: 'blur'
         }]
-      }
+      },
+      showFilterRulesDisable: true,
+      downloadAllFileDisable: true,
+      computeDialog2Disable: true,
+      rejustInputDialogDisable: true,
+      importDialogDisable: true,
+      generateOutputDisable: true,
+      computeDialogDisable: true,
+      generateDivisionsDialogDisable: true,
+      doFilterRulesDialogDisable: true,
+      saveApsSelfMoDisable: true,
+      saveApsOutsoutceMoDisable: true
     }
   },
   computed: {
@@ -1413,6 +1446,92 @@ export default {
     },
     handleCloseGenerateDivisions() {
       this.dialogGenerateDivisionsDivision = false
+    },
+    saveApsSelfMo() {
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要更新自制工单接口？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const pushLoading = {
+          text: '推送中，请稍等...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        } // 导入排程动画
+        this.loadingInstance = Loading.service(pushLoading)
+        const form = {
+          'user_name': this.name
+        }
+        SaveApsSelfMo(form).then(res => {
+          if (res.code === 20000) {
+            this.$alert(res.message, '推送成功', {
+              confirmButtonText: '确定',
+              type: 'success'
+            })
+          } else {
+            this.$alert('推送失败', '错误', {
+              confirmButtonText: '确定',
+              type: 'error'
+            })
+          }
+          this.loadingInstance.close() // 清除动画
+        }).catch(err => {
+          this.loadingInstance.close() // 清除动画
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消推送'
+        })
+      })
+    },
+    saveApsOutsoutceMo() {
+      this.$confirm('提示', {
+        title: '提示',
+        message: '确定要更新外包结果信息写入接口？',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const pushLoading = {
+          text: '推送中，请稍等...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        } // 导入排程动画
+        this.loadingInstance = Loading.service(pushLoading)
+        const form = {
+          'user_name': this.name
+        }
+        SaveApsOutsoutceMo(form).then(res => {
+          if (res.code === 20000) {
+            this.$alert(res.message, '推送成功', {
+              confirmButtonText: '确定',
+              type: 'success'
+            })
+          } else {
+            this.$alert('推送失败', '错误', {
+              confirmButtonText: '确定',
+              type: 'error'
+            })
+          }
+          this.loadingInstance.close() // 清除动画
+        }).catch(err => {
+          this.loadingInstance.close() // 清除动画
+          this.$alert(err, '错误', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消推送'
+        })
+      })
     }
   }
 }

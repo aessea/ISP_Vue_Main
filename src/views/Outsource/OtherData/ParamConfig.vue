@@ -10,10 +10,10 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button> -->
-            <el-button type="primary" @click="updateConfig">
+            <el-button v-if="updateConfigDisable === true" type="primary" @click="updateConfig">
               应用当前配置
             </el-button>
-            <el-button type="primary" @click="loadFromConfig">
+            <el-button v-if="loadFromConfigDisable === true" type="primary" @click="loadFromConfig">
               恢复默认配置
             </el-button>
             <!-- <el-button @click="importDataDialog">
@@ -236,6 +236,8 @@ export default {
       importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
+      updateConfigDisable: true,
+      loadFromConfigDisable: true,
       // 表单相关数据
       forms: ['$form'],
       model: {},

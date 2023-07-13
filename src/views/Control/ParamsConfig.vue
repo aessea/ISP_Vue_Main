@@ -69,6 +69,7 @@
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
                     <el-button
+                      v-if="main_handleModifyDisable === true"
                       type="primary"
                       size="mini"
                       icon="el-icon-edit"
@@ -78,6 +79,7 @@
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
                     <el-button
+                      v-if="main_restoreDefaultDisable === true"
                       type="danger"
                       size="mini"
                       icon="el-icon-refresh"
@@ -126,6 +128,7 @@
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
                     <el-button
+                      v-if="small_handleModifyDisable === true"
                       type="primary"
                       size="mini"
                       icon="el-icon-edit"
@@ -135,6 +138,7 @@
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
                     <el-button
+                      v-if="small_handleModifyDisable === true"
                       type="danger"
                       size="mini"
                       icon="el-icon-refresh"
@@ -146,7 +150,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="其它配置" name="other">
+          <!-- <el-tab-pane label="其它配置" name="other">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -202,7 +206,7 @@
                 </template>
               </el-table-column>
             </el-table>
-          </el-tab-pane>
+          </el-tab-pane> -->
         </el-tabs>
         <el-pagination
           background
@@ -436,7 +440,11 @@ export default {
         { label: '主板配置', value: 'main' },
         { label: '小板配置', value: 'small' },
         { label: '其它配置', value: 'other' }
-      ]
+      ],
+      small_handleModifyDisable: true,
+      main_handleModifyDisable: true,
+      small_restoreDefaultDisable: true,
+      main_restoreDefaultDisable: true
     }
   },
   computed: {

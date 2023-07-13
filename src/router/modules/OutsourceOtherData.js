@@ -10,7 +10,8 @@ const OutsourceOtherDataRouter = {
   meta: {
     title: '外包存储模块',
     icon: 'el-icon-s-data',
-    roles: ['admin', 'outsource']
+    roles: ['Schedule', 'DayCapacityConfig', 'Division', 'OldOrder', 'OutputFiles',
+      'Summary', 'ParamConfig', 'MotherBoard', 'SmallBoard']
   },
   children: [
     {
@@ -19,7 +20,7 @@ const OutsourceOtherDataRouter = {
       name: 'Schedule',
       meta: {
         title: '业务排程明细',
-        roles: ['admin', 'outsource']
+        roles: ['Schedule']
       }
     },
     {
@@ -28,7 +29,7 @@ const OutsourceOtherDataRouter = {
       name: 'DayCapacityConfig',
       meta: {
         title: '每日产能配置',
-        roles: ['admin', 'outsource']
+        roles: ['DayCapacityConfig']
       }
     },
     {
@@ -37,7 +38,7 @@ const OutsourceOtherDataRouter = {
       name: 'Division',
       meta: {
         title: '分工单格式',
-        roles: ['admin', 'outsource']
+        roles: ['Division']
       }
     },
     {
@@ -46,7 +47,7 @@ const OutsourceOtherDataRouter = {
       name: 'OldOrder',
       meta: {
         title: '旧工单',
-        roles: ['admin', 'outsource']
+        roles: ['OldOrder']
       }
     },
     {
@@ -55,7 +56,7 @@ const OutsourceOtherDataRouter = {
       name: 'OutputFiles',
       meta: {
         title: '输出文件',
-        roles: ['admin', 'outsource']
+        roles: ['OutputFiles']
       }
     },
     {
@@ -64,7 +65,7 @@ const OutsourceOtherDataRouter = {
       name: 'Summary',
       meta: {
         title: '业务排程汇总',
-        roles: ['admin', 'outsource']
+        roles: ['Summary']
       }
     },
     {
@@ -73,7 +74,7 @@ const OutsourceOtherDataRouter = {
       name: 'ParamConfig',
       meta: {
         title: '参数配置',
-        roles: ['admin', 'outsource']
+        roles: ['ParamConfig']
       }
     },
     // {
@@ -109,7 +110,7 @@ const OutsourceOtherDataRouter = {
       name: 'MotherBoard',
       meta: {
         title: '外协主板信息',
-        roles: ['admin', 'outsource']
+        roles: ['MotherBoard']
       }
     },
     {
@@ -118,7 +119,7 @@ const OutsourceOtherDataRouter = {
       name: 'SmallBoard',
       meta: {
         title: '外协小板信息',
-        roles: ['admin', 'outsource']
+        roles: ['SmallBoard']
       }
     }
   ]

@@ -152,19 +152,19 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="8">
-                    <el-button type="primary" plain @click="computeDialogMain">
+                    <el-button v-if="computeDialogMainDisable === true" type="primary" plain @click="computeDialogMain">
                       <i class="el-icon-monitor" />
                       计算主板排程
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button type="primary" plain @click="computeDialogSmall">
+                    <el-button v-if="computeDialogSmallDisable === true" type="primary" plain @click="computeDialogSmall">
                       <i class="el-icon-monitor" />
                       计算小板排程
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button type="primary" plain @click="computeDialogBoth">
+                    <el-button v-if="computeDialogBothDisable === true" type="primary" plain @click="computeDialogBoth">
                       <i class="el-icon-monitor" />
                       计算主板小板
                     </el-button>
@@ -174,19 +174,19 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="8">
-                    <el-button type="stopBtn" plain @click="stopTabu">
+                    <el-button v-if="stopTabuDisable === true" type="stopBtn" plain @click="stopTabu">
                       <i class="el-icon-warning-outline" />
                       终止深度搜索
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button type="stopBtn" plain @click="stopSchedule">
+                    <el-button v-if="stopScheduleDisable === true" type="stopBtn" plain @click="stopSchedule">
                       <i class="el-icon-warning-outline" />
                       终止计算排程
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button type="pushBtn" plain @click="post_statistics">
+                    <el-button v-if="post_statisticsDisable === true" type="pushBtn" plain @click="post_statistics">
                       <i class="el-icon-upload2" />
                       推送量化结果
                     </el-button>
@@ -376,7 +376,7 @@
             :style="{width: '70%'}"
             value-format="yyyy-MM-dd"
           />
-          <el-button type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="modifyHoliday">
+          <el-button v-if="modifyHolidayDisable === true" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="modifyHoliday">
             修改包装放假
           </el-button>
         </el-card>
@@ -841,7 +841,16 @@ export default {
       saveApsOutPutCountTip: '未推送',
 
       clickComputeCount: 0, // 点击计算排程的次数
-      pack_holiday_day_list: []
+      pack_holiday_day_list: [],
+
+      computeDialogBothDisable: true,
+      modifyHolidayDisable: true,
+      downloadFileBackendDisable: true,
+      trainModelDisable: true,
+      post_statisticsDisable: true,
+      stopScheduleDisable: true,
+      computeDialogSmallDisable: true,
+      computeDialogMainDisable: true
     }
   },
   computed: {

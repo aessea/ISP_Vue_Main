@@ -10,7 +10,7 @@ const FileManageRouter = {
   meta: {
     title: '文件管理',
     icon: 'el-icon-download',
-    roles: ['admin', 'senioradmin']
+    roles: ['InputFiles', 'MainOutputFiles', 'SmallOutputFiles', 'AnalysisFiles', 'IdleFiles', 'AnalyseProgramFiles', 'StatisticsFiles', 'ApiStatisticsFiles', 'LogFiles']
   },
   children: [
     {
@@ -19,7 +19,7 @@ const FileManageRouter = {
       name: 'InputFiles',
       meta: {
         title: '输入文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['InputFiles']
       }
     },
     {
@@ -28,7 +28,7 @@ const FileManageRouter = {
       name: 'MainOutputFiles',
       meta: {
         title: '主板输出文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['MainOutputFiles']
       }
     },
     {
@@ -37,7 +37,7 @@ const FileManageRouter = {
       name: 'SmallOutputFiles',
       meta: {
         title: '小板输出文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['SmallOutputFiles']
       }
     },
     {
@@ -46,7 +46,7 @@ const FileManageRouter = {
       name: 'AnalysisFiles',
       meta: {
         title: '分析排程输出文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['AnalysisFiles']
       }
     },
     {
@@ -55,7 +55,7 @@ const FileManageRouter = {
       name: 'IdleFiles',
       meta: {
         title: 'idle明细文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['IdleFiles']
       }
     },
     {
@@ -64,7 +64,7 @@ const FileManageRouter = {
       name: 'AnalyseProgramFiles',
       meta: {
         title: '无程序清单文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['AnalyseProgramFiles']
       }
     },
     {
@@ -73,7 +73,7 @@ const FileManageRouter = {
       name: 'StatisticsFiles',
       meta: {
         title: '量化文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['StatisticsFiles']
       }
     },
     {
@@ -82,7 +82,7 @@ const FileManageRouter = {
       name: 'ApiStatisticsFiles',
       meta: {
         title: '接口量化文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['ApiStatisticsFiles']
       }
     },
     {
@@ -91,7 +91,7 @@ const FileManageRouter = {
       name: 'LogFiles',
       meta: {
         title: '日志文件',
-        roles: ['admin', 'senioradmin']
+        roles: ['LogFiles']
       }
     }
   ]

@@ -176,3 +176,19 @@ export function ReAdjustInput(data) {
     data
   })
 }
+export function SaveApsSelfMo(data) {
+  return request({
+    url: '/schedule/api/saveApsSelfMo',
+    method: 'post',
+    timeout: 100 * 60 * 1000,
+    data
+  })
+}
+export function SaveApsOutsoutceMo(data) {
+  return request({
+    url: '/schedule/api/saveApsOutsoutceMo',
+    method: 'post',
+    timeout: 100 * 60 * 1000,
+    data
+  })
+}

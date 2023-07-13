@@ -4,16 +4,16 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="primary" @click="addDataDialog">
+            <el-button v-if="addDataDialogDisable === true" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button type="danger" @click="deleteData">
+            <el-button v-if="deleteDataDisable === true" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <!-- <el-button @click="importDataDialog">
+            <!-- <el-button v-if="importDataDialogDisable === true" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
-            <el-button @click="exportDataDialog">
+            <el-button v-if="exportDataDialogDisable === true" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -231,6 +231,10 @@ export default {
       importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
+      addDataDialogDisable: true,
+      deleteDataDisable: true,
+      importDataDialogDisable: true,
+      exportDataDialogDisable: true,
       // 表单相关数据
       forms: ['$form'],
       model: {},

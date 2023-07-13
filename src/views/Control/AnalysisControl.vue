@@ -116,13 +116,13 @@
                         </el-button>
                       </el-upload>
                       <div>
-                        <el-button type="primary" @click="checkData">
+                        <el-button v-if="checkDataDisable === true" type="primary" @click="checkData">
                           2.检查文件
                         </el-button>
-                        <el-button type="primary" @click="analysisSchedule">
+                        <el-button v-if="analysisScheduleDisable === true" type="primary" @click="analysisSchedule">
                           3.分析排程
                         </el-button>
-                        <el-button type="apiBtn" @click="pushSchedule">
+                        <el-button v-if="pushScheduleDisable === true" type="apiBtn" @click="pushSchedule">
                           4.推送排程
                         </el-button>
                       </div>
@@ -134,10 +134,10 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-button type="success" @click="downloadAnaExcel">
+              <el-button v-if="downloadAnaExcelDisable === true" type="success" @click="downloadAnaExcel">
                 下载最新分析结果文件
               </el-button>
-              <el-button type="primary" @click="statisticsSchedule">
+              <el-button v-if="downloadAnaExcelDisable === true" type="primary" @click="statisticsSchedule">
                 获取量化结果
               </el-button>
             </el-col>
@@ -425,7 +425,12 @@ export default {
       loading_table3: true,
       loading_table4: true,
       statisticsTitle: '量化结果', // 量化的dialog名称
-      statisticsDialogVisible: false // 量化结果dialog显示
+      statisticsDialogVisible: false, // 量化结果dialog显示
+      checkDataDisable: true,
+      analysisScheduleDisable: true,
+      pushScheduleDisable: true,
+      downloadAnaExcelDisable: true,
+      statisticsScheduleDisable: true
     }
   },
   computed: {
@@ -434,6 +439,7 @@ export default {
     ])
   },
   created() {
+    console.log('12312312:', this.$route.name)
     this.getHistoryAnaItem()
   },
   mounted() {

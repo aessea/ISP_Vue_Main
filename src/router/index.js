@@ -101,7 +101,7 @@ export const asyncRoutes = [
     meta: {
       title: '控制面板',
       icon: 'component',
-      roles: ['admin', 'common', 'outsource', 'senioradmin']
+      roles: ['SchedulePanel', 'ParamsConfig', 'AnalysisControl', 'OutsourceControl']
     },
     children: [
       {
@@ -110,7 +110,7 @@ export const asyncRoutes = [
         name: 'SchedulePanel',
         meta: {
           title: '主板小板排程',
-          roles: ['admin', 'common', 'senioradmin']
+          roles: ['SchedulePanel']
         }
       },
       // {
@@ -137,7 +137,7 @@ export const asyncRoutes = [
         name: 'ParamsConfig',
         meta: {
           title: '排程配置表',
-          roles: ['admin', 'common', 'senioradmin']
+          roles: ['ParamsConfig']
         }
       },
       {
@@ -146,7 +146,7 @@ export const asyncRoutes = [
         name: 'AnalysisControl',
         meta: {
           title: '分析推送面板',
-          roles: ['admin', 'common', 'senioradmin']
+          roles: ['AnalysisControl']
         }
       },
       // {
@@ -164,7 +164,7 @@ export const asyncRoutes = [
         name: 'OutsourceControl',
         meta: {
           title: '外包控制面板',
-          roles: ['admin', 'outsource']
+          roles: ['OutsourceControl']
         }
       }
     ]
@@ -187,16 +187,25 @@ export const asyncRoutes = [
     meta: {
       title: '权限管理',
       icon: 'lock',
-      roles: ['admin']
+      roles: ['Permission', 'CreatedRoles']
     },
     children: [
       {
-        path: 'role',
+        path: 'rolepermission',
         component: () => import('@/views/Permission/RolePermission'),
-        name: 'RolePermission',
+        name: 'Permission',
         meta: {
-          title: '用户权限',
-          roles: ['admin']
+          title: '用户管理',
+          roles: ['Permission']
+        }
+      },
+      {
+        path: 'createdrole',
+        component: () => import('@/views/Permission/CreatedRoles'),
+        name: 'CreatedRoles',
+        meta: {
+          title: '角色管理',
+          roles: ['CreatedRoles']
         }
       }
     ]
@@ -210,7 +219,7 @@ export const asyncRoutes = [
     meta: {
       title: '日志系统',
       icon: 'documentation',
-      roles: ['admin', 'common', 'senioradmin']
+      roles: ['HistoryRun', 'HistoryOpera']
     },
     children: [
       {
@@ -219,7 +228,7 @@ export const asyncRoutes = [
         name: 'HistoryRun',
         meta: {
           title: '运行日志',
-          roles: ['admin', 'common', 'senioradmin'],
+          roles: ['HistoryRun'],
           noCache: true
         }
       },
@@ -229,7 +238,7 @@ export const asyncRoutes = [
         name: 'HistoryOpera',
         meta: {
           title: '历史操作',
-          roles: ['admin', 'common', 'senioradmin'],
+          roles: ['HistoryOpera'],
           noCache: true
         }
       }

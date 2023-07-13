@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="primary" @click="createUserDialog">
+            <el-button v-if="createUserDialogDisable === true" type="primary" @click="createUserDialog">
               <i class="el-icon-plus" />创建用户
             </el-button>
           </div>
@@ -42,15 +42,7 @@
         >
           <el-table-column prop="username" label="用户名" width="160" />
           <el-table-column prop="remark" label="备注" width="160" />
-          <el-table-column prop="roles" label="用户权限" width="160">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.roles === 'admin'" size="small">超级管理员</el-tag>
-              <el-tag v-else-if="scope.row.roles === 'senioradmin'" size="small">高级管理员</el-tag>
-              <el-tag v-else-if="scope.row.roles === 'common'" size="small">普通管理员</el-tag>
-              <el-tag v-else-if="scope.row.roles === 'outsource'" size="small">外包管理员</el-tag>
-              <el-tag v-else-if="scope.row.roles === 'program'" size="small">程序员</el-tag>
-            </template>
-          </el-table-column>
+          <el-table-column prop="roles" label="用户角色" width="160" />
           <el-table-column prop="email" label="电子邮件地址" width="200" />
           <el-table-column prop="description" label="描述" />
           <el-table-column prop="enable" label="是否启用" width="120">
@@ -63,6 +55,7 @@
             <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" content="修改密码" placement="top">
                 <el-button
+                  v-if="handleModifyPasswordDisable === true"
                   type="success"
                   size="mini"
                   icon="el-icon-edit"
@@ -72,6 +65,7 @@
               </el-tooltip>
               <el-tooltip class="item" effect="dark" content="查看或修改信息" placement="top">
                 <el-button
+                  v-if="handleModifyUserInfoDisable === true"
                   type="primary"
                   size="mini"
                   icon="el-icon-edit-outline"
@@ -81,6 +75,7 @@
               </el-tooltip>
               <el-tooltip class="item" effect="dark" content="删除用户" placement="top">
                 <el-button
+                  v-if="handleDeleteUserDisable === true"
                   type="danger"
                   size="mini"
                   icon="el-icon-delete"
@@ -349,6 +344,10 @@ export default {
       },
       permissionOptions: PermissionOptions, // 维护线别
       dataTableSelections: [], // 表格选中的数据
+      createUserDialogDisable: true,
+      handleModifyPasswordDisable: true,
+      handleModifyUserInfoDisable: true,
+      handleDeleteUserDisable: true,
       userName: '' // 要修改密码的用户名
     }
   },
@@ -544,7 +543,7 @@ export default {
       }).then(() => {
         const data = {}
         data['id'] = row.id
-        console.log('删除的id', row.id)
+        data['user_name'] = this.name
         DeleteUser(data).then(res => {
           if (res.code === 20000) {
             this.$notify({

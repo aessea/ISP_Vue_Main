@@ -4,28 +4,28 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="primary" @click="addDataDialog">
+            <el-button v-if="addDataDialogDisable === true" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button type="primary" @click="addMultiDataDialog">
+            <el-button v-if="addMultiDataDialogDisable === true" type="primary" @click="addMultiDataDialog">
               <i class="el-icon-plus" />添加多个维护
             </el-button>
-            <el-button type="danger" @click="deleteData">
+            <el-button v-if="deleteDataDisable === true" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button type="backupBtn" @click="backupData">
+            <el-button v-if="backupDataDisable === true" type="backupBtn" @click="backupData">
               <i class="el-icon-document-copy" />备份数据
             </el-button>
-            <el-button type="backupBtn" @click="recoverBackupData">
+            <el-button v-if="recoverBackupDataDisable === true" type="backupBtn" @click="recoverBackupData">
               <i class="el-icon-refresh-left" />恢复备份
             </el-button>
-            <el-button type="backupBtn" @click="manageBackupData">
+            <el-button v-if="addDataDialogDisable === true" type="backupBtn" @click="manageBackupData">
               <i class="el-icon-edit-outline" />备份管理
             </el-button>
-            <el-button @click="importDataDialog">
+            <el-button v-if="importDataDialogDisable === true" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button>
-            <el-button @click="exportDataDialog">
+            <el-button v-if="exportDataDialogDisable === true" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -34,6 +34,7 @@
           <div style="float: right;">
             <el-tooltip class="item" effect="dark" content="同步正式库维护时间表" placement="top">
               <el-button
+                v-if="beforeSyncFormalDataDisable === true"
                 size="small"
                 icon="el-icon-download"
                 circle
@@ -625,7 +626,16 @@ export default {
       manageBackupDialog: false, // 备份管理dialog
       backupTableData: [], // 备份管理数据
       backupTableSelections: [], // 备份管理选中的数据
-      autoBackup: true // 是否自动备份，默认开启
+      autoBackup: true, // 是否自动备份，默认开启
+      backupDataDisable: true,
+      beforeSyncFormalDataDisable: true,
+      exportDataDialogDisable: true,
+      addDataDialogDisable: true,
+      addMultiDataDialogDisable: true,
+      importDataDialogDisable: true,
+      manageBackupDataDisable: true,
+      recoverBackupDataDisable: true,
+      deleteDataDisable: true
     }
   },
   computed: {

@@ -10,7 +10,9 @@ const OutsourceConstraintsRouter = {
   meta: {
     title: '外包约束数据',
     icon: 'el-icon-s-data',
-    roles: ['admin', 'outsource']
+    roles: ['Capacity', 'ProcessRestrictions', 'PackageLineRestrictions', 'CustomerRestrictions',
+      'JobOrderTypeRestrictions', 'BoardNoRestrictions', 'FilterRulesData', 'ModelNameRestrictions',
+      'Manufacturer']
   },
   children: [
 
@@ -20,7 +22,7 @@ const OutsourceConstraintsRouter = {
       name: 'Capacity',
       meta: {
         title: '产能限制表',
-        roles: ['admin', 'outsource']
+        roles: ['Capacity']
       }
     },
     {
@@ -29,7 +31,7 @@ const OutsourceConstraintsRouter = {
       name: 'ProcessRestrictions',
       meta: {
         title: '制程约束表',
-        roles: ['admin']
+        roles: ['ProcessRestrictions']
       }
     },
     {
@@ -38,7 +40,7 @@ const OutsourceConstraintsRouter = {
       name: 'PackageLineRestrictions',
       meta: {
         title: '包装线限制表',
-        roles: ['admin', 'outsource']
+        roles: ['PackageLineRestrictions']
       }
     },
     {
@@ -47,7 +49,7 @@ const OutsourceConstraintsRouter = {
       name: 'CustomerRestrictions',
       meta: {
         title: '客户约束表',
-        roles: ['admin', 'outsource']
+        roles: ['CustomerRestrictions']
       }
     },
     {
@@ -56,7 +58,7 @@ const OutsourceConstraintsRouter = {
       name: 'JobOrderTypeRestrictions',
       meta: {
         title: '工单类型限制表',
-        roles: ['admin', 'outsource']
+        roles: ['JobOrderTypeRestrictions']
       }
     },
     {
@@ -65,7 +67,7 @@ const OutsourceConstraintsRouter = {
       name: 'BoardNoRestrictions',
       meta: {
         title: '板号限制表',
-        roles: ['admin', 'outsource']
+        roles: ['BoardNoRestrictions']
       }
     },
     {
@@ -74,7 +76,7 @@ const OutsourceConstraintsRouter = {
       name: 'FilterRulesData',
       meta: {
         title: '筛选规则表',
-        roles: ['admin', 'outsource']
+        roles: ['FilterRulesData']
       }
     },
     {
@@ -83,7 +85,7 @@ const OutsourceConstraintsRouter = {
       name: 'ModelNameRestrictions',
       meta: {
         title: '主板历史生产厂商表',
-        roles: ['admin', 'outsource']
+        roles: ['ModelNameRestrictions']
       }
     },
     {
@@ -92,7 +94,7 @@ const OutsourceConstraintsRouter = {
       name: 'Manufacturer',
       meta: {
         title: '小板历史生产厂商表',
-        roles: ['admin', 'outsource']
+        roles: ['Manufacturer']
       }
     }
   ]

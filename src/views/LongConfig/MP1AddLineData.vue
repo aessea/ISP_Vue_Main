@@ -4,16 +4,16 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="primary" @click="addDataDialog">
+            <el-button v-if="addDataDialogDisable === true" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button type="danger" @click="deleteData">
+            <el-button v-if="deleteDataDisable === true" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <!-- <el-button @click="importDataDialog">
+            <!-- <el-button v-if="importDataDialogDisable === true" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
-            <el-button @click="exportDataDialog">
+            <el-button v-if="exportDataDialogDisable === true" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -307,6 +307,10 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
+      addDataDialogDisable: true,
+      deleteDataDisable: true,
+      importDataDialogDisable: true,
+      exportDataDialogDisable: true,
       dataTableSelections: [] // 表格选中的数据
     }
   },

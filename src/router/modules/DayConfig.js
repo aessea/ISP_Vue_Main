@@ -10,7 +10,7 @@ const DayConfigRouter = {
   meta: {
     title: '每日配置',
     icon: 'el-icon-setting',
-    roles: ['admin', 'common', 'program', 'senioradmin']
+    roles: ['BlockTimeData', 'PackHoliday', 'ProgramData', 'ProductionReportData', 'NoProgramData', 'NetworkBoard', 'TestProgramData', 'ProductProgramData']
   },
   children: [
     {
@@ -19,7 +19,7 @@ const DayConfigRouter = {
       name: 'BlockTimeData',
       meta: {
         title: '维护时间表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['BlockTimeData']
       }
     },
     {
@@ -28,7 +28,7 @@ const DayConfigRouter = {
       name: 'PackHoliday',
       meta: {
         title: '包装线放假表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['PackHoliday']
       }
     },
     {
@@ -37,7 +37,7 @@ const DayConfigRouter = {
       name: 'ProgramData',
       meta: {
         title: '程序表',
-        roles: ['admin', 'common', 'program', 'senioradmin']
+        roles: ['ProgramData']
       }
     },
     {
@@ -46,7 +46,7 @@ const DayConfigRouter = {
       name: 'ProductionReportData',
       meta: {
         title: '生产报表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['ProductionReportData']
       }
     },
     {
@@ -55,7 +55,7 @@ const DayConfigRouter = {
       name: 'NoProgramData',
       meta: {
         title: '无程序清单表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['NoProgramData']
       }
     },
     {
@@ -64,7 +64,7 @@ const DayConfigRouter = {
       name: 'NetworkBoard',
       meta: {
         title: '网板信息表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['NetworkBoard']
       }
     },
     {
@@ -73,7 +73,7 @@ const DayConfigRouter = {
       name: 'TestProgramData',
       meta: {
         title: '试跑程序表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['TestProgramData']
       }
     },
     {
@@ -82,7 +82,7 @@ const DayConfigRouter = {
       name: 'ProductProgramData',
       meta: {
         title: '量产程序表',
-        roles: ['admin', 'common', 'senioradmin']
+        roles: ['ProductProgramData']
       }
     }
   ]

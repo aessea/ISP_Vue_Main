@@ -4,13 +4,13 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button type="danger" @click="deleteFiles">
+            <el-button v-if="deleteFilesDisable === true" type="danger" @click="deleteFiles">
               <i class="el-icon-delete" />删除文件
             </el-button>
-            <el-button type="danger" @click="deleteBeforeFiles">
+            <el-button v-if="deleteBeforeFilesDisable === true" type="danger" @click="deleteBeforeFiles">
               <i class="el-icon-delete" />删除三个月前的文件
             </el-button>
-            <el-button type="primary" @click="resetAllFileList">
+            <el-button v-if="resetAllFileListDisable === true" type="primary" @click="resetAllFileList">
               <i class="el-icon-refresh" />重置文件列表
             </el-button>
           </div>
@@ -110,6 +110,9 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
+      resetAllFileListDisable: true,
+      deleteFilesDisable: true,
+      deleteBeforeFilesDisable: true,
       dataTableSelections: [] // 表格选中的数据
     }
   },
