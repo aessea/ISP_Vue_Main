@@ -87,24 +87,22 @@
       :before-close="handleFormClose"
       @dragDialog="handleDrag"
     >
-      <el-form ref="$form" :model="model" label-position="left" size="small">
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8">
-            <el-input v-model="input_role_name" placeholder="请输入角色名称" clearable />
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="24" style="margin-top: 10px;">
-            <el-tag
-              v-for="(val, key) in input_role_data_list"
-              :key="key"
-              style="margin-right: 5px;"
-            >
-              {{ val }}
-            </el-tag>
-          </el-col>
-        </el-row>
-      </el-form>
+      <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+        <el-col :span="8">
+          <el-input v-model="input_role_name" placeholder="请输入角色名称" clearable />
+        </el-col>
+      </el-row>
+      <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+        <el-col :span="24" style="margin-top: 10px;">
+          <el-tag
+            v-for="(val, key) in input_role_data_list"
+            :key="key"
+            style="margin-right: 5px;"
+          >
+            {{ val }}
+          </el-tag>
+        </el-col>
+      </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">关闭</el-button>
         <el-button type="primary" @click="handleRolePermissionVisible">权限设置</el-button>
@@ -143,14 +141,11 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="用户权限管理说明"
+      title="说明"
       :visible.sync="helpDialogVisible"
       width="60%"
       @dragDialog="handleDrag"
     >
-      <p>超级管理员：拥有最高权限，支持管理所有表格和用户</p>
-      <p>普通管理员：支持管理所有表格，但无法管理用户</p>
-      <p>程序员：仅支持对程序表进行操作</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">关闭</el-button>
       </span>
@@ -163,7 +158,6 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetAllRoleInfo, CreateRole, ModifyRoleInfo, DeleteRole } from '@/api/Permission/CreatedRoles'
-import { PermissionOptions } from '@/utils/items'
 export default {
   name: 'CreatedRoles',
   directives: { elDragDialog },
@@ -183,44 +177,13 @@ export default {
       dataDialogVisible: false, // 表单dialog显示
       helpDialogVisible: false, // 帮助提示dialog
       isClick: false, // 是否点击了保存或者提交
-      // 表单相关数据
-      forms: ['$form'],
-      pwdForms: ['$pwdForm'],
-      model: {
-        id: '',
-        username: '',
-        password: '',
-        roles: '',
-        remark: '',
-        enable: '',
-        email: '',
-        description: '',
-        create_time: '',
-        last_login_time: ''
-      },
-      // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
-      modelOriginal: {
-        id: '',
-        username: '',
-        password: '',
-        roles: '',
-        remark: '',
-        enable: '',
-        email: '',
-        description: '',
-        create_time: '',
-        last_login_time: ''
-      },
-      permissionOptions: PermissionOptions, // 维护线别
-      dataTableSelections: [], // 表格选中的数据
       createUserDialogDisable: true,
       handleModifyPasswordDisable: true,
       handleModifyRoleInfoDisable: true,
       handleDeleteRoleDisable: true,
       rolePermissionDialogVisible: false,
       createOrModify: true,
-      row_id: -1,
-      userName: '' // 要修改密码的用户名
+      row_id: -1
     }
   },
   computed: {
