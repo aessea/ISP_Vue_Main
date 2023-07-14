@@ -103,7 +103,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetAllButtonInfo, ModifyButton, SearchRoleData } from '@/api/Permission/ButtonRoles'
+import { ModifyButton, SearchRoleData } from '@/api/Permission/ButtonRoles'
 export default {
   name: 'ButtonRoles',
   directives: { elDragDialog },
@@ -139,16 +139,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    getAllButtonInfo() {
-      this.loading = true
-      GetAllButtonInfo().then(res => {
-        if (res.code === 20000) {
-          this.table_data = res.table_data
-          this.role_name_list = res.role_name_list
-          this.loading = false
-        }
-      })
     },
     // 分页
     handlePageChange(val) {
