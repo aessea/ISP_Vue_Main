@@ -14,3 +14,11 @@ export function ModifyButton(data) {
     data
   })
 }
+// 搜索
+export function SearchRoleData(data) {
+  return request({
+    url: '/User/search_data/',
+    method: 'post',
+    data
+  })
+}

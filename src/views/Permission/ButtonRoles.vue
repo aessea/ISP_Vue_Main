@@ -73,6 +73,16 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination
+          background
+          :hide-on-single-page="true"
+          :page-size="pageSize"
+          :current-page="currentPage"
+          layout="total, prev, pager, next, jumper"
+          :total="total_num"
+          style="margin-top: 16px;"
+          @current-change="handlePageChange"
+        />
       </div>
     </el-card>
 
@@ -92,9 +102,8 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-// import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetAllButtonInfo, ModifyButton } from '@/api/Permission/ButtonRoles'
+import { GetAllButtonInfo, ModifyButton, SearchRoleData } from '@/api/Permission/ButtonRoles'
 export default {
   name: 'ButtonRoles',
   directives: { elDragDialog },
@@ -104,9 +113,14 @@ export default {
       loadingInstance: null,
       table_data: [], // 表格数据
       helpDialogVisible: false, // 帮助提示dialog
-      roleNameValue: '',
       role_name_list: [],
-      dataTableSelections: [] // 表格选中的数据
+      // 分页相关
+      total_num: 0,
+      pageSize: 30,
+      currentPage: 1,
+      // 搜索相关
+      roleNameValue: '', // 搜索的用户名
+      isSearch: false // 是否点击了搜索
     }
   },
   computed: {
@@ -115,7 +129,8 @@ export default {
     ])
   },
   created() {
-    this.getAllButtonInfo()
+    // this.getAllButtonInfo()
+    this.getTableData(this.currentPage, this.pageSize, this.isSearch)
   },
   mounted() {
 
@@ -135,9 +150,50 @@ export default {
         }
       })
     },
-    // 刷新表格数据
+    // 分页
+    handlePageChange(val) {
+      this.currentPage = val
+      this.getTableData(val, this.pageSize, this.isSearch) // 翻页
+    },
+    // 分页展示表格数据
+    getTableData(currentPage, pageSize, isSearch) {
+      this.loading = true
+      if (isSearch === true) {
+        const data = {
+          'current_page': currentPage,
+          'page_size': pageSize,
+          'role_name_value': this.roleNameValue
+        }
+        SearchRoleData(data).then(res => {
+          if (res.code === 20000) {
+            this.table_data = res.table_data
+            this.total_num = res.total_num
+            this.role_name_list = res.role_name_list
+            this.loading = false
+          }
+        })
+      } else {
+        const data = {
+          'current_page': currentPage,
+          'page_size': pageSize,
+          'role_name_value': this.roleNameValue
+        }
+        SearchRoleData(data).then(res => {
+          if (res.code === 20000) {
+            this.table_data = res.table_data
+            this.total_num = res.total_num
+            this.role_name_list = res.role_name_list
+            this.loading = false
+          }
+        })
+      }
+    },
+    // 刷新表格
     refreshTableData() {
-      this.getAllButtonInfo()
+      this.isSearch = false
+      this.roleNameValue = ''
+      this.currentPage = 1
+      this.getTableData(1, this.pageSize, false)
     },
     handleModifyButton(index, row) {
       this.$confirm('确定要修改按钮权限?', '提示', {
@@ -164,6 +220,17 @@ export default {
           message: '取消修改'
         })
       })
+    },
+    searchData() {
+      if (this.roleNameValue === '') {
+        this.$message({
+          type: 'warning',
+          message: '请选择角色名称'
+        })
+        return
+      }
+      this.isSearch = true
+      this.getTableData(1, this.pageSize, true)
     },
     // 帮助提示按钮
     helpTips() {
