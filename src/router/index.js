@@ -191,7 +191,7 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'rolepermission',
+        path: 'usermanage',
         component: () => import('@/views/Permission/RolePermission'),
         name: 'Permission',
         meta: {
@@ -200,12 +200,21 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'createdrole',
+        path: 'rolemanage',
         component: () => import('@/views/Permission/CreatedRoles'),
         name: 'CreatedRoles',
         meta: {
-          title: '角色管理',
+          title: '角色权限管理',
           roles: ['CreatedRoles']
+        }
+      },
+      {
+        path: 'buttonmanage',
+        component: () => import('@/views/Permission/ButtonRoles'),
+        name: 'ButtonRoles',
+        meta: {
+          title: '按钮权限管理',
+          roles: ['ButtonRoles']
         }
       }
     ]

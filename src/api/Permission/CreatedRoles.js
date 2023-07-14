@@ -1,5 +1,5 @@
 import request from '../../utils/request'
-// 用户角色信息na
+// 用户角色信息
 export function GetAllRoleInfo() {
   return request({
     url: '/User/get_all_role_info/',
