@@ -132,7 +132,7 @@
                     <el-button v-if="saveApsSelfMoDisable === true" type="stopBtn" @click="saveApsSelfMo">
                       自制工单信息写入接口
                     </el-button>
-                    <el-button v-if="saveApsOutsoutceMoDisable === true" type="stopBtn" @click="saveApsOutsoutceMo">
+                    <el-button v-if="saveApsOutsoutceMoDisable === true" type="stopBtn" @click="saveApsOutsoutceMoDialog">
                       外包结果信息写入接口
                     </el-button>
                   </el-col>
@@ -362,6 +362,44 @@
 
     <el-dialog
       v-el-drag-dialog
+      title="外包结果信息写入接口"
+      :visible.sync="dialogVisibleSaveApsOutsoutceMo"
+      width="30%"
+      :close-on-click-modal="false"
+      :before-close="handleCloseSaveApsOutsoutceMo"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <el-col :span="24">
+          <el-radio-group v-model="componentType4">
+            <el-radio :label="1">SMT主板</el-radio>
+            <el-radio :label="2">SMT小板</el-radio>
+            <el-radio :label="3">AI</el-radio>
+            <el-radio :label="4">SMT点胶</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+      <!-- <el-row>
+        <el-col :span="24">
+          <el-radio-group v-model="runMode4">
+            <el-radio :label="1">自制优先</el-radio>
+            <el-radio :label="2">外包优先</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row> -->
+
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="saveApsOutsoutceMo">
+          确认推送
+        </el-button>
+        <el-button @click="handleCloseSaveApsOutsoutceMo">
+          关闭
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
       title="下载外包优先新机种表"
       :visible.sync="dialogVisibleCompute2"
       width="30%"
@@ -456,7 +494,7 @@
       <el-col :span="12">
         <el-card class="card-config">
           <div slot="header" class="clearfix">
-            <span>参数配置</span>
+            <span>常用参数配置</span>
             <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0" type="text" @click="modifyParamsConfig">修改配置</el-button>
             <el-button v-else-if="isUpdateConfig === true" style="float: right; padding: 3px 0" type="text" @click="saveParamsConfig">保存修改</el-button>
           </div>
@@ -666,7 +704,10 @@ export default {
       generateDivisionsDialogDisable: true,
       doFilterRulesDialogDisable: true,
       saveApsSelfMoDisable: true,
-      saveApsOutsoutceMoDisable: true
+      saveApsOutsoutceMoDisable: true,
+
+      dialogVisibleSaveApsOutsoutceMo: false,
+      componentType4: 1
     }
   },
   computed: {
@@ -1504,7 +1545,8 @@ export default {
         } // 导入排程动画
         this.loadingInstance = Loading.service(pushLoading)
         const form = {
-          'user_name': this.name
+          'user_name': this.name,
+          'component': this.componentType4
         }
         SaveApsOutsoutceMo(form).then(res => {
           if (res.code === 20000) {
@@ -1532,6 +1574,12 @@ export default {
           message: '取消推送'
         })
       })
+    },
+    handleCloseSaveApsOutsoutceMo() {
+      this.dialogVisibleSaveApsOutsoutceMo = false
+    },
+    saveApsOutsoutceMoDialog() {
+      this.dialogVisibleSaveApsOutsoutceMo = true
     }
   }
 }
