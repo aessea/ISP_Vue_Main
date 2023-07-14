@@ -207,7 +207,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData,
   UpdateConfig, LoadFromConfig } from '@/api/Outsource/OtherData/ParamConfig'
-import { DownloadExamleImportFile } from '@/api/Public'
+import { DownloadExamleImportFile } from '@/api/common'
 export default {
   name: 'ParamConfig',
   directives: { elDragDialog },

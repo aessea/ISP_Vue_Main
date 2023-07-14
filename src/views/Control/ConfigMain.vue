@@ -758,7 +758,7 @@
 import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog' // base on element-ui
 import { GetTableData, ModifyData } from '@/api/Control/ConfigMain'
-import { GetLineProcess } from '@/api/Public'
+import { GetLineProcess } from '@/api/common'
 export default {
   name: 'ConfigMain',
   directives: { elDragDialog },

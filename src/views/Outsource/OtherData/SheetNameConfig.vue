@@ -200,7 +200,7 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetBaseData } from '@/api/Outsource/OtherData/SheetNameConfig'
-import { DownloadExamleImportFile } from '@/api/Public'
+import { DownloadExamleImportFile } from '@/api/common'
 export default {
   name: 'SheetNameConfig',
   directives: { elDragDialog },

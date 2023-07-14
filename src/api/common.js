@@ -23,3 +23,10 @@ export function GetLineProcess() {
     method: 'get'
   })
 }
+// 获取按钮权限
+export function GetButtonPermission() {
+  return request({
+    url: '/PublicTool/get_button_permission/',
+    method: 'get'
+  })
+}

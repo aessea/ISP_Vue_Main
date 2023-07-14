@@ -369,7 +369,7 @@ import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled,
   AiPrescheduled, AiScheduled, CheckData, GetHistoryAnaItem, GetHistoryAnaData,
   ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
 } from '@/api/Control/OnlineTable'
-import { DownloadFile } from '@/api/Public'
+import { DownloadFile } from '@/api/common'
 import XLSX from 'xlsx'
 import FileSaver from 'file-saver'
 export default {

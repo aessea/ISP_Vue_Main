@@ -413,7 +413,7 @@ import { AnalysisExcel, GenerateAnaExcel, ClearAnaProgress, GetAnaProgress,
   CheckData, AnalysisSchedule
 } from '@/api/Control/OnlineTable'
 import { lineOptions, lockedList, unLockedList } from '@/utils/items'
-import { DownloadFile } from '@/api/Public'
+import { DownloadFile } from '@/api/common'
 export default {
   name: 'OnlineTable',
   directives: { elDragDialog },

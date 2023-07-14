@@ -208,7 +208,7 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/KeyBoardSpecialModel'
-import { GetLineProcess } from '@/api/Public'
+import { GetLineProcess } from '@/api/common'
 export default {
   name: 'KeyBoardSpecialModel',
   directives: { elDragDialog },

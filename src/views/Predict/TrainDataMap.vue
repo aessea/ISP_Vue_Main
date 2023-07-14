@@ -255,7 +255,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Predict/TrainDataMap'
 import { LineOptions } from '@/utils/items'
-import { GetLineProcess } from '@/api/Public'
+import { GetLineProcess } from '@/api/common'
 export default {
   name: 'TrainDataMap',
   directives: { elDragDialog },

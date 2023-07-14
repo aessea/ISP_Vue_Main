@@ -761,7 +761,7 @@ import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, GetLogSel
   GetApsMoBaseData, GetApsMoProgData, DownloadUploadFileMain, DownloadUploadFileSmall, DoBucklePoints,
   GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData, GetApsDeliveryDay, SaveApsOutPutCount,
   CheckDataNew } from '@/api/Control/SchedulePanel'
-import { DownloadFile } from '@/api/Public'
+import { DownloadFile } from '@/api/common'
 export default {
   name: 'SchedulePanel',
   directives: { elDragDialog },
