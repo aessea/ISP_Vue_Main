@@ -253,7 +253,7 @@ export default {
       const data = {
         'id': this.row_id,
         'role_name': this.input_role_name,
-        'menu_permission_list': this.role_data_value
+        'role_menu_list': this.role_data_value
       }
       CreateRole(data).then(res => {
         if (res.code === 20000) {
@@ -291,7 +291,7 @@ export default {
       const data = {
         'id': this.row_id,
         'role_name': this.input_role_name,
-        'role_menus': this.role_data_value
+        'role_menu_list': this.role_data_value
       }
       ModifyRoleInfo(data).then(res => {
         if (res.code === 20000) {

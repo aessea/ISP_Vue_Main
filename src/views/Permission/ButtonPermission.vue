@@ -50,13 +50,17 @@
           :cell-style="{padding: '3px'}"
           stripe
         >
-          <el-table-column prop="role_name" label="角色名称" />
-          <el-table-column prop="classify_front" label="前端菜单名" />
-          <el-table-column prop="button_name_front" label="前端按钮名称" />
-          <el-table-column prop="rule_menus" label="是否允许使用该按钮">
+          <el-table-column prop="role_name" label="角色名称" width="200" />
+          <el-table-column prop="menu_name_front" label="菜单名" width="240" />
+          <el-table-column prop="has_permission_buttons_front" label="拥有权限的按钮">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.enable === '允许'" type="success">{{ scope.row.enable }}</el-tag>
-              <el-tag v-else-if="scope.row.enable === '不允许'" type="danger">{{ scope.row.enable }}</el-tag>
+              <el-tag
+                v-for="(val, key) in scope.row.has_permission_buttons_front"
+                :key="key"
+                style="margin-right: 5px;"
+              >
+                {{ val }}
+              </el-tag>
             </template>
           </el-table-column>
           <el-table-column width="150" fixed="right" label="操作">
@@ -98,6 +102,22 @@
       </span>
     </el-dialog>
 
+    <el-dialog
+      v-el-drag-dialog
+      title="按钮权限设置"
+      :visible.sync="buttonpDialogVisible"
+      width="60%"
+      @dragDialog="handleDrag"
+    >
+      <el-checkbox-group v-model="data_dict.has_permission_buttons_front">
+        <el-checkbox v-for="button_permission in data_dict.all_permission_buttons_list" :key="button_permission.index" :label="button_permission" />
+      </el-checkbox-group>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="modifyButton">确认修改</el-button>
+        <el-button @click="buttonpDialogVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 <script>
@@ -109,6 +129,7 @@ export default {
   directives: { elDragDialog },
   data() {
     return {
+      buttonpDialogVisible: false,
       loading: true, // 表格加载动画
       loadingInstance: null,
       table_data: [], // 表格数据
@@ -120,7 +141,17 @@ export default {
       currentPage: 1,
       // 搜索相关
       roleNameValue: '', // 搜索的用户名
-      isSearch: false // 是否点击了搜索
+      isSearch: false, // 是否点击了搜索
+      // 权限修改相关
+      data_dict: {
+        row_id: -1,
+        role_name: '',
+        menu_name: '',
+        menu_name_front: '',
+        all_permission_buttons_list: [],
+        has_permission_buttons: [],
+        has_permission_buttons_front: []
+      }
     }
   },
   computed: {
@@ -186,14 +217,22 @@ export default {
       this.getTableData(1, this.pageSize, false)
     },
     handleModifyButton(index, row) {
+      this.buttonpDialogVisible = true
+      this.data_dict.has_permission_buttons = row.has_permission_buttons
+      this.data_dict.has_permission_buttons_front = row.has_permission_buttons_front
+      this.data_dict.all_permission_buttons_list = row.all_permission_buttons_list
+      this.data_dict.row_id = row.id
+      this.data_dict.role_name = row.role_name
+      this.data_dict.menu_name = row.menu_name
+      this.data_dict.menu_name_front = row.menu_name_front
+    },
+    modifyButton() {
       this.$confirm('确定要修改按钮权限?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        const data = {
-          'id': row.id
-        }
+        const data = this.data_dict
         ModifyButton(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
