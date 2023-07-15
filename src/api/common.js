@@ -24,9 +24,10 @@ export function GetLineProcess() {
   })
 }
 // 获取按钮权限
-export function GetButtonPermission() {
+export function GetButtonPermission(data) {
   return request({
     url: '/Common/get_button_permission/',
-    method: 'get'
+    method: 'post',
+    data
   })
 }

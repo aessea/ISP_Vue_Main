@@ -500,6 +500,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/LineData'
 import { lineTypeOptions, lineSizeTypeOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
+import { GetButtonPermission } from '@/api/common'
 export default {
   name: 'LineData',
   directives: { elDragDialog },
@@ -891,10 +892,10 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 30, // 每页多少条数据
-      addDataDialogDisable: true,
-      deleteDataDisable: true,
-      importDataDialogDisable: true,
-      exportDataDialogDisable: true,
+      addDataDialogDisable: false,
+      deleteDataDisable: false,
+      importDataDialogDisable: false,
+      exportDataDialogDisable: false,
       dataTableSelections: [], // 表格选中的数据
       lineTypeOptions: lineTypeOptions,
       lineSizeTypeOptions: lineSizeTypeOptions
@@ -906,6 +907,7 @@ export default {
     ])
   },
   created() {
+    this.getPermission(this.name, this.$route.name)
     this.getLineProcess()
     this.getTableData(this.currentPage, this.pageSize)
   },
@@ -913,6 +915,27 @@ export default {
     // this.getTableData(this.currentPage, this.pageSize)
   },
   methods: {
+    getPermission(user_name, menu_name) {
+      const data = {
+        'user_name': user_name,
+        'menu_name': menu_name
+      }
+      GetButtonPermission(data).then(res => {
+        if (res.data) {
+          const res_data = res.data
+          this.addDataDialogDisable = res_data.addDataDialogDisable
+          this.deleteDataDisable = res_data.deleteDataDisable
+          this.importDataDialogDisable = res_data.importDataDialogDisable
+          this.exportDataDialogDisable = res_data.exportDataDialogDisable
+        }
+        if (res.role_name === '超级管理员') {
+          this.addDataDialogDisable = true
+          this.deleteDataDisable = true
+          this.importDataDialogDisable = true
+          this.exportDataDialogDisable = true
+        }
+      })
+    },
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()

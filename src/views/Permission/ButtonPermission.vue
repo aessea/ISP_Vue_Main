@@ -103,9 +103,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { ModifyButton, SearchRoleData } from '@/api/Permission/ButtonRoles'
+import { ModifyButton, SearchRoleData } from '@/api/Permission/ButtonPermission'
 export default {
-  name: 'ButtonRoles',
+  name: 'ButtonPermission',
   directives: { elDragDialog },
   data() {
     return {
@@ -230,7 +230,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/css/Permission/ButtonRoles.scss';
+  @import '../../assets/css/Permission/ButtonPermission.scss';
 </style>
 <style>
 .btnDanger{
