@@ -7,7 +7,8 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  buttons: []
 }
 
 const mutations = {
@@ -25,6 +26,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_BUTTONS: (state, buttons) => {
+    state.buttons = buttons
   }
 }
 
@@ -51,10 +55,10 @@ const actions = {
         const data = response
 
         if (!data) {
-          reject('认证失败, 请重新登录')
+          reject('认证失败')
         }
 
-        const { roles, name, avatar } = data
+        const { roles, name, avatar, buttons } = data
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
@@ -64,6 +68,7 @@ const actions = {
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+        commit('SET_BUTTONS', buttons)
         // commit('SET_INTRODUCTION', introduction)
         resolve(data)
       }).catch(error => {
