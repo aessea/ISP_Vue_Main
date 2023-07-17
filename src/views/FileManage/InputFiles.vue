@@ -116,7 +116,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'buttons'
     ])
   },
   created() {
