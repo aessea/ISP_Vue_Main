@@ -744,46 +744,6 @@ export default {
           message: '阈值偏差不能为空',
           trigger: 'blur'
         }],
-        // T_unable: [{
-        //   required: true,
-        //   message: '可否制程T不能为空',
-        //   trigger: 'blur'
-        // }],
-        // B_unable: [{
-        //   required: true,
-        //   message: '可否制程B不能为空',
-        //   trigger: 'blur'
-        // }],
-        // T_BPR_unable: [{
-        //   required: true,
-        //   message: '可否制程T-BPR不能为空',
-        //   trigger: 'blur'
-        // }],
-        // B_BPR_unable: [{
-        //   required: true,
-        //   message: '可否制程B-BPR不能为空',
-        //   trigger: 'blur'
-        // }],
-        // S_BPR_unable: [{
-        //   required: true,
-        //   message: '可否制程S-BPR不能为空',
-        //   trigger: 'blur'
-        // }],
-        // S_BPR_M_unable: [{
-        //   required: true,
-        //   message: '可否制程S-BPR-M不能为空',
-        //   trigger: 'blur'
-        // }],
-        // S_unable: [{
-        //   required: true,
-        //   message: '可否制程S不能为空',
-        //   trigger: 'blur'
-        // }],
-        // S_THR_unable: [{
-        //   required: true,
-        //   message: '可否制程S-THR不能为空',
-        //   trigger: 'blur'
-        // }],
         is_burn_in: [{
           required: true,
           message: '是否烧录不能为空',
@@ -794,16 +754,6 @@ export default {
           message: '不能为空',
           trigger: 'blur'
         }],
-        // single_point_lower: [{
-        //   required: true,
-        //   message: '不能为空',
-        //   trigger: 'blur'
-        // }],
-        // single_point_upper: [{
-        //   required: true,
-        //   message: '不能为空',
-        //   trigger: 'blur'
-        // }],
         line_type: [{
           required: true,
           message: '不能为空',
@@ -884,11 +834,6 @@ export default {
           message: '不能为空',
           trigger: 'blur'
         }]
-        // is_BPR_line: [{
-        //   required: true,
-        //   message: '不能为空',
-        //   trigger: 'blur'
-        // }]
       },
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
@@ -1054,16 +999,6 @@ export default {
       for (const key in this.modelOriginal) {
         this.modelOriginal[key] = this.model[key]
       }
-      // this.model['is_AX_line'] = false
-      // this.modelOriginal['is_AX_line'] = false
-      // this.model['is_Big_line_remove22'] = false
-      // this.modelOriginal['is_Big_line_remove22'] = false
-      // this.model['is_Non_big_line'] = false
-      // this.modelOriginal['is_Non_big_line'] = false
-      // this.model['is_special_line'] = false
-      // this.modelOriginal['is_special_line'] = false
-      // this.model['is_cannot_binding_line'] = false
-      // this.modelOriginal['is_cannot_binding_line'] = false
       // 显示dialog
       this.dataDialogVisible = true
       this.isClick = false
