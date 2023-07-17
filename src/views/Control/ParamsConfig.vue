@@ -440,11 +440,7 @@ export default {
         { label: '主板配置', value: 'main' },
         { label: '小板配置', value: 'small' },
         { label: '其它配置', value: 'other' }
-      ],
-      small_handleModifyDisable: true,
-      main_handleModifyDisable: true,
-      small_restoreDefaultDisable: true,
-      main_restoreDefaultDisable: true
+      ]
     }
   },
   computed: {

@@ -231,10 +231,6 @@ export default {
       importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
       isClick: false, // 是否点击了保存或者提交
-      addDataDialogDisable: true,
-      deleteDataDisable: true,
-      importDataDialogDisable: true,
-      exportDataDialogDisable: true,
       // 表单相关数据
       forms: ['$form'],
       model: {},

@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="getAllProgramDataDisable === true" type="primary" @click="getAllProgramData">
+            <el-button v-if="buttons.includes('ProductProgramData/getAllProgramData')" type="primary" @click="getAllProgramData">
               <i class="el-icon-refresh" />更新MES程序
             </el-button>
             <el-button v-if="buttons.includes('ProductProgramData/add')" type="primary" @click="addDataDialog">
@@ -518,11 +518,6 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 30, // 每页多少条数据
-      addDataDialogDisable: true,
-      deleteDataDisable: true,
-      importDataDialogDisable: true,
-      exportDataDialogDisable: true,
-      getAllProgramDataDisable: true,
       dataTableSelections: [] // 表格选中的数据
     }
   },

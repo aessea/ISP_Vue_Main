@@ -691,17 +691,6 @@ export default {
           trigger: 'blur'
         }]
       },
-      showFilterRulesDisable: true,
-      downloadAllFileDisable: true,
-      computeDialog2Disable: true,
-      rejustInputDialogDisable: true,
-      importDialogDisable: true,
-      generateOutputDisable: true,
-      computeDialogDisable: true,
-      generateDivisionsDialogDisable: true,
-      doFilterRulesDialogDisable: true,
-      saveApsSelfMoDisable: true,
-      saveApsOutsoutceMoDisable: true,
 
       dialogVisibleSaveApsOutsoutceMo: false,
       componentType4: 1

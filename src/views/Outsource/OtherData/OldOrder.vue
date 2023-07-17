@@ -10,7 +10,7 @@
             <el-button v-if="buttons.includes('OldOrder/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button v-if="deleteAllDataDisable === true" type="danger" @click="deleteAllData">
+            <el-button v-if="buttons.includes('OldOrder/deleteAll')" type="danger" @click="deleteAllData">
               <i class="el-icon-delete" />清空旧工单数据
             </el-button>
             <!-- <el-button v-if="buttons.includes('OldOrder/import')" @click="importDataDialog">
@@ -456,11 +456,6 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      addDataDialogDisable: true,
-      deleteDataDisable: true,
-      importDataDialogDisable: true,
-      exportDataDialogDisable: true,
-      deleteAllDataDisable: true,
       dataTableSelections: [] // 表格选中的数据
     }
   },

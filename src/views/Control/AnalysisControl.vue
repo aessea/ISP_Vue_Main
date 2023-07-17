@@ -425,12 +425,7 @@ export default {
       loading_table3: true,
       loading_table4: true,
       statisticsTitle: '量化结果', // 量化的dialog名称
-      statisticsDialogVisible: false, // 量化结果dialog显示
-      checkDataDisable: true,
-      analysisScheduleDisable: true,
-      pushScheduleDisable: true,
-      downloadAnaExcelDisable: true,
-      statisticsScheduleDisable: true
+      statisticsDialogVisible: false // 量化结果dialog显示
     }
   },
   computed: {

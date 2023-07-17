@@ -292,10 +292,6 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      addDataDialogDisable: true,
-      deleteDataDisable: true,
-      importDataDialogDisable: true,
-      exportDataDialogDisable: true,
       dataTableSelections: [] // 表格选中的数据
     }
   },
