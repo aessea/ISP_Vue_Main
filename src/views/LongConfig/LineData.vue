@@ -123,9 +123,9 @@
               <el-tag v-else-if="scope.row.is_big_small_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
+          <el-table-column prop="min_min_threshold" label="最低生产阈值的下限" width="110" />
+          <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
-          <el-table-column prop="min_min_threshold" label="智能阈值点(片)数下限" width="110" />
           <el-table-column prop="big_able" label="可否大工单" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.big_able === 1" size="small" type="success">✔</el-tag>
@@ -276,7 +276,12 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值">
+              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="最低生产阈值的下限">
+                <el-input-number v-model="model.min_min_threshold" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值的上限">
                 <el-input-number v-model="model.min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
@@ -290,11 +295,11 @@
                 <el-input-number v-model="model.offset_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+            <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_burn_in" prop="is_burn_in" label="是否烧录">
                 <el-input v-model="model.is_burn_in" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
-            </el-col>
+            </el-col> -->
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -327,11 +332,6 @@
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_cannot_binding_line" prop="is_cannot_binding_line" label="是否为不能绑定的线体">
                 <el-switch v-model="model.is_cannot_binding_line" style="width: 100%" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="智能阈值点(片)数下限">
-                <el-input-number v-model="model.min_min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -425,7 +425,8 @@
         <el-table-column prop="big_able" label="可否大工单" width="100" />
         <el-table-column prop="middle_able" label="可否中工单" width="100" />
         <el-table-column prop="small_able" label="可否小工单" width="100" />
-        <el-table-column prop="min_threshold" label="最低生产阈值" width="110" />
+        <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
+        <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
         <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
         <el-table-column prop="offset_threshold" label="阈值偏差" width="85" />
         <el-table-column prop="T_unable" label="可否制程T" width="95" />
@@ -502,7 +503,6 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/LineData'
 import { lineTypeOptions, lineSizeTypeOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
-import { GetButtonPermission } from '@/api/common'
 export default {
   name: 'LineData',
   directives: { elDragDialog },
@@ -906,7 +906,6 @@ export default {
     ])
   },
   created() {
-    this.getPermission(this.name, this.$route.name)
     this.getLineProcess()
     this.getTableData(this.currentPage, this.pageSize)
   },
@@ -914,27 +913,6 @@ export default {
     // this.getTableData(this.currentPage, this.pageSize)
   },
   methods: {
-    getPermission(user_name, menu_name) {
-      const data = {
-        'user_name': user_name,
-        'menu_name': menu_name
-      }
-      GetButtonPermission(data).then(res => {
-        if (res.data) {
-          const res_data = res.data
-          this.addDataDialogDisable = res_data.addDataDialogDisable
-          this.deleteDataDisable = res_data.deleteDataDisable
-          this.importDataDialogDisable = res_data.importDataDialogDisable
-          this.exportDataDialogDisable = res_data.exportDataDialogDisable
-        }
-        if (res.role_name === '超级管理员') {
-          this.addDataDialogDisable = true
-          this.deleteDataDisable = true
-          this.importDataDialogDisable = true
-          this.exportDataDialogDisable = true
-        }
-      })
-    },
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
