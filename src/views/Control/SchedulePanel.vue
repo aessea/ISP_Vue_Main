@@ -211,19 +211,19 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('result_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
                           <i class="el-icon-download" />
                           下载主板排程
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
                           <i class="el-icon-download" />
                           下载idle明细
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
                           <i class="el-icon-download" />
                           下载量化结果
                         </el-button>
@@ -233,7 +233,7 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
                           <i class="el-icon-download" />
                           下载无程序表
                         </el-button>
@@ -254,19 +254,19 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('result_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
                           <i class="el-icon-download" />
                           下载小板排程
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
                           <i class="el-icon-download" />
                           下载idle明细
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
                           <i class="el-icon-download" />
                           下载量化结果
                         </el-button>
@@ -287,7 +287,7 @@
                   <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button type="primary" plain @click="downloadFileBackend('log_file_path')">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('log_file_path')">
                           <i class="el-icon-download" />
                           下载最新日志
                         </el-button>
