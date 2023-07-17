@@ -120,7 +120,7 @@
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.roles" prop="roles" label="用户权限">
               <el-select v-model="model.roles" placeholder="请选择用户权限" :style="{width: '100%'}">
-                <el-option v-for="(item) in permissionOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
+                <el-option v-for="(item) in rolesOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
           </el-col>
@@ -208,7 +208,6 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetAllUserInfo, CreateUser, ModifyUserPassword, ModifyUserInfo, DeleteUser } from '@/api/Permission/UserManage'
-import { PermissionOptions } from '@/utils/items'
 export default {
   name: 'UserManage',
   directives: { elDragDialog },
@@ -342,7 +341,7 @@ export default {
           trigger: 'blur'
         }]
       },
-      permissionOptions: PermissionOptions, // 维护线别
+      rolesOptions: [],
       dataTableSelections: [], // 表格选中的数据
       createUserDialogDisable: true,
       handleModifyPasswordDisable: true,
@@ -373,6 +372,7 @@ export default {
       GetAllUserInfo().then(res => {
         if (res.code === 20000) {
           this.table_data = res.table_data
+          this.rolesOptions = res.role_list
           this.loading = false
         }
       })
