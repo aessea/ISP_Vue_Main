@@ -49,19 +49,29 @@
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_name_front" label="配置名" sortable>
+              <el-table-column prop="param_name_front" label="配置名" width="260" sortable>
                 <template slot-scope="scope">
                   <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_value" label="配置值">
+              <el-table-column prop="param_value" label="配置值" width="160">
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column prop="visible_roles" label="可配置的角色">
+                <template slot-scope="scope">
+                  <el-tag
+                    v-for="(val, key) in scope.row.visible_roles"
+                    :key="key"
+                    style="margin-right: 5px;"
+                  >
+                    {{ val }}
+                  </el-tag>
+                </template>
+              </el-table-column>
               <el-table-column width="110" fixed="right" label="操作">
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
@@ -145,6 +155,61 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
+          <el-tab-pane label="其它配置" name="other">
+            <el-table
+              id="mytable"
+              v-loading="loading"
+              :data="table_data_other"
+              :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
+              :cell-style="{padding: '3px'}"
+
+              stripe
+              @selection-change="handleSelectionChange"
+            >
+              <el-table-column type="selection" width="55" />
+              <el-table-column prop="param_classify" label="配置分类" width="200" sortable>
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_name_front" label="配置名" sortable>
+                <template slot-scope="scope">
+                  <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_value" label="配置值">
+                <template slot-scope="scope">
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else type="info">{{ scope.row.param_value }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column width="110" fixed="right" label="操作">
+                <template slot-scope="scope">
+                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      icon="el-icon-edit"
+                      circle
+                      @click="handleModify(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
+                    <el-button
+                      type="danger"
+                      size="mini"
+                      icon="el-icon-refresh"
+                      circle
+                      @click="restoreDefault(scope.$index, scope.row)"
+                    />
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
         </el-tabs>
         <el-pagination
           background
@@ -169,8 +234,8 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_classify" prop="param_classify" label="配置分类">
-              <el-select v-model="model.param_classify" placeholder="请选择" style="width: 100%" disabled>
+            <el-form-item :rules="rules.param_classify" prop="param_classify" label="配置类别">
+              <el-select v-model="model.param_classify" placeholder="请选择" style="width: 100%">
                 <el-option
                   v-for="item in param_classify_options"
                   :key="item.value"
@@ -182,7 +247,7 @@
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_name_front" prop="param_name_front" label="配置名">
-              <el-input v-model="model.param_name_front" placeholder="请输入" clearable disabled />
+              <el-input v-model="model.param_name_front" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -205,17 +270,17 @@
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_value" prop="param_default_value" label="配置默认值">
-              <el-input v-model="model.param_default_value" placeholder="" disabled />
+              <el-input v-model="model.param_default_value" placeholder="" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_name" prop="param_default_name" label="默认配置名">
-              <el-input v-model="model.param_default_name" placeholder="" disabled />
+              <el-input v-model="model.param_default_name" placeholder="" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.serial_number" prop="serial_number" label="序号（用于设置配置显示顺序）">
-              <el-input v-model="model.serial_number" placeholder="请输入" clearable disabled />
+              <el-input v-model="model.serial_number" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -237,6 +302,15 @@
               <el-input v-model="model.update_time" placeholder="修改时间" disabled />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-form-item :rules="rules.visible_roles" prop="visible_roles" label="可配置的角色">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-checkbox-group v-model="model.visible_roles">
+                <el-checkbox v-for="role in all_role_list" :key="role.index" :label="role" />
+              </el-checkbox-group>
+            </el-col>
+          </el-form-item>
         </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -288,7 +362,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, ModifyData, ExportData, RestoreDefault } from '@/api/Control/ParamsConfig'
 export default {
-  name: 'ParamsConfig',
+  name: 'ParamConfigManage',
   directives: { elDragDialog },
   data() {
     return {
@@ -334,7 +408,8 @@ export default {
         update_user: '',
         serial_number: '',
         param_description: '',
-        show_in_front: ''
+        show_in_front: '',
+        visible_roles: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -352,7 +427,8 @@ export default {
         update_user: '',
         serial_number: '',
         param_description: '',
-        show_in_front: ''
+        show_in_front: '',
+        visible_roles: []
       },
       rules: {
         param_name_front: [{
@@ -382,7 +458,8 @@ export default {
         { label: '小板配置', value: 'small' },
         { label: '其它配置', value: 'other' }
       ],
-      param_classify_options: [] // 参数分类选项
+      param_classify_options: [], // 参数分类选项
+      all_role_list: []
     }
   },
   computed: {
@@ -427,6 +504,7 @@ export default {
           this.table_data_other = res.table_data_other
           this.param_classify_options = res.param_classify_options
           this.total_num = res.total_num
+          this.all_role_list = res.all_role_list
           this.loading = false
         }
       })

@@ -216,6 +216,15 @@ export const asyncRoutes = [
           title: '按钮权限管理',
           roles: ['ButtonPermission']
         }
+      },
+      {
+        path: 'paramsconfigmanage',
+        component: () => import('@/views/Permission/ParamConfigManage'),
+        name: 'ParamsConfigManage',
+        meta: {
+          title: '排程配置管理',
+          roles: ['ParamsConfig']
+        }
       }
     ]
   },
