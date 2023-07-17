@@ -4,13 +4,13 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="deleteFilesDisable === true" type="danger" @click="deleteFiles">
+            <el-button v-if="buttons.includes('IdleFiles/delete')" type="danger" @click="deleteFiles">
               <i class="el-icon-delete" />删除文件
             </el-button>
-            <el-button v-if="deleteBeforeFilesDisable === true" type="danger" @click="deleteBeforeFiles">
+            <el-button v-if="buttons.includes('IdleFiles/deleteOld')" type="danger" @click="deleteBeforeFiles">
               <i class="el-icon-delete" />删除三个月前的文件
             </el-button>
-            <el-button v-if="resetAllFileListDisable === true" type="primary" @click="resetAllFileList">
+            <el-button v-if="buttons.includes('IdleFiles/reset')" type="primary" @click="resetAllFileList">
               <i class="el-icon-refresh" />重置文件列表
             </el-button>
           </div>
@@ -53,6 +53,7 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
+                v-if="buttons.includes('IdleFiles/download')"
                 type="primary"
                 size="mini"
                 icon="el-icon-download"
