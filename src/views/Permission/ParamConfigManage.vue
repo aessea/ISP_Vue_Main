@@ -76,7 +76,6 @@
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
                     <el-button
-                      v-if="buttons.includes('ParamsConfig/main_handleModify')"
                       type="primary"
                       size="mini"
                       icon="el-icon-edit"
@@ -86,7 +85,6 @@
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
                     <el-button
-                      v-if="buttons.includes('ParamsConfig/main_restoreDefault')"
                       type="danger"
                       size="mini"
                       icon="el-icon-refresh"
@@ -143,7 +141,7 @@
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
                     <el-button
-                      v-if="buttons.includes('ParamsConfig/small_handleModify')"
+
                       type="primary"
                       size="mini"
                       icon="el-icon-edit"
@@ -153,7 +151,6 @@
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
                     <el-button
-                      v-if="buttons.includes('ParamsConfig/small_restoreDefault')"
                       type="danger"
                       size="mini"
                       icon="el-icon-refresh"
@@ -516,7 +513,7 @@ export default {
     // 分页展示表格数据
     getTableData(currentPage, pageSize) {
       this.loading = true
-      const data = { 'current_page': currentPage, 'page_size': pageSize }
+      const data = { 'current_page': currentPage, 'page_size': pageSize, 'user_name': this.name }
       GetTableData(data).then(res => {
         if (res.code === 20000) {
           this.table_data_main = res.table_data_main
