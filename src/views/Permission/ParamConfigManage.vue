@@ -116,19 +116,29 @@
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_name_front" label="配置名" sortable>
+              <el-table-column prop="param_name_front" label="配置名" width="260" sortable>
                 <template slot-scope="scope">
                   <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_value" label="配置值">
+              <el-table-column prop="param_value" label="配置值" width="160">
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column prop="visible_roles" label="可配置的角色">
+                <template slot-scope="scope">
+                  <el-tag
+                    v-for="(val, key) in scope.row.visible_roles"
+                    :key="key"
+                    style="margin-right: 5px;"
+                  >
+                    {{ val }}
+                  </el-tag>
+                </template>
+              </el-table-column>
               <el-table-column width="110" fixed="right" label="操作">
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
@@ -167,25 +177,35 @@
               @selection-change="handleSelectionChange"
             >
               <el-table-column type="selection" width="55" />
-              <el-table-column prop="param_classify" label="配置分类" width="200" sortable>
+              <el-table-column prop="param_classify" label="配置分类" width="120" sortable>
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_name_front" label="配置名" sortable>
+              <el-table-column prop="param_name_front" label="配置名" width="160" sortable>
                 <template slot-scope="scope">
                   <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_value" label="配置值">
+              <el-table-column prop="param_value" label="配置值" width="360">
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column prop="visible_roles" label="可配置的角色">
+                <template slot-scope="scope">
+                  <el-tag
+                    v-for="(val, key) in scope.row.visible_roles"
+                    :key="key"
+                    style="margin-right: 5px;"
+                  >
+                    {{ val }}
+                  </el-tag>
+                </template>
+              </el-table-column>
               <el-table-column width="110" fixed="right" label="操作">
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
