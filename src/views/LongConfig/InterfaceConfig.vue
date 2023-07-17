@@ -4,16 +4,16 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <!-- <el-button v-if="addDataDialogDisable === true" type="primary" @click="addDataDialog">
+            <!-- <el-button v-if="buttons.includes('InterfaceConfig/add')" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button v-if="deleteDataDisable === true" type="danger" @click="deleteData">
+            <el-button v-if="buttons.includes('InterfaceConfig/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button v-if="importDataDialogDisable === true" @click="importDataDialog">
+            <el-button v-if="buttons.includes('InterfaceConfig/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
-            <el-button v-if="exportDataDialogDisable === true" @click="exportDataDialog">
+            <el-button v-if="buttons.includes('InterfaceConfig/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -68,6 +68,7 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
+                v-if="buttons.includes('InterfaceConfig/modify')"
                 type="primary"
                 size="mini"
                 icon="el-icon-edit"
@@ -75,6 +76,7 @@
                 @click="handleModify(scope.$index, scope.row)"
               />
               <!-- <el-button
+                v-if="buttons.includes('InterfaceConfig/delete')"
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
@@ -160,61 +162,6 @@
         <el-button @click="helpDialogVisible = false">关闭</el-button>
       </span>
     </el-dialog>
-
-    <!-- <el-dialog
-      v-el-drag-dialog
-      title="导入数据"
-      :visible.sync="importDialogVisible"
-      width="60%"
-      :before-close="handleImportClose"
-      @dragDialog="handleDrag"
-    >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="process" label="制程" />
-        <el-table-column prop="under_single_points" label="单板点数[以下]" />
-        <el-table-column prop="add_feasible_line" label="补充的可排线别" />
-      </el-table>
-      <el-row>
-        <el-col :span="8">
-          <el-radio-group v-model="importMode" style="margin-top: 26px;">
-            <el-radio label="append">追加数据</el-radio>
-            <el-radio label="replace">替换数据</el-radio>
-          </el-radio-group>
-        </el-col>
-        <el-col :span="16">
-          <div style="display: flex;margin-top: 16px;margin-bottom: 16px;">
-            <el-upload
-              ref="upload"
-              name="file"
-              class="upload-demo"
-              accept=".xlsx"
-              action=""
-              :on-change="handleChange"
-              :auto-upload="false"
-              :show-file-list="true"
-              :file-list="uploadFileList"
-            >
-              <el-button slot="trigger" type="primary" style="margin-left: 10px;">
-                <i class="el-icon-upload" />
-                上传文件
-              </el-button>
-            </el-upload>
-          </div>
-        </el-col>
-      </el-row>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="handleImportClose">关闭</el-button>
-        <el-button type="primary" @click="confirmImport">确认导入</el-button>
-      </span>
-    </el-dialog> -->
 
     <el-dialog
       v-el-drag-dialog

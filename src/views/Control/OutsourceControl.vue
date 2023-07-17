@@ -61,28 +61,25 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="24">
-                    <el-button v-if="importDialogDisable === true" type="primary" plain @click="importDialog">
+                    <el-button v-if="buttons.includes('OutsourceControl/importDialog')" type="primary" plain @click="importDialog">
                       1.导入输入文件
                     </el-button>
-                    <el-button v-if="doFilterRulesDialogDisable === true" type="primary" plain @click="doFilterRulesDialog">
+                    <el-button v-if="buttons.includes('OutsourceControl/doFilterRulesDialog')" type="primary" plain @click="doFilterRulesDialog">
                       2.组件筛选
                     </el-button>
-                    <!-- <el-button type="primary" plain @click="updateNewModels">
-                      3.更新新机种
-                    </el-button> -->
-                    <el-button v-if="generateDivisionsDialogDisable === true" type="primary" plain @click="generateDivisionsDialog">
+                    <el-button v-if="buttons.includes('OutsourceControl/generateDivisionsDialog')" type="primary" plain @click="generateDivisionsDialog">
                       3.生成分工单
                     </el-button>
-                    <el-button v-if="computeDialogDisable === true" type="primary" plain @click="computeDialog">
+                    <el-button v-if="buttons.includes('OutsourceControl/computeDialog')" type="primary" plain @click="computeDialog">
                       4.开始计算
                     </el-button>
-                    <el-button v-if="generateOutputDisable === true" type="success" @click="generateOutput('compute')">
+                    <el-button v-if="buttons.includes('OutsourceControl/generateOutput')" type="success" @click="generateOutput('compute')">
                       5.输出文件
                     </el-button>
-                    <el-button v-if="rejustInputDialogDisable === true" type="pushBtn" plain @click="rejustInputDialog">
+                    <el-button v-if="buttons.includes('OutsourceControl/rejustInputDialog')" type="pushBtn" plain @click="rejustInputDialog">
                       重新输入文件
                     </el-button>
-                    <el-button v-if="showFilterRulesDisable === true" plain @click="showFilterRules">
+                    <el-button v-if="buttons.includes('OutsourceControl/showFilterRules')" plain @click="showFilterRules">
                       显示筛选规则
                     </el-button>
                   </el-col>
@@ -105,11 +102,11 @@
                       <i class="el-icon-download" />
                       下载xx文件
                     </el-button> -->
-                    <el-button v-if="downloadAllFileDisable === true" type="success" @click="computeDialog2">
+                    <el-button v-if="buttons.includes('OutsourceControl/download')" type="success" @click="computeDialog2">
                       <i class="el-icon-download" />
                       下载外包优先新机种表
                     </el-button>
-                    <el-button v-if="computeDialog2Disable === true" type="success" @click="downloadAllFile">
+                    <el-button v-if="buttons.includes('OutsourceControl/download')" type="success" @click="downloadAllFile">
                       <i class="el-icon-download" />
                       下载全部输出文件
                     </el-button>
@@ -129,10 +126,10 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="24">
-                    <el-button v-if="saveApsSelfMoDisable === true" type="stopBtn" @click="saveApsSelfMo">
+                    <el-button v-if="buttons.includes('OutsourceControl/saveApsSelfMo')" type="stopBtn" @click="saveApsSelfMo">
                       自制工单信息写入接口
                     </el-button>
-                    <el-button v-if="saveApsOutsoutceMoDisable === true" type="stopBtn" @click="saveApsOutsoutceMoDialog">
+                    <el-button v-if="buttons.includes('OutsourceControl/saveApsOutsoutceMoDialog')" type="stopBtn" @click="saveApsOutsoutceMoDialog">
                       外包结果信息写入接口
                     </el-button>
                   </el-col>
@@ -712,7 +709,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'buttons'
     ])
   },
   created() {

@@ -10,10 +10,10 @@
             <el-button type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button> -->
-            <el-button v-if="updateConfigDisable === true" type="primary" @click="updateConfig">
+            <el-button v-if="buttons.includes('ParamConfig/updateConfig')" type="primary" @click="updateConfig">
               应用当前配置
             </el-button>
-            <el-button v-if="loadFromConfigDisable === true" type="primary" @click="loadFromConfig">
+            <el-button v-if="buttons.includes('ParamConfig/loadFromConfig')" type="primary" @click="loadFromConfig">
               恢复默认配置
             </el-button>
             <!-- <el-button @click="importDataDialog">
@@ -61,6 +61,7 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
+                v-if="buttons.includes('ParamConfig/modify')"
                 type="primary"
                 size="mini"
                 icon="el-icon-edit"
@@ -68,6 +69,7 @@
                 @click="handleModify(scope.$index, scope.row)"
               />
               <!-- <el-button
+                v-if="buttons.includes('ParamConfig/delete')"
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"

@@ -116,13 +116,13 @@
                         </el-button>
                       </el-upload>
                       <div>
-                        <el-button v-if="checkDataDisable === true" type="primary" @click="checkData">
+                        <el-button v-if="buttons.includes('AnalysisControl/checkData')" type="primary" @click="checkData">
                           2.检查文件
                         </el-button>
-                        <el-button v-if="analysisScheduleDisable === true" type="primary" @click="analysisSchedule">
+                        <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" @click="analysisSchedule">
                           3.分析排程
                         </el-button>
-                        <el-button v-if="pushScheduleDisable === true" type="apiBtn" @click="pushSchedule">
+                        <el-button v-if="buttons.includes('AnalysisControl/pushSchedule')" type="apiBtn" @click="pushSchedule">
                           4.推送排程
                         </el-button>
                       </div>
@@ -134,10 +134,10 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-button v-if="downloadAnaExcelDisable === true" type="success" @click="downloadAnaExcel">
+              <el-button v-if="buttons.includes('AnalysisControl/downloadAnaExcel')" type="success" @click="downloadAnaExcel">
                 下载最新分析结果文件
               </el-button>
-              <el-button v-if="downloadAnaExcelDisable === true" type="primary" @click="statisticsSchedule">
+              <el-button v-if="buttons.includes('AnalysisControl/statisticsSchedule')" type="primary" @click="statisticsSchedule">
                 获取量化结果
               </el-button>
             </el-col>
@@ -435,7 +435,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'buttons'
     ])
   },
   created() {

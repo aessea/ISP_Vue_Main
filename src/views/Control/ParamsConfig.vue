@@ -69,7 +69,7 @@
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
                     <el-button
-                      v-if="main_handleModifyDisable === true"
+                      v-if="buttons.includes('ParamsConfig/main_handleModify')"
                       type="primary"
                       size="mini"
                       icon="el-icon-edit"
@@ -79,7 +79,7 @@
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
                     <el-button
-                      v-if="main_restoreDefaultDisable === true"
+                      v-if="buttons.includes('ParamsConfig/main_restoreDefault')"
                       type="danger"
                       size="mini"
                       icon="el-icon-refresh"
@@ -128,7 +128,7 @@
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
                     <el-button
-                      v-if="small_handleModifyDisable === true"
+                      v-if="buttons.includes('ParamsConfig/small_handleModify')"
                       type="primary"
                       size="mini"
                       icon="el-icon-edit"
@@ -138,7 +138,7 @@
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
                     <el-button
-                      v-if="small_handleModifyDisable === true"
+                      v-if="buttons.includes('ParamsConfig/small_restoreDefault')"
                       type="danger"
                       size="mini"
                       icon="el-icon-refresh"
@@ -449,7 +449,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'buttons'
     ])
   },
   created() {

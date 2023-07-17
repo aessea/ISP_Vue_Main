@@ -4,28 +4,28 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="addDataDialogDisable === true" type="primary" @click="addDataDialog">
+            <el-button v-if="buttons.includes('BlockTimeData/add')" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button v-if="addMultiDataDialogDisable === true" type="primary" @click="addMultiDataDialog">
+            <el-button v-if="buttons.includes('BlockTimeData/addMultiDataDialog')" type="primary" @click="addMultiDataDialog">
               <i class="el-icon-plus" />添加多个维护
             </el-button>
-            <el-button v-if="deleteDataDisable === true" type="danger" @click="deleteData">
+            <el-button v-if="buttons.includes('BlockTimeData/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button v-if="backupDataDisable === true" type="backupBtn" @click="backupData">
+            <el-button v-if="buttons.includes('BlockTimeData/backupData')" type="backupBtn" @click="backupData">
               <i class="el-icon-document-copy" />备份数据
             </el-button>
-            <el-button v-if="recoverBackupDataDisable === true" type="backupBtn" @click="recoverBackupData">
+            <el-button v-if="buttons.includes('BlockTimeData/recoverBackupData')" type="backupBtn" @click="recoverBackupData">
               <i class="el-icon-refresh-left" />恢复备份
             </el-button>
-            <el-button v-if="addDataDialogDisable === true" type="backupBtn" @click="manageBackupData">
+            <el-button v-if="buttons.includes('BlockTimeData/manageBackupData')" type="backupBtn" @click="manageBackupData">
               <i class="el-icon-edit-outline" />备份管理
             </el-button>
-            <el-button v-if="importDataDialogDisable === true" @click="importDataDialog">
+            <el-button v-if="buttons.includes('BlockTimeData/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button>
-            <el-button v-if="exportDataDialogDisable === true" @click="exportDataDialog">
+            <el-button v-if="buttons.includes('BlockTimeData/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -91,13 +91,15 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
+                v-if="buttons.includes('BlockTimeData/modify')"
                 type="primary"
                 size="mini"
                 icon="el-icon-edit"
                 circle
                 @click="handleModify(scope.$index, scope.row)"
               />
-              <el-button
+              <el-button'
+                v-if="buttons.includes('BlockTimeData/delete')"
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
@@ -626,16 +628,7 @@ export default {
       manageBackupDialog: false, // 备份管理dialog
       backupTableData: [], // 备份管理数据
       backupTableSelections: [], // 备份管理选中的数据
-      autoBackup: true, // 是否自动备份，默认开启
-      backupDataDisable: true,
-      beforeSyncFormalDataDisable: true,
-      exportDataDialogDisable: true,
-      addDataDialogDisable: true,
-      addMultiDataDialogDisable: true,
-      importDataDialogDisable: true,
-      manageBackupDataDisable: true,
-      recoverBackupDataDisable: true,
-      deleteDataDisable: true
+      autoBackup: true // 是否自动备份，默认开启
     }
   },
   computed: {

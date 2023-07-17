@@ -4,16 +4,16 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="addDataDialogDisable === true" type="primary" @click="addDataDialog">
+            <el-button v-if="buttons.includes('LineData/add')" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <!-- <el-button v-if="deleteDataDisable === true" type="danger" @click="deleteData">
+            <!-- <el-button v-if="buttons.includes('LineData/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button v-if="importDataDialogDisable === true" @click="importDataDialog">
+            <el-button v-if="buttons.includes('LineData/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
-            <el-button v-if="exportDataDialogDisable === true" @click="exportDataDialog">
+            <el-button v-if="buttons.includes('LineData/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -154,6 +154,7 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
+                v-if="buttons.includes('LineData/modify')"
                 type="primary"
                 size="mini"
                 icon="el-icon-edit"
@@ -161,6 +162,7 @@
                 @click="handleModify(scope.$index, scope.row)"
               />
               <el-button
+                v-if="buttons.includes('LineData/delete')"
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"

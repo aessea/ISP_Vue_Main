@@ -138,7 +138,7 @@
                   placeholder="选择预测模型日期"
                 />
                 <el-tooltip class="item" effect="dark" :content="trainDateTip" placement="top">
-                  <el-button type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="trainModel">
+                  <el-button v-if="buttons.includes('SchedulePanel/trainModel')" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="trainModel">
                     <i class="el-icon-pie-chart" />
                     训练预测模型
                   </el-button>
@@ -152,19 +152,19 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="8">
-                    <el-button v-if="computeDialogMainDisable === true" type="primary" plain @click="computeDialogMain">
+                    <el-button v-if="buttons.includes('SchedulePanel/computeDialogMain')" type="primary" plain @click="computeDialogMain">
                       <i class="el-icon-monitor" />
                       计算主板排程
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button v-if="computeDialogSmallDisable === true" type="primary" plain @click="computeDialogSmall">
+                    <el-button v-if="buttons.includes('SchedulePanel/computeDialogSmall')" type="primary" plain @click="computeDialogSmall">
                       <i class="el-icon-monitor" />
                       计算小板排程
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button v-if="computeDialogBothDisable === true" type="primary" plain @click="computeDialogBoth">
+                    <el-button v-if="buttons.includes('SchedulePanel/computeDialogBoth')" type="primary" plain @click="computeDialogBoth">
                       <i class="el-icon-monitor" />
                       计算主板小板
                     </el-button>
@@ -174,19 +174,19 @@
               <div class="box-button">
                 <el-row>
                   <el-col :span="8">
-                    <el-button v-if="stopTabuDisable === true" type="stopBtn" plain @click="stopTabu">
+                    <el-button v-if="buttons.includes('SchedulePanel/stopTabu')" type="stopBtn" plain @click="stopTabu">
                       <i class="el-icon-warning-outline" />
                       终止深度搜索
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button v-if="stopScheduleDisable === true" type="stopBtn" plain @click="stopSchedule">
+                    <el-button v-if="buttons.includes('SchedulePanel/stopSchedule')" type="stopBtn" plain @click="stopSchedule">
                       <i class="el-icon-warning-outline" />
                       终止计算排程
                     </el-button>
                   </el-col>
                   <el-col :span="8">
-                    <el-button v-if="post_statisticsDisable === true" type="pushBtn" plain @click="post_statistics">
+                    <el-button v-if="buttons.includes('SchedulePanel/post_statistics')" type="pushBtn" plain @click="post_statistics">
                       <i class="el-icon-upload2" />
                       推送量化结果
                     </el-button>
@@ -203,25 +203,6 @@
             <el-tab-pane label="主板下载" name="main">
               <el-row>
                 <el-col :span="24">
-                  <!-- <el-alert
-                    title="主板下载历史数据"
-                    type="info"
-                    :closable="false"
-                  />
-                  <div class="box-button">
-                    <el-select v-model="selectExcelValue" placeholder="选择主板历史排程">
-                      <el-option
-                        v-for="item in options_history_excel"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-select>
-                    <el-button type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="downloadHistoryExcel">
-                      <i class="el-icon-download" />
-                      下载历史排程
-                    </el-button>
-                  </div> -->
                   <el-alert
                     title="主板下载最新数据"
                     type="info"
@@ -265,25 +246,6 @@
             <el-tab-pane label="小板下载" name="small">
               <el-row>
                 <el-col :span="24">
-                  <!-- <el-alert
-                    title="小板下载历史数据"
-                    type="info"
-                    :closable="false"
-                  />
-                  <div class="box-button">
-                    <el-select v-model="selectExcelValue" placeholder="选择小板历史排程">
-                      <el-option
-                        v-for="item in options_history_excel"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-select>
-                    <el-button type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="downloadHistoryExcel">
-                      <i class="el-icon-download" />
-                      下载历史排程
-                    </el-button>
-                  </div> -->
                   <el-alert
                     title="小板下载最新数据"
                     type="info"
@@ -317,25 +279,6 @@
             <el-tab-pane label="日志下载" name="log">
               <el-row>
                 <el-col :span="24">
-                  <!-- <el-alert
-                    title="下载历史日志"
-                    type="info"
-                    :closable="false"
-                  />
-                  <div class="box-button">
-                    <el-select v-model="selectLogValue" placeholder="选择历史日志">
-                      <el-option
-                        v-for="item in options_history_log"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-select>
-                    <el-button type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="downloadHistoryLog">
-                      <i class="el-icon-download" />
-                      下载历史日志
-                    </el-button>
-                  </div> -->
                   <el-alert
                     title="下载最新日志"
                     type="info"
@@ -376,18 +319,11 @@
             :style="{width: '70%'}"
             value-format="yyyy-MM-dd"
           />
-          <el-button v-if="modifyHolidayDisable === true" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="modifyHoliday">
+          <el-button v-if="buttons.includes('SchedulePanel/modifyHoliday')" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="modifyHoliday">
             修改包装放假
           </el-button>
         </el-card>
       </el-col>
-      <!-- <el-col :span="12">
-        <el-card class="card-gantt">
-          <div slot="header" class="clearfix">
-            <span>其它</span>
-          </div>
-        </el-card>
-      </el-col> -->
     </el-row>
 
     <el-dialog
@@ -841,21 +777,13 @@ export default {
       saveApsOutPutCountTip: '未推送',
 
       clickComputeCount: 0, // 点击计算排程的次数
-      pack_holiday_day_list: [],
-
-      computeDialogBothDisable: true,
-      modifyHolidayDisable: true,
-      downloadFileBackendDisable: true,
-      trainModelDisable: true,
-      post_statisticsDisable: true,
-      stopScheduleDisable: true,
-      computeDialogSmallDisable: true,
-      computeDialogMainDisable: true
+      pack_holiday_day_list: []
     }
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'buttons'
     ])
   },
   created() {
