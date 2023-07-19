@@ -19,6 +19,9 @@
           >
             搜索
           </el-button>
+          <el-button v-if="buttons.includes('HistoryRun/deleteHistoryLog')" type="danger" @click="deleteHistoryLog">
+            <i class="el-icon-delete" />删除一个月前的日志
+          </el-button>
         </el-col>
         <el-col :span="4">
           <div style="float: right;">
@@ -47,7 +50,6 @@
         style="width: 100%;margin-top: 16px;"
         :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
         max-height="1000px"
-        :row-class-name="tableRowClassName"
         :cell-style="setCellColor"
       >
         <el-table-column
@@ -96,7 +98,8 @@
 </template>
 
 <script>
-import { GetTableData, SearchData } from '@/api/HistoryLog/HistoryRun'
+import { mapGetters } from 'vuex'
+import { GetTableData, SearchData, DeleteHistoryLog } from '@/api/HistoryLog/HistoryRun'
 export default {
   name: 'HistoryRun',
   data() {
@@ -118,6 +121,12 @@ export default {
       levelValue: '', // 搜索level
       isSearch: false
     }
+  },
+  computed: {
+    ...mapGetters([
+      'name',
+      'buttons'
+    ])
   },
   created() {
     this.getTableData(this.currentPage, this.pageSize)
@@ -188,6 +197,31 @@ export default {
     // 帮助
     helpTips() {
 
+    },
+    // 删除一个月前的日志信息
+    deleteHistoryLog() {
+      this.$confirm('确定要删除一个月前的日志信息？', '提示', {
+        confirmButtonText: '确定删除',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btnDanger',
+        type: 'warning'
+      }).then(() => {
+        DeleteHistoryLog().then(res => {
+          if (res.code === 20000) {
+            this.$notify({
+              title: '提示',
+              message: res.message,
+              type: res.message_type
+            })
+            this.refreshTableData() // 刷新表格数据
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消删除'
+        })
+      })
     }
   }
 }
@@ -197,6 +231,14 @@ export default {
   @import '../../assets/css/HistoryLog/HistoryRun.scss';
 </style>
 <style>
+.btnDanger{
+  background-color: #F56C6C !important;
+  border-color: #F56C6C !important;
+}
+.btnDanger:hover{
+  background-color: #f04747 !important;
+  border-color: #f04747 !important;
+}
 .el-pagination {
     text-align: center;
 }
