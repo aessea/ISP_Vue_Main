@@ -10,7 +10,7 @@ const LoggingRouter = {
   meta: {
     title: '日志系统',
     icon: 'documentation',
-    roles: ['HistoryRun', 'HistoryOpera']
+    roles: ['HistoryRun', 'HistoryOpera', 'ScheduleResData']
   },
   children: [
     {
@@ -30,6 +30,16 @@ const LoggingRouter = {
       meta: {
         title: '历史操作',
         roles: ['HistoryOpera'],
+        noCache: true
+      }
+    },
+    {
+      path: 'scheduleresdata',
+      component: () => import('@/views/HistoryLog/ScheduleResData'),
+      name: 'ScheduleResData',
+      meta: {
+        title: '历史排程数据',
+        roles: ['ScheduleResData'],
         noCache: true
       }
     }
