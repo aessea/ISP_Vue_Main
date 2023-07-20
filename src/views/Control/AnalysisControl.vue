@@ -119,11 +119,11 @@
                         <el-button v-if="buttons.includes('AnalysisControl/checkData')" type="primary" @click="checkData">
                           2.检查文件
                         </el-button>
-                        <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" @click="analysisSchedule">
+                        <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" type="primary" @click="analysisSchedule">
                           3.分析排程
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/pushSchedule')" type="apiBtn" @click="pushSchedule">
-                          4.推送排程
+                          4.分析后推送
                         </el-button>
                       </div>
                     </div>
@@ -134,11 +134,14 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-button v-if="buttons.includes('AnalysisControl/downloadAnaExcel')" type="success" @click="downloadAnaExcel">
+              <el-button v-if="buttons.includes('AnalysisControl/download')" type="success" @click="downloadAnaExcel">
                 下载最新分析结果文件
               </el-button>
-              <el-button v-if="buttons.includes('AnalysisControl/statisticsSchedule')" type="primary" @click="statisticsSchedule">
+              <el-button v-if="buttons.includes('AnalysisControl/statisticsSchedule')" type="apiBtn" @click="statisticsSchedule">
                 获取量化结果
+              </el-button>
+              <el-button v-if="buttons.includes('AnalysisControl/pushImportSchedule')" type="apiBtn" @click="pushImportSchedule">
+                导入后直接推送
               </el-button>
             </el-col>
           </el-row>
@@ -369,6 +372,7 @@ import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled,
   AiPrescheduled, AiScheduled, CheckData, GetHistoryAnaItem, GetHistoryAnaData,
   ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
 } from '@/api/Control/OnlineTable'
+import { DoImportPushSchedule } from '@/api/Control/AnalysisControl'
 import { DownloadFile } from '@/api/common'
 import XLSX from 'xlsx'
 import FileSaver from 'file-saver'
@@ -450,6 +454,76 @@ export default {
       this.ana_progress_refresh = setInterval(() => { // 每隔2秒监听进度条
         setTimeout(this.getAnaProgress(), 0)
       }, 2000)
+    },
+    pushImportSchedule() {
+      if (this.checkAlertType !== 'success') {
+        var confirmText = ['确定要直接导入后推送排程？', '注意：直接导入将不会进行分析排程！']
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        this.$confirm('提示', {
+          title: '提示',
+          message: h('div', null, newDatas),
+          confirmButtonText: '确定导入',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.checkPushImportSchedule()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消导入'
+          })
+        })
+      } else {
+        this.checkPushImportSchedule()
+      }
+    },
+    checkPushImportSchedule() {
+      if (this.checkAlertType !== 'success') {
+        this.$confirm('数据检查未通过，确定要导入排程?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.doImportPsuhSchedule()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消分析'
+          })
+        })
+      } else {
+        this.doImportPsuhSchedule()
+      }
+    },
+    // 导入后直接推送
+    async doImportPsuhSchedule() {
+      const form = new FormData()
+      form.append('file', this.uploadFile)
+      form.append('file_name', this.uploadFileName)
+      form.append('user_name', this.name)
+      const importLoading = {
+        text: '导入中...',
+        background: 'rgba(0, 0, 0, 0.5)'
+      }
+      this.loadingInstance = Loading.service(importLoading)
+      await DoImportPushSchedule(form).then(res => {
+        this.loadingInstance.close()
+        this.pushDialogVisible = true
+        this.$alert(res.message, '提示', {
+          confirmButtonText: '确定',
+          type: 'success'
+        })
+      }).catch(err => {
+        this.loadingInstance.close()
+        this.$alert('导入失败' + err, '提示', {
+          confirmButtonText: '确定',
+          type: 'error'
+        })
+      })
     },
     // 取消监听进度条
     clearListenProgress() {
