@@ -19,7 +19,7 @@
               <div @click="toAnalysis">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-monitor" /></span>
-                  <span style="margin-left: 10px;">在线表格</span>
+                  <span style="margin-left: 10px;">分析推送</span>
                 </el-card>
               </div>
             </el-col>
@@ -149,7 +149,7 @@ export default {
       this.$router.push({ path: 'control/schedulepanel' })
     },
     toAnalysis() {
-      this.$router.push({ path: 'control/onlinetable' })
+      this.$router.push({ path: 'control/analysiscontrol' })
     },
     toLoggingdb() {
       this.$router.push({ path: 'historylog/historyrun' })
