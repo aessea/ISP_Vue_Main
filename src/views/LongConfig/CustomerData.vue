@@ -4,16 +4,16 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="buttons.includes('BoardAdvanceDate/add')" type="primary" @click="addDataDialog">
+            <el-button v-if="buttons.includes('CustomerData/add')" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
-            <el-button v-if="buttons.includes('BoardAdvanceDate/delete')" type="danger" @click="deleteData">
+            <el-button v-if="buttons.includes('CustomerData/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />删除
             </el-button>
-            <el-button v-if="buttons.includes('BoardAdvanceDate/import')" @click="importDataDialog">
+            <el-button v-if="buttons.includes('CustomerData/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button>
-            <el-button v-if="buttons.includes('BoardAdvanceDate/export')" @click="exportDataDialog">
+            <el-button v-if="buttons.includes('CustomerData/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -56,7 +56,7 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
-                v-if="buttons.includes('BoardAdvanceDate/modify')"
+                v-if="buttons.includes('CustomerData/modify')"
                 type="primary"
                 size="mini"
                 icon="el-icon-edit"
@@ -64,7 +64,7 @@
                 @click="handleModify(scope.$index, scope.row)"
               />
               <el-button
-                v-if="buttons.includes('BoardAdvanceDate/delete')"
+                v-if="buttons.includes('CustomerData/delete')"
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
