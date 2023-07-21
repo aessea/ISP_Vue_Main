@@ -15,7 +15,7 @@ const NewLongConfigRouter = {
       'OptimizedMachineData', 'ProcessData', 'SmallProcessData', 'ChangeLineData',
       'PairedSMTMachineData', 'InterfaceConfig', 'BoardAdvanceDate', 'BlockTimeData',
       'ProgramData', 'NoProgramData', 'NetworkBoard', 'TestProgramData', 'ProductProgramData',
-      'ProcessSequenceMap'
+      'ProcessSequenceMap', 'CustomerData'
     ]
   },
   children: [
@@ -125,6 +125,15 @@ const NewLongConfigRouter = {
       meta: {
         title: '后工序提早交期表',
         roles: ['BoardAdvanceDate']
+      }
+    },
+    {
+      path: 'customerdata',
+      component: () => import('@/views/LongConfig/CustomerData'),
+      name: 'CustomerData',
+      meta: {
+        title: '客户识别表',
+        roles: ['CustomerData']
       }
     },
     {

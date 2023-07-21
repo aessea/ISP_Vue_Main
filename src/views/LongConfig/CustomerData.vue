@@ -51,15 +51,8 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="classify" label="类型">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.classify === 'common'" size="small" type="primary">普通</el-tag>
-              <el-tag v-else-if="scope.row.classify === 'special'" size="small" type="danger">特殊</el-tag>
-              <el-tag v-else size="small" type="info">未知</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="process" label="制程" sortable />
-          <el-table-column prop="sequence" label="先后加工顺序" />
+          <el-table-column prop="name" label="客户名称" sortable />
+          <el-table-column prop="identification" label="客户识别码" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -103,23 +96,14 @@
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.classify" prop="classify" label="类型">
-              <el-select v-model="model.classify" placeholder="请选择" :style="{width: '100%'}">
-                <el-option v-for="(item) in all_classify_list" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
-              </el-select>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.name" prop="name" label="客户名称">
+              <el-input v-model="model.name" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.process" prop="process" label="制程">
-              <el-select v-model="model.process" placeholder="请选择" :style="{width: '100%'}">
-                <el-option v-for="(item) in all_process_list" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.sequence" prop="sequence" label="先后加工顺序">
-              <el-input v-model="model.sequence" placeholder="请输入" clearable />
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.identification" prop="identification" label="客户识别码">
+              <el-input v-model="model.identification" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -212,10 +196,9 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/ProcessSequenceMap'
-import { GetLineProcess } from '@/api/common'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/CustomerData'
 export default {
-  name: 'ProcessSequenceMap',
+  name: 'CustomerData',
   directives: { elDragDialog },
   data() {
     return {
@@ -245,39 +228,27 @@ export default {
       forms: ['$form'],
       model: {
         id: '',
-        classify: '',
-        process: '',
-        sequence: ''
+        name: '',
+        identification: ''
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
         id: '',
-        classify: '',
-        process: '',
-        sequence: ''
+        name: '',
+        identification: ''
       },
       rules: {
-        classify: [{
+        name: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'
         }],
-        process: [{
-          required: true,
-          message: '不能为空',
-          trigger: 'blur'
-        }],
-        sequence: [{
+        identification: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'
         }]
       },
-      all_process_list: [],
-      all_classify_list: [
-        { label: '普通', value: 'common' },
-        { label: '特殊', value: 'special' }
-      ],
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -292,7 +263,6 @@ export default {
     ])
   },
   created() {
-    this.getLineProcess()
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
@@ -302,16 +272,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    getLineProcess() {
-      GetLineProcess().then(res => {
-        this.all_process_list = []
-        for (const key in res.all_process_list) {
-          this.all_process_list.push(
-            { label: res.all_process_list[key], value: res.all_process_list[key] }
-          )
-        }
-      })
     },
     // 分页
     handlePageChange(val) {

@@ -12,7 +12,8 @@ const LongConfigRouter = {
     icon: 'el-icon-setting',
     roles: ['MP1AddLineData', 'NotMP1AddLineData', 'ExchangeLineData', 'LineData', 'CapacityChangeData', 'OptimizedMachineData',
       'ProcessData', 'SmallProcessData', 'KeyBoardLineData', 'ChangeLineData', 'PairedSMTMachineData',
-      'KeyBoardSpecialModel', 'InterfaceConfig', 'BoardAdvanceDate', 'ProcessSequenceMap']
+      'KeyBoardSpecialModel', 'InterfaceConfig', 'BoardAdvanceDate', 'ProcessSequenceMap',
+      'CustomerData']
   },
   children: [
     // {
@@ -151,15 +152,6 @@ const LongConfigRouter = {
       }
     },
     {
-      path: 'interfaceconfig',
-      component: () => import('@/views/LongConfig/InterfaceConfig'),
-      name: 'InterfaceConfig',
-      meta: {
-        title: '接口配置表',
-        roles: ['InterfaceConfig']
-      }
-    },
-    {
       path: 'boardadvancedate',
       component: () => import('@/views/LongConfig/BoardAdvanceDate'),
       name: 'BoardAdvanceDate',
@@ -175,6 +167,24 @@ const LongConfigRouter = {
       meta: {
         title: '先后加工顺序对照表',
         roles: ['ProcessSequenceMap']
+      }
+    },
+    {
+      path: 'customerdata',
+      component: () => import('@/views/LongConfig/CustomerData'),
+      name: 'CustomerData',
+      meta: {
+        title: '客户识别表',
+        roles: ['CustomerData']
+      }
+    },
+    {
+      path: 'interfaceconfig',
+      component: () => import('@/views/LongConfig/InterfaceConfig'),
+      name: 'InterfaceConfig',
+      meta: {
+        title: '接口配置表',
+        roles: ['InterfaceConfig']
       }
     }
   ]
