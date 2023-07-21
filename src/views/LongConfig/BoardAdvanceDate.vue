@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <!-- <el-button v-if="buttons.includes('BoardAdvanceDate/add')" type="primary" @click="addDataDialog">
+            <el-button v-if="buttons.includes('BoardAdvanceDate/add')" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />添加
             </el-button>
             <el-button v-if="buttons.includes('BoardAdvanceDate/delete')" type="danger" @click="deleteData">
@@ -12,7 +12,7 @@
             </el-button>
             <el-button v-if="buttons.includes('BoardAdvanceDate/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
-            </el-button> -->
+            </el-button>
             <el-button v-if="buttons.includes('BoardAdvanceDate/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
@@ -64,14 +64,14 @@
                 circle
                 @click="handleModify(scope.$index, scope.row)"
               />
-              <!-- <el-button
+              <el-button
                 v-if="buttons.includes('BoardAdvanceDate/delete')"
                 type="danger"
                 size="mini"
                 icon="el-icon-delete"
                 circle
                 @click="handleDelete(scope.$index, scope.row)"
-              /> -->
+              />
             </template>
           </el-table-column>
         </el-table>
@@ -98,13 +98,18 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_name" prop="param_name" label="后工序">
+              <el-input v-model="model.param_name" placeholder="请输入" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_value" prop="param_value" label="提前打板时间(单位:时)">
               <el-input v-model="model.param_value" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_sources" prop="param_sources" label="参数描述">
-              <el-input v-model="model.param_sources" placeholder="请输入" clearable />
+          <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_sources" prop="param_sources" label="数据来源(单位:时)">
+              <el-input v-model="model.param_sources" placeholder="系统自动生成" disabled />
             </el-form-item>
           </el-col> -->
         </el-row>
@@ -138,19 +143,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="param_description" label="包装线" />
-        <el-table-column prop="param_value" label="放假开始时间" />
-        <el-table-column prop="holiday_end" label="放假结束时间" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -224,17 +216,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          param_description: 'CL01',
-          param_value: '2022-10-01',
-          holiday_end: '2022-10-02'
-        }, {
-          param_description: '(必填)',
-          param_value: '(必填)',
-          holiday_end: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -266,6 +247,11 @@ export default {
         param_name: ''
       },
       rules: {
+        param_name: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
         param_value: [{
           required: true,
           message: '不能为空',
@@ -295,15 +281,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 2) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {
@@ -345,6 +322,7 @@ export default {
       data['user_name'] = this.name
       this.$refs['$form'].validate((valid) => {
         if (valid) {
+          data['param_sources'] = '人工创建'
           AddData(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
@@ -471,7 +449,7 @@ export default {
       data['user_name'] = this.name
       this.$refs['$form'].validate((valid) => {
         if (valid) {
-          data['param_sources'] = '人工'
+          data['param_sources'] = '人工调整'
           ModifyData(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
