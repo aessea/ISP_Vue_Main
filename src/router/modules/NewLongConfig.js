@@ -14,7 +14,8 @@ const NewLongConfigRouter = {
       'MP1AddLineData', 'NotMP1AddLineData', 'ExchangeLineData', 'CapacityChangeData',
       'OptimizedMachineData', 'ProcessData', 'SmallProcessData', 'ChangeLineData',
       'PairedSMTMachineData', 'InterfaceConfig', 'BoardAdvanceDate', 'BlockTimeData',
-      'ProgramData', 'NoProgramData', 'NetworkBoard', 'TestProgramData', 'ProductProgramData'
+      'ProgramData', 'NoProgramData', 'NetworkBoard', 'TestProgramData', 'ProductProgramData',
+      'ProcessSequenceMap'
     ]
   },
   children: [
@@ -124,6 +125,15 @@ const NewLongConfigRouter = {
       meta: {
         title: '后工序提早交期表',
         roles: ['BoardAdvanceDate']
+      }
+    },
+    {
+      path: 'processsequencmap',
+      component: () => import('@/views/LongConfig/ProcessSequenceMap'),
+      name: 'ProcessSequenceMap',
+      meta: {
+        title: '先后加工顺序对照表',
+        roles: ['ProcessSequenceMap']
       }
     },
     {

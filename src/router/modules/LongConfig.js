@@ -12,7 +12,7 @@ const LongConfigRouter = {
     icon: 'el-icon-setting',
     roles: ['MP1AddLineData', 'NotMP1AddLineData', 'ExchangeLineData', 'LineData', 'CapacityChangeData', 'OptimizedMachineData',
       'ProcessData', 'SmallProcessData', 'KeyBoardLineData', 'ChangeLineData', 'PairedSMTMachineData',
-      'KeyBoardSpecialModel', 'InterfaceConfig', 'BoardAdvanceDate']
+      'KeyBoardSpecialModel', 'InterfaceConfig', 'BoardAdvanceDate', 'ProcessSequenceMap']
   },
   children: [
     // {
@@ -166,6 +166,15 @@ const LongConfigRouter = {
       meta: {
         title: '后工序提早交期表',
         roles: ['BoardAdvanceDate']
+      }
+    },
+    {
+      path: 'processsequencmap',
+      component: () => import('@/views/LongConfig/ProcessSequenceMap'),
+      name: 'ProcessSequenceMap',
+      meta: {
+        title: '先后加工顺序对照表',
+        roles: ['ProcessSequenceMap']
       }
     }
   ]
