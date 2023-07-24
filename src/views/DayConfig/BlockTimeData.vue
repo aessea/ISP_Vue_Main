@@ -32,13 +32,13 @@
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="同步正式库维护时间表" placement="top">
+            <el-tooltip class="item" effect="dark" content="同步指定数据库的维护时间表" placement="top">
               <el-button
-                v-if="beforeSyncFormalDataDisable === true"
+                v-if="buttons.includes('BlockTimeData/sync')"
                 size="small"
                 icon="el-icon-download"
                 circle
-                @click="beforeSyncFormalData"
+                @click="beforeSyncDatabaseData"
               />
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
@@ -492,7 +492,7 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, AddMultiData,
   ExportData, ImportData, GetBackupName, BackupData, RecoverBackupData, DeleteBackupData,
-  GetDefaultData, SyncFormalData } from '@/api/DayConfig/BlockTimeData'
+  GetDefaultData, SyncDatabaseData } from '@/api/DayConfig/BlockTimeData'
 // import { lineOptions, LineOptions } from '@/utils/items'
 export default {
   name: 'BlockTimeData',
@@ -1287,14 +1287,14 @@ export default {
       })
     },
     // 测试库同步正式库的维护时间表（提示）
-    beforeSyncFormalData() {
-      this.$confirm('确定要同步正式库的维护时间表？', '提示', {
+    beforeSyncDatabaseData() {
+      this.$confirm('确定要同步指定数据库的维护时间表？', '提示', {
         confirmButtonText: '确定同步',
         cancelButtonText: '取消',
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
-        this.syncFormalData()
+        this.syncDatabaseData()
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -1303,13 +1303,13 @@ export default {
       })
     },
     // 测试库同步正式库的维护时间表
-    syncFormalData() {
+    syncDatabaseData() {
       const syncLoading = {
         text: '拼命同步中...',
         background: 'rgba(0, 0, 0, 0.6)'
       }
       this.loadingInstance = Loading.service(syncLoading)
-      SyncFormalData().then(res => {
+      SyncDatabaseData().then(res => {
         if (res.code === 20000) {
           this.loadingInstance.close() // 清除动画
           this.$alert(res.message, '提示', {

@@ -11,6 +11,14 @@
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
+            <el-tooltip class="item" effect="dark" content="同步指定数据库的排程配置" placement="top">
+              <el-button
+                size="small"
+                icon="el-icon-download"
+                circle
+                @click="beforeSyncDatabaseData"
+              />
+            </el-tooltip>
             <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
               <el-button
                 size="small"
@@ -180,7 +188,7 @@
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_name_front" label="配置名" width="160" sortable>
+              <el-table-column prop="param_name_front" label="配置名" width="200" sortable>
                 <template slot-scope="scope">
                   <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
                 </template>
@@ -375,9 +383,9 @@
 <script>
 import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
-// import { Loading } from 'element-ui'
+import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, ModifyData, ExportData, RestoreDefault } from '@/api/Control/ParamsConfig'
+import { GetTableData, ModifyData, ExportData, RestoreDefault, SyncDatabaseData } from '@/api/Control/ParamsConfig'
 export default {
   name: 'ParamConfigManage',
   directives: { elDragDialog },
@@ -534,6 +542,44 @@ export default {
       } else { // 否则只刷新当前页
         this.getTableData(this.currentPage, this.pageSize)
       }
+    },
+    beforeSyncDatabaseData() {
+      this.$confirm('确定要同步指定数据库的排程配置？', '提示', {
+        confirmButtonText: '确定同步',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btnDanger',
+        type: 'warning'
+      }).then(() => {
+        this.syncDatabaseData()
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消同步'
+        })
+      })
+    },
+    syncDatabaseData() {
+      const syncLoading = {
+        text: '拼命同步中...',
+        background: 'rgba(0, 0, 0, 0.6)'
+      }
+      this.loadingInstance = Loading.service(syncLoading)
+      SyncDatabaseData().then(res => {
+        if (res.code === 20000) {
+          this.loadingInstance.close() // 清除动画
+          this.$alert(res.message, '提示', {
+            confirmButtonText: '确定',
+            type: 'success'
+          })
+          this.refreshTableData(true)
+        }
+      }).catch(err => {
+        this.loadingInstance.close() // 清除动画
+        this.$alert(err, '错误', {
+          confirmButtonText: '确定',
+          type: 'error'
+        })
+      })
     },
     // 获取表格勾选数据
     handleSelectionChange(val) {

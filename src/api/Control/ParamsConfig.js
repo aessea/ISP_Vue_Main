@@ -30,3 +30,10 @@ export function ExportData() {
     method: 'get'
   })
 }
+// 测试库指定数据库的数据
+export function SyncDatabaseData() {
+  return request({
+    method: 'get',
+    url: '/Control/ParamsConfig/sync_data/'
+  })
+}

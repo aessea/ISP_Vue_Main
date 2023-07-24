@@ -54,3 +54,10 @@ export function ExportData() {
     method: 'get'
   })
 }
+export function SyncDatabaseData() {
+  return request({
+    method: 'get',
+    url: '/DayConfig/ProductionReportData/sync_data/',
+    timeout: 10 * 60 * 1000
+  })
+}
