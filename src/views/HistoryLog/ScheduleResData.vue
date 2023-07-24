@@ -2,10 +2,12 @@
   <div class="main-box">
     <el-card>
       <el-row>
-        <el-col :span="20">
-          <!-- <el-button v-if="buttons.includes('HistoryRun/deleteHistoryLog')" type="danger" @click="deleteHistoryLog">
-            <i class="el-icon-delete" />删除一个月前的日志
-          </el-button> -->
+        <el-col :span="16">
+          <div>
+            <el-button @click="exportDataDialog">
+              <i class="el-icon-download" />导出
+            </el-button>
+          </div>
         </el-col>
         <el-col :span="4">
           <div style="float: right;">
@@ -57,12 +59,34 @@
         @current-change="handlePageChange"
       />
     </el-card>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="导出数据"
+      :visible.sync="exportDialogVisible"
+      :before-close="handleExportClose"
+      width="45%"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <span>导出文件格式：</span>
+        <el-radio-group v-model="exportRadio">
+          <el-radio label="xlsx">.xlsx</el-radio>
+        </el-radio-group>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleExportClose">关闭</el-button>
+        <el-button type="primary" @click="exportData">确认导出</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { GetTableData } from '@/api/HistoryLog/ScheduleResData'
+import { GetTableData, ExportData } from '@/api/HistoryLog/ScheduleResData'
+import XLSX from 'xlsx'
 export default {
   name: 'ScheduleResData',
   data() {
@@ -73,7 +97,9 @@ export default {
       total_num: 0,
       pageSize: 20,
       currentPage: 1,
-      isSearch: false
+      isSearch: false,
+      exportDialogVisible: false,
+      exportRadio: 'xlsx' // 导出格式选择（方便以后扩展）
     }
   },
   computed: {
@@ -111,6 +137,40 @@ export default {
     // 帮助
     helpTips() {
 
+    },
+    // 数据库导出到Excel
+    exportDataDialog() {
+      this.exportDialogVisible = true
+    },
+    // 确认导出
+    exportData() {
+      ExportData().then(res => {
+        if (res.code === 20000) {
+          const dataCount = res.data_count
+          const sheetData = res.table_data
+          const fields = res.fields
+          const tableName = res.table_name
+          const fields_display = res.fields_display
+          const newData = [fields_display, ...sheetData]
+          const sheet = XLSX.utils.json_to_sheet(newData, { header: fields, skipHeader: true })
+          const wb = XLSX.utils.book_new()
+          XLSX.utils.book_append_sheet(wb, sheet, tableName)
+          XLSX.writeFile(wb, tableName + '.xlsx')
+          this.$notify({
+            title: '导出成功',
+            message: '本次共导出了 ' + dataCount + ' 条数据',
+            type: 'success'
+          })
+          // 1秒后自动关闭窗口
+          setTimeout(() => {
+            this.handleExportClose() // 导出后自动关闭窗口
+          }, 1000)
+        }
+      })
+    },
+    // 导入数据窗口关闭
+    handleExportClose() {
+      this.exportDialogVisible = false
     }
   }
 }

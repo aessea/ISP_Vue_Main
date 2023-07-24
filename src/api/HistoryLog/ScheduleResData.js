@@ -7,3 +7,10 @@ export function GetTableData(data) {
     data
   })
 }
+export function ExportData(data) {
+  return request({
+    url: '/HistoryLog/ScheduleResData/export_data/',
+    method: 'post',
+    data
+  })
+}

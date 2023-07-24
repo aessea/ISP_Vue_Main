@@ -20,7 +20,7 @@
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="同步指定数据库的生产报表" placement="top">
+            <!-- <el-tooltip class="item" effect="dark" content="同步指定数据库的生产报表" placement="top">
               <el-button
                 v-if="buttons.includes('ProductionReportData/sync')"
                 size="small"
@@ -28,7 +28,7 @@
                 circle
                 @click="beforeSyncDatabaseData"
               />
-            </el-tooltip>
+            </el-tooltip> -->
             <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
               <el-button
                 size="small"
