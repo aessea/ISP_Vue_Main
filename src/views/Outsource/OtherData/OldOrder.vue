@@ -11,7 +11,7 @@
               <i class="el-icon-delete" />删除
             </el-button>
             <el-button v-if="buttons.includes('OldOrder/deleteAll')" type="danger" @click="deleteAllData">
-              <i class="el-icon-delete" />清空旧工单数据
+              <i class="el-icon-delete" />清空所有数据
             </el-button>
             <!-- <el-button v-if="buttons.includes('OldOrder/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入

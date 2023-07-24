@@ -41,10 +41,10 @@
           stripe
         >
           <el-table-column prop="role_name" label="用户角色" width="160" />
-          <el-table-column prop="rule_menus" label="可访问的页面">
+          <el-table-column prop="role_menus" label="可访问的页面">
             <template slot-scope="scope">
               <el-tag
-                v-for="(val, key) in scope.row.rule_menus"
+                v-for="(val, key) in scope.row.role_menus"
                 :key="key"
                 style="margin-right: 5px;"
               >
@@ -275,11 +275,11 @@ export default {
       this.dialogTitle = '修改角色信息'
       this.createOrModify = false
       this.input_role_name = row['role_name']
-      this.input_role_data_list = row['rule_menus']
+      this.input_role_data_list = row['role_menus']
       this.role_data_value = []
       this.row_id = row['id']
-      for (const key in row['rule_menus']) {
-        this.role_data_value.push(this.menu_role_dict[row['rule_menus'][key]])
+      for (const key in row['role_menus']) {
+        this.role_data_value.push(this.menu_role_dict[row['role_menus'][key]])
       }
       // 显示dialog
       this.dataDialogVisible = true

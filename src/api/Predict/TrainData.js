@@ -54,3 +54,10 @@ export function ExportData() {
     method: 'get'
   })
 }
+// 清空所有数据
+export function DeleteAllData() {
+  return request({
+    url: '/Predict/TrainData/delete_all_data/',
+    method: 'get'
+  })
+}
