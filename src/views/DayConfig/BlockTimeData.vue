@@ -98,7 +98,7 @@
                 circle
                 @click="handleModify(scope.$index, scope.row)"
               />
-              <el-button'
+              <el-button
                 v-if="buttons.includes('BlockTimeData/delete')"
                 type="danger"
                 size="mini"
