@@ -13,7 +13,7 @@ const LongConfigRouter = {
     roles: ['MP1AddLineData', 'NotMP1AddLineData', 'ExchangeLineData', 'LineData', 'CapacityChangeData', 'OptimizedMachineData',
       'ProcessData', 'SmallProcessData', 'KeyBoardLineData', 'ChangeLineData', 'PairedSMTMachineData',
       'KeyBoardSpecialModel', 'InterfaceConfig', 'BoardAdvanceDate', 'ProcessSequenceMap',
-      'CustomerData']
+      'CustomerData', 'DelayPackingLine']
   },
   children: [
     // {
@@ -176,6 +176,15 @@ const LongConfigRouter = {
       meta: {
         title: '客户识别表',
         roles: ['CustomerData']
+      }
+    },
+    {
+      path: 'delaypackingline',
+      component: () => import('@/views/LongConfig/DelayPackingLine'),
+      name: 'DelayPackingLine',
+      meta: {
+        title: '包装线延后表',
+        roles: ['DelayPackingLine']
       }
     },
     {

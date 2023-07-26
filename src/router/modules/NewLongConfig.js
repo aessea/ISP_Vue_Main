@@ -15,7 +15,7 @@ const NewLongConfigRouter = {
       'OptimizedMachineData', 'ProcessData', 'SmallProcessData', 'ChangeLineData',
       'PairedSMTMachineData', 'InterfaceConfig', 'BoardAdvanceDate', 'BlockTimeData',
       'ProgramData', 'NoProgramData', 'NetworkBoard', 'TestProgramData', 'ProductProgramData',
-      'ProcessSequenceMap', 'CustomerData'
+      'ProcessSequenceMap', 'CustomerData', 'DelayPackingLine'
     ]
   },
   children: [
@@ -179,6 +179,15 @@ const NewLongConfigRouter = {
       meta: {
         title: '试跑程序表',
         roles: ['TestProgramData']
+      }
+    },
+    {
+      path: 'delaypackingline',
+      component: () => import('@/views/LongConfig/DelayPackingLine'),
+      name: 'DelayPackingLine',
+      meta: {
+        title: '包装线延后表',
+        roles: ['DelayPackingLine']
       }
     },
     {
