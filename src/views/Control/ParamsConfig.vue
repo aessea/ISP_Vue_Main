@@ -238,6 +238,15 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-form-item :rules="rules.visible_roles" prop="visible_roles" label="可配置的角色">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-checkbox-group v-model="model.visible_roles" disabled>
+                <el-checkbox v-for="role in all_role_list" :key="role.index" :label="role" />
+              </el-checkbox-group>
+            </el-col>
+          </el-form-item>
+        </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">关闭</el-button>
@@ -334,7 +343,8 @@ export default {
         update_user: '',
         serial_number: '',
         param_description: '',
-        show_in_front: ''
+        show_in_front: '',
+        visible_roles: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -352,7 +362,8 @@ export default {
         update_user: '',
         serial_number: '',
         param_description: '',
-        show_in_front: ''
+        show_in_front: '',
+        visible_roles: []
       },
       rules: {
         param_name_front: [{
@@ -382,7 +393,8 @@ export default {
         { label: '小板配置', value: 'small' },
         { label: '其它配置', value: 'other' }
       ],
-      param_classify_options: [] // 参数分类选项
+      param_classify_options: [], // 参数分类选项
+      all_role_list: []
     }
   },
   computed: {
@@ -426,6 +438,7 @@ export default {
           this.table_data_small = res.table_data_small
           this.table_data_other = res.table_data_other
           this.param_classify_options = res.param_classify_options
+          this.all_role_list = res.all_role_list
           this.total_num = res.total_num
           this.loading = false
         }
