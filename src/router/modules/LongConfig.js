@@ -192,7 +192,7 @@ const LongConfigRouter = {
       component: () => import('@/views/LongConfig/InterfaceConfig'),
       name: 'InterfaceConfig',
       meta: {
-        title: '接口配置表',
+        title: '对接MES接口配置表',
         roles: ['InterfaceConfig']
       }
     }
