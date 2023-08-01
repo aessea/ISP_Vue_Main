@@ -53,13 +53,23 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="classify" label="类型">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.classify === 'common'" size="small" type="primary">普通</el-tag>
-              <el-tag v-else-if="scope.row.classify === 'special'" size="small" type="danger">特殊</el-tag>
-              <el-tag v-else size="small" type="info">未知</el-tag>
+              <el-tag v-if="scope.row.classify === 'common'" size="small" type="info">普通工单</el-tag>
+              <el-tag v-else size="small" type="primary">{{ scope.row.classify }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="process" label="制程" sortable />
-          <el-table-column prop="sequence" label="先后加工顺序" />
+          <!-- <el-table-column prop="sequence_list" label="先后加工顺序" /> -->
+          <el-table-column prop="sequence_list" label="先后加工顺序">
+            <template slot-scope="scope">
+              <el-tag
+                v-for="(val, key) in scope.row.sequence_list"
+                :key="key"
+                style="margin-right: 5px;"
+              >
+                {{ val }}
+              </el-tag>
+            </template>
+          </el-table-column>
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -103,25 +113,29 @@
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.classify" prop="classify" label="类型">
               <el-select v-model="model.classify" placeholder="请选择" :style="{width: '100%'}">
                 <el-option v-for="(item) in all_classify_list" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.process" prop="process" label="制程">
               <el-select v-model="model.process" placeholder="请选择" :style="{width: '100%'}">
                 <el-option v-for="(item) in all_process_list" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.sequence" prop="sequence" label="先后加工顺序">
-              <el-input v-model="model.sequence" placeholder="请输入" clearable />
-            </el-form-item>
-          </el-col>
+        </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-form-item :rules="rules.sequence_list" prop="sequence_list" label="先后加工顺序">
+            <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
+              <el-checkbox-group v-model="model.sequence_list">
+                <el-checkbox v-for="sequence in all_sequence_list" :key="sequence.index" :label="sequence" />
+              </el-checkbox-group>
+            </el-col>
+          </el-form-item>
         </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -138,7 +152,10 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <span>关于表格的各种说明可以写在这</span>
+      <span>如果特殊客户的先后加工顺序和制程的匹配关系有维护在该表中，就会按照表中的关系进行数据检查。</span>
+      <span>如果特殊客户没有进行维护，就按照普通工单的逻辑进行数据检查。</span>
+      <span>（可以设置一个制程可匹配多个先后加工顺序）</span>
+      <p>该表维护的注意事项：普通工单的所有制程都必须维护，特殊客户可以选择性维护。</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">关闭</el-button>
       </span>
@@ -247,14 +264,14 @@ export default {
         id: '',
         classify: '',
         process: '',
-        sequence: ''
+        sequence_list: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
         id: '',
         classify: '',
         process: '',
-        sequence: ''
+        sequence_list: []
       },
       rules: {
         classify: [{
@@ -267,7 +284,7 @@ export default {
           message: '不能为空',
           trigger: 'blur'
         }],
-        sequence: [{
+        sequence_list: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'
@@ -281,8 +298,9 @@ export default {
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
-      pageSize: 20, // 每页多少条数据
-      dataTableSelections: [] // 表格选中的数据
+      pageSize: 50, // 每页多少条数据
+      dataTableSelections: [], // 表格选中的数据
+      all_sequence_list: ['0', '1', '2']
     }
   },
   computed: {
@@ -327,6 +345,7 @@ export default {
           this.table_data = res.table_data
           this.total_num = res.total_num
           this.loading = false
+          this.all_classify_list = res.all_classify_list
         }
       })
     },
