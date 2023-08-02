@@ -1288,7 +1288,7 @@ export default {
     },
     // 测试库同步正式库的维护时间表（提示）
     beforeSyncDatabaseData() {
-      this.$confirm('确定要同步指定数据库的维护时间表？', '提示', {
+      this.$confirm('确定要同步排程配置表中指定数据库的维护时间表？', '提示', {
         confirmButtonText: '确定同步',
         cancelButtonText: '取消',
         confirmButtonClass: 'btnDanger',
