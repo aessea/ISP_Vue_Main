@@ -364,6 +364,8 @@ export default {
       this.dialogBtnType = true
       this.dataDialogVisible = true
       this.isClick = false
+      this.model['sequence_list'] = []
+      this.modelOriginal['sequence_list'] = []
     },
     // 添加数据
     addData() {
