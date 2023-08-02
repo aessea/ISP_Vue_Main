@@ -526,11 +526,7 @@ export default {
           message: '不能为空',
           trigger: 'blur'
         }],
-        switch_name: [{
-          required: true,
-          message: '不能为空',
-          trigger: 'blur'
-        }]
+        switch_name: []
       },
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
