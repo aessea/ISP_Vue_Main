@@ -310,7 +310,7 @@ export default {
           }
         },
         legend: {
-          data: ['目标值', '逾期', '停顿', '线平衡', '分组数']
+          data: ['逾期', '停顿', '线平衡', '分组数', '运行时长']
         },
         toolbox: {
           show: true,
@@ -338,16 +338,6 @@ export default {
           }
         ],
         series: [
-          {
-            name: '目标值',
-            type: 'bar',
-            barGap: 0,
-            label: labelOption,
-            emphasis: {
-              focus: 'series'
-            },
-            data: this.obj_value_list
-          },
           {
             name: '逾期',
             type: 'bar',
@@ -383,6 +373,16 @@ export default {
               focus: 'series'
             },
             data: this.group_count_list
+          },
+          {
+            name: '运行时长',
+            type: 'bar',
+            barGap: 0,
+            label: labelOption,
+            emphasis: {
+              focus: 'series'
+            },
+            data: this.run_time_list
           }
         ]
       }
