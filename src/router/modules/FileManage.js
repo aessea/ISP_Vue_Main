@@ -6,7 +6,7 @@ const FileManageRouter = {
   component: Layout,
   redirect: '/filemanage/mainoutputfiles',
   alwaysShow: true,
-  name: 'DayConfig',
+  name: 'FileManage',
   meta: {
     title: '文件管理',
     icon: 'el-icon-download',

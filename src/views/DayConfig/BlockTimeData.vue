@@ -67,7 +67,7 @@
           :data="table_data"
           :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
           :cell-style="{padding: '3px'}"
-          stripe
+          :span-method="objectSpanMethod"
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
@@ -646,7 +646,38 @@ export default {
     // this.getTableData(this.currentPage, this.pageSize)
   },
   methods: {
-    // 全选维护时间
+    flitterData(arr) {
+      var spanOneArr = []
+      let concatOne = 0
+      arr.forEach((item, index) => {
+        if (index === 0) {
+          spanOneArr.push(1)
+        } else {
+          // cityName 修改
+          if (item.line_name === arr[index - 1].line_name) { // 第一列需合并相同内容的判断条件
+            spanOneArr[concatOne] += 1
+            spanOneArr.push(0)
+          } else {
+            spanOneArr.push(1)
+            concatOne = index
+          }
+        }
+      })
+      return {
+        one: spanOneArr
+      }
+    },
+    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 1) {
+        // this.tableData  修改
+        const _row = (this.flitterData(this.table_data).one)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+    },
     renderHeaderDay() {
       return (
         <div>
