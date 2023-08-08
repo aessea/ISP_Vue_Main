@@ -11,7 +11,7 @@ const OutsourceOtherDataRouter = {
     title: '外包存储模块',
     icon: 'el-icon-s-data',
     roles: ['Schedule', 'DayCapacityConfig', 'Division', 'OldOrder', 'OutputFiles',
-      'Summary', 'ParamConfig', 'MotherBoard', 'SmallBoard']
+      'Summary', 'ParamConfig', 'MotherBoard', 'SmallBoard', 'SelfMade']
   },
   children: [
     {
@@ -104,6 +104,15 @@ const OutsourceOtherDataRouter = {
     //     roles: ['admin']
     //   }
     // },
+    {
+      path: 'selfmade',
+      component: () => import('@/views/Outsource/OtherData/SelfMade'),
+      name: 'SelfMade',
+      meta: {
+        title: '自制工单信息',
+        roles: ['SelfMade']
+      }
+    },
     {
       path: 'motherboard',
       component: () => import('@/views/Outsource/OtherData/MotherBoard'),
