@@ -127,10 +127,10 @@
                 <el-row>
                   <el-col :span="24">
                     <el-button v-if="buttons.includes('OutsourceControl/saveApsSelfMo')" type="stopBtn" @click="saveApsSelfMo">
-                      自制工单信息写入接口
+                      推送自制工单分配结果
                     </el-button>
                     <el-button v-if="buttons.includes('OutsourceControl/saveApsOutsoutceMoDialog')" type="stopBtn" @click="saveApsOutsoutceMoDialog">
-                      外包结果信息写入接口
+                      推送外包工单分配结果
                     </el-button>
                   </el-col>
                 </el-row>
