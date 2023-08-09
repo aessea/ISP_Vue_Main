@@ -22,20 +22,18 @@
           <div style="float: right;">
             <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
               <el-button
-                v-if="buttons.includes('KeyBoardSpecialModel/modify')"
-                type="primary"
-                size="mini"
-                icon="el-icon-edit"
+                size="small"
+                icon="el-icon-refresh"
                 circle
-                @click="handleModify(scope.$index, scope.row)"
+                @click="refreshTableData"
               />
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="查看说明" placement="top">
               <el-button
-                v-if="buttons.includes('KeyBoardSpecialModel/delete')"
-                type="danger"
-                size="mini"
-                icon="el-icon-delete"
+                size="small"
+                icon="el-icon-warning-outline"
                 circle
-                @click="handleDelete(scope.$index, scope.row)"
+                @click="helpTips"
               />
             </el-tooltip>
           </div>
