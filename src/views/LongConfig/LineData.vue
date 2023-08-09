@@ -145,7 +145,7 @@
           <el-table-column prop="output_order" label="线体输出顺序" sortable width="170" />
           <el-table-column prop="max_process_time" label="新增锁定加工时长上限" width="170" />
           <el-table-column prop="max_points" label="新增锁定点(片)数上限" width="170" />
-          <el-table-column prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值" width="170" />
+          <el-table-column prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值(点数或片数)" width="170" />
           <el-table-column prop="type_of_big_small_line" label="大小穿插的类型" width="160" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
@@ -369,7 +369,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.default_threshould_of_big_small_line" prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值">
+              <el-form-item :rules="rules.default_threshould_of_big_small_line" prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值(点数或片数)">
                 <el-input-number v-model="model.default_threshould_of_big_small_line" placeholder="请输入数字" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
