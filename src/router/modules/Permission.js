@@ -10,7 +10,7 @@ const PermissionRouter = {
   meta: {
     title: '权限管理',
     icon: 'lock',
-    roles: ['UserManage', 'RolePermission', 'ButtonPermission']
+    roles: ['UserManage', 'RolePermission', 'ButtonPermission', 'InterfaceConfig']
   },
   children: [
     {
@@ -47,6 +47,15 @@ const PermissionRouter = {
       meta: {
         title: '排程配置管理',
         roles: ['ParamsConfig']
+      }
+    },
+    {
+      path: 'interfaceconfig',
+      component: () => import('@/views/LongConfig/InterfaceConfig'),
+      name: 'InterfaceConfig',
+      meta: {
+        title: '对接MES接口配置管理',
+        roles: ['InterfaceConfig']
       }
     }
   ]

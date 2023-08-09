@@ -12,8 +12,8 @@ const LongConfigRouter = {
     icon: 'el-icon-setting',
     roles: ['MP1AddLineData', 'NotMP1AddLineData', 'ExchangeLineData', 'LineData', 'CapacityChangeData', 'OptimizedMachineData',
       'ProcessData', 'SmallProcessData', 'KeyBoardLineData', 'ChangeLineData', 'PairedSMTMachineData',
-      'KeyBoardSpecialModel', 'InterfaceConfig', 'BoardAdvanceDate', 'ProcessSequenceMap',
-      'CustomerData', 'DelayPackingLine']
+      'KeyBoardSpecialModel', 'BoardAdvanceDate', 'ProcessSequenceMap',
+      'CustomerData', 'DelayPackingLine', 'KeyboardMachineName']
   },
   children: [
     // {
@@ -188,12 +188,12 @@ const LongConfigRouter = {
       }
     },
     {
-      path: 'interfaceconfig',
-      component: () => import('@/views/LongConfig/InterfaceConfig'),
-      name: 'InterfaceConfig',
+      path: 'keyboardmachinename',
+      component: () => import('@/views/LongConfig/KeyboardMachineName'),
+      name: 'KeyboardMachineName',
       meta: {
-        title: '对接MES接口配置表',
-        roles: ['InterfaceConfig']
+        title: '小板同订单号上排程表',
+        roles: ['KeyboardMachineName']
       }
     }
   ]
