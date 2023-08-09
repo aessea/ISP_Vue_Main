@@ -8,7 +8,7 @@ const PermissionRouter = {
   alwaysShow: true, // will always show the root menu
   name: 'Permission',
   meta: {
-    title: '权限管理',
+    title: '系统管理',
     icon: 'lock',
     roles: ['UserManage', 'RolePermission', 'ButtonPermission', 'InterfaceConfig']
   },
