@@ -51,7 +51,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="machine_name" label="板号" sortable />
+          <el-table-column prop="machine_name" label="组件" sortable />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -92,7 +92,7 @@
       @dragDialog="handleDrag"
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
-        <el-form-item :rules="rules.machine_name" prop="machine_name" label="板号">
+        <el-form-item :rules="rules.machine_name" prop="machine_name" label="组件">
           <el-input v-model="model.machine_name" placeholder="请输入" clearable />
         </el-form-item>
       </el-form>
@@ -133,7 +133,7 @@
         :cell-style="setCellColor"
         border
       >
-        <el-table-column prop="machine_name" label="板号" />
+        <el-table-column prop="machine_name" label="组件" />
       </el-table>
       <el-row>
         <el-col :span="8">
