@@ -81,6 +81,12 @@
               <el-tag v-else-if="scope.row.is_point === false" size="small" type="danger">否</el-tag>
             </template>
           </el-table-column>
+          <el-table-column prop="deleted_process_flag" label="先加工面是否转删除线体" width="200">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.deleted_process_flag === true" size="small" type="success">是</el-tag>
+              <el-tag v-else-if="scope.row.deleted_process_flag === false" size="small" type="danger">否</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="locked_buffer_time" label="锁定内上下板间隔时间(时)" width="200" />
           <el-table-column prop="netboard_buffer_time" label="网板冲突间隔时间(时)" width="180" />
           <el-table-column prop="ct_predict_lower" label="CT预测下限" width="120" />
@@ -194,18 +200,6 @@
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.buffer_time" prop="buffer_time" label="上下板间隔时间">
-                <el-input-number v-model="model.buffer_time" placeholder="请输入" :style="{width: '100%'}" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_point" prop="is_point" label="是否按点数">
-                <el-switch v-model="model.is_point" style="width: 100%" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.locked_buffer_time" prop="locked_buffer_time" label="锁定内上下板间隔时间(时)">
                 <el-input-number v-model="model.locked_buffer_time" placeholder="请输入" :style="{width: '100%'}" />
@@ -224,6 +218,23 @@
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.ct_predict_upper" prop="ct_predict_upper" label="CT预测上限">
                 <el-input-number v-model="model.ct_predict_upper" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.buffer_time" prop="buffer_time" label="上下板间隔时间">
+                <el-input-number v-model="model.buffer_time" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_point" prop="is_point" label="是否按点数">
+                <el-switch v-model="model.is_point" style="width: 100%" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.deleted_process_flag" prop="deleted_process_flag" label="先加工面是否转删除线体">
+                <el-switch v-model="model.deleted_process_flag" style="width: 100%" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -411,7 +422,8 @@ export default {
         ct_predict_upper: 0,
         process_order: '',
         process_sequence: '',
-        onehot_code: ''
+        onehot_code: '',
+        deleted_process_flag: false
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -433,7 +445,8 @@ export default {
         ct_predict_upper: 0,
         process_order: '',
         process_sequence: '',
-        onehot_code: ''
+        onehot_code: '',
+        deleted_process_flag: false
       },
       rules: {
         name: [{
@@ -514,6 +527,11 @@ export default {
           trigger: 'blur'
         }],
         process_order: [{
+          required: true,
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        deleted_process_flag: [{
           required: true,
           message: '不能为空',
           trigger: 'blur'
@@ -754,6 +772,8 @@ export default {
       }
       this.model['is_point'] = false
       this.modelOriginal['is_point'] = false
+      this.model['deleted_process_flag'] = false
+      this.modelOriginal['deleted_process_flag'] = false
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据
