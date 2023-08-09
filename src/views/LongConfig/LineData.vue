@@ -117,12 +117,6 @@
               <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_big_small_line" label="是否进行大小穿插" width="160">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_big_small_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_big_small_line === false" size="small" type="info">否</el-tag>
-            </template>
-          </el-table-column>
           <el-table-column prop="min_min_threshold" label="最低生产阈值的下限" width="110" />
           <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
@@ -151,6 +145,8 @@
           <el-table-column prop="output_order" label="线体输出顺序" sortable width="170" />
           <el-table-column prop="max_process_time" label="新增锁定加工时长上限" width="170" />
           <el-table-column prop="max_points" label="新增锁定点(片)数上限" width="170" />
+          <el-table-column prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值" width="170" />
+          <el-table-column prop="type_of_big_small_line" label="大小穿插的类型" width="160" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -202,7 +198,7 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.enable" prop="enable" label="是否为启用该线体">
-                <el-switch v-model="model.enable" />
+                <el-switch v-model="model.enable" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -317,11 +313,6 @@
                 <el-switch v-model="model.is_special_line" style="width: 100%" />
               </el-form-item>
             </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_big_small_line" prop="is_big_small_line" label="是否进行大小穿插">
-                <el-switch v-model="model.is_big_small_line" style="width: 100%" />
-              </el-form-item>
-            </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -375,6 +366,16 @@
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.max_points" prop="max_points" label="新增锁定点(片)数上限">
                 <el-input-number v-model="model.max_points" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.default_threshould_of_big_small_line" prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值">
+                <el-input-number v-model="model.default_threshould_of_big_small_line" placeholder="请输入数字" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.type_of_big_small_line" prop="type_of_big_small_line" label="大小穿插的类型">
+                <el-input v-model="model.type_of_big_small_line" placeholder="请输入数字" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -624,7 +625,8 @@ export default {
         line_size_type: 0,
         enable: false,
         min_min_threshold: 0,
-        is_big_small_line: false
+        type_of_big_small_line: '',
+        default_threshould_of_big_small_line: ''
         // is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
@@ -676,7 +678,8 @@ export default {
         max_points: '',
         line_size_type: 0,
         min_min_threshold: 0,
-        is_big_small_line: false
+        type_of_big_small_line: '',
+        default_threshould_of_big_small_line: ''
         // is_BPR_line: false
         // CREATED_BY: '',
         // CREATED_TIME: '',
