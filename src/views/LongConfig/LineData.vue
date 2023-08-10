@@ -604,7 +604,7 @@ export default {
         // T_AD_unable: '',
         // S_unable: '',
         // S_THR_unable: '',
-        is_burn_in: '',
+        is_burn_in: 0,
         enable_process_list: [],
 
         // single_point_lower: 0,
@@ -657,7 +657,7 @@ export default {
         // S_unable: '',
         // S_THR_unable: '',
         // T_AD_unable: '',
-        is_burn_in: '',
+        is_burn_in: 0,
         enable: false,
         enable_process_list: [],
 
