@@ -52,6 +52,7 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="machine_name" label="组件" sortable />
+          <el-table-column prop="delay_value" label="延后时间(单位:天)" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -92,10 +93,20 @@
       @dragDialog="handleDrag"
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
-        <el-form-item :rules="rules.machine_name" prop="machine_name" label="组件">
-          <el-input v-model="model.machine_name" placeholder="请输入" clearable />
-        </el-form-item>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.machine_name" prop="machine_name" label="组件">
+              <el-input v-model="model.machine_name" placeholder="请输入" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.delay_value" prop="delay_value" label="延后时间(单位:天)">
+              <el-input-number v-model="model.delay_value" placeholder="请输入" :style="{width: '100%'}" />
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
+
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">关闭</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="addData">添加</el-button>
@@ -235,17 +246,24 @@ export default {
       forms: ['$form'],
       model: {
         id: '',
-        machine_name: ''
+        machine_name: '',
+        delay_value: ''
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
         id: '',
-        machine_name: ''
+        machine_name: '',
+        delay_value: ''
       },
       rules: {
         machine_name: [{
           required: true,
-          message: '机种名不能为空',
+          message: '不能为空',
+          trigger: 'blur'
+        }],
+        delay_value: [{
+          required: true,
+          message: '不能为空',
           trigger: 'blur'
         }]
       },
