@@ -119,7 +119,7 @@
                         <el-button v-if="buttons.includes('AnalysisControl/checkData')" type="primary" @click="checkData">
                           2.检查文件
                         </el-button>
-                        <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" type="primary" @click="analysisSchedule">
+                        <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" type="primary" :disabled="analysisBtnEnable" @click="analysisSchedule">
                           3.分析排程
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/pushSchedule')" type="apiBtn" @click="pushSchedule">
@@ -429,7 +429,8 @@ export default {
       loading_table3: true,
       loading_table4: true,
       statisticsTitle: '量化结果', // 量化的dialog名称
-      statisticsDialogVisible: false // 量化结果dialog显示
+      statisticsDialogVisible: false, // 量化结果dialog显示
+      analysisBtnEnable: false
     }
   },
   computed: {
@@ -813,10 +814,11 @@ export default {
       })
     },
     async doAnalysis() {
-      this.$message({
-        type: 'success',
-        message: '开始分析排程，请关注进度条'
+      this.$alert('开始分析排程，请关注进度条', '提示', {
+        confirmButtonText: '确定',
+        type: 'success'
       })
+      this.analysisBtnEnable = true
       this.stepNow = 3
       const form = new FormData()
       form.append('file', this.uploadFile)
@@ -832,6 +834,7 @@ export default {
           confirmButtonText: '确定',
           type: 'success'
         })
+        this.analysisBtnEnable = false
         this.showAnalysisAlertMessage(res.message, 'success')
         // setTimeout(() => {
         //   this.clearListenProgress()
@@ -842,6 +845,7 @@ export default {
           confirmButtonText: '确定',
           type: 'error'
         })
+        this.analysisBtnEnable = false
         this.showAnalysisAlertMessage(err, 'error')
         setTimeout(() => {
           this.clearListenProgress()
