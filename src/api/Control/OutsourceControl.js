@@ -9,6 +9,15 @@ export function ImportFiles(data) {
     data
   })
 }
+// 进行数据检查
+export function DoCheckInputFiles(data) {
+  return request({
+    url: '/OutsourcingPriority/check_input_files/',
+    method: 'post',
+    timeout: 10 * 60 * 1000,
+    data
+  })
+}
 // 组件筛选
 export function DoFilterRules(data) {
   return request({

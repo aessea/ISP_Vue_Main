@@ -294,17 +294,37 @@
             multiple
             :limit="10"
             :on-exceed="handleExceed_10"
-            :on-remove="handleRemoveOldOrder"
-            :on-change="handleChangeOldOrder"
-            :file-list="fileListOldOrder"
+            :on-remove="handleRemoveOutOldOrder"
+            :on-change="handleChangeOutOldOrder"
+            :file-list="fileListOutOldOrder"
           >
-            <el-button type="primary">点击上传“旧工单”</el-button>
+            <el-button type="primary">点击上传“外包旧工单”</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传.xlsx文件，最多可上传10份</div>
+          </el-upload>
+        </el-col>
+        <el-col :span="8">
+          <el-upload
+            class="upload-demo"
+            action=""
+            accept=".xlsx,.xls"
+            :auto-upload="false"
+            multiple
+            :limit="10"
+            :on-exceed="handleExceed_10"
+            :on-remove="handleRemoveSelfOldOrder"
+            :on-change="handleChangeSelfOldOrder"
+            :file-list="fileListSelfOldOrder"
+          >
+            <el-button type="primary">点击上传“自制旧工单”</el-button>
             <div slot="tip" class="el-upload__tip">只能上传.xlsx文件，最多可上传10份</div>
           </el-upload>
         </el-col>
       </el-row>
 
       <span slot="footer" class="dialog-footer">
+        <el-button type="primary" style="margin-left:10px;" @click="beforeCheck">
+          进行数据检查
+        </el-button>
         <el-button type="primary" style="margin-left:10px;" @click="beforeImport">
           导入文件
         </el-button>
@@ -602,7 +622,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
   DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
-  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput, SaveApsSelfMo, SaveApsOutsoutceMo } from '@/api/Control/OutsourceControl'
+  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput, SaveApsSelfMo, SaveApsOutsoutceMo, DoCheckInputFiles } from '@/api/Control/OutsourceControl'
 import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'OutsourceControl',
@@ -641,7 +661,8 @@ export default {
       fileListSummary: [], // 业务排程汇总
       fileListCustomer: [], // 客户表
       fileListSchedule: [], // 业务排程明细
-      fileListOldOrder: [], // 旧工单
+      fileListOutOldOrder: [], // 外包旧工单
+      fileListSelfOldOrder: [], // 自制旧工单
       fileListReInputDivision: [], // 重新调整输入
       componentType: 1,
       runMode: 1,
@@ -832,10 +853,15 @@ export default {
       this.formData.append('files', file)
       this.fileListSchedule = fileList
     },
-    handleChangeOldOrder(files, fileList) {
-      var file = new File([files.raw], `OldOrder-${files.name}`)
+    handleChangeOutOldOrder(files, fileList) {
+      var file = new File([files.raw], `OutOldOrder-${files.name}`)
       this.formData.append('files', file)
-      this.fileListOldOrder = fileList
+      this.fileListOutOldOrder = fileList
+    },
+    handleChangeSelfOldOrder(files, fileList) {
+      var file = new File([files.raw], `SelfOldOrder-${files.name}`)
+      this.formData.append('files', file)
+      this.fileListSelfOldOrder = fileList
     },
     handleRemoveSummary(file, fileList) {
       for (var key of this.formData.keys()) {
@@ -864,14 +890,23 @@ export default {
       }
       this.fileListSchedule = fileList
     },
-    handleRemoveOldOrder(file, fileList) {
+    handleRemoveOutOldOrder(file, fileList) {
       for (var key of this.formData.keys()) {
         const dict = this.formData.get(key)
         if ((dict.name.indexOf(file.name) !== -1)) {
           this.formData.delete(key)
         }
       }
-      this.fileListOldOrder = fileList
+      this.fileListOutOldOrder = fileList
+    },
+    handleRemoveSelfOldOrder(file, fileList) {
+      for (var key of this.formData.keys()) {
+        const dict = this.formData.get(key)
+        if ((dict.name.indexOf(file.name) !== -1)) {
+          this.formData.delete(key)
+        }
+      }
+      this.fileListSelfOldOrder = fileList
     },
     // dialog可拖拽
     handleDrag() {
@@ -941,7 +976,7 @@ export default {
     },
     // 导入文件之前
     beforeImport() {
-      const fileLength = this.fileListSummary.length + this.fileListCustomer.length + this.fileListSchedule.length + this.fileListOldOrder.length
+      const fileLength = this.fileListSummary.length + this.fileListCustomer.length + this.fileListSchedule.length + this.fileListOutOldOrder.length + this.fileListSelfOldOrder.length
       if (fileLength < 1) {
         this.$message({
           type: 'warning',
@@ -956,6 +991,41 @@ export default {
     async submitUploadFile() {
       this.loadingInstance = Loading.service(this.importLoading)
       await ImportFiles(this.formData).then(res => {
+        this.loadingInstance.close()
+        this.$alert(res.message, '提示', {
+          customClass: 'checkAlertBox',
+          dangerouslyUseHTMLString: true,
+          confirmButtonText: '确定',
+          type: res.message_type
+        })
+        SaveStepNow({ 'step_now': 1 }).then(res => {
+          this.stepNow = 1
+        })
+      }).catch(err => {
+        this.loadingInstance.close() // 清除动画
+        this.$alert(err, '错误', {
+          confirmButtonText: '确定',
+          type: 'error'
+        })
+      })
+    },
+    // 数据检查之前
+    beforeCheck() {
+      const fileLength = this.fileListSummary.length + this.fileListCustomer.length + this.fileListSchedule.length + this.fileListOutOldOrder.length + this.fileListSelfOldOrder.length
+      if (fileLength < 1) {
+        this.$message({
+          type: 'warning',
+          message: '请至少上传 1 份文件后再进行导入'
+        })
+        return
+      } else {
+        this.doCheckInputFiles()
+      }
+    },
+    // 进行数据检查
+    async doCheckInputFiles() {
+      this.loadingInstance = Loading.service(this.importLoading)
+      await DoCheckInputFiles(this.formData).then(res => {
         this.loadingInstance.close()
         this.$alert(res.message, '提示', {
           customClass: 'checkAlertBox',
@@ -1117,7 +1187,7 @@ export default {
     },
     // 更新旧工单网板状态
     updateOutsourceMeshBoard() {
-      if (this.fileListOldOrder.length < 1 || this.stepNow < 1) {
+      if (this.fileListOutOldOrder.length + this.fileListSelfOldOrder.length < 1 || this.stepNow < 1) {
         this.$message({
           type: 'warning',
           message: '未导入旧工单文件，无需进行更新'
