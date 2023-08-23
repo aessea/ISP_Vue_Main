@@ -422,7 +422,6 @@ export default {
         ct_predict_upper: 0,
         process_order: '',
         process_sequence: '',
-        onehot_code: '',
         deleted_process_flag: false
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
@@ -445,7 +444,6 @@ export default {
         ct_predict_upper: 0,
         process_order: '',
         process_sequence: '',
-        onehot_code: '',
         deleted_process_flag: false
       },
       rules: {
