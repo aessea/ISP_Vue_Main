@@ -23,6 +23,15 @@ const DayConfigRouter = {
       }
     },
     {
+      path: 'processaiholiday',
+      component: () => import('@/views/DayConfig/ProcessAiHoliday'),
+      name: 'ProcessAiHoliday',
+      meta: {
+        title: 'AI放假维护表',
+        roles: ['BlockTimeData']
+      }
+    },
+    {
       path: 'packholiday',
       component: () => import('@/views/DayConfig/PackHoliday'),
       name: 'PackHoliday',
