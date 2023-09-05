@@ -1563,9 +1563,9 @@ export default {
         }
         SaveApsSelfMo(form).then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '推送成功', {
+            this.$alert(res.message, '提示', {
               confirmButtonText: '确定',
-              type: 'success'
+              type: res.message_type
             })
           } else {
             this.$alert('推送失败', '错误', {
@@ -1607,9 +1607,9 @@ export default {
         }
         SaveApsOutsoutceMo(form).then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '推送成功', {
+            this.$alert(res.message, '提示', {
               confirmButtonText: '确定',
-              type: 'success'
+              type: res.message_type
             })
           } else {
             this.$alert('推送失败', '错误', {
