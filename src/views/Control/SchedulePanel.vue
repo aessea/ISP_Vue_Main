@@ -273,6 +273,16 @@
                       </el-col>
                     </el-row>
                   </div>
+                  <div class="box-button">
+                    <el-row>
+                      <el-col :span="8">
+                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
+                          <i class="el-icon-download" />
+                          下载无程序表
+                        </el-button>
+                      </el-col>
+                    </el-row>
+                  </div>
                 </el-col>
               </el-row>
             </el-tab-pane>
