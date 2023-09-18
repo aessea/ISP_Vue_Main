@@ -118,7 +118,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="min_min_threshold" label="最低生产阈值的下限" width="110" />
-          <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
+          <el-table-column prop="min_threshold" label="最低生产阈值设定值" width="110" />
           <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
           <el-table-column prop="big_able" label="可否大工单" width="100">
             <template slot-scope="scope">
@@ -277,7 +277,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值的上限">
+              <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值设定值">
                 <el-input-number v-model="model.min_threshold" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
@@ -426,8 +426,8 @@
         <el-table-column prop="big_able" label="可否大工单" width="100" />
         <el-table-column prop="middle_able" label="可否中工单" width="100" />
         <el-table-column prop="small_able" label="可否小工单" width="100" />
-        <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
-        <el-table-column prop="min_threshold" label="最低生产阈值的上限" width="110" />
+        <el-table-column prop="min_threshold" label="最低生产阈值设定值" width="110" />
+        <el-table-column prop="min_threshold" label="最低生产阈值设定值" width="110" />
         <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
         <el-table-column prop="offset_threshold" label="阈值偏差" width="85" />
         <el-table-column prop="T_unable" label="可否制程T" width="95" />
