@@ -74,17 +74,23 @@
           <el-table-column prop="line_name" label="维护线体" width="110" sortable />
           <el-table-column prop="start_time" label="开始时间" width="180" sortable />
           <el-table-column prop="end_time" label="结束时间" width="180" sortable />
-          <!-- <el-table-column prop="lock_time" label="锁定时间节点" sortable /> -->
-          <el-table-column prop="lock_time" width="180" label="锁定时间节点">
+          <!-- <el-table-column prop="lock_time" label="手动输入锁定时间" sortable /> -->
+          <el-table-column prop="lock_time" width="180" label="手动输入锁定时间">
             <template slot-scope="scope">
-              <span v-if="scope.row.flag === true">{{ scope.row.lock_time }}</span>
-              <span v-else-if="scope.row.flag === false" size="small" type="info">未开启</span>
+              <el-tag v-if="scope.row.flag === true" size="small" type="primary">{{ scope.row.lock_time }}</el-tag>
+              <el-tag v-else-if="scope.row.flag === false" size="small" type="info">关闭</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="flag" label="手动修改锁定时间" width="160">
+          <el-table-column prop="flag" label="是否使用手动输入锁定时间（优先）" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.flag === true" size="small" type="success">开启</el-tag>
+              <el-tag v-if="scope.row.flag === true" size="small" type="primary">启用</el-tag>
               <el-tag v-else-if="scope.row.flag === false" size="small" type="info">关闭</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="default_lock_time_flag" width="180" label="是否按照默认锁定时间">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.default_lock_time_flag === true" size="small" type="primary">启用</el-tag>
+              <el-tag v-else-if="scope.row.default_lock_time_flag === false" size="small" type="info">关闭</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="remark" label="备注" />
@@ -277,17 +283,22 @@
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="model.lock_time ? rules.flag:[{required: false, trigger: 'blur'}]" prop="flag" label="手动修改锁定时间">
-              <el-switch v-model="model.flag" />
+          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="model.lock_time ? rules.flag:[{required: false, trigger: 'blur'}]" prop="flag" label="是否使用手动输入锁定时间（优先）">
+              <el-switch v-model="model.flag" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="model.flag===true ? rules.lock_time:[{required: false, trigger: 'blur'}]" prop="lock_time" label="锁定时间节点">
+          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="model.flag===true ? rules.lock_time:[{required: false, trigger: 'blur'}]" prop="lock_time" label="手动输入锁定时间">
               <el-date-picker v-model="model.lock_time" type="datetime" placeholder="请选择" value-format="yyyy-MM-dd HH:00:00" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.default_lock_time_flag" prop="default_lock_time_flag" label="按照默认锁定时间">
+              <el-switch v-model="model.default_lock_time_flag" :style="{width: '100%'}" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.remark" prop="remark" label="备注">
               <el-input v-model="model.remark" />
             </el-form-item>
@@ -422,7 +433,7 @@
         <el-table-column prop="start_time" label="开始时间" />
         <el-table-column prop="end_time" label="结束时间" />
         <el-table-column prop="lock_time" label="锁定时间" />
-        <el-table-column prop="flag" label="手动修改锁定时间" width="200" />
+        <el-table-column prop="flag" label="是否使用手动输入锁定时间（优先）" width="200" />
         <el-table-column prop="remark" label="备注" />
       </el-table>
       <el-row>
@@ -560,6 +571,7 @@ export default {
         start_time: '',
         end_time: '',
         flag: false,
+        default_lock_time_flag: false,
         lock_time: '',
         remark: '',
         CREATED_BY: '',
@@ -574,6 +586,7 @@ export default {
         start_time: '',
         end_time: '',
         flag: false,
+        default_lock_time_flag: false,
         lock_time: '',
         remark: '',
         CREATED_BY: '',
@@ -605,6 +618,11 @@ export default {
         lock_time: [{
           required: true,
           message: '请填写锁定时间节点',
+          trigger: 'blur'
+        }],
+        default_lock_time_flag: [{
+          required: true,
+          message: '不能为空',
           trigger: 'blur'
         }],
         remark: [],
@@ -1178,7 +1196,7 @@ export default {
     closeFormDialog() {
       this.dataDialogVisible = false
       for (const key in this.model) {
-        if (key === 'flag') {
+        if (key === 'flag' || key === 'default_lock_time_flag') {
           this.model[key] = false
           this.modelOriginal[key] = false
         } else {
