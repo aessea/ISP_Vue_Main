@@ -72,8 +72,8 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="line_name" label="维护线体" width="110" sortable />
-          <el-table-column prop="start_time" label="开始时间" width="180" sortable />
-          <el-table-column prop="end_time" label="结束时间" width="180" sortable />
+          <el-table-column prop="start_time" label="维护开始时间" width="180" sortable />
+          <el-table-column prop="end_time" label="维护结束时间" width="180" sortable />
           <!-- <el-table-column prop="lock_time" label="手动输入锁定时间" sortable /> -->
           <el-table-column prop="lock_time" width="180" label="手动输入锁定时间">
             <template slot-scope="scope">
@@ -211,8 +211,8 @@
             v-model="customHourTime"
             is-range
             range-separator="至"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
+            start-placeholder="维护开始时间"
+            end-placeholder="维护结束时间"
           />
         </el-col>
       </el-row>
@@ -272,12 +272,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.start_time" prop="start_time" label="开始时间">
+            <el-form-item :rules="rules.start_time" prop="start_time" label="维护开始时间">
               <el-date-picker v-model="model.start_time" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.end_time" prop="end_time" label="结束时间">
+            <el-form-item :rules="rules.end_time" prop="end_time" label="维护结束时间">
               <el-date-picker v-model="model.end_time" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
@@ -430,8 +430,8 @@
         border
       >
         <el-table-column prop="line_name" label="维护线体" width="110" />
-        <el-table-column prop="start_time" label="开始时间" />
-        <el-table-column prop="end_time" label="结束时间" />
+        <el-table-column prop="start_time" label="维护开始时间" />
+        <el-table-column prop="end_time" label="维护结束时间" />
         <el-table-column prop="lock_time" label="锁定时间" />
         <el-table-column prop="flag" label="是否使用手动输入锁定时间（优先）" width="200" />
         <el-table-column prop="remark" label="备注" />
