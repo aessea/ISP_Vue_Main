@@ -1,8 +1,10 @@
 import request from '../../utils/request'
+const API_URL_FIRST = 'Control'
+const API_URL_SECOND = 'ParamsConfig'
 // 获取数据
 export function GetTableData(data) {
   return request({
-    url: '/Control/ParamsConfig/get_table_data/',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/get_table_data/`,
     method: 'post',
     data
   })
@@ -10,7 +12,7 @@ export function GetTableData(data) {
 // 修改数据
 export function ModifyData(data) {
   return request({
-    url: '/Control/ParamsConfig/modify_data/',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/modify_data/`,
     method: 'post',
     data
   })
@@ -18,7 +20,7 @@ export function ModifyData(data) {
 // 恢复为默认值
 export function RestoreDefault(data) {
   return request({
-    url: '/Control/ParamsConfig/restore_default/',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/restore_default/`,
     method: 'post',
     data
   })
@@ -26,7 +28,7 @@ export function RestoreDefault(data) {
 // 确认导出数据
 export function ExportData() {
   return request({
-    url: '/Control/ParamsConfig/export_data/',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/export_data/`,
     method: 'get'
   })
 }
@@ -34,6 +36,6 @@ export function ExportData() {
 export function SyncDatabaseData() {
   return request({
     method: 'get',
-    url: '/Control/ParamsConfig/sync_data/'
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/sync_data/`
   })
 }

@@ -368,10 +368,11 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import {} from '@/api/Control/AnalysisControl'
-import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled,
-  AiPrescheduled, AiScheduled, CheckData, GetHistoryAnaItem, GetHistoryAnaData,
+import { CheckData, GetHistoryAnaItem, GetHistoryAnaData,
   ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
-} from '@/api/Control/OnlineTable'
+} from '@/api/Control/AnalysisControl'
+import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled, AiPrescheduled, AiScheduled
+} from '@/api/Control/DockingMes'
 import { DoImportPushSchedule } from '@/api/Control/AnalysisControl'
 import { DownloadFile } from '@/api/common'
 import XLSX from 'xlsx'

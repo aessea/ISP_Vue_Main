@@ -702,11 +702,13 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, GetLogSelectItem, DownloadHistoryLog,
-  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, GetApsMtool, CheckData, ExportMainScheduleData, GetApsProgram,
-  GetExcelSelectItem, DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday,
-  GetApsMoBaseData, GetApsMoProgData, DownloadUploadFileMain, DownloadUploadFileSmall, DoBucklePoints,
-  GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData, GetApsDeliveryDay, SaveApsOutPutCount,
-  CheckDataNew } from '@/api/Control/SchedulePanel'
+  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, CheckData, ExportMainScheduleData, GetExcelSelectItem,
+  DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday, DownloadUploadFileMain,
+  DownloadUploadFileSmall, DoBucklePoints, GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData,
+  CheckDataNew
+} from '@/api/Control/SchedulePanel'
+import { GetApsMtool, GetApsMoBaseData, GetApsMoProgData, SaveApsOutPutCount, GetApsProgram, GetApsDeliveryDay
+} from '@/api/Control/DockingMes'
 import { DownloadFile } from '@/api/common'
 export default {
   name: 'SchedulePanel',

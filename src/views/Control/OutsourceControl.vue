@@ -619,10 +619,12 @@
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetProgress, ImportFiles, GeScheduleRes, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
+import { GetProgress, ImportFiles, DoOutsourceDistribute, GnerateDivisions, DownloadAllFile, DownloadFile,
   ShowFilterRules, UpdateNewModels, DoFilterRules, GenerateOutput, SaveStepNow, GetBaseData, UpdateOutsourceMeshBoard,
   DownloadFilterOutputFiles, GetParamConfig, UpdateConfigurableParams, ClearDayCapacityConfig, AppendDayCapacityConfig,
-  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput, SaveApsSelfMo, SaveApsOutsoutceMo, DoCheckInputFiles } from '@/api/Control/OutsourceControl'
+  GetDayCapacityConfig, DoOutsourceOutputModelName, ReAdjustInput, DoCheckInputFiles
+} from '@/api/Control/OutsourceControl'
+import { SaveApsSelfMo, SaveApsOutsoutceMo } from '@/api/Control/DockingMes'
 import { componentTypeOptions } from '@/utils/items'
 export default {
   name: 'OutsourceControl',
@@ -939,16 +941,6 @@ export default {
     },
     handleCloseCompute2() {
       this.dialogVisibleCompute2 = false
-    },
-    // 获取排程结果
-    getScheduleRes() {
-      GeScheduleRes().then(res => {
-        if (res.code === 20000) {
-          this.schedule_result = res.table_data
-          this.schedule_mode = res.mode
-          this.schedule_time = res.date
-        }
-      })
     },
     // 获取进度条
     getProgress() {
