@@ -677,7 +677,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/css/LongConfig/MP1AddLineData.scss';
+  @import '../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{

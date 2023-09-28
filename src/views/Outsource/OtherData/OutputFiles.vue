@@ -732,7 +732,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/css/Outsource/OtherData/OutputFiles.scss';
+  @import '../../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{

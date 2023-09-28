@@ -605,7 +605,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/css/Permission/UserManage.scss';
+  @import '../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{

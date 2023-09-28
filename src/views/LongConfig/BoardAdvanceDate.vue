@@ -644,7 +644,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/css/public/TablePage';
+  @import '../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{

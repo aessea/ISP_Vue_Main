@@ -800,7 +800,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/css/Outsource/OtherData/Schedule.scss';
+  @import '../../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{

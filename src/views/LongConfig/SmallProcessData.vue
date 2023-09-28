@@ -914,7 +914,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/css/LongConfig/SmallProcessData.scss';
+  @import '../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{

@@ -922,7 +922,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/css/Predict/TrainData.scss';
+  @import '../../assets/css/common/TablePage';
 </style>
 <style>
 .btnDanger{
