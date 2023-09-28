@@ -1,15 +1,16 @@
 import request from '../../utils/request'
+const API_URL_FIRST = 'User'
 // 用户角色信息
 export function GetAllRoleInfo() {
   return request({
-    url: '/User/get_all_role_info/',
+    url: `/${API_URL_FIRST}/get_all_role_info/`,
     method: 'get'
   })
 }
 // 创建用户
 export function CreateRole(data) {
   return request({
-    url: '/User/create_role/',
+    url: `/${API_URL_FIRST}/create_role/`,
     method: 'post',
     data
   })
@@ -17,7 +18,7 @@ export function CreateRole(data) {
 // 修改用户基本信息
 export function ModifyRoleInfo(data) {
   return request({
-    url: '/User/modify_role_info/',
+    url: `/${API_URL_FIRST}/modify_role_info/`,
     method: 'post',
     data
   })
@@ -25,7 +26,7 @@ export function ModifyRoleInfo(data) {
 // 删除用户
 export function DeleteRole(data) {
   return request({
-    url: '/User/delete_role/',
+    url: `/${API_URL_FIRST}/delete_role/`,
     method: 'post',
     data
   })

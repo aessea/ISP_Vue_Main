@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+const API_URL_FIRST = 'Dashboard'
 // 获取导入示例文件，传入示例的文件名
 export function DownloadExamleImportFile(file_name) {
   return request({
@@ -11,7 +11,7 @@ export function DownloadExamleImportFile(file_name) {
 }
 export function DownloadFile(file_key) {
   return request({
-    url: '/Control/download_file/',
+    url: `/${API_URL_FIRST}/download_file/`,
     method: 'get',
     params: { file_key },
     responseType: 'blob'
@@ -19,14 +19,14 @@ export function DownloadFile(file_key) {
 }
 export function GetLineProcess() {
   return request({
-    url: '/Control/get_line_process/',
+    url: `/${API_URL_FIRST}/get_line_process/`,
     method: 'get'
   })
 }
 // 获取按钮权限
 export function GetButtonPermission(data) {
   return request({
-    url: '/Common/get_button_permission/',
+    url: `/${API_URL_FIRST}/get_button_permission/`,
     method: 'post',
     data
   })

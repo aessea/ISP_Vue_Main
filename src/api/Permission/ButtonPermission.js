@@ -1,8 +1,9 @@
 import request from '../../utils/request'
+const API_URL_FIRST = 'User'
 // 修改用户基本信息
 export function ModifyButton(data) {
   return request({
-    url: '/User/modify_button_permission/',
+    url: `/${API_URL_FIRST}/modify_button_permission/`,
     method: 'post',
     data
   })
@@ -10,7 +11,7 @@ export function ModifyButton(data) {
 // 搜索
 export function SearchRoleData(data) {
   return request({
-    url: '/User/search_data/',
+    url: `/${API_URL_FIRST}/search_data/`,
     method: 'post',
     data
   })

@@ -111,6 +111,7 @@ export function DownloadFile(data) {
     data
   })
 }
+// 更新旧工单网板状态
 export function UpdateOutsourceMeshBoard(data) {
   return request({
     method: 'post',

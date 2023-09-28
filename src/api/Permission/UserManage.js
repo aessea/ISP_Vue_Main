@@ -1,15 +1,16 @@
 import request from '../../utils/request'
+const API_URL_FIRST = 'User'
 // 获取所有用户信息
 export function GetAllUserInfo() {
   return request({
-    url: '/User/get_all_user/',
+    url: `/${API_URL_FIRST}/get_all_user/`,
     method: 'get'
   })
 }
 // 创建用户
 export function CreateUser(data) {
   return request({
-    url: '/User/create_user/',
+    url: `/${API_URL_FIRST}/create_user/`,
     method: 'post',
     data
   })
@@ -17,7 +18,7 @@ export function CreateUser(data) {
 // 修改用户基本信息
 export function ModifyUserInfo(data) {
   return request({
-    url: '/User/modify_userinfo/',
+    url: `/${API_URL_FIRST}/modify_userinfo/`,
     method: 'post',
     data
   })
@@ -25,7 +26,7 @@ export function ModifyUserInfo(data) {
 // 修改用户密码
 export function ModifyUserPassword(data) {
   return request({
-    url: '/User/modify_password/',
+    url: `/${API_URL_FIRST}/modify_password/`,
     method: 'post',
     data
   })
@@ -33,7 +34,7 @@ export function ModifyUserPassword(data) {
 // 删除用户
 export function DeleteUser(data) {
   return request({
-    url: '/User/delete_user/',
+    url: `/${API_URL_FIRST}/delete_user/`,
     method: 'post',
     data
   })

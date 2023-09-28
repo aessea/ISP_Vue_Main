@@ -1,24 +1,22 @@
 import request from '@/utils/request'
-
+const API_URL_FIRST = 'User'
 export function login(data) {
   return request({
-    url: '/User/login/',
+    url: `/${API_URL_FIRST}/login/`,
     method: 'post',
     data
   })
 }
-
 export function getInfo(token) {
   return request({
-    url: '/User/info/',
+    url: `/${API_URL_FIRST}/info/`,
     method: 'get',
     params: { token }
   })
 }
-
 export function logout() {
   return request({
-    url: '/User/logout/',
+    url: `/${API_URL_FIRST}/logout/`,
     method: 'post'
   })
 }
