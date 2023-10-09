@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { title } from '@/settings'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -24,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: 'SMT排程系统',
+      title: title,
       logo: '../../../assets/img/logo.png'
     }
   }
