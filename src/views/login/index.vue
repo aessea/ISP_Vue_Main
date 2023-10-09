@@ -41,7 +41,8 @@
               round
               size="big"
               class="gradientBtn"
-              @click.native.prevent="handleLogin"
+              @click="toLogin"
+              @keyup.enter="keyDown"
             >
               登录
             </el-button>
@@ -93,6 +94,7 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
+    window.addEventListener('keydown', this.keyDown) // 绑定监听事件
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
@@ -101,6 +103,7 @@ export default {
   },
   destroyed() {
     // window.removeEventListener('storage', this.afterQRScan)
+    window.removeEventListener('keydown', this.keyDown, false) // 绑定监听事件
   },
   methods: {
     checkCapslock(e) {
@@ -117,7 +120,7 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
+    toLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -134,6 +137,14 @@ export default {
           return false
         }
       })
+    },
+    // 点击回车键登录
+    keyDown(e) {
+      // 回车则执行登录方法 enter键的ASCII是13
+      console.log('111:', e.keyCode)
+      if (e.keyCode === 13 || e.keyCode === 100) {
+        this.toLogin() // 定义的登录方法
+      }
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
