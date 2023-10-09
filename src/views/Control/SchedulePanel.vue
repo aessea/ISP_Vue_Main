@@ -702,10 +702,10 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, GetLogSelectItem, DownloadHistoryLog,
-  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, CheckData, ExportMainScheduleData, GetExcelSelectItem,
+  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, ExportMainScheduleData, GetExcelSelectItem,
   DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday, DownloadUploadFileMain,
   DownloadUploadFileSmall, DoBucklePoints, GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData,
-  CheckDataNew
+  DoCheckScheduleData
 } from '@/api/Control/SchedulePanel'
 import { GetApsMtool, GetApsMoBaseData, GetApsMoProgData, SaveApsOutPutCount, GetApsProgram, GetApsDeliveryDay
 } from '@/api/Control/DockingMes'
@@ -957,7 +957,7 @@ export default {
           this.uploadFileNameMain = this.uploadFileListMain[0].name // 更新文件名
           this.uploadFileMain = this.uploadFileListMain[0].raw // 更新文件
         }
-        this.checkDataBackend(this.uploadFileMain, this.uploadFileNameMain)
+        this.doCheckScheduleData(this.uploadFileMain, this.uploadFileNameMain)
       }
     },
     // 小板文件上传钩子
@@ -980,52 +980,16 @@ export default {
           this.uploadFileNameSmall = this.uploadFileListSmall[0].name // 更新文件名
           this.uploadFileSmall = this.uploadFileListSmall[0].raw // 更新文件
         }
-        this.checkDataBackend(this.uploadFileSmall, this.uploadFileNameSmall)
+        this.doCheckScheduleData(this.uploadFileSmall, this.uploadFileNameSmall)
       }
     },
     // 检查
-    async checkData(uploadFile, uploadFileName) {
+    async doCheckScheduleData(uploadFile, uploadFileName) {
       this.loadingInstance = Loading.service(this.checkLoading)
       const form = new FormData()
       form.append('file', uploadFile)
       form.append('file_name', uploadFileName)
-      await CheckData(form).then(res => {
-        if (res.type === 'success') {
-          this.$alert(res.message, '检查结果', {
-            confirmButtonText: '确定',
-            type: 'success'
-          })
-        } else {
-          this.$alert(res.message, '检查结果', {
-            customClass: 'checkAlertBox',
-            dangerouslyUseHTMLString: true,
-            confirmButtonText: '确定',
-            type: 'warning'
-          })
-        }
-        if (this.uploadFileNameMain !== '') {
-          this.stepNowMain = 1
-        } else if (this.uploadFileListSmall !== '') {
-          this.stepNowSmall = 1
-        } else if (this.uploadFileNameMain !== '' && this.uploadFileNameSmall !== '') {
-          this.stepNowBoth = 1
-        }
-        this.loadingInstance.close()
-      }).catch(err => {
-        this.loadingInstance.close() // 清除动画
-        this.$alert('检查出现异常：' + err, '错误', {
-          confirmButtonText: '确定',
-          type: 'error'
-        })
-      })
-    },
-    // 新版检查
-    async checkDataBackend(uploadFile, uploadFileName) {
-      this.loadingInstance = Loading.service(this.checkLoading)
-      const form = new FormData()
-      form.append('file', uploadFile)
-      form.append('file_name', uploadFileName)
-      await CheckDataNew(form).then(res => {
+      await DoCheckScheduleData(form).then(res => {
         if (res.message_type === 'success') {
           this.$alert(res.message, '检查结果', {
             confirmButtonText: '确定',

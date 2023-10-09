@@ -116,7 +116,7 @@
                         </el-button>
                       </el-upload>
                       <div>
-                        <el-button v-if="buttons.includes('AnalysisControl/checkData')" type="primary" @click="checkData">
+                        <el-button v-if="buttons.includes('AnalysisControl/doCheckScheduleData')" type="primary" @click="doCheckScheduleData">
                           2.检查文件
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" type="primary" :disabled="analysisBtnEnable" @click="analysisSchedule">
@@ -368,7 +368,7 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import {} from '@/api/Control/AnalysisControl'
-import { CheckData, GetHistoryAnaItem, GetHistoryAnaData,
+import { DoCheckScheduleData, GetHistoryAnaItem, GetHistoryAnaData,
   ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
 } from '@/api/Control/AnalysisControl'
 import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled, AiPrescheduled, AiScheduled
@@ -615,7 +615,7 @@ export default {
       this.analysisMessage = '分析排程提示信息：未完成分析排程'
     },
     // 后端数据检查
-    async checkData() {
+    async doCheckScheduleData() {
       if (this.uploadFileName === '') {
         this.$message({
           type: 'warning',
@@ -631,7 +631,7 @@ export default {
       const form = new FormData()
       form.append('file', this.uploadFile)
       this.stepNow = 2
-      await CheckData(form).then(res => {
+      await DoCheckScheduleData(form).then(res => {
         if (res.message_type === 'success') {
           this.$alert(res.message, '检查结果', {
             confirmButtonText: '确定',

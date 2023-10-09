@@ -11,18 +11,9 @@ export function TrainModel(data) {
   })
 }
 // 数据检查
-export function CheckData(data) {
+export function DoCheckScheduleData(data) {
   return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/check_input_excel_upload/`,
-    method: 'post',
-    timeout: API_TIMEOUT,
-    data
-  })
-}
-// 新版数据检查
-export function CheckDataNew(data) {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/check_input_excel_new/`,
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_check_schedule_data/`,
     method: 'post',
     timeout: API_TIMEOUT,
     data

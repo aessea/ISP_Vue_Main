@@ -10,9 +10,9 @@ export function DoImportPushSchedule(data) {
   })
 }
 // 检查表格
-export function CheckData(data) {
+export function DoCheckScheduleData(data) {
   return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/check_excel_data/`,
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_check_schedule_data/`,
     method: 'post',
     timeout: API_TIMEOUT,
     data
