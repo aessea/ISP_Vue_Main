@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-const API_URL_FIRST = 'Dashboard'
+const API_URL_FIRST = 'Control'
 // 获取导入示例文件，传入示例的文件名
 export function DownloadExamleImportFile(file_name) {
   return request({

@@ -2,7 +2,6 @@ import request from '../../utils/request'
 const API_URL_FIRST = 'Control'
 const API_URL_SECOND = 'AnalysisControl'
 const API_TIMEOUT = 10 * 60 * 1000
-// 修改数据
 export function DoImportPushSchedule(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_import_push_schedule/`,
@@ -122,7 +121,7 @@ export function AnalysisSchedule(data) {
 // 导入排程表格接口
 export function ImportPushSchedule(data) {
   return request({
-    url: '/Control/OnlineTable/import_push_schedule/',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/import_push_schedule/`,
     method: 'post',
     timeout: API_TIMEOUT,
     data
