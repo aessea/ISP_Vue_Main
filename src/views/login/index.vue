@@ -141,7 +141,6 @@ export default {
     // 点击回车键登录
     keyDown(e) {
       // 回车则执行登录方法 enter键的ASCII是13
-      console.log('111:', e.keyCode)
       if (e.keyCode === 13 || e.keyCode === 100) {
         this.toLogin() // 定义的登录方法
       }
