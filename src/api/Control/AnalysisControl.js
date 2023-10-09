@@ -1,7 +1,7 @@
 import request from '../../utils/request'
+import { REQUEST_TIMEOUT } from '../config'
 const API_URL_FIRST = 'Control'
 const API_URL_SECOND = 'AnalysisControl'
-const API_TIMEOUT = 10 * 60 * 1000
 export function DoImportPushSchedule(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_import_push_schedule/`,
@@ -14,7 +14,7 @@ export function DoCheckScheduleData(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_check_schedule_data/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -44,7 +44,7 @@ export function AnalysisExcel(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/begin_analysis/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -114,7 +114,7 @@ export function AnalysisSchedule(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_analysis_schedule/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -123,7 +123,7 @@ export function ImportPushSchedule(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/import_push_schedule/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }

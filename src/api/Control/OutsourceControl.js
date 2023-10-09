@@ -1,12 +1,12 @@
 import request from '../../utils/request'
 const API_URL_FIRST = 'OutsourcingPriority'
-const API_TIMEOUT = 10 * 60 * 1000
+import { REQUEST_TIMEOUT } from '../config'
 // 导入文件
 export function ImportFiles(data) {
   return request({
     url: `/${API_URL_FIRST}/importallfiles/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -15,7 +15,7 @@ export function DoCheckInputFiles(data) {
   return request({
     url: `/${API_URL_FIRST}/check_input_files/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -24,7 +24,7 @@ export function DoFilterRules(data) {
   return request({
     url: `/${API_URL_FIRST}/filterrules/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -33,7 +33,7 @@ export function UpdateNewModels(data) {
   return request({
     url: `/${API_URL_FIRST}/updatenewmodels/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -42,7 +42,7 @@ export function ShowFilterRules(data) {
   return request({
     url: `/${API_URL_FIRST}/showfilterrules/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -51,7 +51,7 @@ export function GnerateDivisions(data) {
   return request({
     url: `/${API_URL_FIRST}/generatedivisions/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -60,7 +60,7 @@ export function DoOutsourceDistribute(data) {
   return request({
     url: `/${API_URL_FIRST}/outsourcedistribute/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -69,7 +69,7 @@ export function GenerateOutput(data) {
   return request({
     url: `/${API_URL_FIRST}/generateoutput/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -176,7 +176,7 @@ export function ReAdjustInput(data) {
   return request({
     url: `/${API_URL_FIRST}/readjust_input/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }

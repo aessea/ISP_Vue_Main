@@ -9,6 +9,7 @@ export function DownloadExamleImportFile(file_name) {
     responseType: 'blob'
   })
 }
+// 下载文件
 export function DownloadFile(file_key) {
   return request({
     url: `/${API_URL_FIRST}/download_file/`,
@@ -17,6 +18,7 @@ export function DownloadFile(file_key) {
     responseType: 'blob'
   })
 }
+// 获取所有制程和线体
 export function GetLineProcess() {
   return request({
     url: `/${API_URL_FIRST}/get_line_process/`,

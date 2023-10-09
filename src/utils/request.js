@@ -50,11 +50,11 @@ service.interceptors.response.use(
     }
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
-      Message({
-        message: res.message || '请求出错',
-        type: 'error',
-        duration: 5 * 1000
-      })
+      // Message({
+      //   message: res.message || '请求出错',
+      //   type: 'error',
+      //   duration: 5 * 1000
+      // })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -69,19 +69,26 @@ service.interceptors.response.use(
           })
         })
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.message || '请求出错'))
     } else {
       return res
     }
   },
   error => {
     console.log('err' + error) // for debug
+    let error_message = '未知错误'
+    // 网络超时异常处理
+    if (error.message.includes('timeout')) {
+      error_message = '请求超时，请稍后重试'
+    } else if (error.code === 'ECONNABORTED' || error.message === 'Network Error') {
+      error_message = '连接异常'
+    }
     Message({
-      message: error.message,
+      message: error_message,
       type: 'error',
       duration: 5 * 1000
     })
-    return Promise.reject(error)
+    return Promise.reject(new Error(error_message))
   }
 )
 

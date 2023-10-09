@@ -1,13 +1,14 @@
+// 对接MES的接口
 import request from '../../utils/request'
 const API_URL_FIRST = 'schedule'
 const API_URL_SECOND = 'api'
-const API_TIMEOUT = 10 * 60 * 1000
+import { REQUEST_TIMEOUT } from '../config'
 // 推送SMT未排接口
 export function SmtUnscheduled(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsScheduleSmtWplan`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -16,7 +17,7 @@ export function SmtPrescheduled(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsSmtScheduleResultFirst`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -25,7 +26,7 @@ export function SmtScheduled(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsSmtScheduleResultSecond`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -34,7 +35,7 @@ export function AiUnscheduled(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsScheduleAiWplan`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -43,7 +44,7 @@ export function AiPrescheduled(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsAiScheduleResultFirst`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -52,7 +53,7 @@ export function AiScheduled(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsAiScheduleResultSecond`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -61,7 +62,7 @@ export function SaveApsSelfMo(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsSelfMo`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -70,7 +71,7 @@ export function SaveApsOutsoutceMo(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsOutsoutceMo`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -79,7 +80,7 @@ export function GetApsMtool(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/getApsMtool`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -88,7 +89,7 @@ export function GetApsProgram(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/getApsProgram`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -97,7 +98,7 @@ export function GetApsMoBaseData(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/getApsMoBaseData`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -106,7 +107,7 @@ export function GetApsMoProgData(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/getApsMoProgData`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -115,7 +116,7 @@ export function GetApsDeliveryDay(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/getApsDeliveryDay`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -124,7 +125,7 @@ export function SaveApsOutPutCount(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsOutPutCount`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }

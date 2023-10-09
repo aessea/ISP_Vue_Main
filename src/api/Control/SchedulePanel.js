@@ -1,7 +1,7 @@
 import request from '../../utils/request'
 const API_URL_FIRST = 'Control'
 const API_URL_SECOND = 'SchedulePanel'
-const API_TIMEOUT = 10 * 60 * 1000
+import { REQUEST_TIMEOUT } from '../config'
 // 训练预测模型接口
 export function TrainModel(data) {
   return request({
@@ -15,7 +15,7 @@ export function DoCheckScheduleData(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_check_schedule_data/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -24,7 +24,7 @@ export function ImportSchedule(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/import_schedule/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -33,7 +33,7 @@ export function ImportScheduleBoth(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/import_schedule_both/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -58,7 +58,7 @@ export function ComputeScheduleBoth(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/compute_schedule_both/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
@@ -238,7 +238,7 @@ export function DoBucklePoints(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_buckle_points/`,
     method: 'post',
-    timeout: API_TIMEOUT,
+    timeout: REQUEST_TIMEOUT,
     data
   })
 }
