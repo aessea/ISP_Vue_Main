@@ -8,7 +8,7 @@ const LoggingRouter = {
   alwaysShow: true,
   name: 'Logging',
   meta: {
-    title: '日志系统',
+    title: '系统日志',
     icon: 'documentation',
     roles: ['HistoryRun', 'HistoryOpera', 'ScheduleResData']
   },
@@ -38,7 +38,7 @@ const LoggingRouter = {
       component: () => import('@/views/HistoryLog/ScheduleResData'),
       name: 'ScheduleResData',
       meta: {
-        title: '历史排程数据',
+        title: '历史排程记录',
         roles: ['ScheduleResData'],
         noCache: true
       }

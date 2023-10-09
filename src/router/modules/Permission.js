@@ -45,7 +45,7 @@ const PermissionRouter = {
       component: () => import('@/views/Permission/ParamConfigManage'),
       name: 'ParamsConfigManage',
       meta: {
-        title: '排程配置管理',
+        title: '配置管理',
         roles: ['ParamsConfig']
       }
     },
@@ -54,7 +54,7 @@ const PermissionRouter = {
       component: () => import('@/views/LongConfig/InterfaceConfig'),
       name: 'InterfaceConfig',
       meta: {
-        title: '对接MES接口配置管理',
+        title: 'MES接口配置管理',
         roles: ['InterfaceConfig']
       }
     }

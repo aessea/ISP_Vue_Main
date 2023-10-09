@@ -8,7 +8,7 @@ const FileManageRouter = {
   alwaysShow: true,
   name: 'FileManage',
   meta: {
-    title: '文件管理',
+    title: '系统文件',
     icon: 'el-icon-download',
     roles: ['InputFiles', 'MainOutputFiles', 'SmallOutputFiles', 'AnalysisFiles', 'IdleFiles', 'AnalyseProgramFiles', 'StatisticsFiles', 'ApiStatisticsFiles', 'LogFiles']
   },
