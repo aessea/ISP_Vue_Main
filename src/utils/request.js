@@ -69,19 +69,30 @@ service.interceptors.response.use(
           })
         })
       }
-      return Promise.reject(new Error(res.message || '请求出错'))
+      return Promise.reject(new Error(res.message))
     } else {
       return res
     }
   },
   error => {
     console.log('err' + error) // for debug
-    let error_message = '未知错误'
+    console.log('status:', error.status)
+    let error_message = '请求出错'
     // 网络超时异常处理
     if (error.message.includes('timeout')) {
       error_message = '请求超时，请稍后重试'
     } else if (error.code === 'ECONNABORTED' || error.message === 'Network Error') {
-      error_message = '连接异常'
+      error_message = '连接异常，请检查网络后重新操作'
+    } else if (error.message.includes('code 500')) {
+      error_message = '服务器后台错误，请联系技术人员 500'
+    } else if (error.message.includes('code 502')) {
+      error_message = '服务器网关错误，请联系技术人员 502'
+    } else if (error.message.includes('code 404')) {
+      error_message = '请求的资源不存在 404'
+    } else if (error.message.includes('code 403')) {
+      error_message = '服务器拒绝执行请求，请联系技术人员 403'
+    } else if (error.message.includes('code 400')) {
+      error_message = '客户端发送了一个不正确的请求，服务器无法理解或处理 400'
     }
     Message({
       message: error_message,
