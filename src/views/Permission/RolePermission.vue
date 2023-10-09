@@ -118,7 +118,7 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <div style="text-align: center">
+      <div class="transfer-dev">
         <el-transfer
           v-model="role_data_value"
           style="text-align: left; display: inline-block"
@@ -363,5 +363,10 @@ export default {
 .el-table .warning-row {
   color: #E6A23C;
 }
-
+.transfer-dev{
+  text-align: center;
+}
+.transfer-dev .el-transfer-panel {
+  width:350px;
+}
 </style>
