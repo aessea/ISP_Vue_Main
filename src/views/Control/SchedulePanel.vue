@@ -2045,7 +2045,7 @@ export default {
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '下载失败，文件不存在',
+          message: '下载失败',
           type: 'error'
         })
       })
@@ -2085,7 +2085,7 @@ export default {
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '下载失败，文件不存在',
+          message: '下载失败',
           type: 'error'
         })
       })
@@ -2101,7 +2101,7 @@ export default {
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '下载失败，文件不存在',
+          message: '下载失败',
           type: 'error'
         })
       })

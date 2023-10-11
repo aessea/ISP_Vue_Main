@@ -51,7 +51,7 @@
           stripe
         >
           <el-table-column prop="role_name" label="角色名称" width="200" />
-          <el-table-column prop="menu_name_front" label="菜单名" width="240" />
+          <el-table-column prop="menu_name_front" label="菜单名" width="280" />
           <el-table-column prop="has_permission_buttons_front" label="拥有权限的按钮">
             <template slot-scope="scope">
               <el-tag
