@@ -109,3 +109,12 @@ export function SyncDatabaseData() {
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/sync_data/`
   })
 }
+
+// 添加按默认锁定时间的线体
+export function AddHolidayLines(data) {
+  return request({
+    method: 'post',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/add_holidayLines_data/`,
+    data
+  })
+}

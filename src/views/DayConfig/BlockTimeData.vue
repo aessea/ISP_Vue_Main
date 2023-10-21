@@ -28,6 +28,9 @@
             <el-button v-if="buttons.includes('BlockTimeData/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
+            <el-button v-if="buttons.includes('BlockTimeData/export')" @click="addHolidayLinesDialog">
+              <i class="el-icon-plus" />默认锁定时间的线体
+            </el-button>
           </div>
         </el-col>
         <el-col :span="8">
@@ -493,6 +496,26 @@
         <el-button type="primary" @click="exportData">确认导出</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="添加按默认锁定时间的线体"
+      :visible.sync="holidayLinesDialogVisible"
+      :before-close="handleAddHolidyLinesClose"
+      width="70%"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <el-checkbox-group v-model="chosen_line_list">
+          <el-checkbox v-for="line in all_line_list" :key="line" :label="line" name="type" />
+        </el-checkbox-group>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleAddHolidyLinesClose">关闭</el-button>
+        <el-button type="primary" @click="addHolidayLines">确认</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 <script>
@@ -503,8 +526,9 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, AddMultiData,
   ExportData, ImportData, GetBackupName, BackupData, RecoverBackupData, DeleteBackupData,
-  GetDefaultData, SyncDatabaseData } from '@/api/DayConfig/BlockTimeData'
+  GetDefaultData, SyncDatabaseData, AddHolidayLines } from '@/api/DayConfig/BlockTimeData'
 // import { lineOptions, LineOptions } from '@/utils/items'
+import { GetLineProcess } from '@/api/common'
 export default {
   name: 'BlockTimeData',
   directives: { elDragDialog },
@@ -543,6 +567,9 @@ export default {
       scopeRow: '', // 表格行数据
       importDialogVisible: false, // 导入数据dialog
       exportDialogVisible: false, // 导出dialog
+      holidayLinesDialogVisible: false, // 按默认锁定时间的线体dialog
+      all_line_list: [], // 所有线体
+      chosen_line_list: [], // 选中的线体
       importType: false, // false为替换数据 true为添加数据
       uploadFileName: '', // 上传的文件名
       uploadFileList: [], // 上传的文件列表
@@ -659,6 +686,7 @@ export default {
     this.getTableData(this.currentPage, this.pageSize)
     this.getDefaultData()
     this.initializeDate()
+    this.getLineProcess()
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
@@ -1309,6 +1337,7 @@ export default {
     exportDataDialog() {
       this.exportDialogVisible = true
     },
+
     // 确认导出
     exportData() {
       ExportData().then(res => {
@@ -1379,9 +1408,46 @@ export default {
     handleExportClose() {
       this.exportDialogVisible = false
     },
+    // 默认锁定时间线体窗口关闭
+    handleAddHolidyLinesClose() {
+      this.holidayLinesDialogVisible = false
+    },
+    // 显示按默认锁定时间的线体窗口
+    addHolidayLinesDialog() {
+      this.holidayLinesDialogVisible = true
+    },
+    // 添加按默认锁定时间的线体
+    addHolidayLines() {
+      console.log('保存', this.chosen_line_list)
+      // 上传后端
+      const data = {
+        'holiday_lines': this.chosen_line_list
+      }
+      AddHolidayLines(data).then((res) => {
+        if (res.code === 20000) {
+          this.$notify({
+            title: res.message,
+            type: 'success'
+          })
+          setTimeout(() => {
+            this.holidayLinesDialogVisible = false
+          }, 1000)
+        }
+      }).catch(err => {
+        this.$alert(err, '错误', {
+          confirmButtonText: '确定',
+          type: 'error'
+        })
+      })
+    },
     // 帮助提示按钮
     helpTips() {
       this.helpDialogVisible = true
+    },
+    getLineProcess() {
+      GetLineProcess().then(res => {
+        this.all_line_list = res.all_line_list
+      })
     }
   }
 }
