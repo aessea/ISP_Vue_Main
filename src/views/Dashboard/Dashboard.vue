@@ -85,7 +85,7 @@
           <el-calendar v-model="value">
             <template slot="dateCell" slot-scope="{data}">
               {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : '' }}
-              <div v-for="item in calendarData" :key="item" style="width:100%;">
+              <div v-for="item in calendarData" :key="item.id" style="width:100%;">
                 <el-tag v-if="item.date === data.day && item.isYuPai === true" type="success">预排√</el-tag>
                 <el-tag v-if="item.date === data.day && item.isZhengPai === true" type="success">正排√</el-tag>
                 <el-tag v-if="item.date === data.day && item.isHoliday === true">放假</el-tag>
