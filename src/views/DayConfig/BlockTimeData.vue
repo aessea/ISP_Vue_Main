@@ -526,7 +526,7 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, AddMultiData,
   ExportData, ImportData, GetBackupName, BackupData, RecoverBackupData, DeleteBackupData,
-  GetDefaultData, SyncDatabaseData, AddHolidayLines } from '@/api/DayConfig/BlockTimeData'
+  GetDefaultData, SyncDatabaseData, AddHolidayLines, GetHolidayLines } from '@/api/DayConfig/BlockTimeData'
 // import { lineOptions, LineOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
 export default {
@@ -687,6 +687,7 @@ export default {
     this.getDefaultData()
     this.initializeDate()
     this.getLineProcess()
+    this.getHolidayLines()
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
@@ -1447,6 +1448,11 @@ export default {
     getLineProcess() {
       GetLineProcess().then(res => {
         this.all_line_list = res.all_line_list
+      })
+    },
+    getHolidayLines() {
+      GetHolidayLines().then(res => {
+        this.chosen_line_list = res.holidayLines
       })
     }
   }

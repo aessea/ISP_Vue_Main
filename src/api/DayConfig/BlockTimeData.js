@@ -118,3 +118,11 @@ export function AddHolidayLines(data) {
     data
   })
 }
+
+// 获取按默认锁定时间的线体
+export function GetHolidayLines() {
+  return request({
+    method: 'get',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/get_holidayLines_data/`
+  })
+}
