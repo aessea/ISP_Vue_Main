@@ -16,6 +16,21 @@
             <el-button v-if="buttons.includes('FixedCTData/export')" @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
+            <el-input
+              v-model="SMT_machine_value"
+              placeholder="按照SMT机种名搜索"
+              prefix-icon="el-icon-search"
+              style="width: 200px;margin-left: 10px;"
+              clearable
+            />
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              style="margin-left: 10px;"
+              @click="searchData"
+            >
+              搜索
+            </el-button>
           </div>
         </el-col>
         <el-col :span="8">
@@ -227,7 +242,7 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Predict/FixedCTData'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, SearchData } from '@/api/Predict/FixedCTData'
 import { GetLineProcess } from '@/api/common'
 export default {
   name: 'FixedCTData',
@@ -245,6 +260,9 @@ export default {
       }, // 导出动画
       loadingInstance: null,
       table_data: [], // 表格数据
+      // 搜索数据
+      SMT_machine_value: '', // 按SMT机种名搜索
+      isSearch: false, // 是否为搜索获取表格数据
       tableDataExample: [
         {
           line: 'SM02',
@@ -364,16 +382,35 @@ export default {
       })
     },
     // 分页展示表格数据
-    getTableData(currentPage, pageSize) {
+    getTableData(currentPage, pageSize, isSearch) {
       this.loading = true
-      const data = { 'current_page': currentPage, 'page_size': pageSize }
-      GetTableData(data).then(res => {
-        if (res.code === 20000) {
-          this.table_data = res.table_data
-          this.total_num = res.total_num
-          this.loading = false
+      if (isSearch) {
+        const data = {
+          'current_page': currentPage,
+          'page_size': pageSize,
+          'SMT_machine_value': this.SMT_machine_value
         }
-      })
+
+        SearchData(data).then(res => {
+          if (res.code === 20000) {
+            this.table_data = res.table_data
+            this.total_num = res.total_num
+            this.loading = false
+          }
+        })
+      } else {
+        const data = {
+          'current_page': currentPage,
+          'page_size': pageSize
+        }
+        GetTableData(data).then(res => {
+          if (res.code === 20000) {
+            this.table_data = res.table_data
+            this.total_num = res.total_num
+            this.loading = false
+          }
+        })
+      }
     },
     // 刷新表格数据
     refreshTableData(isAddData = false) {
@@ -698,6 +735,19 @@ export default {
     // 帮助提示按钮
     helpTips() {
       this.helpDialogVisible = true
+    },
+
+    // 搜索数据
+    searchData() {
+      if (this.SMT_machine_value === '') {
+        this.$message({
+          type: 'warning',
+          message: '请至少输入一个关键词'
+        })
+        return
+      }
+      this.isSearch = true
+      this.getTableData(1, this.pageSize, true)
     }
   }
 }
