@@ -842,7 +842,13 @@ export default {
         // }, 5000)
       }).catch(err => {
         this.stepNow = 2
+        // this.$alert(err, '错误', {
+        //   confirmButtonText: '确定',
+        //   type: 'error'
+        // })
         this.$alert(err, '错误', {
+          customClass: 'checkAlertBox',
+          dangerouslyUseHTMLString: true,
           confirmButtonText: '确定',
           type: 'error'
         })
