@@ -433,21 +433,29 @@ export default {
       this.isClick = true
       const data = this.model
       data['user_name'] = this.name
-      this.$refs['$form'].validate((valid) => {
+      this.$refs['$form'].validate(async(valid) => {
         if (valid) {
-          AddData(data).then(res => {
-            if (res.code === 20000) {
-              this.$notify({
-                title: '添加成功',
-                message: '成功添加 1 条数据',
-                type: 'success'
-              })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
-              this.refreshTableData(true)
-            }
-          })
+          // 若不存在同组件同线体的记录，允许添加
+          if (!await this.hasSameRow(data)) {
+            AddData(data).then(res => {
+              if (res.code === 20000) {
+                this.$notify({
+                  title: '添加成功',
+                  message: '成功添加 1 条数据',
+                  type: 'success'
+                })
+                setTimeout(() => {
+                  this.closeFormDialog()
+                }, 1000)
+                this.refreshTableData(true)
+              }
+            })
+          } else {
+            this.$message({
+              type: 'error',
+              message: '已存在同组件同线别的记录，无需重复添加！'
+            })
+          }
         } else {
           this.$message({
             type: 'error',
@@ -455,6 +463,18 @@ export default {
           })
         }
       })
+    },
+    // 判断是否已经存在同组件同线别的记录
+    async hasSameRow(addData) {
+      // 获取所有data
+      const res = await GetTableData({
+        'current_page': 1,
+        'page_size': this.total_num
+      })
+      if (res.table_data.find(obj => obj.line === addData.line && obj.SMT_machine_name === addData.SMT_machine_name)) {
+        return true
+      }
+      return false
     },
     // 获取表格勾选数据
     handleSelectionChange(val) {
