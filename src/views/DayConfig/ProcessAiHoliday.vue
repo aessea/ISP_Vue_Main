@@ -370,21 +370,30 @@ export default {
       this.isClick = true
       const data = this.model
       data['user_name'] = this.name
+      console.log(this.model.holiday_begin)
       this.$refs['$form'].validate((valid) => {
         if (valid) {
-          AddData(data).then(res => {
-            if (res.code === 20000) {
-              this.$notify({
-                title: '添加成功',
-                message: '成功添加 1 条数据',
-                type: 'success'
-              })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
-              this.refreshTableData(true)
-            }
-          })
+          // 截止时间不能早于开始时间
+          if (new Date(this.model.holiday_begin) > new Date(this.model.holiday_end)) {
+            this.$message({
+              type: 'error',
+              message: '结束时间不能早于开始时间！'
+            })
+          } else {
+            AddData(data).then(res => {
+              if (res.code === 20000) {
+                this.$notify({
+                  title: '添加成功',
+                  message: '成功添加 1 条数据',
+                  type: 'success'
+                })
+                setTimeout(() => {
+                  this.closeFormDialog()
+                }, 1000)
+                this.refreshTableData(true)
+              }
+            })
+          }
         } else {
           this.$message({
             type: 'error',
@@ -400,21 +409,27 @@ export default {
       data['user_name'] = this.name
       this.$refs['$form'].validate((valid) => {
         if (valid) {
-          AddData(data).then(res => {
-            if (res.code === 20000) {
-              this.$notify({
-                title: '添加成功',
-                message: '成功添加 1 条数据',
-                type: 'success'
-              })
-              for (const key in this.model) {
-                this.model[key] = ''
-                this.modelOriginal[key] = ''
+          // 截止时间不能早于开始时间
+          if (new Date(this.model.holiday_begin) > new Date(this.model.holiday_end)) {
+            this.$message({
+              type: 'error',
+              message: '结束时间不能早于开始时间！'
+            })
+          } else {
+            AddData(data).then(res => {
+              if (res.code === 20000) {
+                this.$notify({
+                  title: '添加成功',
+                  message: '成功添加 1 条数据',
+                  type: 'success'
+                })
+                setTimeout(() => {
+                  this.closeFormDialog()
+                }, 1000)
+                this.refreshTableData(true)
               }
-              this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
-              this.refreshTableData(true)
-            }
-          })
+            })
+          }
         } else {
           this.$message({
             type: 'error',
@@ -498,16 +513,23 @@ export default {
       data['user_name'] = this.name
       this.$refs['$form'].validate((valid) => {
         if (valid) {
-          ModifyData(data).then(res => {
-            if (res.code === 20000) {
-              this.$notify({
-                title: res.message,
-                message: '数据已修改',
-                type: 'success'
-              })
-              this.refreshTableData()
-            }
-          })
+          if (new Date(this.model.holiday_begin) > new Date(this.model.holiday_end)) {
+            this.$message({
+              type: 'error',
+              message: '结束时间不能早于开始时间！'
+            })
+          } else {
+            ModifyData(data).then(res => {
+              if (res.code === 20000) {
+                this.$notify({
+                  title: res.message,
+                  message: '数据已修改',
+                  type: 'success'
+                })
+                this.refreshTableData()
+              }
+            })
+          }
         } else {
           this.$message({
             type: 'error',
