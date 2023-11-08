@@ -370,7 +370,6 @@ export default {
       this.isClick = true
       const data = this.model
       data['user_name'] = this.name
-      console.log(this.model.holiday_begin)
       this.$refs['$form'].validate((valid) => {
         if (valid) {
           // 截止时间不能早于开始时间
