@@ -104,12 +104,12 @@
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.holiday_begin" prop="holiday_begin" label="放假开始时间">
-              <el-date-picker v-model="model.holiday_begin" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-date-picker v-model="model.holiday_begin" type="datetime" placeholder="请选择日期时间" value-format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.holiday_end" prop="holiday_end" label="放假结束时间">
-              <el-date-picker v-model="model.holiday_end" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-date-picker v-model="model.holiday_end" type="datetime" placeholder="请选择日期时间" value-format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -218,6 +218,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/DayConfig/ProcessAiHoliday'
 import { LineOptions } from '@/utils/items'
+import { FormatDatabaseDatetime } from '@/utils/date'
 export default {
   name: 'ProcessAiHoliday',
   directives: { elDragDialog },
@@ -334,9 +335,18 @@ export default {
       GetTableData(data).then(res => {
         if (res.code === 20000) {
           this.table_data = res.table_data
+          // datetime形式转化
+          this.formatDatabaseDatetime()
           this.total_num = res.total_num
           this.loading = false
         }
+      })
+    },
+    // 将返回结果的时间格式化
+    formatDatabaseDatetime() {
+      this.table_data.forEach(item => {
+        item.holiday_begin = FormatDatabaseDatetime(item.holiday_begin)
+        item.holiday_end = FormatDatabaseDatetime(item.holiday_end)
       })
     },
     // 刷新表格数据
