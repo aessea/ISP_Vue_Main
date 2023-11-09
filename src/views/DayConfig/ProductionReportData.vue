@@ -337,46 +337,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="date" label="日期" width="110" />
-        <el-table-column prop="line" label="线别" width="110" />
-        <el-table-column prop="package_line" label="包装线" width="110" />
-        <el-table-column prop="product_type" label="产品类型" width="110" />
-        <el-table-column prop="machine_name" label="机种名" width="160" />
-        <el-table-column prop="board" label="板号" width="180" />
-        <el-table-column prop="job_ix" label="工单号" width="110" />
-        <el-table-column prop="job_quantity" label="工单量" width="110" />
-        <el-table-column prop="completed_quantity" label="产出片数" width="110" />
-        <el-table-column prop="connecting_plates" label="联片数" width="110" />
-        <el-table-column prop="CT" label="CT" width="110" />
-        <el-table-column prop="production_time" label="生产时间" width="110" />
-        <el-table-column prop="first_plate_time" label="首片时间" width="110" />
-        <el-table-column prop="setup_time" label="切换时间" width="110" />
-        <el-table-column prop="wait_material_time" label="物料等待时间" width="110" />
-        <el-table-column prop="small_stop_time" label="小停止时间" width="110" />
-        <el-table-column prop="downtime" label="设备故障时间" width="110" />
-        <el-table-column prop="program_adjustment_time" label="程序调整时间" width="110" />
-        <el-table-column prop="process_adjustment_time" label="工艺调整时间" width="110" />
-        <el-table-column prop="power_failed_time" label="停气停电" width="110" />
-        <el-table-column prop="clear_mantissa_time" label="清尾数" width="110" />
-        <el-table-column prop="wait_spares_time" label="待备件时间" width="110" />
-        <el-table-column prop="substitute_material_time" label="代用料时间" width="110" />
-        <el-table-column prop="total_points" label="总点数" width="110" />
-        <el-table-column prop="process" label="制程面" width="110" />
-        <el-table-column prop="factory" label="工厂别" width="110" />
-        <el-table-column prop="package_product_type" label="包装产品类型" width="110" />
-        <el-table-column prop="SMT_product_type" label="SMT产品类型" width="110" />
-        <el-table-column prop="setup_type" label="切换类型" width="110" />
-        <el-table-column prop="single_hand_insert_points" label="单板手插点数" width="110" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -438,7 +398,6 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, SyncDatabaseData } from '@/api/DayConfig/ProductionReportData'
-import { LineOptions } from '@/utils/items'
 export default {
   name: 'ProductionReportData',
   directives: { elDragDialog },
@@ -455,74 +414,6 @@ export default {
       }, // 导出动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          date: '2022-09-26',
-          line: 'SP08B',
-          package_line: 'CL02',
-          single_hand_insert_points: 0,
-          total_points: 0,
-          process: 'T',
-          product_type: 'MNTPWPC',
-          machine_name: 'PLKW261XQW1SMT',
-          board: '715GA790P02004003R',
-          job_ix: '6022099',
-          job_quantity: 88,
-          CT: 48,
-          completed_quantity: 88,
-          connecting_plates: 1,
-          single_points: 355,
-          production_time: 163,
-          first_plate_time: 11,
-          setup_time: 10,
-          wait_material_time: 0,
-          small_stop_time: 0,
-          downtime: 0,
-          program_adjustment_time: 0,
-          process_adjustment_time: 0,
-          power_failed_time: 0,
-          clear_mantissa_time: 0,
-          wait_spares_time: 0,
-          substitute_material_time: 0,
-          factory: '10',
-          package_product_type: '电源板',
-          SMT_product_type: 'PWPC',
-          setup_type: '整单换料'
-        }, {
-          time: '(必填)',
-          date: '(必填)',
-          line: '(必填)',
-          package_line: '(必填)',
-          single_hand_insert_points: '(选填)',
-          total_points: '(必填)',
-          process: '(必填)',
-          product_type: '(必填)',
-          machine_name: '(必填)',
-          board: '(必填)',
-          job_ix: '(必填)',
-          job_quantity: '(必填)',
-          CT: '(必填)',
-          completed_quantity: '(必填)',
-          connecting_plates: '(必填)',
-          single_points: '(必填)',
-          production_time: '(必填)',
-          first_plate_time: '(必填)',
-          setup_time: '(必填)',
-          wait_material_time: '(必填)',
-          small_stop_time: '(必填)',
-          downtime: '(必填)',
-          program_adjustment_time: '(必填)',
-          process_adjustment_time: '(必填)',
-          power_failed_time: '(必填)',
-          clear_mantissa_time: '(必填)',
-          wait_spares_time: '(必填)',
-          substitute_material_time: '(必填)',
-          factory: '(必填)',
-          package_product_type: '(必填)',
-          SMT_product_type: '(必填)',
-          setup_type: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -766,7 +657,6 @@ export default {
           trigger: 'blur'
         }]
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -790,15 +680,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 28) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

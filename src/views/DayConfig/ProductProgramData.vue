@@ -276,35 +276,7 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="status" label="程序表类型" width="120" />
-        <el-table-column prop="model_name" label="SMT机种名" width="130" />
-        <el-table-column prop="program_line_type" label="程序线别" width="120" />
-        <el-table-column prop="board_no" label="板号" width="160" />
-        <el-table-column prop="process" label="制程" width="80" />
-        <el-table-column prop="workmanship" label="工艺" />
-        <el-table-column prop="connecting_plates" label="联片数" width="100" />
-        <el-table-column prop="points" label="点数" width="80" />
-        <el-table-column prop="length" label="长" width="80" />
-        <el-table-column prop="width" label="宽" width="80" />
-        <el-table-column prop="height" label="高" width="80" />
-        <el-table-column prop="program_CT" label="标准CT" width="100" />
-        <el-table-column prop="yin_yang_board" label="阴阳板" width="100" />
-        <el-table-column prop="component_merge" label="组件合并" width="120" />
-        <el-table-column prop="component_bind" label="组件绑定" width="120" />
-        <el-table-column prop="package_name" label="包装阶" width="100" />
-        <el-table-column prop="is_rivet" label="是否打铆钉" width="120" />
-        <el-table-column prop="program_time" label="程序制作时间" width="150" />
-        <el-table-column prop="program_id" label="MES程序ID" width="120" />
-      </el-table>
+
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -366,7 +338,6 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetAllProgramData } from '@/api/DayConfig/ProductProgramData'
-import { LineOptions } from '@/utils/items'
 export default {
   name: 'ProductProgramData',
   directives: { elDragDialog },
@@ -379,49 +350,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          status: 0,
-          model_name: '',
-          program_line_type: '',
-          board_no: '',
-          process: '',
-          workmanship: '',
-          connecting_plates: 0,
-          points: 0,
-          length: 0,
-          width: 0,
-          height: 0,
-          program_CT: 0,
-          yin_yang_board: '',
-          component_merge: '',
-          component_bind: '',
-          package_name: '',
-          is_rivet: '',
-          program_time: '',
-          program_id: ''
-        }, {
-          status: '(待确定)',
-          model_name: '(待确定)',
-          program_line_type: '(待确定)',
-          board_no: '(待确定)',
-          process: '(待确定)',
-          workmanship: '(待确定)',
-          connecting_plates: '(待确定)',
-          points: '(待确定)',
-          length: '(待确定)',
-          width: '(待确定)',
-          height: '(待确定)',
-          program_CT: '(待确定)',
-          yin_yang_board: '(待确定)',
-          component_merge: '(待确定)',
-          component_bind: '(待确定)',
-          package_name: '(待确定)',
-          is_rivet: '(待确定)',
-          program_time: '(待确定)',
-          program_id: '(待确定)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -513,7 +441,6 @@ export default {
         program_time: [],
         program_id: []
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -537,15 +464,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      // if (rowIndex === 1 && columnIndex <= -1) {
-      //   return 'color: #F56C6C;font-weight: bold;'
-      // } else if (rowIndex === 1 && columnIndex > -1) {
-      //   return 'color: #E6A23C;font-weight: bold;'
-      // }
-      return ''
     },
     // 分页
     handlePageChange(val) {

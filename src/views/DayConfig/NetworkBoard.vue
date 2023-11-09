@@ -289,41 +289,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="serial_number" label="序列号" width="120" />
-        <el-table-column prop="pcb_number" label="PCB料号" width="220" />
-        <el-table-column prop="substitute_pcb" label="代用" width="180" />
-        <el-table-column prop="front_back" label="正反面" width="100" />
-        <el-table-column prop="model_name" label="机种名" width="138" />
-        <el-table-column prop="storage_spaces" label="储位" width="100" />
-        <el-table-column prop="state" label="状态" width="100" />
-        <el-table-column prop="backup_wash" label="备洗" width="100" />
-        <el-table-column prop="remark" label="备注" width="380" />
-        <el-table-column prop="last_used_line" label="最后使用线" width="120" />
-        <el-table-column prop="last_used_time" label="最后一次操作时间" width="200" />
-        <el-table-column prop="used_times" label="已用次数" width="120" />
-        <el-table-column prop="double_sticker" label="双贴" width="100" />
-        <el-table-column prop="double_sticker_remark" label="双贴 备注" width="120" />
-        <el-table-column prop="inventory_date" label="入库日期" width="120" />
-        <el-table-column prop="big_or_small" label="大/小" width="100" />
-        <el-table-column prop="type" label="类型" width="100" />
-        <el-table-column prop="thickness" label="厚度" width="80" />
-        <el-table-column prop="supplier" label="供应商" width="100" />
-        <el-table-column prop="warehousing_number" label="入库编号" width="160" />
-        <el-table-column prop="furnace_fixture" label="过炉治具" width="120" />
-        <el-table-column prop="pin" label="印刷机下PIN治具" width="160" />
-        <el-table-column prop="status_change_time" label="状态变更时间" width="200" />
-        <el-table-column prop="total_num" label="网板数量" width="120" />
-        <el-table-column prop="process" label="制程（工序）" width="140" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -385,7 +350,6 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/DayConfig/NetworkBoard'
-import { LineOptions } from '@/utils/items'
 export default {
   name: 'NetworkBoard',
   directives: { elDragDialog },
@@ -398,59 +362,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          serial_number: '',
-          pcb_number: '',
-          substitute_pcb: '',
-          front_back: '',
-          model_name: '',
-          storage_spaces: '',
-          state: '',
-          backup_wash: '',
-          remark: '',
-          last_used_line: '',
-          last_used_time: '',
-          used_times: 0,
-          input_1665235991812: '',
-          double_sticker_remark: '',
-          inventory_date: '',
-          big_or_small: '',
-          type: '',
-          thickness: 0,
-          status_change_time: '',
-          total_num: 0,
-          process: '',
-          supplier: '',
-          warehousing_number: '',
-          furnace_fixture: ''
-        }, {
-          serial_number: '(待确定)',
-          pcb_number: '(待确定)',
-          substitute_pcb: '(待确定)',
-          front_back: '(待确定)',
-          model_name: '(待确定)',
-          storage_spaces: '(待确定)',
-          state: '(待确定)',
-          backup_wash: '(待确定)',
-          remark: '(待确定)',
-          last_used_line: '(待确定)',
-          last_used_time: '(待确定)',
-          used_times: '(待确定)',
-          input_1665235991812: '(待确定)',
-          double_sticker_remark: '(待确定)',
-          inventory_date: '(待确定)',
-          big_or_small: '(待确定)',
-          type: '(待确定)',
-          thickness: '(待确定)',
-          status_change_time: '(待确定)',
-          total_num: '(待确定)',
-          process: '(待确定)',
-          supplier: '(待确定)',
-          warehousing_number: '(待确定)',
-          furnace_fixture: '(待确定)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -609,7 +520,6 @@ export default {
           trigger: 'blur'
         }]
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -633,15 +543,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      // if (rowIndex === 1 && columnIndex <= 7) {
-      //   return 'color: #F56C6C;font-weight: bold;'
-      // } else if (rowIndex === 1 && columnIndex > 2) {
-      //   return 'color: #E6A23C;font-weight: bold;'
-      // }
-      return ''
     },
     // 分页
     handlePageChange(val) {

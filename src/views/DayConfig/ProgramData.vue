@@ -230,32 +230,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <!-- <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="time" label="制作时间" width="120" />
-        <el-table-column prop="SMT_machine_name" label="SMT机种名" width="130" />
-        <el-table-column prop="line" label="线体" width="60" />
-        <el-table-column prop="board" label="板号" width="180" />
-        <el-table-column prop="size" label="长宽厚" width="120" />
-        <el-table-column prop="process" label="制程" width="60" />
-        <el-table-column prop="connecting_plates" label="联片数" width="80" />
-        <el-table-column prop="single_points" label="单板点数" width="100" />
-        <el-table-column prop="program_CT" label="程序CT" width="100" />
-        <el-table-column prop="bind_state" label="合并绑定状态" width="120" />
-        <el-table-column prop="bind_detail" label="绑定明细" />
-        <el-table-column prop="unknown1" label="未知1" />
-        <el-table-column prop="unknown2" label="未知2" />
-        <el-table-column prop="unknown3" label="未知3" />
-        <el-table-column prop="unknown4" label="未知4" />
-        <el-table-column prop="unknown5" label="未知5" />
-      </el-table> -->
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -317,7 +291,6 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/DayConfig/ProgramData'
-import { LineOptions } from '@/utils/items'
 export default {
   name: 'ProgramData',
   directives: { elDragDialog },
@@ -334,43 +307,6 @@ export default {
       }, // 导出动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          time: '2022-09-30',
-          bind_state: '绑定',
-          bind_detail: '',
-          line: 'SM07',
-          process: 'B',
-          board: '715GB080M0A001005K',
-          SMT_machine_name: 'SMTCPALN3QH',
-          size: '324.5*315*1.6',
-          connecting_plates: '1.0',
-          single_points: '594.0',
-          program_CT: '36.0',
-          unknown1: '',
-          unknown2: '',
-          unknown3: '',
-          unknown4: '',
-          unknown5: ''
-        }, {
-          time: '(必填)',
-          line: '(必填)',
-          process: '(必填)',
-          board: '(必填)',
-          SMT_machine_name: '(必填)',
-          size: '(必填)',
-          connecting_plates: '(必填)',
-          single_points: '(必填)',
-          program_CT: '(必填)',
-          bind_state: '(选填)',
-          bind_detail: '(选填)',
-          unknown1: '(选填)',
-          unknown2: '(选填)',
-          unknown3: '(选填)',
-          unknown4: '(选填)',
-          unknown5: '(选填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -489,7 +425,6 @@ export default {
         unknown4: [],
         unknown5: []
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -513,15 +448,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 7) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

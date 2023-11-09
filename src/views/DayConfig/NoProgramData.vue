@@ -272,35 +272,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="line" label="需求线体" width="110" />
-        <el-table-column prop="package_stage" width="170" label="需求包装阶" />
-        <el-table-column prop="machine_name" label="机种名" width="150" />
-        <el-table-column prop="raw_order_id" label="订单号" width="100" />
-        <el-table-column prop="order_num" label="工单量" width="100" />
-        <el-table-column prop="process" label="制程" width="80" />
-        <el-table-column prop="board" label="板号" width="200" />
-        <el-table-column prop="no_program_flag" label="有无程序" width="110" />
-        <el-table-column prop="no_package_flag" label="有无包装阶" width="120" />
-        <el-table-column prop="program_line" label="已有程序的线体" width="160" />
-        <el-table-column prop="connecting_plates" label="联板数" width="80" />
-        <el-table-column prop="single_points" label="单面点数" width="110" />
-        <el-table-column prop="long" label="长" width="100" />
-        <el-table-column prop="width" label="宽" width="100" />
-        <el-table-column prop="thick" label="厚" width="100" />
-        <el-table-column prop="program_CT" label="program_CT" width="140" />
-        <el-table-column prop="component_bind" label="组件绑定" width="200" />
-        <el-table-column prop="require_time" label="程序需求时间" width="180" />
-        <el-table-column prop="finish_time" label="程序完成时间" width="180" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -362,7 +333,6 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/DayConfig/NoProgramData'
-import { LineOptions } from '@/utils/items'
 export default {
   name: 'NoProgramData',
   directives: { elDragDialog },
@@ -375,47 +345,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          line: '',
-          package_stage: '',
-          machine_name: '',
-          raw_order_id: '',
-          order_num: '',
-          process: '',
-          no_program_flag: '',
-          no_package_flag: '',
-          program_line: '',
-          connecting_plates: 0,
-          single_points: 0,
-          long: 0,
-          width: 0,
-          thick: 0,
-          program_CT: 0,
-          component_bind: '',
-          require_time: '',
-          finish_time: ''
-        }, {
-          line: '(待确定)',
-          package_stage: '(待确定)',
-          machine_name: '(待确定)',
-          raw_order_id: '(待确定)',
-          order_num: '(待确定)',
-          process: '(待确定)',
-          no_program_flag: '(待确定)',
-          no_package_flag: '(待确定)',
-          program_line: '(待确定)',
-          connecting_plates: '(待确定)',
-          single_points: '(待确定)',
-          long: '(待确定)',
-          width: '(待确定)',
-          thick: '(待确定)',
-          program_CT: '(待确定)',
-          component_bind: '(待确定)',
-          require_time: '(待确定)',
-          finish_time: '(待确定)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -576,7 +505,6 @@ export default {
           trigger: 'change'
         }]
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -600,15 +528,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      // if (rowIndex === 1 && columnIndex <= 2) {
-      //   return 'color: #F56C6C;font-weight: bold;'
-      // } else if (rowIndex === 1 && columnIndex > 2) {
-      //   return 'color: #E6A23C;font-weight: bold;'
-      // }
-      return ''
     },
     // 分页
     handlePageChange(val) {
