@@ -220,6 +220,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/MP1AddLineData'
 import { LineOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
+import { isEqual } from '@/utils/common'
 export default {
   name: 'MP1AddLineData',
   directives: { elDragDialog },
@@ -468,14 +469,7 @@ export default {
     },
     // 检测表单数据是否发生变化，用于提示
     checkFormChange() {
-      let isChange = false
-      for (const key in this.model) {
-        if (this.model[key] !== this.modelOriginal[key]) {
-          isChange = true
-          break
-        }
-      }
-      return isChange
+      return isEqual(this.model, this.modelOriginal)
     },
     // 表单dialog关闭前提示
     handleFormClose() {
