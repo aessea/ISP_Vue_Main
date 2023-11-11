@@ -560,33 +560,33 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        line_name: '',
-        start_time: '',
-        end_time: '',
+        id: null,
+        line_name: null,
+        start_time: null,
+        end_time: null,
         flag: false,
         default_lock_time_flag: false,
-        lock_time: '',
-        remark: '',
-        CREATED_BY: '',
-        CREATED_TIME: '',
-        UPDATED_BY: '',
-        UPDATED_TIME: ''
+        lock_time: null,
+        remark: null,
+        CREATED_BY: null,
+        CREATED_TIME: null,
+        UPDATED_BY: null,
+        UPDATED_TIME: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        line_name: '',
-        start_time: '',
-        end_time: '',
+        id: null,
+        line_name: null,
+        start_time: null,
+        end_time: null,
         flag: false,
         default_lock_time_flag: false,
-        lock_time: '',
-        remark: '',
-        CREATED_BY: '',
-        CREATED_TIME: '',
-        UPDATED_BY: '',
-        UPDATED_TIME: ''
+        lock_time: null,
+        remark: null,
+        CREATED_BY: null,
+        CREATED_TIME: null,
+        UPDATED_BY: null,
+        UPDATED_TIME: null
       },
       rules: {
         line_name: [{

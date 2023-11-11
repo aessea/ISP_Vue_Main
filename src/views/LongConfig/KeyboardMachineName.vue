@@ -227,15 +227,15 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        machine_name: '',
-        delay_value: ''
+        id: null,
+        machine_name: null,
+        delay_value: undefined
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        machine_name: '',
-        delay_value: ''
+        id: null,
+        machine_name: null,
+        delay_value: undefined
       },
       rules: {
         machine_name: [{

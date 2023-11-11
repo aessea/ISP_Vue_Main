@@ -228,15 +228,15 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        machine_name: '',
-        optimized_lines: ''
+        id: null,
+        machine_name: null,
+        optimized_lines: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        machine_name: '',
-        optimized_lines: ''
+        id: null,
+        machine_name: null,
+        optimized_lines: null
       },
       rules: {
         machine_name: [{

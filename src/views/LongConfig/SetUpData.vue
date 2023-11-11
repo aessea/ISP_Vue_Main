@@ -240,19 +240,19 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        line: '',
-        big_setup: 0,
-        small_setup: 0,
-        setup_program: 0
+        id: null,
+        line: null,
+        big_setup: undefined,
+        small_setup: undefined,
+        setup_program: undefined
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        line: '',
-        big_setup: 0,
-        small_setup: 0,
-        setup_program: 0
+        id: null,
+        line: null,
+        big_setup: undefined,
+        small_setup: undefined,
+        setup_program: undefined
       },
       rules: {
         line: [{

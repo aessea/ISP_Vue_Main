@@ -267,19 +267,19 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        line: '',
-        SMT_machine_name: '',
-        process: '',
-        CT: 0
+        id: null,
+        line: null,
+        SMT_machine_name: null,
+        process: null,
+        CT: undefined
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        line: '',
-        SMT_machine_name: '',
-        process: '',
-        CT: 0
+        id: null,
+        line: null,
+        SMT_machine_name: null,
+        process: null,
+        CT: undefined
       },
       rules: {
         line: [{

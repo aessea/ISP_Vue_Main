@@ -234,17 +234,17 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        board: '',
-        top_SMT_mac_name: '',
-        bottom_SMT_mac_name: ''
+        id: null,
+        board: null,
+        top_SMT_mac_name: null,
+        bottom_SMT_mac_name: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        board: '',
-        top_SMT_mac_name: '',
-        bottom_SMT_mac_name: ''
+        id: null,
+        board: null,
+        top_SMT_mac_name: null,
+        bottom_SMT_mac_name: null
       },
       rules: {
         board: [{

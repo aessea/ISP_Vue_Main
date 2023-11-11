@@ -262,27 +262,27 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        machine_name: '',
-        ct: 0,
-        trial_run_timedelta: 0,
-        batch_production_timedelta: 0,
-        CREATED_BY: '',
-        CREATED_TIME: '',
-        UPDATED_BY: '',
-        UPDATED_TIME: ''
+        id: null,
+        machine_name: null,
+        ct: undefined,
+        trial_run_timedelta: undefined,
+        batch_production_timedelta: undefined,
+        CREATED_BY: null,
+        CREATED_TIME: null,
+        UPDATED_BY: null,
+        UPDATED_TIME: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        machine_name: '',
-        ct: 0,
-        trial_run_timedelta: 0,
-        batch_production_timedelta: 0,
-        CREATED_BY: '',
-        CREATED_TIME: '',
-        UPDATED_BY: '',
-        UPDATED_TIME: ''
+        id: null,
+        machine_name: null,
+        ct: undefined,
+        trial_run_timedelta: undefined,
+        batch_production_timedelta: undefined,
+        CREATED_BY: null,
+        CREATED_TIME: null,
+        UPDATED_BY: null,
+        UPDATED_TIME: null
       },
       rules: {
         machine_name: [{

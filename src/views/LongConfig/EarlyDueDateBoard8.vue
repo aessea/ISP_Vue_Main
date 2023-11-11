@@ -228,15 +228,15 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        board8: '',
-        advance_days: 0
+        id: null,
+        board8: null,
+        advance_days: undefined
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        board8: '',
-        advance_days: 0
+        id: null,
+        board8: null,
+        advance_days: undefined
       },
       rules: {
         board8: [{

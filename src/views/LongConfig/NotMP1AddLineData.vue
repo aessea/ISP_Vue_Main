@@ -234,6 +234,7 @@ import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/NotMP1AddLineData'
 import { LineOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
+import { isEqual } from '@/utils/common'
 export default {
   name: 'NotMP1AddLineData',
   directives: { elDragDialog },
@@ -265,21 +266,21 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        process: '',
+        id: null,
+        process: null,
         add_feasible_line: [],
-        above_connecting_points: 0,
-        under_single_points: 0,
-        above_connecting_plates: 0
+        above_connecting_points: undefined,
+        under_single_points: undefined,
+        above_connecting_plates: undefined
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        process: '',
+        id: null,
+        process: null,
         add_feasible_line: [],
-        above_connecting_points: 0,
-        under_single_points: 0,
-        above_connecting_plates: 0
+        above_connecting_points: undefined,
+        under_single_points: undefined,
+        above_connecting_plates: undefined
       },
       rules: {
         process: [{
@@ -486,14 +487,7 @@ export default {
     },
     // 检测表单数据是否发生变化，用于提示
     checkFormChange() {
-      let isChange = false
-      for (const key in this.model) {
-        if (this.model[key] !== this.modelOriginal[key]) {
-          isChange = true
-          break
-        }
-      }
-      return isChange
+      return !isEqual(this.model, this.modelOriginal)
     },
     // 表单dialog关闭前提示
     handleFormClose() {

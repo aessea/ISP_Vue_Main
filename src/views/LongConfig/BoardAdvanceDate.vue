@@ -229,22 +229,22 @@ export default {
       uploadFileList: [], // 上传的文件列表
       uploadFile: null, // 上传的文件
       importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
-      exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
+      exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）model:
       isClick: false, // 是否点击了保存或者提交
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        param_sources: '',
-        param_value: '',
-        param_name: ''
+        id: null,
+        param_sources: null,
+        param_value: null,
+        param_name: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        param_sources: '',
-        param_value: '',
-        param_name: ''
+        id: null,
+        param_sources: null,
+        param_value: null,
+        param_name: null
       },
       rules: {
         param_name: [{

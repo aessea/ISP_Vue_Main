@@ -231,21 +231,21 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        name: '',
-        description: '',
-        url: '',
+        id: null,
+        name: null,
+        description: null,
+        url: null,
         request_test_server: true,
-        remark: ''
+        remark: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        name: '',
-        description: '',
-        url: '',
+        id: null,
+        name: null,
+        description: null,
+        url: null,
         request_test_server: true,
-        remark: ''
+        remark: null
       },
       rules: {
       },

@@ -230,15 +230,15 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        SMT_machine_name: '',
-        line_name: ''
+        id: null,
+        SMT_machine_name: null,
+        line_name: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        SMT_machine_name: '',
-        line_name: ''
+        id: null,
+        SMT_machine_name: null,
+        line_name: null
       },
       rules: {
         SMT_machine_name: [{

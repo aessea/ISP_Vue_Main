@@ -235,17 +235,17 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        post_process_name: '',
-        holiday_begin: '',
-        holiday_end: ''
+        id: null,
+        post_process_name: null,
+        holiday_begin: null,
+        holiday_end: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        post_process_name: '',
-        holiday_begin: '',
-        holiday_end: ''
+        id: null,
+        post_process_name: null,
+        holiday_begin: null,
+        holiday_end: null
       },
       rules: {
         post_process_name: [{

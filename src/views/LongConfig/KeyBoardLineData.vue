@@ -228,15 +228,15 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        line: '',
-        points_limit: 0
+        id: null,
+        line: null,
+        points_limit: undefined
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        line: '',
-        points_limit: 0
+        id: null,
+        line: null,
+        points_limit: undefined
       },
       rules: {
         line: [{

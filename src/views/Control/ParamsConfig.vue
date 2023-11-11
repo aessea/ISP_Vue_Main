@@ -321,7 +321,7 @@ export default {
       exportDialogVisible: false, // 导出dialog
       importType: false, // false为替换数据 true为添加数据
       uploadFileName: '', // 上传的文件名
-      uploadFileList: [], // 上传的文件列表
+      uploadFileList: [], // 上传的文件列表model:
       uploadFile: null, // 上传的文件
       importMode: 'add', // 导入方式选择:追加或替换（方便以后扩展）
       exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
@@ -329,40 +329,40 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        param_type: '',
-        param_classify: '',
-        param_name_backend: '',
-        param_name_front: '',
-        param_value: '',
-        param_value_type: '',
-        param_default_value: '',
-        param_before_value: '',
-        param_default_name: '',
-        update_time: '',
-        update_user: '',
-        serial_number: '',
-        param_description: '',
-        show_in_front: '',
+        id: null,
+        param_type: null,
+        param_classify: null,
+        param_name_backend: null,
+        param_name_front: null,
+        param_value: null,
+        param_value_type: null,
+        param_default_value: null,
+        param_before_value: null,
+        param_default_name: null,
+        update_time: null,
+        update_user: null,
+        serial_number: null,
+        param_description: null,
+        show_in_front: null,
         visible_roles: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        param_type: '',
-        param_classify: '',
-        param_name_backend: '',
-        param_name_front: '',
-        param_value: '',
-        param_value_type: '',
-        param_default_value: '',
-        param_default_name: '',
-        param_before_value: '',
-        update_time: '',
-        update_user: '',
-        serial_number: '',
-        param_description: '',
-        show_in_front: '',
+        id: null,
+        param_type: null,
+        param_classify: null,
+        param_name_backend: null,
+        param_name_front: null,
+        param_value: null,
+        param_value_type: null,
+        param_default_value: null,
+        param_default_name: null,
+        param_before_value: null,
+        update_time: null,
+        update_user: null,
+        serial_number: null,
+        param_description: null,
+        show_in_front: null,
         visible_roles: []
       },
       rules: {

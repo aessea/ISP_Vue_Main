@@ -386,6 +386,7 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, ModifyData, ExportData, RestoreDefault, SyncDatabaseData } from '@/api/Control/ParamsConfig'
+import { isEqual } from '@/utils/common'
 export default {
   name: 'ParamConfigManage',
   directives: { elDragDialog },
@@ -419,40 +420,40 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        param_type: '',
-        param_classify: '',
-        param_name_backend: '',
-        param_name_front: '',
-        param_value: '',
-        param_value_type: '',
-        param_default_value: '',
-        param_before_value: '',
-        param_default_name: '',
-        update_time: '',
-        update_user: '',
-        serial_number: '',
-        param_description: '',
-        show_in_front: '',
+        id: null,
+        param_type: null,
+        param_classify: null,
+        param_name_backend: null,
+        param_name_front: null,
+        param_value: null,
+        param_value_type: null,
+        param_default_value: null,
+        param_before_value: null,
+        param_default_name: null,
+        update_time: null,
+        update_user: null,
+        serial_number: null,
+        param_description: null,
+        show_in_front: null,
         visible_roles: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        param_type: '',
-        param_classify: '',
-        param_name_backend: '',
-        param_name_front: '',
-        param_value: '',
-        param_value_type: '',
-        param_default_value: '',
-        param_default_name: '',
-        param_before_value: '',
-        update_time: '',
-        update_user: '',
-        serial_number: '',
-        param_description: '',
-        show_in_front: '',
+        id: null,
+        param_type: null,
+        param_classify: null,
+        param_name_backend: null,
+        param_name_front: null,
+        param_value: null,
+        param_value_type: null,
+        param_default_value: null,
+        param_default_name: null,
+        param_before_value: null,
+        update_time: null,
+        update_user: null,
+        serial_number: null,
+        param_description: null,
+        show_in_front: null,
         visible_roles: []
       },
       rules: {
@@ -667,14 +668,7 @@ export default {
     },
     // 检测表单数据是否发生变化，用于提示
     checkFormChange() {
-      let isChange = false
-      for (const key in this.model) {
-        if (this.model[key] !== this.modelOriginal[key]) {
-          isChange = true
-          break
-        }
-      }
-      return isChange
+      return !isEqual(this.model, this.modelOriginal)
     },
     // 表单dialog关闭前提示
     handleFormClose() {

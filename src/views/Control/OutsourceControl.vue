@@ -540,7 +540,7 @@
         <el-card class="card-config">
           <div slot="header" class="clearfix">
             <span>每日产能配置</span>
-            <el-button style="float: right; padding: 3px 0" type="text" @click="showDayCapacityConfigDialog">添加数据</el-button>
+            <el-button style="float: right; padding: 3px 5px" type="text" @click="showDayCapacityConfigDialog">添加数据</el-button>
             <el-button style="float: right; padding: 3px 0;" type="text" @click="clearDayCapacityConfig">清空数据</el-button>
           </div>
           <div class="table-box">
@@ -577,7 +577,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.component_type" prop="component_type" label="组件类型">
-              <el-select v-model="model.component_type" placeholder="请选择">
+              <el-select v-model="model.component_type" placeholder="请选择" style="width: 100%">
                 <el-option
                   v-for="item in componentTypeOptions"
                   :key="item.value"
@@ -689,10 +689,10 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        component_type: '',
-        date_info: '',
-        capacity: ''
+        id: null,
+        component_type: null,
+        date_info: null,
+        capacity: undefined
       },
       dialogVisibleCompute2: false,
       componentType2: 2,

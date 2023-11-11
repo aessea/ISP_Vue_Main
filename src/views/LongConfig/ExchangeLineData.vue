@@ -244,21 +244,21 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        start_time: '',
-        end_time: '',
-        exchange_line_one: '',
-        exchange_line_two: '',
-        remark: ''
+        id: null,
+        start_time: null,
+        end_time: null,
+        exchange_line_one: null,
+        exchange_line_two: null,
+        remark: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        start_time: '',
-        end_time: '',
-        exchange_line_one: '',
-        exchange_line_two: '',
-        remark: ''
+        id: null,
+        start_time: null,
+        end_time: null,
+        exchange_line_one: null,
+        exchange_line_two: null,
+        remark: null
       },
       rules: {
         start_time: [{

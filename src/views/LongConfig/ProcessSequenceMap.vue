@@ -231,6 +231,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/ProcessSequenceMap'
 import { GetLineProcess } from '@/api/common'
+import { isEqual } from '@/utils/common'
 export default {
   name: 'ProcessSequenceMap',
   directives: { elDragDialog },
@@ -261,16 +262,16 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        classify: '',
-        process: '',
+        id: null,
+        classify: null,
+        process: null,
         sequence_list: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        classify: '',
-        process: '',
+        id: null,
+        classify: null,
+        process: null,
         sequence_list: []
       },
       rules: {
@@ -490,14 +491,7 @@ export default {
     },
     // 检测表单数据是否发生变化，用于提示
     checkFormChange() {
-      let isChange = false
-      for (const key in this.model) {
-        if (this.model[key] !== this.modelOriginal[key]) {
-          isChange = true
-          break
-        }
-      }
-      return isChange
+      return !isEqual(this.model, this.modelOriginal)
     },
     // 表单dialog关闭前提示
     handleFormClose() {

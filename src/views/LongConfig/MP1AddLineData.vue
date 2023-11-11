@@ -253,15 +253,15 @@ export default {
       forms: ['$form'],
       model: {
         id: null,
-        process: '',
+        process: null,
         under_single_points: undefined,
         add_feasible_line: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        process: '',
-        under_single_points: 0,
+        id: null,
+        process: null,
+        under_single_points: undefined,
         add_feasible_line: []
       },
       rules: {
@@ -469,7 +469,7 @@ export default {
     },
     // 检测表单数据是否发生变化，用于提示
     checkFormChange() {
-      return isEqual(this.model, this.modelOriginal)
+      return !isEqual(this.model, this.modelOriginal)
     },
     // 表单dialog关闭前提示
     handleFormClose() {
@@ -496,6 +496,8 @@ export default {
       }
       this.model['add_feasible_line'] = []
       this.modelOriginal['add_feasible_line'] = []
+      this.model['under_single_points'] = undefined
+      this.modelOriginal['under_single_points'] = undefined
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据
