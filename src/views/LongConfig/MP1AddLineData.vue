@@ -157,19 +157,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="process" label="制程" />
-        <el-table-column prop="under_single_points" label="单板点数[以下]" />
-        <el-table-column prop="add_feasible_line" label="补充的可排线别" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -245,17 +232,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          process: 'B-BPR',
-          under_single_points: 0.0,
-          add_feasible_line: 'SR02、SR06'
-        }, {
-          process: '(必填)',
-          under_single_points: '(必填)',
-          add_feasible_line: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -275,9 +251,9 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
+        id: null,
         process: '',
-        under_single_points: 0,
+        under_single_points: undefined,
         add_feasible_line: []
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
@@ -329,15 +305,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 2) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     getLineProcess() {
       GetLineProcess().then(res => {

@@ -152,21 +152,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="line" label="线别" width="120" />
-        <el-table-column prop="start_time" label="开始时间" width="120" />
-        <el-table-column prop="end_time" label="结束时间" width="120" />
-        <el-table-column prop="capacity_change" label="产能修改比例" width="120" />
-        <el-table-column prop="remark" label="备注" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -241,21 +226,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          line: 'SM01',
-          start_time: '2021-08-12',
-          end_time: '2021-09-19',
-          capacity_change: 0.75,
-          remark: 'SM01在2021年8月12日和2021年9月19日中产能为原先产能的75%'
-        }, {
-          line: '(必填)',
-          start_time: '(必填)',
-          end_time: '(必填)',
-          capacity_change: '(必填)',
-          remark: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -341,15 +311,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 4) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 4) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

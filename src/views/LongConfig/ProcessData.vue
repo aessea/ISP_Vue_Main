@@ -274,26 +274,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="name" label="制程名" width="90" />
-        <el-table-column prop="TB" label="面" width="60" />
-        <el-table-column prop="paired_process" label="配对制程名" width="100" />
-        <el-table-column prop="grouping_factor_day" label="第一块和第二块工单划分参数(天)" width="240" />
-        <el-table-column prop="grouping_factor_hour" label="第二块工单控制大小(时)" width="190" />
-        <el-table-column prop="grouping_factor_overtime" label="第三块划分参数(天)" width="160" />
-        <el-table-column prop="grouping_combination_flag" label="第三块是否可并(0否,1是)" width="180" />
-        <el-table-column prop="first_second_combination_flag" label="没有第三块时，前两块是否可并(0否,1是)" width="280" />
-        <el-table-column prop="buffer_time" label="上下板间隔时间" width="130" />
-        <el-table-column prop="is_point" label="是否按点数" width="110" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -367,31 +347,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          name: 'T',
-          TB: 'T',
-          paired_process: 'B',
-          grouping_factor_day: 2.0,
-          grouping_factor_hour: 0.0,
-          grouping_factor_overtime: 4.0,
-          grouping_combination_flag: 1,
-          first_second_combination_flag: 0,
-          is_point: 'TRUE',
-          buffer_time: 8.0
-        }, {
-          name: '(必填)',
-          TB: '(必填)',
-          paired_process: '(必填)',
-          grouping_factor_day: '(必填)',
-          grouping_factor_hour: '(必填)',
-          grouping_factor_overtime: '(必填)',
-          grouping_combination_flag: '(必填)',
-          first_second_combination_flag: '(必填)',
-          is_point: '(必填)',
-          buffer_time: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -574,15 +529,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 20) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 20) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

@@ -247,34 +247,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="board" label="板号前八位" width="120" />
-        <el-table-column prop="SMT_machine_name" label="SMT机种名" width="200" />
-        <el-table-column prop="line" label="线体" width="80" />
-        <el-table-column prop="line_classify" label="线别类" width="95" />
-        <el-table-column prop="connecting_plates" label="联片数" width="95" />
-        <el-table-column prop="passing_plates" label="过板数" width="95" />
-        <el-table-column prop="single_points" label="单板点数" width="110" />
-        <el-table-column prop="process" label="制程" width="80" />
-        <el-table-column prop="long" label="长" width="60" />
-        <el-table-column prop="wide" label="宽" width="60" />
-        <el-table-column prop="thick" label="厚" width="60" />
-        <el-table-column prop="completed_quantity" label="产出片数" width="110" />
-        <el-table-column prop="total_points" label="总点数" width="95" />
-        <el-table-column prop="process_time" label="加工时间" width="110" />
-        <el-table-column prop="other_time" label="其他时间" width="110" />
-        <el-table-column prop="program_CT" label="程序CT" width="100" />
-        <el-table-column prop="average_CT" label="平均CT" width="110" />
-        <el-table-column prop="data_time" label="数据时间" width="110" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -353,47 +325,6 @@ export default {
       }, // 导出动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          board: '715GC159',
-          SMT_machine_name: 'MLPD1DFA426AE4SMT',
-          line: 'SM19',
-          line_classify: 'c5',
-          process: 'T',
-          connecting_plates: 1.0,
-          passing_plates: 25.0,
-          single_points: 10816.0,
-          completed_quantity: 0,
-          long: '0',
-          wide: '0',
-          thick: '0',
-          total_points: 270400.0,
-          process_time: 438,
-          other_time: 20,
-          program_CT: 0.0,
-          average_CT: 422.40,
-          data_time: '2021-04-09'
-        }, {
-          board: '(必填)',
-          SMT_machine_name: '(必填)',
-          line: '(必填)',
-          line_classify: '(必填)',
-          process: '(必填)',
-          connecting_plates: '(必填)',
-          passing_plates: '(必填)',
-          single_points: '(必填)',
-          completed_quantity: '(必填)',
-          long: '(必填)',
-          wide: '(必填)',
-          thick: '(必填)',
-          total_points: '(必填)',
-          process_time: '(必填)',
-          other_time: '(必填)',
-          program_CT: '(必填)',
-          average_CT: '(必填)',
-          data_time: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -571,15 +502,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 28) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

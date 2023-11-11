@@ -409,38 +409,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="name" label="产线名字" width="110" />
-        <el-table-column prop="is_points" label="是否按点数分大中小工单" width="170" />
-        <el-table-column prop="config_class" label="配置类型" width="85" />
-        <el-table-column prop="program_class" label="程序类型" width="85" />
-        <el-table-column prop="balance_class" label="线平衡类型" width="100" />
-        <el-table-column prop="big_able" label="可否大工单" width="100" />
-        <el-table-column prop="middle_able" label="可否中工单" width="100" />
-        <el-table-column prop="small_able" label="可否小工单" width="100" />
-        <el-table-column prop="min_threshold" label="最低生产阈值设定值" width="110" />
-        <el-table-column prop="min_threshold" label="最低生产阈值设定值" width="110" />
-        <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
-        <el-table-column prop="offset_threshold" label="阈值偏差" width="85" />
-        <el-table-column prop="T_unable" label="可否制程T" width="95" />
-        <el-table-column prop="B_unable" label="可否制程B" width="95" />
-        <el-table-column prop="T_BPR_unable" label="可否制程T-BPR" width="125" />
-        <el-table-column prop="B_BPR_unable" label="可否制程B-BPR" width="130" />
-        <el-table-column prop="S_BPR_unable" label="可否制程S-BPR" width="130" />
-        <el-table-column prop="S_BPR_M_unable" label="可否制程S-BPR-M" width="145" />
-        <el-table-column prop="S_unable" label="可否制程S" width="95" />
-        <el-table-column prop="S_THR_unable" label="可否制程S-THR" width="130" />
-        <el-table-column prop="is_burn_in" label="是否烧录" width="85" />
-        <el-table-column prop="capacity" label="日产能" width="80" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -516,53 +484,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          name: 'SR09',
-          is_points: 1,
-          capacity: 0,
-          config_class: 1,
-          program_class: 1,
-          balance_class: 1,
-          big_able: 1,
-          middle_able: 1,
-          small_able: 0,
-          min_threshold: 0,
-          max_threshold: 0,
-          offset_threshold: 0,
-          T_unable: 0,
-          B_unable: 1,
-          T_BPR_unable: 0,
-          B_BPR_unable: 1,
-          S_BPR_unable: 0,
-          S_BPR_M_unable: 1,
-          S_unable: 0,
-          S_THR_unable: 1,
-          is_burn_in: 0
-        }, {
-          name: '(必填)',
-          is_points: '(必填)',
-          capacity: '(必填)',
-          config_class: '(必填)',
-          program_class: '(必填)',
-          balance_class: '(必填)',
-          big_able: '(必填)',
-          middle_able: '(必填)',
-          small_able: '(必填)',
-          min_threshold: '(必填)',
-          max_threshold: '(必填)',
-          offset_threshold: '(必填)',
-          T_unable: '(必填)',
-          B_unable: '(必填)',
-          T_BPR_unable: '(必填)',
-          B_BPR_unable: '(必填)',
-          S_BPR_unable: '(必填)',
-          S_BPR_M_unable: '(必填)',
-          S_unable: '(必填)',
-          S_THR_unable: '(必填)',
-          is_burn_in: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -864,15 +785,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 20) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 20) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

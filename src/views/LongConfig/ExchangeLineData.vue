@@ -152,21 +152,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="start_time" label="开始时间" width="120" />
-        <el-table-column prop="end_time" label="结束时间" width="120" />
-        <el-table-column prop="exchange_line_one" label="交换线别一" width="120" />
-        <el-table-column prop="exchange_line_two" label="交换线别二" width="120" />
-        <el-table-column prop="remark" label="备注" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -241,21 +226,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          start_time: '2021-07-21',
-          end_time: '2022-01-01',
-          exchange_line_one: 'SM03',
-          exchange_line_two: 'SM06',
-          remark: 'SM03和SM06在2021年7月21日至2022年1月1日间的历史数据互相交换'
-        }, {
-          start_time: '(必填)',
-          end_time: '(必填)',
-          exchange_line_one: '(必填)',
-          exchange_line_two: '(必填)',
-          remark: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -342,15 +312,7 @@ export default {
     handleDrag() {
       // this.$refs.select.blur()
     },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 4) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 4) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
-    },
+
     // 分页
     handlePageChange(val) {
       this.currentPage = val

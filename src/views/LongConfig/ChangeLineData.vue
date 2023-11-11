@@ -152,21 +152,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="start_time" label="开始时间" width="120" />
-        <el-table-column prop="end_time" label="结束时间" width="120" />
-        <el-table-column prop="line_one" label="需要删除线体" width="120" />
-        <el-table-column prop="line_two" label="所更改线别" width="120" />
-        <el-table-column prop="remark" label="备注" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -241,21 +226,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          start_time: '2022-03-15',
-          end_time: '2022-01-01',
-          line_one: 'SR01',
-          line_two: 'SR06',
-          remark: '2022年8月15日之前的SR01数据均更改为SR06数据'
-        }, {
-          start_time: '(必填)',
-          end_time: '(必填)',
-          line_one: '(必填)',
-          line_two: '(必填)',
-          remark: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -341,15 +311,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 4) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 4) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {

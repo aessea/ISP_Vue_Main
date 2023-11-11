@@ -191,26 +191,6 @@
       :before-close="handleImportClose"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;margin-bottom: 16px;">
-        导入数据格式示例如下（仅支持.xlsx文件，列名需保持名称一致）：
-      </p>
-      <el-table
-        :data="tableDataExample"
-        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-        :cell-style="setCellColor"
-        border
-      >
-        <el-table-column prop="check_status" label="检验状态" />
-        <el-table-column prop="component_type" label="组件类型" />
-        <el-table-column prop="serial_no" label="序列号" />
-        <el-table-column prop="package_name" label="机种" />
-        <el-table-column prop="model_name" label="AI/SMT组件" />
-        <el-table-column prop="total_count" label="总数量" />
-        <el-table-column prop="origin_date" label="原始日期" />
-        <el-table-column prop="demand_date" label="需求日期" />
-        <el-table-column prop="package_line" label="包装线" />
-        <el-table-column prop="factory" label="工厂" />
-      </el-table>
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
@@ -285,31 +265,6 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      tableDataExample: [
-        {
-          check_status: '',
-          component_type: '',
-          serial_no: '',
-          package_name: '',
-          model_name: '',
-          total_count: '',
-          origin_date: '',
-          demand_date: '',
-          package_line: '',
-          factory: ''
-        }, {
-          check_status: '(必填)',
-          component_type: '(必填)',
-          serial_no: '(必填)',
-          package_name: '(必填)',
-          model_name: '(必填)',
-          total_count: '(必填)',
-          origin_date: '(必填)',
-          demand_date: '(必填)',
-          package_line: '(必填)',
-          factory: '(必填)'
-        }
-      ], // 示例的表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
@@ -430,15 +385,6 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
-    },
-    // 示例表格行颜色
-    setCellColor({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex === 1 && columnIndex <= 2) {
-        return 'color: #F56C6C;font-weight: bold;'
-      } else if (rowIndex === 1 && columnIndex > 2) {
-        return 'color: #E6A23C;font-weight: bold;'
-      }
-      return ''
     },
     // 分页
     handlePageChange(val) {
