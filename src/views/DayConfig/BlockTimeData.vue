@@ -513,6 +513,7 @@ import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, AddMultiDa
   GetDefaultData, SyncDatabaseData, AddHolidayLines, GetHolidayLines } from '@/api/DayConfig/BlockTimeData'
 // import { lineOptions, LineOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
+import { deepClone } from '@/utils'
 export default {
   name: 'BlockTimeData',
   directives: { elDragDialog },
@@ -588,6 +589,8 @@ export default {
         UPDATED_BY: null,
         UPDATED_TIME: null
       },
+      // 备份model用于恢复初始状态
+      modelBackup: {},
       rules: {
         line_name: [{
           required: true,
@@ -658,6 +661,7 @@ export default {
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
+    this.modelBackup = deepClone(this.model)
   },
   methods: {
     flitterData(arr) {
@@ -1182,15 +1186,8 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
-      for (const key in this.model) {
-        if (key === 'flag' || key === 'default_lock_time_flag') {
-          this.model[key] = false
-          this.modelOriginal[key] = false
-        } else {
-          this.model[key] = ''
-          this.modelOriginal[key] = ''
-        }
-      }
+      this.model = deepClone(this.modelBackup)
+      this.modelOriginal = deepClone(this.modelBackup)
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据

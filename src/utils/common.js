@@ -47,4 +47,18 @@ function isSameType(a, b) {
   return Object.prototype.toString.call(a) === Object.prototype.toString.call(b)
 }
 
-export { isEqual }
+// 对象深拷贝
+function deepClone(obj) {
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+  const clone = Array.isArray(obj) ? [] : {}
+  const keys = Object.keys(obj)
+  for (const key of keys) {
+    // 递归深拷贝每个属性的值
+    clone[key] = deepClone(obj[key])
+  }
+  return clone
+}
+
+export { isEqual, deepClone }
