@@ -11,7 +11,7 @@
               <div @click="toCompute">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-monitor" /></span>
-                  <span style="margin-left: 10px;">主板小板排程</span>
+                  <span style="margin-left: 10px;">计算排程面板</span>
                 </el-card>
               </div>
             </el-col>

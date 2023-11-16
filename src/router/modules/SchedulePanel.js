@@ -18,7 +18,7 @@ const SchedulePanelRouter = {
       component: () => import('@/views/Control/SchedulePanel'),
       name: 'SchedulePanel',
       meta: {
-        title: '主板小板排程',
+        title: '计算排程面板',
         roles: ['SchedulePanel']
       }
     },
