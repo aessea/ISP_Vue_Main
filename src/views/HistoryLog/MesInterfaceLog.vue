@@ -38,20 +38,6 @@
         <el-table-column prop="name" label="接口函数名" sortable />
         <el-table-column prop="api_name" label="接口名称" sortable />
         <el-table-column prop="require_time" label="发送请求的时间" sortable />
-        <el-table-column prop="post_data" label="发送数据" sortable>
-          <template slot-scope="scope">
-            <div class="two-line-ellipsis">
-              {{ scope.row.post_data }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="receive_data" label="接收数据" sortable>
-          <template slot-scope="scope">
-            <div class="two-line-ellipsis">
-              {{ scope.row.receive_data }}
-            </div>
-          </template>
-        </el-table-column>
         <el-table-column prop="require_type" label="请求类型" sortable />
         <el-table-column prop="time_consumed" label="耗时（单位：秒）" sortable />
         <el-table-column width="110" fixed="right" label="操作">
@@ -82,8 +68,6 @@
           </el-descriptions-item>
           <el-descriptions-item label="接口名称">{{ model.api_name }}</el-descriptions-item>
           <el-descriptions-item label="发送请求的时间">{{ model.require_time }}</el-descriptions-item>
-          <el-descriptions-item label="发送数据">{{ model.post_data }}</el-descriptions-item>
-          <el-descriptions-item label="接收数据">{{ model.receive_data }}</el-descriptions-item>
           <el-descriptions-item label="请求类型">{{ model.require_type }}</el-descriptions-item>
           <el-descriptions-item label="耗时（单位：秒）">{{ model.time_consumed }}</el-descriptions-item>
         </el-descriptions>
