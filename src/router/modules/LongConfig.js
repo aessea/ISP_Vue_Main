@@ -147,7 +147,7 @@ const LongConfigRouter = {
       component: () => import('@/views/LongConfig/KeyBoardSpecialModel'),
       name: 'KeyBoardSpecialModel',
       meta: {
-        title: '小板特殊机种表',
+        title: '无需打板机种表',
         roles: ['KeyBoardSpecialModel']
       }
     },
