@@ -204,6 +204,7 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/BoardAdvanceDate'
+import { deepClone } from '@/utils'
 export default {
   name: 'BoardAdvanceDate',
   directives: { elDragDialog },
@@ -246,6 +247,7 @@ export default {
         param_value: null,
         param_name: null
       },
+      modelBackup: {},
       rules: {
         param_name: [{
           required: true,
@@ -276,6 +278,7 @@ export default {
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
+    this.modelBackup = deepClone(this.model)
   },
   methods: {
     // dialog可拖拽
@@ -498,10 +501,8 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
-      for (const key in this.model) {
-        this.model[key] = ''
-        this.modelOriginal[key] = ''
-      }
+      this.model = deepClone(this.modelBackup)
+      this.modelOriginal = deepClone(this.modelBackup)
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据

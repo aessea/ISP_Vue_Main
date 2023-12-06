@@ -232,6 +232,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/LongConfig/LEDCTData'
 import { LineOptions } from '@/utils/items'
+import { deepClone } from '@/utils'
 export default {
   name: 'LEDCTData',
   directives: { elDragDialog },
@@ -284,6 +285,7 @@ export default {
         UPDATED_BY: null,
         UPDATED_TIME: null
       },
+      modelBackup: {},
       rules: {
         machine_name: [{
           required: true,
@@ -325,6 +327,7 @@ export default {
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
+    this.modelBackup = deepClone(this.model)
   },
   methods: {
     // dialog可拖拽
@@ -378,9 +381,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.refreshTableData(true)
             }
           })
@@ -516,10 +518,8 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
-      for (const key in this.model) {
-        this.model[key] = ''
-        this.modelOriginal[key] = ''
-      }
+      this.model = deepClone(this.modelBackup)
+      this.modelOriginal = deepClone(this.modelBackup)
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据
