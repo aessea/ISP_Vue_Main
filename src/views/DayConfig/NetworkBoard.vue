@@ -177,7 +177,7 @@
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.last_used_time" prop="last_used_time" label="最后一次操作时间">
-                <el-date-picker v-model="model.last_used_time" placeholder="请选择" format="yyyy-MM-dd" :style="{width: '100%'}" />
+                <el-date-picker v-model="model.last_used_time" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -199,7 +199,7 @@
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.inventory_date" prop="inventory_date" label="入库日期">
-                <el-date-picker v-model="model.inventory_date" placeholder="请选择" format="yyyy-MM-dd" :style="{width: '100%'}" />
+                <el-date-picker v-model="model.inventory_date" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -594,9 +594,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.refreshTableData(true)
             }
           })

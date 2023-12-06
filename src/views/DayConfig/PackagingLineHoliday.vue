@@ -323,9 +323,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.refreshTableData(true)
             }
           })

@@ -863,9 +863,7 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
+              this.closeFormDialog()
               this.refreshTableData(true)
             }
           })
@@ -891,15 +889,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              for (const key in this.model) {
-                if (key === 'flag') {
-                  this.model[key] = false
-                  this.modelOriginal[key] = false
-                } else {
-                  this.model[key] = ''
-                  this.modelOriginal[key] = ''
-                }
-              }
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.isClick = false
               this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
               this.refreshTableData(true)

@@ -213,7 +213,7 @@
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.program_time" prop="program_time" label="程序制作时间">
-                <el-date-picker v-model="model.program_time" placeholder="请选择" format="yyyy-MM-dd" :style="{width: '100%'}" />
+                <el-date-picker v-model="model.program_time" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -338,6 +338,7 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetAllProgramData } from '@/api/DayConfig/ProductProgramData'
+import { deepClone } from '@/utils'
 export default {
   name: 'ProductProgramData',
   directives: { elDragDialog },
@@ -420,6 +421,7 @@ export default {
         UPDATED_BY: null,
         UPDATED_TIME: null
       },
+      modelBackup: {},
       rules: {
         status: [],
         model_name: [],
@@ -459,6 +461,7 @@ export default {
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
+    this.modelBackup = deepClone(this.model)
   },
   methods: {
     // dialog可拖拽
@@ -512,9 +515,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.refreshTableData(true)
             }
           })
@@ -649,16 +651,8 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
-      for (const key in this.model) {
-        var isNum = /^[0-9]+.?[0-9]*/
-        if (isNum.test(this.model[key])) { // 数字要初始化为0
-          this.model[key] = 0
-          this.modelOriginal[key] = 0
-        } else {
-          this.model[key] = ''
-          this.modelOriginal[key] = ''
-        }
-      }
+      this.model = deepClone(this.modelBackup)
+      this.modelOriginal = deepClone(this.modelBackup)
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据
