@@ -205,6 +205,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Outsource/OtherData/Summary'
 import { LineOptions } from '@/utils/items'
+import { deepClone } from '@/utils'
 export default {
   name: 'Summary',
   directives: { elDragDialog },
@@ -235,18 +236,19 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        model_name: '',
-        total_count: 0,
-        factory: ''
+        id: null,
+        model_name: null,
+        total_count: undefined,
+        factory: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        model_name: '',
-        total_count: 0,
-        factory: ''
+        id: null,
+        model_name: null,
+        total_count: undefined,
+        factory: null
       },
+      modelBackup: {},
       rules: {
         model_name: [{
           required: true,
@@ -283,6 +285,7 @@ export default {
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
+    this.modelBackup = deepClone(this.model)
   },
   methods: {
     // dialog可拖拽
@@ -336,9 +339,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              setTimeout(() => {
-                this.closeFormDialog()
-              }, 1000)
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.refreshTableData(true)
             }
           })
@@ -503,10 +505,8 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
-      for (const key in this.model) {
-        this.model[key] = ''
-        this.modelOriginal[key] = ''
-      }
+      this.model = deepClone(this.modelBackup)
+      this.modelOriginal = deepClone(this.modelBackup)
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据

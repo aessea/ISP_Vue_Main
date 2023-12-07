@@ -273,6 +273,7 @@ import { mapGetters } from 'vuex'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, DeleteAllData } from '@/api/Outsource/OtherData/OldOrder'
 import { LineOptions } from '@/utils/items'
+import { deepClone } from '@/utils'
 export default {
   name: 'OldOrder',
   directives: { elDragDialog },
@@ -285,16 +286,16 @@ export default {
       }, // 导入动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      dialogTitle: '', // 表单dialog标题
+      dialogTitle: null, // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
       helpDialogVisible: false, // 帮助提示dialog
-      scopeIndex: '', // 表格行数index
-      scopeRow: '', // 表格行数据
+      scopeIndex: null, // 表格行数index
+      scopeRow: null, // 表格行数据
       importDialogVisible: false, // 导入数据dialog
       exportDialogVisible: false, // 导出dialog
       importType: false, // false为替换数据 true为添加数据
-      uploadFileName: '', // 上传的文件名
+      uploadFileName: null, // 上传的文件名
       uploadFileList: [], // 上传的文件列表
       uploadFile: null, // 上传的文件
       importMode: 'append', // 导入方式选择:追加或替换（方便以后扩展）
@@ -303,38 +304,39 @@ export default {
       // 表单相关数据
       forms: ['$form'],
       model: {
-        id: '',
-        component_type: '',
-        old_order_type: '',
-        demand_date: '',
-        model_name: '',
-        job_quantity: 0,
-        remain_count: 0,
-        remain_points: 0,
-        total_points: 0,
-        board_no: '',
-        mesh_plate_status: '',
-        mesh_plate_count: 0,
-        process: '',
-        manufacturer: ''
+        id: null,
+        component_type: null,
+        old_order_type: null,
+        demand_date: null,
+        model_name: null,
+        job_quantity: undefined,
+        remain_count: undefined,
+        remain_points: undefined,
+        total_points: undefined,
+        board_no: null,
+        mesh_plate_status: null,
+        mesh_plate_count: undefined,
+        process: null,
+        manufacturer: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
-        id: '',
-        component_type: '',
-        old_order_type: '',
-        demand_date: '',
-        model_name: '',
-        job_quantity: 0,
-        remain_count: 0,
-        remain_points: 0,
-        total_points: 0,
-        board_no: '',
-        mesh_plate_status: '',
-        mesh_plate_count: 0,
-        process: '',
-        manufacturer: ''
+        id: null,
+        component_type: null,
+        old_order_type: null,
+        demand_date: null,
+        model_name: null,
+        job_quantity: undefined,
+        remain_count: undefined,
+        remain_points: undefined,
+        total_points: undefined,
+        board_no: null,
+        mesh_plate_status: null,
+        mesh_plate_count: undefined,
+        process: null,
+        manufacturer: null
       },
+      modelBackup: {},
       rules: {
         component_type: [{
           required: true,
@@ -417,6 +419,7 @@ export default {
   },
   mounted() {
     // this.getTableData(this.currentPage, this.pageSize)
+    this.modelBackup = deepClone(this.model)
   },
   methods: {
     // dialog可拖拽
@@ -498,10 +501,8 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              for (const key in this.model) {
-                this.model[key] = ''
-                this.modelOriginal[key] = ''
-              }
+              this.model = deepClone(this.modelBackup)
+              this.modelOriginal = deepClone(this.modelBackup)
               this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
               this.refreshTableData(true)
             }
@@ -660,20 +661,8 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
-      for (const key in this.model) {
-        this.model[key] = ''
-        this.modelOriginal[key] = ''
-      }
-      this.model['job_quantity'] = 0
-      this.model['remain_count'] = 0
-      this.model['remain_points'] = 0
-      this.model['total_points'] = 0
-      this.model['mesh_plate_count'] = 0
-      this.modelOriginal['job_quantity'] = 0
-      this.modelOriginal['remain_count'] = 0
-      this.modelOriginal['remain_points'] = 0
-      this.modelOriginal['total_points'] = 0
-      this.modelOriginal['mesh_plate_count'] = 0
+      this.model = deepClone(this.modelBackup)
+      this.modelOriginal = deepClone(this.modelBackup)
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
     },
     // 表格中删除数据
@@ -763,7 +752,7 @@ export default {
       this.importDialogVisible = false
       // 清理已上传文件
       this.$refs.upload.clearFiles()
-      this.uploadFileName = ''
+      this.uploadFileName = null
       this.uploadFile = null
     },
     // 获取上传文件
