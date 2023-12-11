@@ -13,7 +13,7 @@
             <el-button v-if="buttons.includes('InterfaceConfig/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />导入
             </el-button> -->
-            <el-button v-if="buttons.includes('InterfaceConfig/export')" @click="exportDataDialog">
+            <el-button @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
           </div>
@@ -68,7 +68,6 @@
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
-                v-if="buttons.includes('InterfaceConfig/modify')"
                 type="primary"
                 size="mini"
                 icon="el-icon-edit"
@@ -118,19 +117,20 @@
               <el-input v-model="model.description" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.url" prop="url" label="接口相对地址">
               <el-input v-model="model.url" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.request_test_server" prop="request_test_server" label="请求MES的正式服/测试服">
               <el-switch
                 v-model="model.request_test_server"
                 active-text="正式库"
                 inactive-text="测试库"
+                style="width: 100%;"
               />
             </el-form-item>
           </el-col>
