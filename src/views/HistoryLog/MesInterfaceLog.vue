@@ -113,7 +113,7 @@
           <el-form-item label="需要保留的数据日期范围：" :label-width="formLabelWidth">
             <el-date-picker
               v-model="dateRange"
-              type="daterange"
+              type="datetimerange"
               :picker-options="pickerOptions"
               range-separator="至"
               start-placeholder="开始日期"
