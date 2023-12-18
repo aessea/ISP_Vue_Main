@@ -54,6 +54,16 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        background
+        :hide-on-single-page="false"
+        :page-size="pageSize"
+        :current-page="currentPage"
+        layout="total, prev, pager, next, jumper"
+        :total="total_num"
+        style="margin-top: 16px;"
+        @current-change="handlePageChange"
+      />
     </el-card>
     <el-dialog
       v-el-drag-dialog
@@ -137,6 +147,7 @@ import { mapGetters } from 'vuex'
 import { GetTableData, ExportData, SearchData, GetPostData, GetReceiveData, FilterTableData } from '@/api/HistoryLog/MesInterfaceLog'
 import { FormatDatabaseDatetime } from '@/utils/date'
 import XLSX from 'xlsx'
+
 export default {
   name: 'MesInterfaceLog',
   data() {
@@ -320,22 +331,29 @@ export default {
             })
             return
           }
-          const tableName = `${this.table_data[this.scopeIndex].api_name}-接收数据`
-          const jsonString = this.fixJSONString(res.receive_data)
-          const receive_data_array = JSON.parse(jsonString)
-          const dataCount = receive_data_array.length
-          const fields = Object.keys(receive_data_array[0])
-          const newData = [...receive_data_array]
-          const sheet = XLSX.utils.json_to_sheet(newData, { header: fields })
-          const wb = XLSX.utils.book_new()
-          XLSX.utils.book_append_sheet(wb, sheet, tableName)
-          XLSX.writeFile(wb, tableName + '.xlsx')
-          this.loading = false
-          this.$notify({
-            title: '导出成功',
-            message: '本次共导出了 ' + dataCount + ' 条数据',
-            type: 'success'
-          })
+          try {
+            const tableName = `${this.table_data[this.scopeIndex].api_name}-接收数据`
+            const jsonString = this.fixJSONString(res.receive_data)
+            const receive_data_array = JSON.parse(jsonString)
+            const dataCount = receive_data_array.length
+            const fields = Object.keys(receive_data_array[0])
+            const newData = [...receive_data_array]
+            const sheet = XLSX.utils.json_to_sheet(newData, { header: fields })
+            const wb = XLSX.utils.book_new()
+            XLSX.utils.book_append_sheet(wb, sheet, tableName)
+            XLSX.writeFile(wb, tableName + '.xlsx')
+            this.loading = false
+            this.$notify({
+              title: '导出成功',
+              message: '本次共导出了 ' + dataCount + ' 条数据',
+              type: 'success'
+            })
+          } catch (error) {
+            this.$message({
+              message: '数据解析错误',
+              type: 'error'
+            })
+          }
         }
       })
     },
@@ -352,23 +370,32 @@ export default {
             })
             return
           }
-          const tableName = `${this.table_data[this.scopeIndex].api_name}-发送数据`
-          const jsonString = this.fixJSONString(res.post_data)
-          const post_data_array = JSON.parse(jsonString)
-          console.log(post_data_array)
-          const dataCount = post_data_array.length
-          const fields = Object.keys(post_data_array[0])
-          const newData = [...post_data_array]
-          const sheet = XLSX.utils.json_to_sheet(newData, { header: fields })
-          const wb = XLSX.utils.book_new()
-          XLSX.utils.book_append_sheet(wb, sheet, tableName)
-          XLSX.writeFile(wb, tableName + '.xlsx')
-          this.loading = false
-          this.$notify({
-            title: '导出成功',
-            message: '本次共导出了 ' + dataCount + ' 条数据',
-            type: 'success'
-          })
+          try {
+            const tableName = `${this.table_data[this.scopeIndex].api_name}-发送数据`
+            const jsonString = this.fixJSONString(res.post_data)
+            const post_data_array = JSON.parse(jsonString)
+            console.log(post_data_array)
+            const dataCount = post_data_array.length
+            const fields = Object.keys(post_data_array[0])
+            const newData = [...post_data_array]
+            const sheet = XLSX.utils.json_to_sheet(newData, { header: fields })
+            const wb = XLSX.utils.book_new()
+            XLSX.utils.book_append_sheet(wb, sheet, tableName)
+            XLSX.writeFile(wb, tableName + '.xlsx')
+            this.loading = false
+            this.$notify({
+              title: '导出成功',
+              message: '本次共导出了 ' + dataCount + ' 条数据',
+              type: 'success'
+            })
+          } catch (error) {
+            console.log(error)
+            // 这里是针对解析 JSON 字符串出现异常时的处理
+            this.$message({
+              type: 'error',
+              message: '数据解析错误'
+            })
+          }
         }
       })
     },
