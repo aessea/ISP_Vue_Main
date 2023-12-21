@@ -12,7 +12,7 @@ export function DoImportPushSchedule(data) {
 // 检查表格
 export function DoCheckScheduleData(data) {
   return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_check_schedule_data/`,
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/check_schedule_file/`,
     method: 'post',
     timeout: REQUEST_TIMEOUT,
     data
@@ -113,15 +113,6 @@ export function GetRunFlag() {
 export function AnalysisSchedule(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_analysis_schedule/`,
-    method: 'post',
-    timeout: REQUEST_TIMEOUT,
-    data
-  })
-}
-// 导入排程表格接口
-export function ImportPushSchedule(data) {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/import_push_schedule/`,
     method: 'post',
     timeout: REQUEST_TIMEOUT,
     data

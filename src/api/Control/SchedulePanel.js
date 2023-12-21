@@ -13,7 +13,7 @@ export function TrainModel(data) {
 // 数据检查
 export function DoCheckScheduleData(data) {
   return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/do_check_schedule_data/`,
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/check_schedule_file/`,
     method: 'post',
     timeout: REQUEST_TIMEOUT,
     data

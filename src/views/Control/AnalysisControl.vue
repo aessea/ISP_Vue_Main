@@ -369,7 +369,7 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import {} from '@/api/Control/AnalysisControl'
 import { DoCheckScheduleData, GetHistoryAnaItem, GetHistoryAnaData,
-  ImportPushSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
+  AnalysisSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
 } from '@/api/Control/AnalysisControl'
 import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled, AiPrescheduled, AiScheduled
 } from '@/api/Control/DockingMes'
@@ -829,7 +829,7 @@ export default {
       this.resetShowAnaData()
       this.resetAnalysisAlertMessage()
       this.listenProgress()
-      await ImportPushSchedule(form).then(res => {
+      await AnalysisSchedule(form).then(res => {
         this.isAnalysis = true // 分析完成
         this.$alert(res.message, '提示', {
           confirmButtonText: '确定',
