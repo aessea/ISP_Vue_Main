@@ -49,7 +49,9 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="file_name" label="文件名" sortable />
-          <el-table-column prop="file_time" label="文件时间" sortable />
+          <el-table-column prop="file_time" label="创建时间" sortable width="200" />
+          <el-table-column prop="remark" label="备注" sortable width="160" />
+          <el-table-column prop="create_user" label="创建人" sortable width="160" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
