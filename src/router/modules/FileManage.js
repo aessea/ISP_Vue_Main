@@ -23,6 +23,15 @@ const FileManageRouter = {
       }
     },
     {
+      path: 'analysisinputfiles',
+      component: () => import('@/views/FileManage/AnalysisInputFiles'),
+      name: 'AnalysisInputFiles',
+      meta: {
+        title: '分析排程输入文件',
+        roles: ['InputFiles']
+      }
+    },
+    {
       path: 'mainoutputfiles',
       component: () => import('@/views/FileManage/MainOutputFiles'),
       name: 'MainOutputFiles',
