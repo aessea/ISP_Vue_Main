@@ -21,7 +21,7 @@
         </el-col>
         <el-col :span="4">
           <div style="float: right;">
-            <el-button type="primary" icon="el-icon-date" style="margin-left: 10px;" @click="filterDataDialog">
+            <el-button type="danger" icon="el-icon-delete" style="margin-left: 10px;" @click="filterDataDialog">
               过滤存储数据
             </el-button>
             <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
@@ -120,22 +120,18 @@
     >
       <el-row>
         <el-form>
-          <el-form-item label="需要保留的数据日期范围：" :label-width="formLabelWidth">
-            <el-date-picker
-              v-model="dateRange"
-              type="datetimerange"
-              :picker-options="pickerOptions"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              align="right"
-            />
-          </el-form-item>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item label="保留数据的月份数：" :label-width="formLabelWidth">
+                <el-input-number v-model="save_months" placeholder="请输入月份数" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFilterClose">关闭</el-button>
-        <el-button type="danger" plain @click="filterData">确认过滤</el-button>
+        <el-button type="danger" @click="filterData">确认删除</el-button>
       </span>
     </el-dialog>
 
@@ -144,12 +140,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, ExportData, SearchData, GetPostData, GetReceiveData, FilterTableData } from '@/api/HistoryLog/MesInterfaceLog'
 import { FormatDatabaseDatetime } from '@/utils/date'
 import XLSX from 'xlsx'
 
 export default {
   name: 'MesInterfaceLog',
+  directives: { elDragDialog },
   data() {
     return {
       loading: true, // 表格加载动画
@@ -169,42 +167,7 @@ export default {
       model: {},
       // 过滤数据相关
       filterDialogVisible: false,
-      dateRange: '',
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近十五天',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      }
+      save_months: 1
     }
   },
   computed: {
@@ -284,33 +247,43 @@ export default {
       this.filterDialogVisible = false
     },
     filterData() {
-      if (this.dateRange === '') {
-        this.$message({
-          title: '过滤失败',
-          message: '请先选择需要保留的日期范围！',
-          type: 'error'
-        })
-        return
-      }
-      const start_date = new Date(this.dateRange[0]).getTime()
-      const end_date = new Date(this.dateRange[1]).getTime()
-      const data = {
-        start_date,
-        end_date
-      }
-      FilterTableData(data).then(res => {
-        console.log(res)
-        if (res.code === 20000) {
-          this.$notify({
-            title: '过滤成功',
-            message: res.message,
-            type: 'success'
+      this.$confirm(`确认要删除${this.save_months}个月前的数据吗？`, '提示', {
+        confirmButtonText: '确定删除',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btnDanger',
+        type: 'warning'
+      }).then(() => {
+        if (this.save_months === undefined) {
+          this.$message({
+            title: '过滤失败',
+            message: '请先选择需要保留的日期范围！',
+            type: 'error'
           })
-          this.refreshTableData()
-          setTimeout(() => {
-            this.filterDialogVisible = false
-          }, 1000)
+          return
         }
+        const save_months = this.save_months
+        const data = {
+          save_months
+        }
+        FilterTableData(data).then(res => {
+          console.log(res)
+          if (res.code === 20000) {
+            this.$notify({
+              title: '过滤成功',
+              message: res.message,
+              type: 'success'
+            })
+            this.refreshTableData()
+            setTimeout(() => {
+              this.filterDialogVisible = false
+            }, 1000)
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消删除'
+        })
       })
     },
     fixJSONString(string) {
