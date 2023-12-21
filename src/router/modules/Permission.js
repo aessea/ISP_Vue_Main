@@ -57,6 +57,15 @@ const PermissionRouter = {
         title: 'MES接口配置管理',
         roles: ['InterfaceConfig']
       }
+    },
+    {
+      path: 'runcontrolconfigmanage',
+      component: () => import('@/views/Permission/RunControlConfigManage'),
+      name: 'RunControlConfig',
+      meta: {
+        title: '排程功能管理',
+        roles: ['RunControlConfig']
+      }
     }
   ]
 }
