@@ -7,8 +7,8 @@
             <el-button v-if="buttons.includes('StatisticsFiles/delete')" type="danger" @click="deleteFiles">
               <i class="el-icon-delete" />删除文件
             </el-button>
-            <el-button v-if="buttons.includes('StatisticsFiles/deleteOld')" type="danger" @click="deleteBeforeFiles">
-              <i class="el-icon-delete" />删除三个月前的文件
+            <el-button v-if="buttons.includes('AnalyseProgramFiles/deleteOld')" type="danger" @click="filterDataDialog">
+              <i class="el-icon-delete" />批量删除文件
             </el-button>
             <el-button v-if="buttons.includes('StatisticsFiles/reset')" type="primary" @click="resetAllFileList">
               <i class="el-icon-refresh" />重置文件列表
@@ -90,7 +90,29 @@
         <el-button @click="helpDialogVisible = false">关闭</el-button>
       </span>
     </el-dialog>
-
+    <el-dialog
+      v-el-drag-dialog
+      title="批量删除数据"
+      :visible.sync="filterDialogVisible"
+      width="45%"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <el-form>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item label="保留数据的月份数：" :label-width="formLabelWidth">
+                <el-input-number v-model="save_months" placeholder="请输入月份数" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleFilterClose">关闭</el-button>
+        <el-button type="danger" @click="deleteBeforeFiles">确认删除</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -113,7 +135,9 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      dataTableSelections: [] // 表格选中的数据
+      dataTableSelections: [], // 表格选中的数据
+      filterDialogVisible: false,
+      save_months: 3
     }
   },
   computed: {
@@ -129,6 +153,12 @@ export default {
     // this.getFilesList(this.currentPage, this.pageSize)
   },
   methods: {
+    filterDataDialog() {
+      this.filterDialogVisible = true
+    },
+    handleFilterClose() {
+      this.filterDialogVisible = false
+    },
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
@@ -212,13 +242,15 @@ export default {
     },
     // 删除三个月前的文件
     deleteBeforeFiles() {
-      this.$confirm('确定要删除三个月前的文件？', '提示', {
+      this.$confirm(`确定要删除${this.save_months}个月前的文件？`, '提示', {
         confirmButtonText: '确定删除',
         cancelButtonText: '取消',
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
-        DeleteBeforeFiles().then(res => {
+        const save_months = this.save_months
+        const data = { save_months }
+        DeleteBeforeFiles(data).then(res => {
           if (res.code === 20000 && res.count > 0) {
             this.$notify({
               title: '删除成功',
@@ -229,7 +261,7 @@ export default {
           } else if (res.count === 0) {
             this.$message({
               type: 'warning',
-              message: '未查找到三个月前的文件'
+              message: `未查找到${this.save_months}个月前的文件`
             })
           }
         })
