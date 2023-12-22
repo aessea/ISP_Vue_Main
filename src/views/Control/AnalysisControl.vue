@@ -843,10 +843,6 @@ export default {
       this.listenProgress()
       await AnalysisSchedule(form).then(res => {
         this.isAnalysis = true // 分析完成
-        // this.$alert(res.message, '提示', {
-        //   confirmButtonText: '确定',
-        //   type: res.message_type
-        // })
         this.$alert(res.message, res.message_title, {
           customClass: 'checkAlertBox',
           dangerouslyUseHTMLString: true,
@@ -857,13 +853,10 @@ export default {
         this.analysisBtnEnable = false
         if (res.message_type === 'error') {
           this.stepNow = 2
-          setTimeout(() => {
-            this.clearListenProgress()
-          }, 5000)
         }
-        // setTimeout(() => {
-        //   this.clearListenProgress()
-        // }, 5000)
+        setTimeout(() => {
+          this.clearListenProgress()
+        }, 5000)
       }).catch(err => {
         this.stepNow = 2
         this.$alert(err, '错误', {
