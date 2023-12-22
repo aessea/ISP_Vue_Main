@@ -606,9 +606,21 @@ export default {
       div_text.innerHTML = '数据检查提示信息：未进行数据检查'
       alert_div.appendChild(div_text) // 将标签插入到指定标签中
     },
-    showAnalysisAlertMessage(message_info, message_type) {
-      this.analysisAlertType = message_type
-      this.analysisMessage = message_info
+    showAnalysisAlertMessage(data_list, message_type) {
+      if (data_list.length > 0) {
+        this.analysisAlertType = message_type
+        // 删除上一次的提示信息
+        const alert_div = document.getElementById('analysisMessage')
+        while (alert_div.hasChildNodes()) { // 当div下还存在子节点时 循环继续
+          alert_div.removeChild(alert_div.firstChild)
+        }
+        for (var i = 0; i < data_list.length; i++) {
+          // 显示提示信息
+          const div_text = document.createElement('div')
+          div_text.innerHTML = data_list[i]
+          alert_div.appendChild(div_text) // 将标签插入到指定标签中
+        }
+      }
     },
     resetAnalysisAlertMessage() {
       this.analysisAlertType = 'info'
@@ -831,24 +843,30 @@ export default {
       this.listenProgress()
       await AnalysisSchedule(form).then(res => {
         this.isAnalysis = true // 分析完成
-        this.$alert(res.message, '提示', {
+        // this.$alert(res.message, '提示', {
+        //   confirmButtonText: '确定',
+        //   type: res.message_type
+        // })
+        this.$alert(res.message, res.message_title, {
+          customClass: 'checkAlertBox',
+          dangerouslyUseHTMLString: true,
           confirmButtonText: '确定',
-          type: 'success'
+          type: res.message_type
         })
+        this.showAnalysisAlertMessage(res.msg_data_list, res.message_type)
         this.analysisBtnEnable = false
-        this.showAnalysisAlertMessage(res.message, 'success')
+        if (res.message_type === 'error') {
+          this.stepNow = 2
+          setTimeout(() => {
+            this.clearListenProgress()
+          }, 5000)
+        }
         // setTimeout(() => {
         //   this.clearListenProgress()
         // }, 5000)
       }).catch(err => {
         this.stepNow = 2
-        // this.$alert(err, '错误', {
-        //   confirmButtonText: '确定',
-        //   type: 'error'
-        // })
         this.$alert(err, '错误', {
-          customClass: 'checkAlertBox',
-          dangerouslyUseHTMLString: true,
           confirmButtonText: '确定',
           type: 'error'
         })
