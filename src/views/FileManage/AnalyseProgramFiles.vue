@@ -93,7 +93,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="批量删除数据"
+      title="批量删除文件"
       :visible.sync="filterDialogVisible"
       width="45%"
       @dragDialog="handleDrag"
@@ -102,8 +102,8 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item label="保留数据的月份数：" :label-width="formLabelWidth">
-                <el-input-number v-model="save_months" placeholder="请输入月份数" clearable />
+              <el-form-item label="删除几个月前的数据：" :label-width="formLabelWidth">
+                <el-input-number v-model="save_months" :min="3" placeholder="请输入月份数" clearable />
               </el-form-item>
             </el-col>
           </el-row>

@@ -1365,7 +1365,6 @@ export default {
     },
     // 添加按默认锁定时间的线体
     addHolidayLines() {
-      console.log('保存', this.chosen_line_list)
       // 上传后端
       const data = {
         'holiday_lines': this.chosen_line_list

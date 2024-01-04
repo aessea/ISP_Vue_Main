@@ -33,6 +33,9 @@
           >
             搜索
           </el-button>
+          <el-button type="danger" icon="el-icon-delete" style="margin-left: 10px;" @click="filterDataDialog">
+            删除历史日志
+          </el-button>
         </el-col>
         <el-col :span="4">
           <div style="float: right;">
@@ -117,11 +120,36 @@
         @current-change="handlePageChange"
       />
     </el-card>
+
+    <el-dialog
+      v-el-drag-dialog
+      title="删除历史日志"
+      :visible.sync="filterDialogVisible"
+      width="45%"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <el-form>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item label="删除几个月前的日志：" :label-width="formLabelWidth">
+                <el-input-number v-model="save_months" :min="6" placeholder="请输入月份数" clearable />
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleFilterClose">关闭</el-button>
+        <el-button type="danger" @click="filterData">确认删除</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { GetTableData, SearchData } from '@/api/HistoryLog/HistoryOpera'
+import { GetTableData, SearchData, DeleteHistoryLog } from '@/api/HistoryLog/HistoryOpera'
 export default {
   name: 'HistoryOpera',
   data() {
@@ -161,7 +189,10 @@ export default {
       tableValue: '', // 搜索表名
       typeValue: '', // 搜索类型
       userValue: '', // 搜索用户
-      isSearch: false // 是否点击了搜索
+      isSearch: false, // 是否点击了搜索
+      // 过滤数据相关
+      filterDialogVisible: false,
+      save_months: 6
     }
   },
   created() {
@@ -229,6 +260,50 @@ export default {
     // 帮助
     helpTips() {
 
+    },
+    // 按日期过滤表格数据
+    filterDataDialog() {
+      this.filterDialogVisible = true
+    },
+    handleFilterClose() {
+      this.filterDialogVisible = false
+    },
+    filterData() {
+      this.$confirm(`确认要删除${this.save_months}个月前的日志？`, '提示', {
+        confirmButtonText: '确定删除',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btnDanger',
+        type: 'warning'
+      }).then(() => {
+        if (this.save_months === undefined) {
+          this.$alert('删除失败', '提示', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+          return
+        }
+        const save_months = this.save_months
+        const data = {
+          save_months
+        }
+        DeleteHistoryLog(data).then(res => {
+          if (res.code === 20000) {
+            this.$alert(res.message, '提示', {
+              confirmButtonText: '确定',
+              type: res.message_type
+            })
+            this.refreshTableData()
+            setTimeout(() => {
+              this.filterDialogVisible = false
+            }, 1000)
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消删除'
+        })
+      })
     }
   }
 }
@@ -240,5 +315,13 @@ export default {
 <style>
 .el-pagination {
     text-align: center;
+}
+.btnDanger{
+  background-color: #F56C6C !important;
+  border-color: #F56C6C !important;
+}
+.btnDanger:hover{
+  background-color: #f04747 !important;
+  border-color: #f04747 !important;
 }
 </style>

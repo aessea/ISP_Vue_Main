@@ -7,6 +7,9 @@
             <el-button @click="exportDataDialog">
               <i class="el-icon-download" />导出
             </el-button>
+            <el-button type="danger" @click="deleteAllJobdataBackup">
+              <i class="el-icon-delete" />清空排程备份表
+            </el-button>
           </div>
         </el-col>
         <el-col :span="8">
@@ -39,7 +42,7 @@
         </el-col>
       </el-row>
       <div class="table-box">
-        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+        <el-tabs v-model="activeName" type="card">
           <el-tab-pane label="主板配置" name="main">
             <el-table
               id="mytable"
@@ -340,9 +343,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">关闭</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addDataAndContinue">添加并继续</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">添加</el-button>
-        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">确认修改</el-button>
+        <el-button type="primary" @click="modifyData">确认修改</el-button>
       </span>
     </el-dialog>
 
@@ -385,7 +386,7 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, ModifyData, ExportData, RestoreDefault, SyncDatabaseData } from '@/api/Control/ParamsConfig'
+import { GetTableData, ModifyData, ExportData, RestoreDefault, SyncDatabaseData, DeleteAllJobdataBackup } from '@/api/Control/ParamsConfig'
 import { isEqual } from '@/utils/common'
 export default {
   name: 'ParamConfigManage',
@@ -740,6 +741,28 @@ export default {
     // 帮助提示按钮
     helpTips() {
       this.helpDialogVisible = true
+    },
+    deleteAllJobdataBackup() {
+      this.$confirm('确定要清空排程备份表？', '警告', {
+        confirmButtonText: '确定清空',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btnDanger',
+        type: 'warning'
+      }).then(() => {
+        DeleteAllJobdataBackup().then(res => {
+          if (res.code === 20000) {
+            this.$alert(res.message, '提示', {
+              confirmButtonText: '确定',
+              type: 'success'
+            })
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消删除'
+        })
+      })
     }
   }
 }

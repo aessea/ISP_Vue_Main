@@ -39,3 +39,10 @@ export function SyncDatabaseData() {
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/sync_data/`
   })
 }
+// 测试库指定数据库的数据
+export function DeleteAllJobdataBackup() {
+  return request({
+    method: 'get',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/delete_all_jobdata_backup/`
+  })
+}

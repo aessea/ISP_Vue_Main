@@ -15,7 +15,7 @@ export function SearchData(data) {
     data
   })
 }
-// 获取表格数据 分页获取
+// 删除历史数据
 export function DeleteHistoryLog(data) {
   return request({
     url: '/HistoryLog/HistoryRun/delete_history_log/',
