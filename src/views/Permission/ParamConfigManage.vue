@@ -69,6 +69,7 @@
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else-if="scope.row.show_value === false">********</span>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
@@ -134,6 +135,7 @@
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else-if="scope.row.show_value === false">********</span>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
@@ -200,6 +202,7 @@
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <span v-else-if="scope.row.show_value === false">********</span>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
@@ -280,7 +283,8 @@
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_value" prop="param_value" label="配置值">
-              <el-input-number v-if="model.param_value_type === 'int'" v-model="model.param_value" placeholder="请输入" :style="{width: '100%'}" clearable />
+              <el-input v-if="model.show_value === false" v-model="model.param_value" placeholder="请输入" show-password />
+              <el-input-number v-else-if="model.param_value_type === 'int'" v-model="model.param_value" placeholder="请输入" :style="{width: '100%'}" clearable />
               <el-input-number v-else-if="model.param_value_type === 'float'" v-model="model.param_value" placeholder="请输入" :step="0.1" :style="{width: '100%'}" clearable />
               <el-date-picker v-else-if="model.param_value_type === 'datetime'" v-model="model.param_value" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
               <el-date-picker v-else-if="model.param_value_type === 'date'" v-model="model.param_value" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
@@ -293,12 +297,14 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_before_value" prop="param_before_value" label="上一次配置值">
-              <el-input v-model="model.param_before_value" placeholder="" disabled />
+              <el-input v-if="model.show_value === false" v-model="model.param_before_value" show-password disabled />
+              <el-input v-else v-model="model.param_before_value" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_value" prop="param_default_value" label="配置默认值">
-              <el-input v-model="model.param_default_value" placeholder="" />
+              <el-input v-if="model.show_value === false" v-model="model.param_default_value" show-password disabled />
+              <el-input v-else v-model="model.param_default_value" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -436,7 +442,8 @@ export default {
         serial_number: null,
         param_description: null,
         show_in_front: null,
-        visible_roles: []
+        visible_roles: [],
+        show_value: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -455,7 +462,8 @@ export default {
         serial_number: null,
         param_description: null,
         show_in_front: null,
-        visible_roles: []
+        visible_roles: [],
+        show_value: null
       },
       rules: {
         param_name_front: [{
