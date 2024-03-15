@@ -10,7 +10,7 @@ const PermissionRouter = {
   meta: {
     title: '系统管理',
     icon: 'lock',
-    roles: ['UserManage', 'RolePermission', 'ButtonPermission', 'InterfaceConfig']
+    roles: ['UserManage', 'RolePermission', 'ButtonPermission', 'InterfaceConfig', 'RunControlConfig', 'ParamsConfig']
   },
   children: [
     {
