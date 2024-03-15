@@ -50,11 +50,11 @@ service.interceptors.response.use(
     }
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
-      // Message({
-      //   message: res.message || '请求出错',
-      //   type: 'error',
-      //   duration: 5 * 1000
-      // })
+      Message({
+        message: res.message || '请求出错',
+        type: 'error',
+        duration: 5 * 1000
+      })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -82,17 +82,19 @@ service.interceptors.response.use(
     if (error.message.includes('timeout')) {
       error_message = '请求超时，请稍后重试'
     } else if (error.code === 'ECONNABORTED' || error.message === 'Network Error') {
-      error_message = '连接异常，请检查网络后重新操作'
+      error_message = '连接异常，请尝试重新连接'
     } else if (error.message.includes('code 500')) {
-      error_message = '服务器后台错误，请联系技术人员 500'
+      error_message = '服务器内部错误，无法响应 500'
     } else if (error.message.includes('code 502')) {
-      error_message = '服务器网关错误，请联系技术人员 502'
+      error_message = '502 Bad Gateway'
     } else if (error.message.includes('code 404')) {
       error_message = '请求的资源不存在 404'
     } else if (error.message.includes('code 403')) {
       error_message = '服务器拒绝执行请求，请联系技术人员 403'
     } else if (error.message.includes('code 400')) {
       error_message = '客户端发送了一个不正确的请求，服务器无法理解或处理 400'
+    } else {
+      error_message = '出现未知错误'
     }
     Message({
       message: error_message,
