@@ -53,8 +53,8 @@
           <el-table-column prop="name" label="制程" width="120" sortable fixed />
           <el-table-column prop="TB" label="面" width="50" />
           <el-table-column prop="paired_process" label="配对制程名" width="100" />
-          <el-table-column prop="grouping_factor_day" label="第一块和第二块工单划分参数" width="240" />
-          <el-table-column prop="grouping_factor_overtime" label="第三块划分参数" width="160" />
+          <el-table-column prop="grouping_factor_day" label="第一块工单划分参数(天)" width="240" />
+          <el-table-column prop="grouping_factor_overtime" label="第二块划分参数(天)" width="160" />
           <el-table-column prop="grouping_factor_hour" label="第二块工单控制大小" width="170" />
           <el-table-column prop="grouping_combination_flag" label="第三块是否可并" width="130">
             <template slot-scope="scope">
