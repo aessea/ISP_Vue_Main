@@ -842,7 +842,7 @@ export default {
                 message: '成功添加 1 条数据',
                 type: 'success'
               })
-              this.$alert('成功添加 1 条数据（注：如有需要，请记得同时维护MP1补线表、非MP1补线表、车间指定CT表接口）', '提示', {
+              this.$alert('成功添加 1 条数据（注：如有需要，请记得同时维护MP1补线表、非MP1补线表、车间指定CT表、先后加工顺序对照表）', '提示', {
                 confirmButtonText: '确定',
                 type: 'success'
               })
