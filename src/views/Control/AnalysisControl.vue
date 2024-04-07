@@ -164,7 +164,7 @@
             三天总点数：{{ three_days_points }}<br>
           </p>
           <div class="ana-history">
-            <el-select v-model="selectAnaTime" placeholder="查看历史分析结果" style="width: 200px%;" size="mini">
+            <el-select v-model="selectAnaTime" placeholder="查看历史分析结果" style="width: 200px;" size="mini">
               <el-option
                 v-for="item in options_history_analysis"
                 :key="item.value"
