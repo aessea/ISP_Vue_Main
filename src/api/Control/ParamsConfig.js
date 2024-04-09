@@ -33,10 +33,11 @@ export function ExportData() {
   })
 }
 // 测试库指定数据库的数据
-export function SyncDatabaseData() {
+export function SyncDatabaseData(data) {
   return request({
-    method: 'get',
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/sync_data/`
+    method: 'post',
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/sync_data/`,
+    data
   })
 }
 // 测试库指定数据库的数据

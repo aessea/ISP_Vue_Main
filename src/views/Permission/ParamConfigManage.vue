@@ -574,7 +574,10 @@ export default {
         background: 'rgba(0, 0, 0, 0.6)'
       }
       this.loadingInstance = Loading.service(syncLoading)
-      SyncDatabaseData().then(res => {
+      const data = {
+        'user_name': this.name
+      }
+      SyncDatabaseData(data).then(res => {
         if (res.code === 20000) {
           this.loadingInstance.close() // 清除动画
           this.$alert(res.message, '提示', {

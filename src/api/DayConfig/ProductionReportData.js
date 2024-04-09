@@ -56,10 +56,11 @@ export function ExportData() {
     method: 'get'
   })
 }
-export function SyncDatabaseData() {
+export function SyncDatabaseData(data) {
   return request({
-    method: 'get',
+    method: 'post',
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/sync_data/`,
-    timeout: 10 * 60 * 1000
+    timeout: 10 * 60 * 1000,
+    data
   })
 }
