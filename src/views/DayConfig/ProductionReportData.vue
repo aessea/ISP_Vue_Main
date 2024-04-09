@@ -379,6 +379,16 @@
       width="45%"
       @dragDialog="handleDrag"
     >
+      <el-row style="margin-bottom: 10px;">
+        <span class="demonstration">导出日期范围：</span>
+        <el-date-picker
+          v-model="date_range"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        />
+      </el-row>
       <el-row>
         <span>导出文件格式：</span>
         <el-radio-group v-model="exportRadio">
@@ -663,7 +673,8 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 30, // 每页多少条数据
-      dataTableSelections: [] // 表格选中的数据
+      dataTableSelections: [], // 表格选中的数据
+      date_range: ''
     }
   },
   computed: {
@@ -1019,7 +1030,10 @@ export default {
     // 确认导出
     exportData() {
       this.loadingInstance = Loading.service(this.exportLoading)
-      ExportData().then(res => {
+      const data = {
+        'date_range': this.date_range
+      }
+      ExportData(data).then(res => {
         if (res.code === 20000) {
           const dataCount = res.data_count
           const sheetData = res.table_data
