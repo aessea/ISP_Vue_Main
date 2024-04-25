@@ -147,6 +147,7 @@
           <el-table-column prop="max_points" label="新增锁定点(片)数上限" width="170" />
           <el-table-column prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值(点数或片数)" width="170" />
           <el-table-column prop="type_of_big_small_line" label="大小穿插的类型" width="160" />
+          <el-table-column prop="fixed_ct" label="指定CT默认值(单位:秒)" width="160" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -379,6 +380,13 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.fixed_ct" prop="fixed_ct" label="指定CT默认值(单位:秒)">
+                <el-input-number v-model="model.fixed_ct" placeholder="请输入" :style="{width: '100%'}" />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
       </el-card>
       <span slot="footer" class="dialog-footer">
@@ -549,7 +557,8 @@ export default {
         enable: false,
         min_min_threshold: undefined,
         type_of_big_small_line: null,
-        default_threshould_of_big_small_line: undefined
+        default_threshould_of_big_small_line: undefined,
+        fixed_ct: undefined
         // is_BPR_line: false
         // CREATED_BY: null,
         // CREATED_TIME: null,
@@ -602,7 +611,8 @@ export default {
         line_size_type: undefined,
         min_min_threshold: undefined,
         type_of_big_small_line: null,
-        default_threshould_of_big_small_line: undefined
+        default_threshould_of_big_small_line: undefined,
+        fixed_ct: undefined
         // is_BPR_line: false
         // CREATED_BY: null,
         // CREATED_TIME: null,
