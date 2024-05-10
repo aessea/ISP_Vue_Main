@@ -8,7 +8,7 @@ const SchedulePanelRouter = {
   alwaysShow: true,
   name: 'Control',
   meta: {
-    title: '控制面板',
+    title: 'Control',
     icon: 'component',
     roles: ['SchedulePanel', 'ParamsConfig', 'AnalysisControl', 'OutsourceControl']
   },
@@ -18,7 +18,7 @@ const SchedulePanelRouter = {
       component: () => import('@/views/Control/SchedulePanel'),
       name: 'SchedulePanel',
       meta: {
-        title: '计算排程面板',
+        title: 'SchedulePanel',
         roles: ['SchedulePanel']
       }
     },
@@ -45,7 +45,7 @@ const SchedulePanelRouter = {
       component: () => import('@/views/Control/ParamsConfig'),
       name: 'ParamsConfig',
       meta: {
-        title: '排程配置表',
+        title: 'ParamsConfig',
         roles: ['ParamsConfig']
       }
     },
@@ -54,10 +54,10 @@ const SchedulePanelRouter = {
       component: () => import('@/views/Control/AnalysisControl'),
       name: 'AnalysisControl',
       meta: {
-        title: '分析推送面板',
+        title: 'AnalysisControl',
         roles: ['AnalysisControl']
       }
-    },
+    }
     // {
     //   path: 'onlinetable',
     //   component: () => import('@/views/Control/OnlineTable'),
@@ -67,15 +67,15 @@ const SchedulePanelRouter = {
     //     roles: ['admin', 'common', 'senioradmin']
     //   }
     // },
-    {
-      path: 'outsourcecontrol',
-      component: () => import('@/views/Control/OutsourceControl'),
-      name: 'OutsourceControl',
-      meta: {
-        title: '外包控制面板',
-        roles: ['OutsourceControl']
-      }
-    }
+    // {
+    //   path: 'outsourcecontrol',
+    //   component: () => import('@/views/Control/OutsourceControl'),
+    //   name: 'OutsourceControl',
+    //   meta: {
+    //     title: '外包控制面板',
+    //     roles: ['OutsourceControl']
+    //   }
+    // }
   ]
 }
 

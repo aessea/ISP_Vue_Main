@@ -8,7 +8,7 @@ const PermissionRouter = {
   alwaysShow: true, // will always show the root menu
   name: 'Permission',
   meta: {
-    title: '系统管理',
+    title: 'Permission',
     icon: 'lock',
     roles: ['UserManage', 'RolePermission', 'ButtonPermission', 'InterfaceConfig', 'RunControlConfig', 'ParamsConfig']
   },
@@ -18,7 +18,7 @@ const PermissionRouter = {
       component: () => import('@/views/Permission/UserManage'),
       name: 'UserManage',
       meta: {
-        title: '用户管理',
+        title: 'UserManage',
         roles: ['UserManage']
       }
     },
@@ -27,7 +27,7 @@ const PermissionRouter = {
       component: () => import('@/views/Permission/RolePermission'),
       name: 'RolePermission',
       meta: {
-        title: '角色权限管理',
+        title: 'RolePermission',
         roles: ['RolePermission']
       }
     },
@@ -36,7 +36,7 @@ const PermissionRouter = {
       component: () => import('@/views/Permission/ButtonPermission'),
       name: 'ButtonPermission',
       meta: {
-        title: '按钮权限管理',
+        title: 'ButtonPermission',
         roles: ['ButtonPermission']
       }
     },
@@ -45,7 +45,7 @@ const PermissionRouter = {
       component: () => import('@/views/Permission/ParamConfigManage'),
       name: 'ParamsConfigManage',
       meta: {
-        title: '配置管理',
+        title: 'ParamsConfigManage',
         roles: ['ParamsConfig']
       }
     },
@@ -54,7 +54,7 @@ const PermissionRouter = {
       component: () => import('@/views/LongConfig/InterfaceConfig'),
       name: 'InterfaceConfig',
       meta: {
-        title: 'MES接口配置管理',
+        title: 'InterfaceConfig',
         roles: ['InterfaceConfig']
       }
     },
@@ -63,7 +63,7 @@ const PermissionRouter = {
       component: () => import('@/views/Permission/RunControlConfigManage'),
       name: 'RunControlConfig',
       meta: {
-        title: '排程功能管理',
+        title: 'RunControlConfig',
         roles: ['RunControlConfig']
       }
     }

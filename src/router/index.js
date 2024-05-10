@@ -7,9 +7,9 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import OutsourceConstraintsRouter from './modules/OutsourceConstraints'
-import OutsourceBaseDataRouter from './modules/OutsourceBaseData'
-import OutsourceOtherDataRouter from './modules/OutsourceOtherData'
+// import OutsourceConstraintsRouter from './modules/OutsourceConstraints'
+// import OutsourceBaseDataRouter from './modules/OutsourceBaseData'
+// import OutsourceOtherDataRouter from './modules/OutsourceOtherData'
 import DayConfigRouter from './modules/DayConfig'
 import LongConfigRouter from './modules/LongConfig'
 import PredictRouter from './modules/Predict'
@@ -84,7 +84,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/Dashboard/Dashboard'),
         name: 'Dashboard',
-        meta: { title: '首页', icon: 'el-icon-s-home', affix: true }
+        meta: { title: 'Dashboard', icon: 'el-icon-s-home', affix: true }
       }
     ]
   }
@@ -100,9 +100,9 @@ export const asyncRoutes = [
   DayConfigRouter,
   LongConfigRouter,
   PredictRouter,
-  OutsourceConstraintsRouter,
-  OutsourceBaseDataRouter,
-  OutsourceOtherDataRouter,
+  // OutsourceConstraintsRouter,
+  // OutsourceBaseDataRouter,
+  // OutsourceOtherDataRouter,
   FileManageRouter,
   PermissionRouter,
   LoggingRouter,

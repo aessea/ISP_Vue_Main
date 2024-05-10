@@ -8,7 +8,7 @@ const PredictRouter = {
   alwaysShow: true,
   name: 'Predict',
   meta: {
-    title: '预测数据',
+    title: 'Predict',
     icon: 'el-icon-coin',
     roles: ['TrainLEDTData', 'TrainData', 'FixedCTData', 'TrainDataMap']
   },
@@ -18,7 +18,7 @@ const PredictRouter = {
       component: () => import('@/views/Predict/TrainLEDTData'),
       name: 'TrainLEDTData',
       meta: {
-        title: 'LED训练数据',
+        title: 'TrainLEDTData',
         roles: ['TrainLEDTData']
       }
     },
@@ -27,7 +27,7 @@ const PredictRouter = {
       component: () => import('@/views/Predict/TrainData'),
       name: 'TrainData',
       meta: {
-        title: '训练数据',
+        title: 'TrainData',
         roles: ['TrainData']
       }
     },
@@ -36,7 +36,7 @@ const PredictRouter = {
       component: () => import('@/views/Predict/FixedCTData'),
       name: 'FixedCTData',
       meta: {
-        title: '车间指定CT表',
+        title: 'FixedCTData',
         roles: ['FixedCTData']
       }
     },
@@ -45,7 +45,7 @@ const PredictRouter = {
       component: () => import('@/views/Predict/TrainDataMap'),
       name: 'TrainDataMap',
       meta: {
-        title: '新线体预测参考表',
+        title: 'TrainDataMap',
         roles: ['TrainDataMap']
       }
     }

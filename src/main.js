@@ -17,6 +17,7 @@ import router from './router'
 import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
+import i18n from './lang'
 
 /**
  * If you don't want to use mock-server
@@ -42,5 +43,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

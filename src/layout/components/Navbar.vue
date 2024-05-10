@@ -5,6 +5,9 @@
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
+      <template>
+        <lang-select class="right-menu-item hover-effect" />
+      </template>
       <template v-if="device!=='mobile'">
         <search id="header-search" class="right-menu-item" />
 
@@ -48,6 +51,7 @@ import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
+import LangSelect from '@/components/LangSelect'
 
 export default {
   components: {
@@ -56,7 +60,8 @@ export default {
     ErrorLog,
     Screenfull,
     SizeSelect,
-    Search
+    Search,
+    LangSelect
   },
   computed: {
     ...mapGetters([
