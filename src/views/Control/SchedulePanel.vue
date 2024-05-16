@@ -10,7 +10,7 @@
         <el-col :span="4">
           <div class="card-panel-description">
             <div class="card-panel-text-upper">
-              排程日期
+              {{ $t('SchedulePanelPage.ScheduleDateTitle') }}
             </div>
             <div class="card-panel-text-down">
               {{ schedule_time }}-{{ schedule_mode }}
@@ -25,7 +25,7 @@
         <el-col :span="8">
           <div class="card-panel-description">
             <div class="card-panel-text-upper">
-              排程运行时长
+              {{ $t('SchedulePanelPage.TitleScheduleRunTime') }}
             </div>
             <div class="card-panel-text-down">
               {{ schedule_run_time }}
@@ -42,12 +42,12 @@
               :header-cell-style="{'font-weight':'normal', 'text-align':'right'}"
               :cell-style="{'font-size':'20px', 'font-weight':'20px', 'text-align': 'right'}"
             >
-              <el-table-column prop="schedule_type" label="排程类型" width="100px;" />
-              <el-table-column prop="enable" label="是否可行解" width="100px;" />
-              <el-table-column prop="line_balance" label="包装线平衡" width="100px;" />
-              <el-table-column prop="idle_value" label="停顿(天)" width="100px;" />
-              <el-table-column prop="overdue_value" label="逾期(天)" width="100px;" />
-              <el-table-column prop="obj_value" label="目标值" width="110px;" />
+              <el-table-column prop="schedule_type" label="$t('SchedulePanelPage.ScheduleType')" width="100px;" />
+              <el-table-column prop="enable" label="$t('SchedulePanelPage.Feasible')" width="100px;" />
+              <el-table-column prop="line_balance" label="$t('SchedulePanelPage.LineBalanceValue')" width="100px;" />
+              <el-table-column prop="idle_value" label="$t('SchedulePanelPage.IdleValue')" width="100px;" />
+              <el-table-column prop="overdue_value" label="$t('SchedulePanelPage.OverdueValue')" width="100px;" />
+              <el-table-column prop="obj_value" label="$t('SchedulePanelPage.ResultValue')" width="110px;" />
             </el-table>
           </div>
         </el-col>
@@ -57,7 +57,7 @@
       <el-col :span="8">
         <el-card class="card-progress">
           <div slot="header" class="clearfix">
-            <span>任务进度</span>
+            <span>{{ $t('SchedulePanelPage.TaskProgress') }}</span>
           </div>
           <el-progress
             :text-inside="true"
@@ -122,7 +122,7 @@
       <el-col :span="8">
         <el-card class="control">
           <div slot="header" class="clearfix">
-            <span>控制中心</span>
+            <span>{{ $t('SchedulePanelPage.ControlPanel') }}</span>
           </div>
           <el-row>
             <el-col :span="24">
@@ -140,7 +140,7 @@
                 <el-tooltip class="item" effect="dark" :content="trainDateTip" placement="top">
                   <el-button v-if="buttons.includes('SchedulePanel/trainModel')" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="trainModel">
                     <i class="el-icon-pie-chart" />
-                    训练预测模型
+                    {{ $t('SchedulePanelPage.BtnTrainPredictModel') }}
                   </el-button>
                 </el-tooltip>
               </div>
@@ -154,19 +154,19 @@
                   <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/computeDialogMain')" type="primary" plain @click="computeDialogMain">
                       <i class="el-icon-monitor" />
-                      计算主板排程
+                      {{ $t('SchedulePanelPage.BtnComputeMain') }}
                     </el-button>
                   </el-col>
                   <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/computeDialogSmall')" type="primary" plain @click="computeDialogSmall">
                       <i class="el-icon-monitor" />
-                      计算小板排程
+                      {{ $t('SchedulePanelPage.BtnComputeSmall') }}
                     </el-button>
                   </el-col>
                   <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/computeDialogBoth')" type="primary" plain @click="computeDialogBoth">
                       <i class="el-icon-monitor" />
-                      计算主板小板
+                      {{ $t('SchedulePanelPage.BtnComputeBoth') }}
                     </el-button>
                   </el-col>
                 </el-row>
@@ -176,19 +176,19 @@
                   <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/stopTabu')" type="stopBtn" plain @click="stopTabu">
                       <i class="el-icon-warning-outline" />
-                      终止深度搜索
+                      {{ $t('SchedulePanelPage.BtnEndDeepSearch') }}
                     </el-button>
                   </el-col>
                   <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/stopSchedule')" type="stopBtn" plain @click="stopSchedule">
                       <i class="el-icon-warning-outline" />
-                      终止计算排程
+                      {{ $t('SchedulePanelPage.BtnEndCompute') }}
                     </el-button>
                   </el-col>
                   <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/post_statistics')" type="pushBtn" plain @click="post_statistics">
                       <i class="el-icon-upload2" />
-                      推送量化结果
+                      {{ $t('SchedulePanelPage.BtnPushStatistics') }}
                     </el-button>
                   </el-col>
                 </el-row>
@@ -213,19 +213,19 @@
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
                           <i class="el-icon-download" />
-                          下载主板排程
+                          {{ $t('SchedulePanelPage.BtnDownloadMain') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
                           <i class="el-icon-download" />
-                          下载idle明细
+                          {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
                           <i class="el-icon-download" />
-                          下载量化结果
+                          {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
                         </el-button>
                       </el-col>
                     </el-row>
@@ -235,7 +235,7 @@
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
                           <i class="el-icon-download" />
-                          下载无程序表
+                          {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
                         </el-button>
                       </el-col>
                     </el-row>
@@ -256,19 +256,19 @@
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
                           <i class="el-icon-download" />
-                          下载小板排程
+                          {{ $t('SchedulePanelPage.BtnDownloadSmall') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
                           <i class="el-icon-download" />
-                          下载idle明细
+                          {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
                           <i class="el-icon-download" />
-                          下载量化结果
+                          {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
                         </el-button>
                       </el-col>
                     </el-row>
@@ -278,7 +278,7 @@
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
                           <i class="el-icon-download" />
-                          下载无程序表
+                          {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
                         </el-button>
                       </el-col>
                     </el-row>
@@ -299,7 +299,7 @@
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('log_file_path')">
                           <i class="el-icon-download" />
-                          下载最新日志
+                          {{ $t('SchedulePanelPage.BtnDownloadLog') }}
                         </el-button>
                       </el-col>
                     </el-row>
@@ -320,17 +320,17 @@
       <el-col :span="24">
         <el-card class="card-config">
           <div slot="header" class="clearfix">
-            <span>配置</span>
+            <span>{{ $t('SchedulePanelPage.Config') }}</span>
           </div>
           <el-date-picker
             v-model="pack_holiday_day_list"
             type="dates"
-            placeholder="选择一个或多个包装放假日期"
+            placeholder="$t('SchedulePanelPage.TextChooseHoliday')"
             :style="{width: '70%'}"
             value-format="yyyy-MM-dd"
           />
           <el-button v-if="buttons.includes('SchedulePanel/modifyHoliday')" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="modifyHoliday">
-            修改包装放假
+            {{ $t('SchedulePanelPage.BtnModifyPackHoliday') }}
           </el-button>
         </el-card>
       </el-col>
@@ -368,7 +368,7 @@
             style="margin-left: 10px;"
           >
             <el-button slot="trigger" type="primary">
-              上传主板排程
+              {{ $t('SchedulePanelPage.BtnUploadMain') }}
             </el-button>
           </el-upload>
         </el-col>
@@ -395,37 +395,37 @@
             style="margin-left: 20px;"
           >
             <el-button slot="trigger" type="primary">
-              上传小板排程
+              {{ $t('SchedulePanelPage.BtnUploadSmall') }}
             </el-button>
           </el-upload>
         </el-col>
         <el-col :span="4">
           <el-button type="success" style="margin-left:20px;" @click="beforeImportBoth">
-            导入排程
+            {{ $t('SchedulePanelPage.BtnImportFile') }}
           </el-button>
         </el-col>
       </el-row>
       <el-row style="margin-top: 10px;">
         <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameMain)">
-          主板转移扣点
+          {{ $t('SchedulePanelPage.BtnTransferMain') }}
         </el-button>
         <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameSmall)">
-          小板转移扣点
+          {{ $t('SchedulePanelPage.BtnTransferSmall') }}
         </el-button>
         <el-button @click="exportScheduleDataMain">
-          导出主板
+          {{ $t('SchedulePanelPage.BtnExportMain') }}
         </el-button>
         <el-button @click="exportScheduleDataSmall">
-          导出小板
+          {{ $t('SchedulePanelPage.BtnExportSmall') }}
         </el-button>
         <el-tooltip class="item" effect="dark" :content="mainUploadName" placement="top">
           <el-button style="margin-left: 10px;" @click="downloadFileBackend('upload_file_path_main')">
-            获取主板上传文件
+            {{ $t('SchedulePanelPage.BtnGetMainUpload') }}
           </el-button>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" :content="smallUploadName" placement="top">
           <el-button style="margin-left: 10px;" @click="downloadFileBackend('upload_file_path_small')">
-            获取小板上传文件
+            {{ $t('SchedulePanelPage.BtnGetSmallUpload') }}
           </el-button>
         </el-tooltip>
       </el-row>
@@ -439,27 +439,27 @@
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="apsProgramMsg" placement="top">
             <el-button type="primary" @click="getApsProgram('both')">
-              更新程序信息
+              {{ $t('SchedulePanelPage.BtnGetApsProgram') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMtoolMsg" placement="top">
             <el-button type="primary" @click="getApsMtool('both')">
-              更新钢网信息
+              {{ $t('SchedulePanelPage.BtnGetApsMtool') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMoBaseData" placement="top">
             <el-button type="primary" @click="getApsMoBaseData('both')">
-              更新齐套信息
+              {{ $t('SchedulePanelPage.BtnGetApsMoBaseData') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMoProgData" placement="top">
             <el-button type="primary" @click="getApsMoProgData('both')">
-              更新工单进度
+              {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
             <el-button type="primary" @click="getApsDeliveryDay('both')">
-              更新包装时间
+              {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
             </el-button>
           </el-tooltip>
         </el-col>
@@ -471,7 +471,7 @@
         style="margin-top: 10px;margin-bottom: 10px;"
       />
       <el-button type="primary" @click="beforeComputeBoth">
-        开始计算排程
+        {{ $t('SchedulePanelPage.BtnBeginCompute') }}
       </el-button>
       <span slot="footer" class="dialog-footer">
         <el-tooltip class="item" effect="dark" content="刷新上传文件时间" placement="top">
@@ -480,7 +480,7 @@
           </el-button>
         </el-tooltip>
         <el-button @click="handleCloseBoth">
-          关闭
+          {{ $t('PublicBtn.Close') }}
         </el-button>
       </span>
     </el-dialog>
@@ -517,16 +517,16 @@
             style="margin-left: 10px;"
           >
             <el-button slot="trigger" type="primary">
-              上传主板排程
+              {{ $t('SchedulePanelPage.BtnUploadMain') }}
             </el-button>
             <el-button type="success" style="margin-left:10px;" @click="beforeImportMain">
-              导入排程
+              {{ $t('SchedulePanelPage.BtnImportFile') }}
             </el-button>
             <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameMain)">
-              转移扣点
+              {{ $t('SchedulePanelPage.BtnTransfer') }}
             </el-button>
             <el-button @click="exportScheduleDataMain">
-              导出主板
+              {{ $t('SchedulePanelPage.BtnExportMain') }}
             </el-button>
           </el-upload>
         </el-col>
@@ -541,27 +541,27 @@
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="apsProgramMsg" placement="top">
             <el-button type="primary" @click="getApsProgram('main')">
-              更新程序信息
+              {{ $t('SchedulePanelPage.BtnGetApsProgram') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMtoolMsg" placement="top">
             <el-button type="primary" @click="getApsMtool('main')">
-              更新钢网信息
+              {{ $t('SchedulePanelPage.BtnGetApsMtool') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMoBaseData" placement="top">
             <el-button type="primary" @click="getApsMoBaseData('main')">
-              更新齐套信息
+              {{ $t('SchedulePanelPage.BtnGetApsMoBaseData') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMoProgData" placement="top">
             <el-button type="primary" @click="getApsMoProgData('main')">
-              更新工单进度
+              {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
             <el-button type="primary" @click="getApsDeliveryDay('main')">
-              更新包装时间
+              {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
             </el-button>
           </el-tooltip>
         </el-col>
@@ -573,11 +573,11 @@
         style="margin-top: 10px;margin-bottom: 10px;"
       />
       <el-button type="primary" @click="beforeComputeMain">
-        开始计算排程
+        {{ $t('SchedulePanelPage.BtnBeginCompute') }}
       </el-button>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseMain">
-          关闭
+          {{ $t('PublicBtn.Close') }}
         </el-button>
       </span>
     </el-dialog>
@@ -614,16 +614,16 @@
             style="margin-left: 10px;"
           >
             <el-button slot="trigger" type="primary">
-              上传小板排程
+              {{ $t('SchedulePanelPage.BtnUploadSmall') }}
             </el-button>
             <el-button type="success" style="margin-left:10px;" @click="beforeImportSmall">
-              导入排程
+              {{ $t('SchedulePanelPage.BtnImportFile') }}
             </el-button>
             <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameSmall)">
-              转移扣点
+              {{ $t('SchedulePanelPage.BtnTransfer') }}
             </el-button>
             <el-button @click="exportScheduleDataSmall">
-              导出小板
+              {{ $t('SchedulePanelPage.BtnExportSmall') }}
             </el-button>
           </el-upload>
         </el-col>
@@ -638,27 +638,27 @@
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="apsProgramMsg" placement="top">
             <el-button type="primary" @click="getApsProgram('small')">
-              更新程序信息
+              {{ $t('SchedulePanelPage.BtnGetApsProgram') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMtoolMsg" placement="top">
             <el-button type="primary" @click="getApsMtool('small')">
-              更新钢网信息
+              {{ $t('SchedulePanelPage.BtnGetApsMtool') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMoBaseData" placement="top">
             <el-button type="primary" @click="getApsMoBaseData('small')">
-              更新齐套信息
+              {{ $t('SchedulePanelPage.BtnGetApsMoBaseData') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsMoProgData" placement="top">
             <el-button type="primary" @click="getApsMoProgData('small')">
-              更新工单进度
+              {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
             <el-button type="primary" @click="getApsDeliveryDay('small')">
-              更新包装时间
+              {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
             </el-button>
           </el-tooltip>
         </el-col>
@@ -670,11 +670,11 @@
         style="margin-top: 10px;margin-bottom: 10px;"
       />
       <el-button type="primary" @click="beforeComputeSmall">
-        开始计算排程
+        {{ $t('SchedulePanelPage.BtnBeginCompute') }}
       </el-button>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseSmall">
-          关闭
+          {{ $t('PublicBtn.Close') }}
         </el-button>
       </span>
     </el-dialog>
@@ -690,8 +690,8 @@
       <p style="font-size:16px;">请在下方输入框输入<span style="color:#F56C6C;font-weight:bold;"> 确认终止 </span>后点击确定以终止排程！</p>
       <el-input v-model="stopInput" placeholder="请输入" style="width: 200px;" />
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleCloseStop">取 消</el-button>
-        <el-button type="primary" @click="confirmStopSchedule">确 定</el-button>
+        <el-button @click="handleCloseStop">{{ $t('PublicBtn.Cancel') }}</el-button>
+        <el-button type="primary" @click="confirmStopSchedule">{{ $t('PublicBtn.Confirm') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -734,11 +734,11 @@ export default {
       uploadFileNameSmall: '', // 小板文件名
 
       checkLoading: {
-        text: '拼命检查中...',
+        text: this.$t('PublicText.CheckLoadiing'),
         background: 'rgba(0, 0, 0, 0.6)'
       }, // 检查动画
       importLoading: {
-        text: '拼命导入中...',
+        text: this.$t('PublicText.ImportLoadiing'),
         background: 'rgba(0, 0, 0, 0.5)'
       }, // 导入排程动画
       loadingInstance: null, // 动画实例
@@ -756,12 +756,12 @@ export default {
       percentage_2: 0,
       percentage_3: 0,
       percentage_4: 0,
-      progress_text_1: '未开始训练预测模型|0%',
-      progress_text_2: '未开始|0%',
-      progress_text_3: '未开始初始解|0%',
-      progress_text_4: '未开始深度搜索|0%',
+      progress_text_1: this.$t('SchedulePanelPage.Progress1'), // '未开始训练预测模型|0%'
+      progress_text_2: this.$t('SchedulePanelPage.Progress2'),
+      progress_text_3: this.$t('SchedulePanelPage.Progress3'),
+      progress_text_4: this.$t('SchedulePanelPage.Progress4'),
       // 排程结果
-      schedule_run_time: '未开始', // 排程时间 未开始 计算完毕，共耗时：00 时 00 分 00 秒
+      schedule_run_time: this.$t('SchedulePanelPage.TextScheduleRunTime1'), // 排程时间 未开始 计算完毕，共耗时：00 时 00 分 00 秒
       schedule_time: '', // 排程时间
       schedule_mode: '', // 正排或预排
       schedule_result: [{
@@ -773,20 +773,20 @@ export default {
         line_balance: ''
       }],
       progress_refresh: null, // 刷新进度条
-      apsMtoolMsg: '未更新', // 钢网信息更新提示
-      apsProgramMsg: '未更新', // 程序信息更新提示
-      apsMoProgData: '未更新', // 更新工单进度提示
-      apsMoBaseData: '未更新', // 更新齐套信息提示
-      apsDeliveryDay: '未更新', // 更新包装时间提示
+      apsMtoolMsg: this.$t('PublicText.MesApiUpload'), // 钢网信息更新提示
+      apsProgramMsg: this.$t('PublicText.MesApiUpload'), // 程序信息更新提示
+      apsMoProgData: this.$t('PublicText.MesApiUpload'), // 更新工单进度提示
+      apsMoBaseData: this.$t('PublicText.MesApiUpload'), // 更新齐套信息提示
+      apsDeliveryDay: this.$t('PublicText.MesApiUpload'), // 更新包装时间提示
       stopScheduleDialog: false, // 终止计算排程dialog
       stopInput: '', // 确认终止
       trainDateTip: '', // 训练日期提示
 
       activeName: 'main',
-      mainUploadName: '获取主板上传文件',
-      smallUploadName: '获取小板上传文件',
+      mainUploadName: this.$t('SchedulePanelPage.TextMainUploadName'),
+      smallUploadName: this.$t('SchedulePanelPage.TextSmallUploadName'),
 
-      saveApsOutPutCountTip: '未推送',
+      saveApsOutPutCountTip: this.$t('PublicText.MesApiPush'),
 
       clickComputeCount: 0, // 点击计算排程的次数
       pack_holiday_day_list: []
@@ -892,20 +892,20 @@ export default {
         const hour = parseInt((time / (60 * 60)) % 24)
         if (res.run_flag === -1) {
           this.clearListenProgress()
-          this.schedule_run_time = '计算排程出错'
-          this.$alert('计算排程出错：' + res.err_message, '错误', {
-            confirmButtonText: '确定',
+          this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime2')
+          this.$alert(this.$t('SchedulePanelPage.TextScheduleRunTime2') + ':' + res.err_message, this.$t('PublicText.TextError'), {
+            confirmButtonText: this.$t('PublicBtn.BtnConfirm'),
             type: 'error'
           })
-          this.schedule_run_time = '计算排程出错，耗时：' + hour.toString() + ' 时 ' + minute.toString() + ' 分 ' + second.toString() + ' 秒'
+          this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime4') + hour.toString() + ' h ' + minute.toString() + ' m ' + second.toString() + ' s'
         } else if (res.run_flag === 1) {
-          this.schedule_run_time = '计算中：' + hour.toString() + ' 时 ' + minute.toString() + ' 分 ' + second.toString() + ' 秒'
+          this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime3') + hour.toString() + ' h ' + minute.toString() + ' m ' + second.toString() + ' s'
         } else if (res.run_flag === 2) {
           this.clearListenProgress()
-          this.schedule_run_time = '计算完毕，总耗时: ' + hour.toString() + ' 时 ' + minute.toString() + ' 分 ' + second.toString() + ' 秒'
+          this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime5') + hour.toString() + ' h ' + minute.toString() + ' m ' + second.toString() + ' s'
           this.getScheduleRes() // 获取排程结果
         } else {
-          this.schedule_run_time = '未开始'
+          this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime1')
         }
       })
     },
