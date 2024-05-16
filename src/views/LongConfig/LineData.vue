@@ -148,6 +148,7 @@
           <el-table-column prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值(点数或片数)" width="170" />
           <el-table-column prop="type_of_big_small_line" label="大小穿插的类型" width="160" />
           <el-table-column prop="fixed_ct" label="指定CT默认值(单位:秒)" width="160" />
+          <el-table-column prop="is_open_program" label="是否开放程序" width="120" />
           <el-table-column width="110" fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -386,6 +387,11 @@
                 <el-input-number v-model="model.fixed_ct" placeholder="请输入" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_open_program" prop="is_open_program" label="是否开放程序">
+                <el-switch v-model="model.is_open_program" style="width: 100%" />
+              </el-form-item>
+            </el-col>
           </el-row>
         </el-form>
       </el-card>
@@ -558,7 +564,8 @@ export default {
         min_min_threshold: undefined,
         type_of_big_small_line: null,
         default_threshould_of_big_small_line: undefined,
-        fixed_ct: undefined
+        fixed_ct: undefined,
+        is_open_program: false
         // is_BPR_line: false
         // CREATED_BY: null,
         // CREATED_TIME: null,
@@ -612,7 +619,8 @@ export default {
         min_min_threshold: undefined,
         type_of_big_small_line: null,
         default_threshould_of_big_small_line: undefined,
-        fixed_ct: undefined
+        fixed_ct: undefined,
+        is_open_program: false
         // is_BPR_line: false
         // CREATED_BY: null,
         // CREATED_TIME: null,
