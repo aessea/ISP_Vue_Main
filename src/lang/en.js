@@ -83,6 +83,7 @@ export default {
   title: {
     text: 'SMT Schedule System'
   },
+  // 通用文本
   PublicText: {
     CheckLoadiing: 'Checking...', // 检查中...
     ImportLoadiing: 'Importing...', // 导入中...
@@ -90,11 +91,16 @@ export default {
     MesApiPush: 'Not Pushed', // 未推送
     TextError: 'Error' // 错误
   },
+  // 通用按钮
   PublicBtn: {
     Confirm: 'Confirm', // 确定
     Close: 'Close', // 关闭
     Append: 'Append', // 添加
     Cancel: 'Cancel' // 取消
+  },
+  // 表单验证
+  FormValidation: {
+    NotEmpty: 'It can not be empty' // 不能为空
   },
   SchedulePanelPage: { // 控制面板
     // 标题
@@ -160,5 +166,50 @@ export default {
     BtnGetApsMoProgData: 'Get Small Upload File', // 更新工单进度
     BtnGetApsDeliveryDay: 'Get Small Upload File', // 更新包装时间
     BtnBeginCompute: 'Begin Conpute' // 开始计算排程
+  },
+  TablePage: {
+    // 按钮
+    BtnAppend: 'Append', // 添加
+    BtnDelete: 'Delete', // 删除
+    BtnImport: 'Import', // 导入
+    BtnExport: 'Export', // 导出
+    BtnClose: 'Close', // 关闭
+    BtnModify: 'Modify', // 确认修改
+    BtnAppendContinue: 'Append And Continue', // 添加并继续
+    BtnRefreshTable: 'Refresh Table', // 刷新表格
+    BtnViewInstruction: 'View Instruction', // 查看说明
+    BtnAppendData: 'Append Data', // 追加数据
+    BtnReplaceData: 'Replace Data', // 替换数据
+    BtnUploadFile: 'Upload File', // 上传文件
+    BtnConfirmImport: 'Confirm Import', // 确认导入
+    BtnConfirmExport: 'Confirm Export', // 确认导出
+    BtnConfirmDelete: 'Comfirm Delete', // 确认删除
+    BtnUndelete: 'Undelete', // 取消删除
+    // 标题
+    TitleAppendData: 'Append Data', // 添加数据
+    TitleModifyData: 'Modify Data', // 修改数据
+    // 提示信息
+    MsgImportType: 'Import File Type:', // 导出文件格式：
+    TitleTip: 'Tip', // 提示
+    MsgAppendSuccess: 'The data was added successfully', // 数据添加成功
+    MsgAppendError: 'Submission failed, please fill in the data as required!', // 提交失败，请按照要求填写数据！
+    MsgSelectWarn: 'Please select at least one piece of data', // 请至少选中一条数据
+    MsgDeleteMultiDataWarn1: 'Please select at least one piece of data ', // 确定要删除选中的
+    MsgDeleteMultiDataWarn2: ' pieces of data?', // 条数据？
+    MsgDeleteMultiDataWarn3: 'The selected ', // 成功删除选中的
+    MsgDeleteMultiDataWarn4: ' pieces of data were deleted', // 条数据
+    MsgModifyInfo: 'The data is not modified, does not need to be submitted', // 数据未修改，无需提交
+    MsgModifySuccess: 'The data was modified', // 数据已修改
+    MsgModifyError: 'Submission failed, please fill in the data as required!', // 提交失败，请按照要求填写数据！
+    MsgModifyCloseWarn: 'Data is not committed, are you sure to close the window?', // 数据未提交，确定要关闭窗口？
+    MsgDeleteWarn: 'Are you sure you want to delete that data?', // 确定要删除该数据？
+    MsgDeleteSuccess: 'The data has been deleted', // 该数据已删除
+    MsgImportReplace: 'This will erase all the original content, Are you sure you want to replace it?', // 此操作将会清空所有原有内容, 确定要进行替换操作？
+    MsgUnimport: 'Unimport', // 取消导入
+    MsgImportData1: 'A total of ', // 本次共导入了
+    MsgImportData2: ' pieces of data were imported', // 条数据
+    MsgExportSuccess: 'Export Successful', // 导出成功
+    MsgExportData1: 'A total of ', // 本次共导出了
+    MsgExportData2: ' pieces of data were exported' // 条数据
   }
 }
