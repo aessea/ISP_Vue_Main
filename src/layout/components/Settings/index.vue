@@ -1,25 +1,25 @@
 <template>
   <div class="drawer-container">
     <div>
-      <h3 class="drawer-title">页面样式设置</h3>
+      <h3 class="drawer-title">{{ $t('title.PageStyle') }}</h3>
 
       <div class="drawer-item">
-        <span>主题颜色</span>
+        <span>{{ $t('title.ThemeColor') }}</span>
         <theme-picker style="float: right;height: 26px;margin: -3px 8px 0 0;" @change="themeChange" />
       </div>
 
       <div class="drawer-item">
-        <span>启用路由标签</span>
+        <span>{{ $t('title.RouteLabels') }}</span>
         <el-switch v-model="tagsView" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
-        <span>固定顶部导航</span>
+        <span>{{ $t('title.FixedTopNavigation') }}</span>
         <el-switch v-model="fixedHeader" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
-        <span>显示侧边LOGO</span>
+        <span>{{ $t('title.DisplayLogo') }}</span>
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
 

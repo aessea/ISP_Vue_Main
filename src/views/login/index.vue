@@ -16,7 +16,7 @@
                 ref="username"
                 v-model="loginForm.username"
                 class="login-input"
-                placeholder="请输入用户名"
+                :placeholder="$t('Msg.InputName')"
                 prefix-icon="el-icon-user"
                 autocomplete="on"
                 size="big"
@@ -27,7 +27,7 @@
                 ref="password"
                 v-model="loginForm.password"
                 class="login-input"
-                placeholder="请输入密码"
+                :placeholder="$t('Msg.InputPassword')"
                 prefix-icon="el-icon-lock"
                 autocomplete="on"
                 show-password
@@ -44,7 +44,7 @@
               @click="toLogin"
               @keyup.enter="keyDown"
             >
-              登录
+              {{ $t('title.Login') }}
             </el-button>
           </el-form>
         </div>
@@ -68,8 +68,8 @@ export default {
         password: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }]
+        username: [{ required: true, trigger: 'blur', message: this.$t('Form.NotNull') }],
+        password: [{ required: true, trigger: 'blur', message: this.$t('Form.NotNull') }]
       },
       passwordType: 'password',
       capsTooltip: false,

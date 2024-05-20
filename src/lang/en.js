@@ -1,4 +1,33 @@
 export default {
+  user: {
+    uname: 'User Name',
+    role: 'Role',
+    sex: 'Sex'
+  },
+  title: {
+    Language: 'Language', // 语言
+    Login: 'Login', // 登录
+    SignOut: 'Sign Out', // 退出登录
+    PageStyle: 'Page Style', // 页面样式设计
+    ThemeColor: 'Theme Color', // 主题颜色
+    RouteLabels: 'Route Labels', // 启用路由标签
+    FixedTopNavigation: 'Fixed Top Navigation', // 固定顶部导航
+    DisplayLogo: 'Display Logo', // 显示侧边LOGO
+    Resize: 'Font Size', // 调整字体大小
+    Search: 'Search', // 搜索
+    SizeDefault: 'Default', // 默认
+    SizeMedium: 'Medium', // 中等
+    SizeSmall: 'Small', // 小号
+    SizeMini: 'Mini' // 超小号
+  },
+  Msg: {
+    InputName: 'Please enter your username', // 请输入用户名
+    InputPassword: 'Please enter your password' // 请输入密码
+  },
+  // 表单验证
+  Form: {
+    NotNull: 'It cannot be a null value' // 不能为空
+  },
   route: { // 路由
     // 首页
     Dashboard: 'Dashboard', // 首页（一级菜单）
@@ -72,17 +101,6 @@ export default {
     ScheduleResData: 'Schedule Data', // 排程记录
     MesInterfaceLog: 'Interface Log' // 接口日志
   },
-  role: {
-    permission: 'Permission'
-  },
-  user: {
-    uname: 'User Name',
-    role: 'Role',
-    sex: 'Sex'
-  },
-  title: {
-    text: 'SMT Schedule System'
-  },
   // 通用文本
   PublicText: {
     CheckLoadiing: 'Checking...', // 检查中...
@@ -97,10 +115,6 @@ export default {
     Close: 'Close', // 关闭
     Append: 'Append', // 添加
     Cancel: 'Cancel' // 取消
-  },
-  // 表单验证
-  FormValidation: {
-    NotEmpty: 'It can not be empty' // 不能为空
   },
   SchedulePanelPage: { // 控制面板
     // 标题
@@ -188,9 +202,14 @@ export default {
     // 标题
     TitleAppendData: 'Append Data', // 添加数据
     TitleModifyData: 'Modify Data', // 修改数据
+    TitleFormDescription: 'Description of The Form', // 表格说明
+    TitleImportData: 'Import Data', // 导入数据
+    TitleExportData: 'Export Data', // 导出数据
+    TitleOperate: 'Operate', // 操作
     // 提示信息
-    MsgImportType: 'Import File Type:', // 导出文件格式：
     TitleTip: 'Tip', // 提示
+    MsgIllustrate: 'Various notes on the form are written here.', // 关于表格的各种说明写在这
+    MsgExportType: 'File format to export:', // 要导出的文件格式：
     MsgAppendSuccess: 'The data was added successfully', // 数据添加成功
     MsgAppendError: 'Submission failed, please fill in the data as required!', // 提交失败，请按照要求填写数据！
     MsgSelectWarn: 'Please select at least one piece of data', // 请至少选中一条数据

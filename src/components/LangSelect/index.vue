@@ -1,42 +1,58 @@
 <template>
-  <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
-    <div>
-      请选择语言
-    </div>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item :disabled="language==='zh'" command="zh">中文</el-dropdown-item>
-      <el-dropdown-item :disabled="language==='en'" command="en">English</el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+  <div class="ChannelSelected mr">
+    <el-dropdown split-button placement="bottom-start" @command="handleCommand">
+      <span class="el-dropdown-link">
+        {{ language }}
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="zh">中文</el-dropdown-item>
+        <el-dropdown-item command="en">English</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+  </div>
 </template>
 <script>
 export default {
-  name: 'LangSelect',
+  name: 'LanguageSelect',
   data() {
     return {
-
+      language: '',
+      t: this.$i18n.locale
     }
-  },
-  computed: {
-    language() {
-      return this.$store.getters.language
-    }
-  },
-  watch: {
-
   },
   created() {
+    this.language = this.$i18n.locale === 'zh' ? '中文' : 'English'
   },
   methods: {
-    handleSetLanguage(lang) {
-      this.$i18n.locale = lang
-      this.$store.dispatch('app/setLanguage', lang)
-      this.$message.success('switch language success')
+    // 根据下拉框的中被选中的值切换语言
+    handleCommand(command) {
+      if (command === 'zh') {
+        this.lang = '中文'
+      } else {
+        this.lang = 'English'
+      }
+      console.log(command)
+      this.$i18n.locale = command
+      // console.log('this.$i18n.locale', this.$i18n.locale)
+      sessionStorage.setItem('lang', command)
+      // console.log(sessionStorage.getItem('lang'))
+      window.location.reload()
     }
   }
 }
 </script>
-
-<style>
-
+<style lang="scss" scoped>
+.ChannelSelected {
+    ::v-deep {
+    .el-dropdown {
+        color: white;
+    }
+    }
+  .el-dropdown-link {
+    &:hover {
+      cursor: pointer;
+    }
+    }
+}
 </style>
+

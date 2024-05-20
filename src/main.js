@@ -18,7 +18,7 @@ import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
 import i18n from './lang'
-
+import locale from 'element-ui/lib//locale'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -36,9 +36,8 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
   // locale: enLang // 如果使用中文，无需设置，请删除
 })
-
+locale.i18n((key, value) => i18n.t(key, value)) // 4.element ui组件的语言自动切换
 Vue.config.productionTip = false
-
 new Vue({
   el: '#app',
   router,

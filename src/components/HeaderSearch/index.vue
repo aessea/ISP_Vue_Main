@@ -8,7 +8,7 @@
       filterable
       default-first-option
       remote
-      placeholder="搜索"
+      :placeholder="$t('title.Search')"
       class="header-search-select"
       @change="change"
     >
