@@ -101,27 +101,27 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.start_time" prop="start_time" label="开始时间">
-              <el-date-picker v-model="model.start_time" placeholder="请选择" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-date-picker v-model="model.start_time" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.end_time" prop="end_time" label="结束时间">
-              <el-date-picker v-model="model.end_time" placeholder="请选择" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-date-picker v-model="model.end_time" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.exchange_line_one" prop="exchange_line_one" label="交换线别一">
-              <el-input v-model="model.exchange_line_one" placeholder="请输入" clearable />
+              <el-input v-model="model.exchange_line_one" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.exchange_line_two" prop="exchange_line_two" label="交换线别二">
-              <el-input v-model="model.exchange_line_two" placeholder="请输入" clearable />
+              <el-input v-model="model.exchange_line_two" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item :rules="rules.remark" prop="remark" label="备注">
-          <el-input v-model="model.remark" placeholder="请输入" :rows="2" type="textarea" clearable />
+          <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" :rows="2" type="textarea" clearable />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">

@@ -98,12 +98,12 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.board8" prop="board8" label="板号">
-              <el-input v-model="model.board8" placeholder="请输入" clearable />
+              <el-input v-model="model.board8" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.advance_days" prop="advance_days" label="提前天数">
-              <el-input-number v-model="model.advance_days" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.advance_days" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

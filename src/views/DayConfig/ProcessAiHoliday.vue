@@ -99,7 +99,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.post_process_name" prop="post_process_name" label="后工序">
-              <el-input v-model="model.post_process_name" placeholder="请输入" clearable />
+              <el-input v-model="model.post_process_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">

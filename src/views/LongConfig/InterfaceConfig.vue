@@ -109,17 +109,17 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <!-- <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.name" prop="name" label="接口函数名">
-              <el-input v-model="model.name" placeholder="请输入" clearable />
+              <el-input v-model="model.name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col> -->
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.description" prop="description" label="接口描述">
-              <el-input v-model="model.description" placeholder="请输入" clearable />
+              <el-input v-model="model.description" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.url" prop="url" label="接口相对地址">
-              <el-input v-model="model.url" placeholder="请输入" clearable />
+              <el-input v-model="model.url" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -138,7 +138,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.remark" prop="remark" label="备注">
-              <el-input v-model="model.remark" placeholder="请输入" clearable />
+              <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>

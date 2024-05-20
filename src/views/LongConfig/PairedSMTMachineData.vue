@@ -99,17 +99,17 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.board" prop="board" label="板号">
-              <el-input v-model="model.board" placeholder="请输入" clearable />
+              <el-input v-model="model.board" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.top_SMT_mac_name" prop="top_SMT_mac_name" label="前配套板名">
-              <el-input v-model="model.top_SMT_mac_name" placeholder="请输入" clearable />
+              <el-input v-model="model.top_SMT_mac_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.bottom_SMT_mac_name" prop="bottom_SMT_mac_name" label="后配套板名">
-              <el-input v-model="model.bottom_SMT_mac_name" placeholder="请输入" clearable />
+              <el-input v-model="model.bottom_SMT_mac_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>

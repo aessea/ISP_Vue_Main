@@ -688,7 +688,7 @@
       @dragDialog="handleDrag"
     >
       <p style="font-size:16px;">请在下方输入框输入<span style="color:#F56C6C;font-weight:bold;"> 确认终止 </span>后点击确定以终止排程！</p>
-      <el-input v-model="stopInput" placeholder="请输入" style="width: 200px;" />
+      <el-input v-model="stopInput" :placeholder="$t('Placeholder.Enter')" style="width: 200px;" />
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseStop">{{ $t('PublicBtn.Cancel') }}</el-button>
         <el-button type="primary" @click="confirmStopSchedule">{{ $t('PublicBtn.Confirm') }}</el-button>

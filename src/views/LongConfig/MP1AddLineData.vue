@@ -110,12 +110,12 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.process" prop="process" label="制程">
-              <el-input v-model="model.process" placeholder="请输入" clearable />
+              <el-input v-model="model.process" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.under_single_points" prop="under_single_points" label="单板点数[以下]">
-              <el-input-number v-model="model.under_single_points" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.under_single_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

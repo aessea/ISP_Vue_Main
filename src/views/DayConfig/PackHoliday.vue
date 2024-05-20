@@ -51,9 +51,9 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="pack_line" label="包装线" sortable />
-          <el-table-column prop="holiday_begin" label="放假开始时间" sortable />
-          <el-table-column prop="holiday_end" label="放假结束时间" sortable />
+          <el-table-column prop="pack_line" :label="$t('PackHoliday.pack_line')" sortable />
+          <el-table-column prop="holiday_begin" :label="$t('PackHoliday.holiday_begin')" sortable />
+          <el-table-column prop="holiday_end" :label="$t('PackHoliday.holiday_end')" sortable />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -98,18 +98,18 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.pack_line" prop="pack_line" label="包装线">
-              <el-input v-model="model.pack_line" placeholder="请输入" clearable />
+            <el-form-item :rules="rules.pack_line" prop="pack_line" :label="$t('PackHoliday.pack_line')">
+              <el-input v-model="model.pack_line" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.holiday_begin" prop="holiday_begin" label="放假开始时间">
-              <el-date-picker v-model="model.holiday_begin" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+            <el-form-item :rules="rules.holiday_begin" prop="holiday_begin" :label="$t('PackHoliday.holiday_begin')">
+              <el-date-picker v-model="model.holiday_begin" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.holiday_end" prop="holiday_end" label="放假结束时间">
-              <el-date-picker v-model="model.holiday_end" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+            <el-form-item :rules="rules.holiday_end" prop="holiday_end" :label="$t('PackHoliday.holiday_end')">
+              <el-date-picker v-model="model.holiday_end" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -249,17 +249,17 @@ export default {
       rules: {
         pack_line: [{
           required: true,
-          message: this.$t('FormValidation.NotEmpty'),
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         holiday_begin: [{
           required: true,
-          message: this.$t('FormValidation.NotEmpty'),
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         holiday_end: [{
           required: true,
-          message: this.$t('FormValidation.NotEmpty'),
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

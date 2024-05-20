@@ -85,12 +85,12 @@
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.func_module" prop="func_module" label="功能所属模块">
-              <el-input v-model="model.func_module" placeholder="请输入" clearable />
+              <el-input v-model="model.func_module" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.func_des" prop="func_des" label="功能名称">
-              <el-input v-model="model.func_des" placeholder="请输入" clearable />
+              <el-input v-model="model.func_des" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -102,7 +102,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.remark" prop="remark" label="备注说明">
-              <el-input v-model="model.remark" placeholder="请输入" :rows="1" type="textarea" clearable />
+              <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
             </el-form-item>
           </el-col>
         </el-row>

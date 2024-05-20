@@ -102,34 +102,34 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.file_category" prop="file_category" label="文件类别">
-              <el-input v-model="model.file_category" placeholder="请输入" clearable />
+              <el-input v-model="model.file_category" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.file_name" prop="file_name" label="文件名">
-              <el-input v-model="model.file_name" placeholder="请输入" clearable />
+              <el-input v-model="model.file_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.file_type" prop="file_type" label="文件类型">
-              <el-input v-model="model.file_type" placeholder="请输入" clearable />
+              <el-input v-model="model.file_type" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.file_size" prop="file_size" label="文件大小">
-              <el-input v-model="model.file_size" placeholder="请输入" clearable />
+              <el-input v-model="model.file_size" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.file_path" prop="file_path" label="文件路径">
-              <el-input v-model="model.file_path" placeholder="请输入" clearable />
+              <el-input v-model="model.file_path" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.create_time" prop="create_time" label="创建时间">
-              <el-date-picker v-model="model.create_time" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
+              <el-date-picker v-model="model.create_time" type="datetime" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

@@ -100,22 +100,22 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.line" prop="line" label="线别">
-              <el-input v-model="model.line" placeholder="请输入" clearable />
+              <el-input v-model="model.line" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.big_setup" prop="big_setup" label="大切换">
-              <el-input-number v-model="model.big_setup" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.big_setup" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.small_setup" prop="small_setup" label="小切换">
-              <el-input-number v-model="model.small_setup" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.small_setup" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.setup_program" prop="setup_program" label="切软体">
-              <el-input-number v-model="model.setup_program" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.setup_program" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

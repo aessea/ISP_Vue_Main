@@ -140,7 +140,7 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.name" prop="name" label="制程">
-                <el-input v-model="model.name" placeholder="请输入" clearable />
+                <el-input v-model="model.name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -157,7 +157,7 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.process_order" prop="process_order" label="制程分配点数的优先顺序">
-                <el-input v-model="model.process_order" placeholder="请输入" clearable />
+                <el-input v-model="model.process_order" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -169,17 +169,17 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_day" prop="grouping_factor_day" label="第一块和第二块工单划分参数">
-                <el-input-number v-model="model.grouping_factor_day" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.grouping_factor_day" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_overtime" prop="grouping_factor_overtime" label="第三块划分参数">
-                <el-input-number v-model="model.grouping_factor_overtime" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.grouping_factor_overtime" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_hour" prop="grouping_factor_hour" label="第二块工单控制大小">
-                <el-input-number v-model="model.grouping_factor_hour" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.grouping_factor_hour" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -203,29 +203,29 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.locked_buffer_time" prop="locked_buffer_time" label="锁定内上下板间隔时间(时)">
-                <el-input-number v-model="model.locked_buffer_time" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.locked_buffer_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.netboard_buffer_time" prop="netboard_buffer_time" label="网板冲突间隔时间(时)">
-                <el-input-number v-model="model.netboard_buffer_time" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.netboard_buffer_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.ct_predict_lower" prop="ct_predict_lower" label="CT预测下限">
-                <el-input-number v-model="model.ct_predict_lower" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.ct_predict_lower" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.ct_predict_upper" prop="ct_predict_upper" label="CT预测上限">
-                <el-input-number v-model="model.ct_predict_upper" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.ct_predict_upper" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.buffer_time" prop="buffer_time" label="上下板间隔时间">
-                <el-input-number v-model="model.buffer_time" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.buffer_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -235,7 +235,7 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.switch_name" prop="switch_name" label="原制程名">
-                <el-input v-model="model.switch_name" placeholder="请输入" clearable />
+                <el-input v-model="model.switch_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">

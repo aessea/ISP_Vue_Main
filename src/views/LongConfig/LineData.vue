@@ -195,7 +195,7 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.name" prop="name" label="产线名字">
-                <el-input v-model="model.name" placeholder="请输入" clearable />
+                <el-input v-model="model.name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -205,7 +205,7 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.line_type" prop="line_type" label="线体类型">
-                <el-select v-model="model.line_type" placeholder="请选择">
+                <el-select v-model="model.line_type" :placeholder="$t('Placeholder.Select')">
                   <el-option
                     v-for="item in lineTypeOptions"
                     :key="item.value"
@@ -217,7 +217,7 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.line_size_type" prop="line_size_type" label="智能阈值线体类型">
-                <el-select v-model="model.line_size_type" placeholder="请选择">
+                <el-select v-model="model.line_size_type" :placeholder="$t('Placeholder.Select')">
                   <el-option
                     v-for="item in lineSizeTypeOptions"
                     :key="item.value"
@@ -253,7 +253,7 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.capacity" prop="capacity" label="日产能">
-                <el-input-number v-model="model.capacity" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.capacity" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -275,22 +275,22 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="最低生产阈值的下限">
-                <el-input-number v-model="model.min_min_threshold" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.min_min_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值设定值">
-                <el-input-number v-model="model.min_threshold" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.min_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.max_threshold" prop="max_threshold" label="最高生产阈值">
-                <el-input-number v-model="model.max_threshold" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.max_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.offset_threshold" prop="offset_threshold" label="阈值偏差">
-                <el-input-number v-model="model.offset_threshold" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.offset_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -340,34 +340,34 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.big_setup" prop="big_setup" label="大切换">
-                <el-input-number v-model="model.big_setup" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.big_setup" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.small_setup" prop="small_setup" label="小切换">
-                <el-input-number v-model="model.small_setup" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.small_setup" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.setup_program" prop="setup_program" label="切软体">
-                <el-input-number v-model="model.setup_program" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.setup_program" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.output_order" prop="output_order" label="线体输出顺序">
-                <el-input v-model="model.output_order" placeholder="请输入" clearable />
+                <el-input v-model="model.output_order" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.max_process_time" prop="max_process_time" label="新增锁定加工时长上限">
-                <el-input-number v-model="model.max_process_time" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.max_process_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.max_points" prop="max_points" label="新增锁定点(片)数上限">
-                <el-input-number v-model="model.max_points" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.max_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -384,7 +384,7 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.fixed_ct" prop="fixed_ct" label="指定CT默认值(单位:秒)">
-                <el-input-number v-model="model.fixed_ct" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.fixed_ct" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">

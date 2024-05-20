@@ -121,7 +121,7 @@
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.SMT_machine_name" prop="SMT_machine_name" label="SMT机种名">
-              <el-input v-model="model.SMT_machine_name" placeholder="请输入" clearable />
+              <el-input v-model="model.SMT_machine_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -133,7 +133,7 @@
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.CT" prop="CT" label="指定CT">
-              <el-input-number v-model="model.CT" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.CT" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

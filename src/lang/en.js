@@ -28,6 +28,10 @@ export default {
   Form: {
     NotNull: 'It cannot be a null value' // 不能为空
   },
+  Placeholder: {
+    Enter: 'Please enter', // 请输入
+    Select: 'Please select' // 请选择
+  },
   route: { // 路由
     // 首页
     Dashboard: 'Dashboard', // 首页（一级菜单）
@@ -181,6 +185,7 @@ export default {
     BtnGetApsDeliveryDay: 'Get Small Upload File', // 更新包装时间
     BtnBeginCompute: 'Begin Conpute' // 开始计算排程
   },
+  // 通用
   TablePage: {
     // 按钮
     BtnAppend: 'Append', // 添加
@@ -230,5 +235,10 @@ export default {
     MsgExportSuccess: 'Export Successful', // 导出成功
     MsgExportData1: 'A total of ', // 本次共导出了
     MsgExportData2: ' pieces of data were exported' // 条数据
+  },
+  PackHoliday: {
+    pack_line: 'Pack Line', // 包装线
+    holiday_begin: 'Holiday Begin', // 放假开始时间
+    holiday_end: 'Holiday End' // 放假结束时间
   }
 }

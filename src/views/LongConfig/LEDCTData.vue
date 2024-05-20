@@ -100,22 +100,22 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.machine_name" prop="machine_name" label="机种名">
-              <el-input v-model="model.machine_name" placeholder="请输入" clearable />
+              <el-input v-model="model.machine_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.ct" prop="ct" label="CT">
-              <el-input-number v-model="model.ct" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.ct" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.trial_run_timedelta" prop="trial_run_timedelta" label="试跑工单停线时间">
-              <el-input-number v-model="model.trial_run_timedelta" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.trial_run_timedelta" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.batch_production_timedelta" prop="batch_production_timedelta" label="量产工单停线时间">
-              <el-input-number v-model="model.batch_production_timedelta" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.batch_production_timedelta" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

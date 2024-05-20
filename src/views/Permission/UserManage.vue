@@ -126,7 +126,7 @@
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.remark" prop="remark" label="备注">
-              <el-input v-model="model.remark" placeholder="请输入" clearable />
+              <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -138,12 +138,12 @@
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.email" prop="email" label="电子邮件地址">
-              <el-input v-model="model.email" placeholder="请输入" clearable />
+              <el-input v-model="model.email" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item :rules="rules.description" prop="description" label="描述">
-          <el-input v-model="model.description" placeholder="请输入" :rows="2" type="textarea" clearable />
+          <el-input v-model="model.description" :placeholder="$t('Placeholder.Enter')" :rows="2" type="textarea" clearable />
         </el-form-item>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">

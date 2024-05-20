@@ -98,12 +98,12 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.packaging_line_name" prop="packaging_line_name" label="包装线名">
-              <el-input v-model="model.packaging_line_name" placeholder="请输入" clearable />
+              <el-input v-model="model.packaging_line_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.holiday_days" prop="holiday_days" label="放假天数">
-              <el-input-number v-model="model.holiday_days" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.holiday_days" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

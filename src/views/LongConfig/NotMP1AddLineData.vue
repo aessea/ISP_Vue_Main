@@ -112,24 +112,24 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.process" prop="process" label="制程">
-              <el-input v-model="model.process" placeholder="请输入" clearable />
+              <el-input v-model="model.process" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.above_connecting_points" prop="above_connecting_points" label="联板点数[以上]">
-              <el-input-number v-model="model.above_connecting_points" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.above_connecting_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.under_single_points" prop="under_single_points" label="单板点数[以下]">
-              <el-input-number v-model="model.under_single_points" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.under_single_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.above_connecting_plates" prop="above_connecting_plates" label="联板数[以上]">
-              <el-input-number v-model="model.above_connecting_plates" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.above_connecting_plates" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>

@@ -170,7 +170,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_classify" prop="param_classify" label="配置分类">
-              <el-select v-model="model.param_classify" placeholder="请选择" style="width: 100%" disabled>
+              <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" style="width: 100%" disabled>
                 <el-option
                   v-for="item in param_classify_options"
                   :key="item.value"
@@ -182,18 +182,18 @@
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_name_front" prop="param_name_front" label="配置名">
-              <el-input v-model="model.param_name_front" placeholder="请输入" clearable disabled />
+              <el-input v-model="model.param_name_front" :placeholder="$t('Placeholder.Enter')" clearable disabled />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_value" prop="param_value" label="配置值">
-              <el-input-number v-if="model.param_value_type === 'int'" v-model="model.param_value" placeholder="请输入" :style="{width: '100%'}" clearable />
-              <el-input-number v-else-if="model.param_value_type === 'float'" v-model="model.param_value" placeholder="请输入" :step="0.1" :style="{width: '100%'}" clearable />
-              <el-date-picker v-else-if="model.param_value_type === 'datetime'" v-model="model.param_value" value-format="yyyy-MM-dd HH:00:00" type="datetime" placeholder="请选择" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
-              <el-date-picker v-else-if="model.param_value_type === 'date'" v-model="model.param_value" placeholder="请选择" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
-              <el-time-picker v-else-if="model.param_value_type === 'time'" v-model="model.param_value" arrow-control placeholder="请选择" value-format="HH:mm:ss" :style="{width: '100%'}" />
+              <el-input-number v-if="model.param_value_type === 'int'" v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" clearable />
+              <el-input-number v-else-if="model.param_value_type === 'float'" v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" :step="0.1" :style="{width: '100%'}" clearable />
+              <el-date-picker v-else-if="model.param_value_type === 'datetime'" v-model="model.param_value" value-format="yyyy-MM-dd HH:00:00" type="datetime" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
+              <el-date-picker v-else-if="model.param_value_type === 'date'" v-model="model.param_value" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+              <el-time-picker v-else-if="model.param_value_type === 'time'" v-model="model.param_value" arrow-control :placeholder="$t('Placeholder.Select')" value-format="HH:mm:ss" :style="{width: '100%'}" />
               <el-switch v-else-if="model.param_value_type === 'bool'" v-model="model.param_value" style="width: 100%" />
-              <el-input v-else v-model="model.param_value" placeholder="请输入" clearable />
+              <el-input v-else v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -215,14 +215,14 @@
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.serial_number" prop="serial_number" label="序号（用于设置配置显示顺序）">
-              <el-input v-model="model.serial_number" placeholder="请输入" clearable disabled />
+              <el-input v-model="model.serial_number" :placeholder="$t('Placeholder.Enter')" clearable disabled />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_description" prop="param_description" label="配置描述">
-              <el-input v-model="model.param_description" placeholder="请输入" :rows="1" type="textarea" clearable />
+              <el-input v-model="model.param_description" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
             </el-form-item>
           </el-col>
         </el-row>

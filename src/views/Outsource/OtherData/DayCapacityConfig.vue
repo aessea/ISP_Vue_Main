@@ -106,7 +106,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.component_type" prop="component_type" label="组件类型">
-              <el-select v-model="model.component_type" placeholder="请选择">
+              <el-select v-model="model.component_type" :placeholder="$t('Placeholder.Select')">
                 <el-option
                   v-for="item in componentTypeOptions"
                   :key="item.value"

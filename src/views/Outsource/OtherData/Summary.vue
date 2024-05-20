@@ -99,17 +99,17 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.model_name" prop="model_name" label="AI/SMT组件">
-              <el-input v-model="model.model_name" placeholder="请输入" clearable />
+              <el-input v-model="model.model_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.total_count" prop="total_count" label="总数量">
-              <el-input-number v-model="model.total_count" placeholder="请输入" :style="{width: '100%'}" />
+              <el-input-number v-model="model.total_count" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.factory" prop="factory" label="工厂">
-              <el-input v-model="model.factory" placeholder="请输入" clearable />
+              <el-input v-model="model.factory" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>

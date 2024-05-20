@@ -114,12 +114,12 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.board" prop="board" label="板号前八位">
-                <el-input v-model="model.board" placeholder="请输入" clearable />
+                <el-input v-model="model.board" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.SMT_machine_name" prop="SMT_machine_name" label="SMT机种名">
-                <el-input v-model="model.SMT_machine_name" placeholder="请输入" clearable />
+                <el-input v-model="model.SMT_machine_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -133,7 +133,7 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.line_classify" prop="line_classify" label="线别类">
-                <el-input v-model="model.line_classify" placeholder="请输入" clearable />
+                <el-input v-model="model.line_classify" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -145,75 +145,75 @@
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.connecting_plates" prop="connecting_plates" label="联片数">
-                <el-input-number v-model="model.connecting_plates" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.connecting_plates" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.passing_plates" prop="passing_plates" label="过板数">
-                <el-input-number v-model="model.passing_plates" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.passing_plates" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.single_points" prop="single_points" label="单板点数">
-                <el-input-number v-model="model.single_points" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.single_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.completed_quantity" prop="completed_quantity" label="产出片数">
-                <el-input-number v-model="model.completed_quantity" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.completed_quantity" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.long" prop="long" label="长">
-                <el-input v-model="model.long" placeholder="请输入" clearable />
+                <el-input v-model="model.long" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.wide" prop="wide" label="宽">
-                <el-input v-model="model.wide" placeholder="请输入" clearable />
+                <el-input v-model="model.wide" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.thick" prop="thick" label="厚">
-                <el-input v-model="model.thick" placeholder="请输入" clearable />
+                <el-input v-model="model.thick" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.total_points" prop="total_points" label="总点数">
-                <el-input-number v-model="model.total_points" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.total_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.process_time" prop="process_time" label="加工时间">
-                <el-input-number v-model="model.process_time" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.process_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.other_time" prop="other_time" label="其他时间">
-                <el-input-number v-model="model.other_time" placeholder="请输入" :style="{width: '100%'}" />
+                <el-input-number v-model="model.other_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.program_CT" prop="program_CT" label="程序CT">
-                <el-input-number v-model="model.program_CT" placeholder="请输入" step="0.1" :style="{width: '100%'}" />
+                <el-input-number v-model="model.program_CT" :placeholder="$t('Placeholder.Enter')" step="0.1" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.average_CT" prop="average_CT" label="平均CT">
-                <el-input-number v-model="model.average_CT" placeholder="请输入" step="0.1" :style="{width: '100%'}" />
+                <el-input-number v-model="model.average_CT" :placeholder="$t('Placeholder.Enter')" step="0.1" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.data_time" prop="data_time" label="数据时间">
-                <el-date-picker v-model="model.data_time" placeholder="请选择" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
+                <el-date-picker v-model="model.data_time" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
