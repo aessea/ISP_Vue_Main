@@ -39,7 +39,7 @@
         </el-col>
         <el-col :span="4">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnRefreshTable')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-refresh"
@@ -47,7 +47,7 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="查看说明" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
@@ -270,14 +270,14 @@ export default {
     },
     filterData() {
       this.$confirm(`确认要删除${this.save_months}个月前的日志？`, '提示', {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
         if (this.save_months === undefined) {
           this.$alert('删除失败', '提示', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
           return
@@ -289,7 +289,7 @@ export default {
         DeleteHistoryLog(data).then(res => {
           if (res.code === 20000) {
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
             this.refreshTableData()
@@ -301,7 +301,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消删除'
+          message: this.$t('TablePage.BtnUndelete')
         })
       })
     }

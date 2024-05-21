@@ -5,7 +5,7 @@
         <el-col :span="16">
           <div>
             <el-button v-if="buttons.includes('MainOutputFiles/delete')" type="danger" @click="deleteFiles">
-              <i class="el-icon-delete" />删除文件
+              <i class="el-icon-delete" />{{ this.$t('TablePage.BtnDelete') }}文件
             </el-button>
             <el-button v-if="buttons.includes('AnalyseProgramFiles/deleteOld')" type="danger" @click="filterDataDialog">
               <i class="el-icon-delete" />批量删除文件
@@ -17,7 +17,7 @@
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnRefreshTable')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-refresh"
@@ -25,7 +25,7 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="查看说明" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
@@ -80,14 +80,14 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="表格说明"
+      :title="$t('TablePage.TitleFormDescription')"
       :visible.sync="helpDialogVisible"
       width="60%"
       @dragDialog="handleDrag"
     >
-      <span>关于表格的各种说明可以写在这</span>
+      <span>{{ this.$t('TablePage.MsgIllustrate') }}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">关闭</el-button>
+        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
@@ -218,8 +218,8 @@ export default {
         idList.push(this.dataTableSelections[i].id)
       }
       this.$confirm('确定要删除选中的 ' + dataLength + ' 个文件？', '提示', {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -227,7 +227,7 @@ export default {
         DeleteFiles(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: '删除成功',
+              title: this.$t('TablePage.TitleTip'),
               message: '成功删除选中的 ' + dataLength + ' 个文件',
               type: 'success'
             })
@@ -237,15 +237,15 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消删除'
+          message: this.$t('TablePage.BtnUndelete')
         })
       })
     },
     // 删除三个月前的文件
     deleteBeforeFiles() {
       this.$confirm(`确定要删除${this.save_months}个月前的文件？`, '提示', {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -254,7 +254,7 @@ export default {
         DeleteBeforeFiles(data).then(res => {
           if (res.code === 20000 && res.count > 0) {
             this.$notify({
-              title: '删除成功',
+              title: this.$t('TablePage.TitleTip'),
               message: '成功删除:' + res.count + '个文件',
               type: 'success'
             })
@@ -269,7 +269,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消删除'
+          message: this.$t('TablePage.BtnUndelete')
         })
       })
     },
@@ -309,13 +309,13 @@ export default {
     },
     resetAllFileList() {
       this.$confirm('确定要重置文件列表？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         ResetAllFileList().then(res => {
           this.$alert(res.message, '提示', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.refreshTableData() // 刷新表格数据

@@ -11,7 +11,7 @@
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnRefreshTable')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-refresh"
@@ -19,7 +19,7 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="查看说明" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
@@ -159,7 +159,7 @@
         </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFormClose">关闭</el-button>
+        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="createUser">创建</el-button>
         <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyUserInfo">确认修改</el-button>
       </span>
@@ -176,7 +176,7 @@
       <p>普通管理员：支持管理所有表格，但无法管理用户</p>
       <p>程序员：仅支持对程序表进行操作</p>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">关闭</el-button>
+        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
@@ -508,7 +508,7 @@ export default {
       if (!this.checkFormChange()) {
         this.$message({
           type: 'info',
-          message: '数据未修改，无需提交'
+          message: this.$t('TablePage.MsgModifyInfo')
         })
         return
       }
@@ -536,8 +536,8 @@ export default {
     },
     handleDeleteUser(index, row) {
       this.$confirm('确定要删除该用户？', '提示', {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -547,7 +547,7 @@ export default {
         DeleteUser(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: '删除成功',
+              title: this.$t('TablePage.TitleTip'),
               message: res.message,
               type: 'success'
             })
@@ -557,7 +557,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消删除'
+          message: this.$t('TablePage.BtnUndelete')
         })
       })
     },
@@ -575,9 +575,9 @@ export default {
     // 表单dialog关闭前提示
     handleFormClose() {
       if (this.checkFormChange() && !this.isClick) {
-        this.$confirm('数据未提交，确定要关闭窗口？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('TablePage.TitleTip'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
+          cancelButtonText: this.$t('TablePage.BtnUndelete'),
           type: 'warning'
         }).then(() => {
           this.closeFormDialog()

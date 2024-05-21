@@ -5,7 +5,7 @@
         <el-col :span="20">
           <div>
             <el-button @click="exportDataDialog">
-              <i class="el-icon-download" />导出
+              <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
             </el-button>
             <el-input
               v-model="api_name"
@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="4">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="刷新表格" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnRefreshTable')" placement="top">
               <el-button size="small" icon="el-icon-refresh" circle @click="refreshTableData" />
             </el-tooltip>
           </div>
@@ -87,27 +87,27 @@
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="exportPostData">导出发送数据</el-button>
         <el-button type="primary" @click="exportReceiveData">导出接收数据</el-button>
-        <el-button @click="handleFormClose">关闭</el-button>
+        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
-      title="导出数据"
+      :title="$t('TablePage.TitleExportData')"
       :visible.sync="exportDialogVisible"
       :before-close="handleExportClose"
       width="45%"
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>导出文件格式：</span>
+        <span>{{ this.$t('TablePage.MsgExportType') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleExportClose">关闭</el-button>
-        <el-button type="primary" @click="exportData">确认导出</el-button>
+        <el-button @click="handleExportClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="exportData">{{ this.$t('TablePage.BtnConfirmExport') }}</el-button>
       </span>
     </el-dialog>
 
@@ -248,14 +248,14 @@ export default {
     },
     filterData() {
       this.$confirm(`确认要删除${this.save_months}个月前的日志？`, '提示', {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
         if (this.save_months === undefined) {
           this.$alert('删除失败', '提示', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
           return
@@ -267,7 +267,7 @@ export default {
         FilterTableData(data).then(res => {
           if (res.code === 20000) {
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
             this.refreshTableData()
@@ -279,7 +279,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消删除'
+          message: this.$t('TablePage.BtnUndelete')
         })
       })
     },
@@ -314,8 +314,8 @@ export default {
             XLSX.writeFile(wb, tableName + '.xlsx')
             this.loading = false
             this.$notify({
-              title: '导出成功',
-              message: '本次共导出了 ' + dataCount + ' 条数据',
+              title: this.$t('tablepage.msgexportsuccess'),
+              message: this.$t('TablePage.MsgExportData1') + dataCount + this.$t('TablePage.MsgExportData2'),
               type: 'success'
             })
           } catch (error) {
@@ -354,8 +354,8 @@ export default {
             XLSX.writeFile(wb, tableName + '.xlsx')
             this.loading = false
             this.$notify({
-              title: '导出成功',
-              message: '本次共导出了 ' + dataCount + ' 条数据',
+              title: this.$t('tablepage.msgexportsuccess'),
+              message: this.$t('TablePage.MsgExportData1') + dataCount + this.$t('TablePage.MsgExportData2'),
               type: 'success'
             })
           } catch (error) {
@@ -395,8 +395,8 @@ export default {
           XLSX.utils.book_append_sheet(wb, sheet, tableName)
           XLSX.writeFile(wb, tableName + '.xlsx')
           this.$notify({
-            title: '导出成功',
-            message: '本次共导出了 ' + dataCount + ' 条数据',
+            title: this.$t('tablepage.msgexportsuccess'),
+            message: this.$t('TablePage.MsgExportData1') + dataCount + this.$t('TablePage.MsgExportData2'),
             type: 'success'
           })
           // 1秒后自动关闭窗口

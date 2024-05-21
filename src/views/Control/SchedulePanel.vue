@@ -850,7 +850,7 @@ export default {
         StopSchedule(this.name).then(res => {
           if (res.code === 20000) {
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
             setTimeout(() => {
@@ -945,7 +945,7 @@ export default {
       if (!regex.test(fileName)) {
         const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排）'
         this.$alert(tip, '错误', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
           type: 'error'
         })
@@ -968,7 +968,7 @@ export default {
       if (!regex.test(fileName)) {
         const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901小板预排）'
         this.$alert(tip, '错误', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
           type: 'error'
         })
@@ -992,14 +992,14 @@ export default {
       await DoCheckScheduleData(form).then(res => {
         if (res.message_type === 'success') {
           this.$alert(res.message, '检查结果', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
         } else {
           this.$alert(res.message, '检查结果', {
             customClass: 'checkAlertBox',
             dangerouslyUseHTMLString: true,
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: res.message_type
           })
         }
@@ -1014,7 +1014,7 @@ export default {
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
         this.$alert('检查出现异常：' + err, '错误', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -1063,8 +1063,8 @@ export default {
     // 终止深度搜索
     stopTabu() {
       this.$confirm('确定要终止深度搜索？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         StopTabu(this.name).then(res => {
@@ -1146,7 +1146,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要导入',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1197,7 +1197,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要计算',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1279,7 +1279,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要导入',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1323,7 +1323,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要计算',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1398,8 +1398,8 @@ export default {
         this.clearUpdateMag()
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -1431,7 +1431,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要导入',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1465,8 +1465,8 @@ export default {
         this.clearUpdateMag()
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -1498,7 +1498,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要计算',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1551,7 +1551,7 @@ export default {
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
           this.$alert(tip, '警告', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
           })
@@ -1592,8 +1592,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: '确定要更新钢网信息？',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1605,7 +1605,7 @@ export default {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
             this.apsMtoolMsg = '已更新'
@@ -1620,7 +1620,7 @@ export default {
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
           this.$alert(err, '更新信息出错', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -1637,7 +1637,7 @@ export default {
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
           this.$alert(tip, '警告', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
           })
@@ -1678,8 +1678,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: '确定要更新程序信息？',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1691,7 +1691,7 @@ export default {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
             this.apsProgramMsg = '已更新'
@@ -1706,7 +1706,7 @@ export default {
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
           this.$alert(err, '更新信息错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -1723,7 +1723,7 @@ export default {
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
           this.$alert(tip, '警告', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
           })
@@ -1764,8 +1764,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: '确定要更新齐套信息？',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1777,7 +1777,7 @@ export default {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
             this.apsMoBaseData = '已更新'
@@ -1792,7 +1792,7 @@ export default {
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
           this.$alert(err, '更新信息错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -1809,7 +1809,7 @@ export default {
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
           this.$alert(tip, '警告', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
           })
@@ -1850,8 +1850,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: '确定要更新工单进度？',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1863,7 +1863,7 @@ export default {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
             this.apsMoProgData = '已更新'
@@ -1878,7 +1878,7 @@ export default {
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
           this.$alert(err, '更新信息错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -1895,7 +1895,7 @@ export default {
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
           this.$alert(tip, '警告', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
           })
@@ -1936,8 +1936,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: '确定要更新包装点时间？',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1949,7 +1949,7 @@ export default {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert('包装点时间更新成功！', '提示', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
             this.apsDeliveryDay = '已更新'
@@ -1964,7 +1964,7 @@ export default {
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
           this.$alert(err, '更新信息错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -2110,8 +2110,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: '确定要推送量化结果？',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
@@ -2125,21 +2125,21 @@ export default {
         SaveApsOutPutCount(form).then(res => {
           if (res.code === 20000) {
             this.$alert(res.message, '推送量化结果成功', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
             this.saveApsOutPutCountTip = '已推送'
           } else {
             this.$alert('推送失败', '错误', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'error'
             })
           }
           this.loadingInstance.close() // 清除动画
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '错误', {
-            confirmButtonText: '确定',
+          this.$alert(err, this.$t('PublicText.TextError'), {
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -2179,8 +2179,8 @@ export default {
       this.$confirm('提示', {
         title: '提示',
         message: tip_message,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
@@ -2194,20 +2194,20 @@ export default {
         DoBucklePoints(form).then(res => {
           if (res.code === 20000) {
             this.$alert(res.message, '转移扣点成功', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
           } else {
             this.$alert('扣点失败', '错误', {
-              confirmButtonText: '确定',
+              confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'error'
             })
           }
           this.loadingInstance.close() // 清除动画
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '错误', {
-            confirmButtonText: '确定',
+          this.$alert(err, this.$t('PublicText.TextError'), {
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         })
@@ -2220,8 +2220,8 @@ export default {
     },
     modifyHoliday() {
       this.$confirm('确定要修改放假日期？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('TablePage.BtnUndelete'),
         type: 'warning'
       }).then(() => {
         const data = {}

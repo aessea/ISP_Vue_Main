@@ -469,14 +469,14 @@ export default {
           title: '提示',
           message: h('div', null, newDatas),
           confirmButtonText: '确定导入',
-          cancelButtonText: '取消',
+          cancelButtonText: this.$t('TablePage.BtnUndelete'),
           type: 'warning'
         }).then(() => {
           this.checkPushImportSchedule()
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '取消导入'
+            message: this.$t('PublicBtn.MsgUnimport')
           })
         })
       } else {
@@ -486,8 +486,8 @@ export default {
     checkPushImportSchedule() {
       if (this.checkAlertType !== 'success') {
         this.$confirm('数据检查未通过，确定要导入排程?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
+          cancelButtonText: this.$t('TablePage.BtnUndelete'),
           type: 'warning'
         }).then(() => {
           this.doImportPsuhSchedule()
@@ -516,13 +516,13 @@ export default {
         this.loadingInstance.close()
         this.pushDialogVisible = true
         this.$alert(res.message, '提示', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'success'
         })
       }).catch(err => {
         this.loadingInstance.close()
         this.$alert('导入失败' + err, '提示', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -563,7 +563,7 @@ export default {
       if (!regex.test(fileName)) {
         const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排）'
         this.$alert(tip, '错误', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
           type: 'error'
         })
@@ -646,14 +646,14 @@ export default {
       await DoCheckScheduleData(form).then(res => {
         if (res.message_type === 'success') {
           this.$alert(res.message, '检查结果', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
         } else {
           this.$alert(res.message, '检查结果', {
             customClass: 'checkAlertBox',
             dangerouslyUseHTMLString: true,
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: res.message_type
           })
         }
@@ -662,7 +662,7 @@ export default {
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
         this.$alert('检查出现错误：' + err, '错误', {
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -777,8 +777,8 @@ export default {
       }
       if (this.checkAlertType !== 'success') {
         this.$confirm('数据检查未通过，确定要开始分析排程?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
+          cancelButtonText: this.$t('TablePage.BtnUndelete'),
           type: 'warning'
         }).then(() => {
           this.beforeDoAnalysis()
@@ -810,7 +810,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定分析',
-            cancelButtonText: '取消',
+            cancelButtonText: this.$t('TablePage.BtnUndelete'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -828,7 +828,7 @@ export default {
     },
     async doAnalysis() {
       this.$alert('开始分析排程，请关注进度条', '提示', {
-        confirmButtonText: '确定',
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
         type: 'success'
       })
       this.analysisBtnEnable = true
@@ -846,7 +846,7 @@ export default {
         this.$alert(res.message, res.message_title, {
           customClass: 'checkAlertBox',
           dangerouslyUseHTMLString: true,
-          confirmButtonText: '确定',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: res.message_type
         })
         this.showAnalysisAlertMessage(res.msg_data_list, res.message_type)
@@ -859,8 +859,8 @@ export default {
         }, 5000)
       }).catch(err => {
         this.stepNow = 2
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
         this.analysisBtnEnable = false
@@ -878,21 +878,21 @@ export default {
       SmtUnscheduled(form).then(res => {
         if (res.code === 20000) {
           this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.smtUnscheduledTip = '已推送'
         } else {
           this.$alert('推送失败', '错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         }
         this.loadingInstance.close() // 清除动画
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -905,21 +905,21 @@ export default {
       SmtPrescheduled(form).then(res => {
         if (res.code === 20000) {
           this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.smtPrescheduledTip = '已推送'
         } else {
           this.$alert('推送失败', '错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         }
         this.loadingInstance.close() // 清除动画
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -932,21 +932,21 @@ export default {
       SmtScheduled(form).then(res => {
         if (res.code === 20000) {
           this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.smtScheduledTip = '已推送'
         } else {
           this.$alert('推送失败', '错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         }
         this.loadingInstance.close() // 清除动画
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -959,21 +959,21 @@ export default {
       AiUnscheduled(form).then(res => {
         if (res.code === 20000) {
           this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.aiUnscheduledTip = '已推送'
         } else {
           this.$alert('推送失败', '错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         }
         this.loadingInstance.close() // 清除动画
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -986,21 +986,21 @@ export default {
       AiPrescheduled(form).then(res => {
         if (res.code === 20000) {
           this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.aiPrescheduledTip = '已推送'
         } else {
           this.$alert('推送失败', '错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         }
         this.loadingInstance.close() // 清除动画
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })
@@ -1013,21 +1013,21 @@ export default {
       AiScheduled(form).then(res => {
         if (res.code === 20000) {
           this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
           this.aiScheduledTip = '已推送'
         } else {
           this.$alert('推送失败', '错误', {
-            confirmButtonText: '确定',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
         }
         this.loadingInstance.close() // 清除动画
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert(err, '错误', {
-          confirmButtonText: '确定',
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
       })

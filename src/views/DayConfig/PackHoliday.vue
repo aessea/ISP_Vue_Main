@@ -362,8 +362,8 @@ export default {
     //       AddData(data).then(res => {
     //         if (res.code === 20000) {
     //           this.$notify({
-    //             title: '添加成功',
-    //             message: '成功添加 1 条数据',
+    //             title: this.$t('TablePage.TitleTip'),
+    //             message: this.$t('TablePage.MsgAppendSuccess'),
     //             type: 'success'
     //           })
     //           for (const key in this.model) {
@@ -377,7 +377,7 @@ export default {
     //     } else {
     //       this.$message({
     //         type: 'error',
-    //         message: '提交失败，请按照要求填写数据！'
+    //         message: this.$t('TablePage.MsgAppendError')
     //       })
     //     }
     //   })
@@ -401,8 +401,8 @@ export default {
         idList.push(this.dataTableSelections[i].id)
       }
       this.$confirm(this.$t('TablePage.MsgDeleteMultiDataWarn1') + dataLength + this.$t('TablePage.MsgDeleteMultiDataWarn2'), this.$t('TablePage.TitleTip'), {
-        confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
