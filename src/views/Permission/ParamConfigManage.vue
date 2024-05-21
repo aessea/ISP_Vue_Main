@@ -556,7 +556,7 @@ export default {
     beforeSyncDatabaseData() {
       this.$confirm('确定要同步排程配置表中指定数据库的排程配置？', '提示', {
         confirmButtonText: '确定同步',
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -624,7 +624,7 @@ export default {
       }
       this.$confirm('确定要该配置恢复到默认值？', '提示', {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const data = this.model
@@ -685,9 +685,9 @@ export default {
     // 表单dialog关闭前提示
     handleFormClose() {
       if (this.checkFormChange() && !this.isClick) {
-        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('TablePage.TitleTip'), {
+        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           this.closeFormDialog()
@@ -756,7 +756,7 @@ export default {
     deleteAllJobdataBackup() {
       this.$confirm('确定要清空排程备份表？', '警告', {
         confirmButtonText: '确定清空',
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -771,7 +771,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     }

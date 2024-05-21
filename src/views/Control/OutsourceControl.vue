@@ -772,7 +772,7 @@ export default {
         title: '提示',
         message: '确定清空每日产能数据？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         ClearDayCapacityConfig().then(res => {
@@ -799,7 +799,7 @@ export default {
         title: '提示',
         message: '确定修改配置？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const data = {
@@ -1057,7 +1057,7 @@ export default {
         title: '提示',
         message: '确定要进行组件筛选？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const loadingMessage = {
@@ -1109,7 +1109,7 @@ export default {
           title: '提示',
           message: '确定要下载全部文件（本次共有 ' + res.file_list.length + ' 个文件）？',
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           for (const key in res.file_list) {
@@ -1148,7 +1148,7 @@ export default {
         title: '提示',
         message: '确定要更新新机种？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const loadingMessage = {
@@ -1190,7 +1190,7 @@ export default {
         title: '提示',
         message: '确定要更新旧工单网板状态？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const loadingMessage = {
@@ -1251,7 +1251,7 @@ export default {
         title: '提示',
         message: '确定要生成分工单？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         this.listenProgress()
@@ -1418,7 +1418,7 @@ export default {
           title: '提示',
           message: '确定要下载全部输出文件（本次共有 ' + res.file_list.length + ' 个输出文件）？',
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           for (const key in res.file_list) {
@@ -1456,7 +1456,7 @@ export default {
         title: '提示',
         message: '确定要下载外包优先新机种表？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const form = {}
@@ -1542,7 +1542,7 @@ export default {
         title: '提示',
         message: '确定要更新自制工单接口？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
@@ -1585,7 +1585,7 @@ export default {
         title: '提示',
         message: '确定要更新外包结果信息写入接口？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {

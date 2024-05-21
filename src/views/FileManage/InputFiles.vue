@@ -218,7 +218,7 @@ export default {
       }
       this.$confirm('确定要删除选中的 ' + dataLength + ' 个文件？', '提示', {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -226,7 +226,7 @@ export default {
         DeleteFiles(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: this.$t('TablePage.TitleTip'),
+              title: this.$t('PublicText.TitleTip'),
               message: '成功删除选中的 ' + dataLength + ' 个文件',
               type: 'success'
             })
@@ -236,7 +236,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -244,7 +244,7 @@ export default {
     deleteBeforeFiles() {
       this.$confirm(`确定要删除${this.save_months}个月前的文件？`, '提示', {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -253,7 +253,7 @@ export default {
         DeleteBeforeFiles(data).then(res => {
           if (res.code === 20000 && res.count > 0) {
             this.$notify({
-              title: this.$t('TablePage.TitleTip'),
+              title: this.$t('PublicText.TitleTip'),
               message: '成功删除:' + res.count + '个文件',
               type: 'success'
             })
@@ -268,7 +268,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -309,7 +309,7 @@ export default {
     resetAllFileList() {
       this.$confirm('确定要重置文件列表？', '提示', {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         ResetAllFileList().then(res => {

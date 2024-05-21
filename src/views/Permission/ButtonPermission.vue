@@ -229,7 +229,7 @@ export default {
     modifyButton() {
       this.$confirm('确定要修改按钮权限?', '提示', {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const data = this.data_dict

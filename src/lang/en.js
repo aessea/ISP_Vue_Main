@@ -108,7 +108,9 @@ export default {
     ExportLoadiing: 'Exporting...', // 导出中...
     MesApiUpload: 'Not Updated', // 未更新
     MesApiPush: 'Not Pushed', // 未推送
-    TextError: 'Error' // 错误
+    TextError: 'Error', // 错误
+    TextCancel: 'Canceled', // 已取消
+    TitleTip: 'Tip' // 提示
   },
   // 通用按钮
   PublicBtn: {
@@ -121,11 +123,11 @@ export default {
     // 标题
     ScheduleDateTitle: 'Schedule Title', // 排程标题
     TitleScheduleRunTime: 'Schedule Run Time', // 排程运行时长
-    ScheduleType: 'Schedule Type', // 排程类型
+    ScheduleType: 'Type', // 排程类型
     Feasible: 'Feasible', // 是否可行解
-    LineBalanceValue: 'Line Balance', // 包装线平衡
-    IdleValue: 'Idle Days', // 停顿(天)
-    OverdueValue: 'Overdue Days', // 逾期(天)
+    LineBalanceValue: 'Balance', // 包装线平衡
+    IdleValue: 'Idle', // 停顿(天)
+    OverdueValue: 'Overdue', // 逾期(天)
     ResultValue: 'Result Value', // 目标值
     TaskProgress: 'Task Progress', // 任务进度
     ControlPanel: 'Control Center', // 控制中心
@@ -137,9 +139,19 @@ export default {
     TitleDownloadNewMain: 'Download New Main', // 下载主板最新排程
     TitleDownloadNewSmall: 'Download New Small', // 下载小板最新排程
     TitleDownloadNewLog: 'Download New Log', // 下载最新日志
+    TitleComputeBoth: 'Compute Main and Small', // 计算主板和小板排程
+    TitleComputeMain: 'Compute Main', // 计算主板排程
+    TitleComputeSmall: 'Compute Small', // 计算小板排程
+    ComputeTextStep1: 'Upload File', // 上传排程
+    ComputeTextStep2: 'Import File', // 导入排程
+    ComputeTextStep3: 'Update Data', // 更新信息
+    ComputeTextStep4: 'Compute Schedule', // 计算排程
     TextMainUploadName: 'Retrieve Main Upload File', // 获取主板上传文件
     TextSmallUploadName: 'Retrieve Small Upload File', // 获取小板上传文件
     TextChooseHoliday: 'Select one or more holiday dates', // 选择一个或多个包装放假日期
+    TextUploadMainFile: 'Please Upload Main Schedule File', // 请上传主板排程文件
+    TextUploadSmallFile: 'Please Upload Main Schedule File', // 请上传小板排程文件
+    TextRefreshUploadTime: 'Refresh File Upload Time', // 刷新文件上传时间
     // 提示
     Progress1: 'Training Prediction Model Not Started | 0%', // 第一个进度条：未开始训练预测模型|0%
     Progress2: 'Not Started | 0%', // 第二个进度条：未开始|0%
@@ -150,14 +162,18 @@ export default {
     TextScheduleRunTime3: 'Calculating:', // 计算中：
     TextScheduleRunTime4: 'Calculation Error, Total Time Taken:', // 计算排程出错，耗时：
     TextScheduleRunTime5: 'Calculation Completed, Total Time Taken:', // 计算完毕，总耗时：
+    TextStopCompute1: 'Please enter below, please enter in the input box below', // 请在下方输入框输入
+    TextStopCompute2: 'Comfirm Stop', // 确认终止
+    TextStopCompute3: 'Then click Confirm to terminate the schedule!', // 后点击确定以终止排程！
+    TextStopTabu: 'Are you sure you want to terminate your deep search?', // 确定要终止深度搜索？
     // 按钮
     BtnModifyPackHoliday: 'Modify Pack Holiday', // 修改包装放假
     BtnTrainPredictModel: 'Train Predict Model', // 训练预测模型
     BtnComputeMain: 'Compute Main', // 计算主板排程
     BtnComputeSmall: 'Compute Small', // 计算小板排程
     BtnComputeBoth: 'Compute Both', // 计算主板小板
-    BtnEndDeepSearch: 'End DeepSearch', // 终止深度搜索
-    BtnEndCompute: 'End Compute', // 终止计算排程
+    BtnEndDeepSearch: 'Stop DeepSearch', // 终止深度搜索
+    BtnEndCompute: 'Stop Compute', // 终止计算排程
     BtnPushStatistics: 'Push Stastic', // 推送量化结果
     BtnDownloadMain: 'Download Main', // 下载主板排程
     BtnDownloadSmall: 'Download Small', // 下载小板排程
@@ -200,7 +216,6 @@ export default {
     BtnConfirmImport: 'Confirm Import', // 确认导入
     BtnConfirmExport: 'Confirm Export', // 确认导出
     BtnConfirmDelete: 'Comfirm Delete', // 确认删除
-    BtnUndelete: 'Undelete', // 取消删除
     // 标题
     TitleAppendData: 'Append Data', // 添加数据
     TitleModifyData: 'Modify Data', // 修改数据

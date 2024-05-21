@@ -469,7 +469,7 @@ export default {
           title: '提示',
           message: h('div', null, newDatas),
           confirmButtonText: '确定导入',
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           this.checkPushImportSchedule()
@@ -487,7 +487,7 @@ export default {
       if (this.checkAlertType !== 'success') {
         this.$confirm('数据检查未通过，确定要导入排程?', '提示', {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           this.doImportPsuhSchedule()
@@ -778,7 +778,7 @@ export default {
       if (this.checkAlertType !== 'success') {
         this.$confirm('数据检查未通过，确定要开始分析排程?', '提示', {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           this.beforeDoAnalysis()
@@ -810,7 +810,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定分析',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {

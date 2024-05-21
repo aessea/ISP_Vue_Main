@@ -483,7 +483,7 @@ export default {
       }
       this.$confirm('确定要该配置恢复到默认值？', '提示', {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const data = this.model
@@ -551,9 +551,9 @@ export default {
     // 表单dialog关闭前提示
     handleFormClose() {
       if (this.checkFormChange() && !this.isClick) {
-        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('TablePage.TitleTip'), {
+        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           this.closeFormDialog()

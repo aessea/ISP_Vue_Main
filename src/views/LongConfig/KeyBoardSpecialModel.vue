@@ -335,7 +335,7 @@ export default {
           AddData(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
-                title: this.$t('TablePage.TitleTip'),
+                title: this.$t('PublicText.TitleTip'),
                 message: this.$t('TablePage.MsgAppendSuccess'),
                 type: 'success'
               })
@@ -370,9 +370,9 @@ export default {
       for (let i = 0; i < dataLength; i++) {
         idList.push(this.dataTableSelections[i].id)
       }
-      this.$confirm(this.$t('TablePage.MsgDeleteMultiDataWarn1') + dataLength + this.$t('TablePage.MsgDeleteMultiDataWarn2'), this.$t('TablePage.TitleTip'), {
+      this.$confirm(this.$t('TablePage.MsgDeleteMultiDataWarn1') + dataLength + this.$t('TablePage.MsgDeleteMultiDataWarn2'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -380,7 +380,7 @@ export default {
         DeleteData(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: this.$t('TablePage.TitleTip'),
+              title: this.$t('PublicText.TitleTip'),
               message: this.$t('TablePage.MsgDeleteMultiDataWarn3') + dataLength + this.$t('TablePage.MsgDeleteMultiDataWarn4'),
               type: 'success'
             })
@@ -390,7 +390,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -460,9 +460,9 @@ export default {
     // 表单dialog关闭前提示
     handleFormClose() {
       if (this.checkFormChange() && !this.isClick) {
-        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('TablePage.TitleTip'), {
+        this.$confirm(this.$t('TablePage.MsgModifyCloseWarn'), this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
           this.closeFormDialog()
@@ -482,9 +482,9 @@ export default {
     },
     // 表格中删除数据
     handleDelete(index, row) {
-      this.$confirm(this.$t('TablePage.MsgDeleteWarn'), this.$t('TablePage.TitleTip'), {
+      this.$confirm(this.$t('TablePage.MsgDeleteWarn'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -495,7 +495,7 @@ export default {
         HandleDelete(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: this.$t('TablePage.TitleTip'),
+              title: this.$t('PublicText.TitleTip'),
               message: this.$t('TablePage.MsgDeleteSuccess'),
               type: 'success'
             })
@@ -505,7 +505,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -516,9 +516,9 @@ export default {
     // 确认导入
     confirmImport() {
       if (this.importMode === 'replace') {
-        this.$confirm(this.$t('TablePage.MsgImportReplace'), this.$t('TablePage.TitleTip'), {
+        this.$confirm(this.$t('TablePage.MsgImportReplace'), this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
-          cancelButtonText: this.$t('TablePage.BtnUndelete'),
+          cancelButtonText: this.$t('PublicBtn.Cancel'),
           confirmButtonClass: 'btnDanger',
           type: 'warning'
         }).then(() => {

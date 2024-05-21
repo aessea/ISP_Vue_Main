@@ -42,12 +42,12 @@
               :header-cell-style="{'font-weight':'normal', 'text-align':'right'}"
               :cell-style="{'font-size':'20px', 'font-weight':'20px', 'text-align': 'right'}"
             >
-              <el-table-column prop="schedule_type" label="$t('SchedulePanelPage.ScheduleType')" width="100px;" />
-              <el-table-column prop="enable" label="$t('SchedulePanelPage.Feasible')" width="100px;" />
-              <el-table-column prop="line_balance" label="$t('SchedulePanelPage.LineBalanceValue')" width="100px;" />
-              <el-table-column prop="idle_value" label="$t('SchedulePanelPage.IdleValue')" width="100px;" />
-              <el-table-column prop="overdue_value" label="$t('SchedulePanelPage.OverdueValue')" width="100px;" />
-              <el-table-column prop="obj_value" label="$t('SchedulePanelPage.ResultValue')" width="110px;" />
+              <el-table-column prop="schedule_type" :label="$t('SchedulePanelPage.ScheduleType')" width="100px;" />
+              <el-table-column prop="enable" :label="$t('SchedulePanelPage.Feasible')" width="100px;" />
+              <el-table-column prop="line_balance" :label="$t('SchedulePanelPage.LineBalanceValue')" width="100px;" />
+              <el-table-column prop="idle_value" :label="$t('SchedulePanelPage.IdleValue')" width="100px;" />
+              <el-table-column prop="overdue_value" :label="$t('SchedulePanelPage.OverdueValue')" width="100px;" />
+              <el-table-column prop="obj_value" :label="$t('SchedulePanelPage.ResultValue')" width="110px;" />
             </el-table>
           </div>
         </el-col>
@@ -200,11 +200,11 @@
       <el-col :span="8">
         <el-card style="margin-right: 16px;height: 400px;">
           <el-tabs v-model="activeName" type="card">
-            <el-tab-pane label="主板下载" name="main">
+            <el-tab-pane :label="$t('SchedulePanelPage.MainDowload')" name="main">
               <el-row>
                 <el-col :span="24">
                   <el-alert
-                    title="主板下载最新数据"
+                    :title="$t('SchedulePanelPage.TitleDownloadNewMain')"
                     type="info"
                     :closable="false"
                   />
@@ -243,11 +243,11 @@
                 </el-col>
               </el-row>
             </el-tab-pane>
-            <el-tab-pane label="小板下载" name="small">
+            <el-tab-pane :label="$t('SchedulePanelPage.SmallDowload')" name="small">
               <el-row>
                 <el-col :span="24">
                   <el-alert
-                    title="小板下载最新数据"
+                    :title="$t('SchedulePanelPage.TitleDownloadNewSmall')"
                     type="info"
                     :closable="false"
                   />
@@ -286,11 +286,11 @@
                 </el-col>
               </el-row>
             </el-tab-pane>
-            <el-tab-pane label="日志下载" name="log">
+            <el-tab-pane :label="$t('SchedulePanelPage.LogDownload')" name="log">
               <el-row>
                 <el-col :span="24">
                   <el-alert
-                    title="下载最新日志"
+                    :title="$t('SchedulePanelPage.TitleDownloadNewLog')"
                     type="info"
                     :closable="false"
                   />
@@ -325,7 +325,7 @@
           <el-date-picker
             v-model="pack_holiday_day_list"
             type="dates"
-            placeholder="$t('SchedulePanelPage.TextChooseHoliday')"
+            :placeholder="$t('SchedulePanelPage.TextChooseHoliday')"
             :style="{width: '70%'}"
             value-format="yyyy-MM-dd"
           />
@@ -338,7 +338,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="计算主板和小板排程"
+      :title="$t('SchedulePanelPage.TitleComputeBoth')"
       :visible.sync="computeBothDialogVisible"
       width="60%"
       :close-on-click-modal="false"
@@ -346,14 +346,14 @@
       @dragDialog="handleDrag"
     >
       <el-steps :active="stepNowBoth" finish-status="success" simple>
-        <el-step title="上传排程" />
-        <el-step title="导入排程" />
-        <el-step title="更新信息" />
-        <el-step title="计算排程" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep1')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep2')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep3')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep4')" />
       </el-steps>
       <el-row style="margin-top:10px;">
         <el-col :span="6">
-          <el-input placeholder="请上传主板排程文件" :value="uploadFileNameMain" />
+          <el-input :placeholder="$t('SchedulePanelPage.TextUploadMainFile')" :value="uploadFileNameMain" />
         </el-col>
         <el-col :span="4">
           <el-upload
@@ -380,7 +380,7 @@
           </el-tooltip>
         </el-col> -->
         <el-col :span="6">
-          <el-input style="margin-left: 10px;" placeholder="请上传小板排程文件" :value="uploadFileNameSmall" />
+          <el-input style="margin-left: 10px;" :placeholder="$t('SchedulePanelPage.TextUploadSmallFile')" :value="uploadFileNameSmall" />
         </el-col>
         <el-col :span="4">
           <el-upload
@@ -430,7 +430,7 @@
         </el-tooltip>
       </el-row>
       <el-alert
-        title="更新信息"
+        :title="$t('SchedulePanelPage.ComputeTextStep3')"
         type="info"
         :closable="false"
         style="margin-top: 10px;margin-bottom: 10px;"
@@ -465,7 +465,7 @@
         </el-col>
       </el-row>
       <el-alert
-        title="计算排程"
+        :title="$t('SchedulePanelPage.ComputeTextStep4')"
         type="info"
         :closable="false"
         style="margin-top: 10px;margin-bottom: 10px;"
@@ -474,7 +474,7 @@
         {{ $t('SchedulePanelPage.BtnBeginCompute') }}
       </el-button>
       <span slot="footer" class="dialog-footer">
-        <el-tooltip class="item" effect="dark" content="刷新上传文件时间" placement="top">
+        <el-tooltip class="item" effect="dark" :content="$t('SchedulePanelPage.ComputeTextStep4')" placement="top">
           <el-button @click="getUploadFileTime">
             <i class="el-icon-refresh" />
           </el-button>
@@ -487,7 +487,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="计算主板排程"
+      :title="$t('SchedulePanelPage.TitleComputeMain')"
       :visible.sync="computeMainDialogVisible"
       width="50%"
       :close-on-click-modal="false"
@@ -495,14 +495,14 @@
       @dragDialog="handleDrag"
     >
       <el-steps :active="stepNowMain" finish-status="success" simple>
-        <el-step title="上传排程" />
-        <el-step title="导入排程" />
-        <el-step title="更新信息" />
-        <el-step title="计算排程" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep1')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep2')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep3')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep4')" />
       </el-steps>
       <el-row style="margin-top:10px;">
         <el-col :span="8">
-          <el-input placeholder="请上传主板排程文件" :value="uploadFileNameMain" />
+          <el-input :placeholder="$t('SchedulePanelPage.TextUploadMainFile')" :value="uploadFileNameMain" />
         </el-col>
         <el-col :span="16">
           <el-upload
@@ -532,7 +532,7 @@
         </el-col>
       </el-row>
       <el-alert
-        title="更新信息"
+        :title="$t('SchedulePanelPage.ComputeTextStep3')"
         type="info"
         :closable="false"
         style="margin-top: 10px;margin-bottom: 10px;"
@@ -567,7 +567,7 @@
         </el-col>
       </el-row>
       <el-alert
-        title="计算排程"
+        :title="$t('SchedulePanelPage.ComputeTextStep4')"
         type="info"
         :closable="false"
         style="margin-top: 10px;margin-bottom: 10px;"
@@ -584,7 +584,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="计算小板排程"
+      :title="$t('SchedulePanelPage.TitleComputeSmall')"
       :visible.sync="computeSmallDialogVisible"
       width="50%"
       :close-on-click-modal="false"
@@ -592,14 +592,14 @@
       @dragDialog="handleDrag"
     >
       <el-steps :active="stepNowSmall" finish-status="success" simple>
-        <el-step title="上传排程" />
-        <el-step title="导入排程" />
-        <el-step title="更新信息" />
-        <el-step title="计算排程" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep1')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep2')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep3')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep4')" />
       </el-steps>
       <el-row style="margin-top:10px;">
         <el-col :span="8">
-          <el-input placeholder="请上传小板排程文件" :value="uploadFileNameSmall" />
+          <el-input :placeholder="$t('SchedulePanelPage.TextUploadSmallFile')" :value="uploadFileNameSmall" />
         </el-col>
         <el-col :span="16">
           <el-upload
@@ -629,7 +629,7 @@
         </el-col>
       </el-row>
       <el-alert
-        title="更新信息"
+        :title="$t('SchedulePanelPage.ComputeTextStep3')"
         type="info"
         :closable="false"
         style="margin-top: 10px;margin-bottom: 10px;"
@@ -664,7 +664,7 @@
         </el-col>
       </el-row>
       <el-alert
-        title="计算排程"
+        :title="$t('SchedulePanelPage.ComputeTextStep4')"
         type="info"
         :closable="false"
         style="margin-top: 10px;margin-bottom: 10px;"
@@ -681,13 +681,13 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="提示"
+      :title="$t('PublicText.TitleTip')"
       :visible.sync="stopScheduleDialog"
       width="30%"
       :before-close="handleCloseStop"
       @dragDialog="handleDrag"
     >
-      <p style="font-size:16px;">请在下方输入框输入<span style="color:#F56C6C;font-weight:bold;"> 确认终止 </span>后点击确定以终止排程！</p>
+      <p style="font-size:16px;">{{ $t('SchedulePanelPage.TextStopCompute1') }}<span style="color:#F56C6C;font-weight:bold;"> {{ $t('SchedulePanelPage.TextStopCompute2') }} </span>{{ $t('SchedulePanelPage.TextStopCompute3') }}</p>
       <el-input v-model="stopInput" :placeholder="$t('Placeholder.Enter')" style="width: 200px;" />
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseStop">{{ $t('PublicBtn.Cancel') }}</el-button>
@@ -1062,9 +1062,9 @@ export default {
     },
     // 终止深度搜索
     stopTabu() {
-      this.$confirm('确定要终止深度搜索？', '提示', {
+      this.$confirm(this.$t('SchedulePanelPage.TextStopTabu'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         StopTabu(this.name).then(res => {
@@ -1078,7 +1078,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消终止'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -1146,7 +1146,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要导入',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1197,7 +1197,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要计算',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1279,7 +1279,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要导入',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1323,7 +1323,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要计算',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1431,7 +1431,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要导入',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1498,7 +1498,7 @@ export default {
             title: '警告',
             message: h('div', null, newDatas),
             confirmButtonText: '确定，仍要计算',
-            cancelButtonText: this.$t('TablePage.BtnUndelete'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
           }).then(() => {
@@ -1593,7 +1593,7 @@ export default {
         title: '提示',
         message: '确定要更新钢网信息？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1679,7 +1679,7 @@ export default {
         title: '提示',
         message: '确定要更新程序信息？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1765,7 +1765,7 @@ export default {
         title: '提示',
         message: '确定要更新齐套信息？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1851,7 +1851,7 @@ export default {
         title: '提示',
         message: '确定要更新工单进度？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -1937,7 +1937,7 @@ export default {
         title: '提示',
         message: '确定要更新包装点时间？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
@@ -2111,7 +2111,7 @@ export default {
         title: '提示',
         message: '确定要推送量化结果？',
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
@@ -2180,7 +2180,7 @@ export default {
         title: '提示',
         message: tip_message,
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
@@ -2221,7 +2221,7 @@ export default {
     modifyHoliday() {
       this.$confirm('确定要修改放假日期？', '提示', {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const data = {}

@@ -236,7 +236,7 @@ export default {
     filterData() {
       this.$confirm(`确认要删除${this.save_months}个月前的日志？`, '提示', {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -266,7 +266,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     }

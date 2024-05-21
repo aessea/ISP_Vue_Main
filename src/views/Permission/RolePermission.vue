@@ -307,7 +307,7 @@ export default {
     handleDeleteRole(index, row) {
       this.$confirm('确定要删除该角色？', '提示', {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
-        cancelButtonText: this.$t('TablePage.BtnUndelete'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
@@ -326,7 +326,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: this.$t('TablePage.BtnUndelete')
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
