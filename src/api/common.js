@@ -33,3 +33,11 @@ export function GetButtonPermission(data) {
     data
   })
 }
+// 修改语言
+export function SwitchLanguage(data) {
+  return request({
+    url: `/${API_URL_FIRST}/switch_language/`,
+    method: 'post',
+    data
+  })
+}

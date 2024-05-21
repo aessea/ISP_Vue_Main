@@ -1,9 +1,4 @@
 export default {
-  user: {
-    uname: 'User Name',
-    role: 'Role',
-    sex: 'Sex'
-  },
   title: {
     Language: 'Language', // 语言
     Login: 'Login', // 登录
@@ -22,7 +17,8 @@ export default {
   },
   Msg: {
     InputName: 'Please enter your username', // 请输入用户名
-    InputPassword: 'Please enter your password' // 请输入密码
+    InputPassword: 'Please enter your password', // 请输入密码
+    LangSwitchSuccess: 'The language switch is successful' // 语言切换成功
   },
   // 表单验证
   Form: {
@@ -235,10 +231,5 @@ export default {
     MsgExportSuccess: 'Export Successful', // 导出成功
     MsgExportData1: 'A total of ', // 本次共导出了
     MsgExportData2: ' pieces of data were exported' // 条数据
-  },
-  PackHoliday: {
-    pack_line: 'Pack Line', // 包装线
-    holiday_begin: 'Holiday Begin', // 放假开始时间
-    holiday_end: 'Holiday End' // 放假结束时间
   }
 }

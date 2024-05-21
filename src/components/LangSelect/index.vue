@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+import { SwitchLanguage } from '@/api/common'
 export default {
   name: 'LanguageSelect',
   data() {
@@ -31,12 +32,21 @@ export default {
       } else {
         this.lang = 'English'
       }
-      console.log(command)
+      const data = {
+        'lang': command
+      }
+      SwitchLanguage(data).then(res => {
+
+      })
       this.$i18n.locale = command
       // console.log('this.$i18n.locale', this.$i18n.locale)
       sessionStorage.setItem('lang', command)
       // console.log(sessionStorage.getItem('lang'))
       window.location.reload()
+      this.$message({
+        type: 'success',
+        message: this.$t('Msg.LangSwitchSuccess')
+      })
     }
   }
 }

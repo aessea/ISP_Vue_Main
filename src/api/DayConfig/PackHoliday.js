@@ -56,3 +56,10 @@ export function ExportData() {
     method: 'get'
   })
 }
+// 确认导出数据
+export function GetLangDict() {
+  return request({
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/get_lang_dict/`,
+    method: 'get'
+  })
+}
