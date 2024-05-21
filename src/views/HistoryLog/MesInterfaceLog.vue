@@ -43,7 +43,7 @@
         <el-table-column prop="require_time" label="发送请求的时间" sortable />
         <el-table-column prop="require_type" label="请求类型" sortable />
         <el-table-column prop="time_consumed" label="耗时（单位：秒）" sortable />
-        <el-table-column width="110" fixed="right" label="操作">
+        <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
           <template slot-scope="scope">
             <el-button
               size="mini"

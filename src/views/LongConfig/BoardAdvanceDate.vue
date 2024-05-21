@@ -54,7 +54,7 @@
           <el-table-column prop="param_name" label="后工序" sortable />
           <el-table-column prop="param_value" label="提前打板时间(单位:时)" />
           <el-table-column prop="param_sources" label="数据来源" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('BoardAdvanceDate/modify')"

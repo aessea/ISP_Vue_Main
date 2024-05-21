@@ -56,7 +56,7 @@
           <el-table-column prop="exchange_line_one" label="交换线别一" width="120" />
           <el-table-column prop="exchange_line_two" label="交换线别二" width="120" />
           <el-table-column prop="remark" label="备注" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('ExchangeLineData/modify')"

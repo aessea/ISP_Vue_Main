@@ -54,7 +54,7 @@
           <el-table-column prop="model_name" label="AI/SMT组件" sortable />
           <el-table-column prop="total_count" label="总数量" sortable />
           <el-table-column prop="factory" label="工厂" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('Summary/modify')"

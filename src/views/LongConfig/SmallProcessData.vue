@@ -93,7 +93,7 @@
           <el-table-column prop="ct_predict_upper" label="CT预测上限" width="120" />
           <el-table-column prop="process_sequence" label="先后加工顺序" width="120" />
           <el-table-column prop="process_order" label="制程分配点数的优先顺序" width="120" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('SmallProcessData/modify')"

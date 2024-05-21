@@ -55,7 +55,7 @@
           <el-table-column prop="big_setup" label="大切换" />
           <el-table-column prop="small_setup" label="小切换" />
           <el-table-column prop="setup_program" label="切软体" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('SetUpData/modify')"

@@ -72,7 +72,7 @@
           <el-table-column prop="is_rivet" label="是否打铆钉" width="120" />
           <el-table-column prop="program_time" label="程序制作时间" width="150" sortable />
           <el-table-column prop="program_id" label="MES程序ID" width="150" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('ProductProgramData/modify')"

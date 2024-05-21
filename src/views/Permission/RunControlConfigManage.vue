@@ -44,7 +44,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 type="primary"

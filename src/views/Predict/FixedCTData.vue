@@ -69,7 +69,7 @@
           <el-table-column prop="SMT_machine_name" label="SMT机种名" sortable />
           <el-table-column prop="process" label="制程" sortable />
           <el-table-column prop="CT" label="指定CT" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('FixedCTData/modify')"

@@ -56,7 +56,7 @@
           <el-table-column prop="line_one" label="需要删除线体" width="120" />
           <el-table-column prop="line_two" label="所更改线别" width="120" />
           <el-table-column prop="remark" label="备注" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('ChangeLineData/modify')"

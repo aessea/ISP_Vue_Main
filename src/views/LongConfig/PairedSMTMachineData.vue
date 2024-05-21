@@ -54,7 +54,7 @@
           <el-table-column prop="board" label="板号" sortable />
           <el-table-column prop="top_SMT_mac_name" label="前配套板名" />
           <el-table-column prop="bottom_SMT_mac_name" label="后配套板名" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('PairedSMTMachineData/modify')"

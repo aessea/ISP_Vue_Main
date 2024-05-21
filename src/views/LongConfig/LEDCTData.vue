@@ -55,7 +55,7 @@
           <el-table-column prop="ct" label="CT" sortable />
           <el-table-column prop="trial_run_timedelta" label="试跑工单停线时间" sortable />
           <el-table-column prop="batch_production_timedelta" label="量产工单停线时间" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('LEDCTData/modify')"

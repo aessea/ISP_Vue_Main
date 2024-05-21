@@ -68,7 +68,7 @@
           <el-table-column prop="program_CT" label="程序CT" width="100" sortable />
           <el-table-column prop="average_CT" label="平均CT" width="110" sortable />
           <el-table-column prop="data_time" label="数据时间" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('TrainLEDTData/modify')"

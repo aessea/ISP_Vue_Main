@@ -53,7 +53,7 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="packaging_line_name" label="包装线名" sortable />
           <el-table-column prop="holiday_days" label="放假天数" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('PackagingLineHoliday/modify')"

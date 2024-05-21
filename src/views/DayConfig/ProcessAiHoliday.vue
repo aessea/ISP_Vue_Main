@@ -54,7 +54,7 @@
           <el-table-column prop="post_process_name" label="后工序" sortable />
           <el-table-column prop="holiday_begin" label="放假开始时间" sortable />
           <el-table-column prop="holiday_end" label="放假结束时间" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('ProcessAiHoliday/modify')"

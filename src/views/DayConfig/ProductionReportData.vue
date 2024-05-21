@@ -67,7 +67,7 @@
           <el-table-column prop="date" label="日期" width="120" sortable />
           <el-table-column prop="job_quantity" label="工单量" width="120" sortable />
           <el-table-column prop="total_points" label="总点数" width="160" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('ProductionReportData/modify')"

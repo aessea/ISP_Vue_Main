@@ -53,7 +53,7 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="line" label="线别" sortable />
           <el-table-column prop="points_limit" label="点数界限" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('KeyBoardLineData/modify')"

@@ -61,7 +61,7 @@
           </el-table-column>
           <el-table-column prop="date_info" label="日期" sortable />
           <el-table-column prop="capacity" label="产能" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('DayCapacityConfig/modify')"

@@ -56,7 +56,7 @@
           <el-table-column prop="end_time" label="结束时间" width="120" />
           <el-table-column prop="capacity_change" label="产能修改比例" width="120" />
           <el-table-column prop="remark" label="备注" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('CapacityChangeData/modify')"

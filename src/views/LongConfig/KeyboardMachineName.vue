@@ -53,7 +53,7 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="machine_name" label="组件" sortable />
           <el-table-column prop="delay_value" label="延后时间(单位:天)" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 type="primary"

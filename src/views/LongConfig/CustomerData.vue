@@ -53,7 +53,7 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="name" label="客户名称" sortable />
           <el-table-column prop="identification" label="客户识别码" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('CustomerData/modify')"

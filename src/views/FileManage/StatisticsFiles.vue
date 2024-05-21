@@ -52,7 +52,7 @@
           <el-table-column prop="file_time" label="创建时间" sortable width="200" />
           <el-table-column prop="remark" label="备注" sortable width="160" />
           <el-table-column prop="create_user" label="创建人" sortable width="160" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('StatisticsFiles/download')"

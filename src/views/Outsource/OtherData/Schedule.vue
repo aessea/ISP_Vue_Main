@@ -61,7 +61,7 @@
           <el-table-column prop="demand_date" label="需求日期" />
           <el-table-column prop="package_line" label="包装线" />
           <el-table-column prop="factory" label="工厂" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('Schedule/modify')"

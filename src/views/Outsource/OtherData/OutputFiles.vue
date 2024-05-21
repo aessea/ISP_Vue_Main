@@ -57,7 +57,7 @@
           <el-table-column prop="file_size" width="110" label="文件大小" sortable />
           <el-table-column prop="file_path" label="文件路径" />
           <el-table-column prop="create_time" width="200" label="创建时间" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('OutputFiles/modify')"

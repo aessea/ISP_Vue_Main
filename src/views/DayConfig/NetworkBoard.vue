@@ -75,7 +75,7 @@
           <el-table-column prop="status_change_time" label="状态变更时间" width="200" sortable />
           <el-table-column prop="total_num" label="网板数量" width="120" sortable />
           <el-table-column prop="process" label="制程（工序）" width="140" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('NetworkBoard/modify')"

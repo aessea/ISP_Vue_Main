@@ -52,7 +52,7 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column v-for="col in cols" :key="col.prop" :prop="col.prop" :label="col.label" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('FactoryType/modify')"

@@ -70,7 +70,7 @@
           <el-table-column prop="component_bind" label="组件绑定" width="200" sortable />
           <el-table-column prop="require_time" label="程序需求时间" width="180" sortable />
           <el-table-column prop="finish_time" label="程序完成时间" width="180" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('NoProgramData/modify')"

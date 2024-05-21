@@ -61,7 +61,7 @@
           <el-table-column prop="program_CT" label="标准CT" sortable />
           <el-table-column prop="yin_yang_board" label="阴阳板" sortable />
           <el-table-column prop="program_time" label="程序制作时间" width="150" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('TestProgramData/modify')"

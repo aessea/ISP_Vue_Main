@@ -149,7 +149,7 @@
           <el-table-column prop="type_of_big_small_line" label="大小穿插的类型" width="160" />
           <el-table-column prop="fixed_ct" label="指定CT默认值(单位:秒)" width="160" />
           <el-table-column prop="is_open_program" label="是否开放程序" width="120" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('LineData/modify')"

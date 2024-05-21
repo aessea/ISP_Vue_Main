@@ -59,7 +59,7 @@
           <el-table-column prop="connecting_plates" label="联片数" width="100" sortable />
           <el-table-column prop="single_points" label="单板点数" width="120" sortable />
           <el-table-column prop="program_CT" label="程序CT" width="120" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('ProgramData/modify')"

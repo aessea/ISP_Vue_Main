@@ -76,7 +76,7 @@
           </el-table-column>
           <el-table-column prop="create_time" label="创建时间" width="120" sortable />
           <el-table-column prop="end_time" label="结束时间" width="120" sortable />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('TrainDataMap/modify')"

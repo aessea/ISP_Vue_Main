@@ -53,7 +53,7 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="board8" label="板号" sortable />
           <el-table-column prop="advance_days" label="提前天数" />
-          <el-table-column width="110" fixed="right" label="操作">
+          <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
                 v-if="buttons.includes('EarlyDueDateBoard8/modify')"
