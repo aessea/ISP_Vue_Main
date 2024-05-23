@@ -127,7 +127,7 @@
           <el-row>
             <el-col :span="24">
               <el-alert
-                title="训练预测模型"
+                :title="$t('SchedulePanelPage.TitleTrainPredictModel')"
                 type="info"
                 :closable="false"
               />
@@ -135,7 +135,7 @@
                 <el-date-picker
                   v-model="trainDate"
                   type="date"
-                  placeholder="选择预测模型日期"
+                  :placeholder="$t('SchedulePanelPage.TextChooseTrainDate')"
                 />
                 <el-tooltip class="item" effect="dark" :content="trainDateTip" placement="top">
                   <el-button v-if="buttons.includes('SchedulePanel/trainModel')" type="primary" plain style="margin-top:2px;margin-left: 8px;" @click="trainModel">
@@ -145,7 +145,7 @@
                 </el-tooltip>
               </div>
               <el-alert
-                title="排程相关操作"
+                :title="$t('SchedulePanelPage.TitleRelatedOperate')"
                 type="info"
                 :closable="false"
               />
@@ -773,11 +773,11 @@ export default {
         line_balance: ''
       }],
       progress_refresh: null, // 刷新进度条
-      apsMtoolMsg: this.$t('PublicText.MesApiUpload'), // 钢网信息更新提示
-      apsProgramMsg: this.$t('PublicText.MesApiUpload'), // 程序信息更新提示
-      apsMoProgData: this.$t('PublicText.MesApiUpload'), // 更新工单进度提示
-      apsMoBaseData: this.$t('PublicText.MesApiUpload'), // 更新齐套信息提示
-      apsDeliveryDay: this.$t('PublicText.MesApiUpload'), // 更新包装时间提示
+      apsMtoolMsg: this.$t('PublicText.MesApiNotUpdate'), // 钢网信息更新提示
+      apsProgramMsg: this.$t('PublicText.MesApiNotUpdate'), // 程序信息更新提示
+      apsMoProgData: this.$t('PublicText.MesApiNotUpdate'), // 更新工单进度提示
+      apsMoBaseData: this.$t('PublicText.MesApiNotUpdate'), // 更新齐套信息提示
+      apsDeliveryDay: this.$t('PublicText.MesApiNotUpdate'), // 更新包装时间提示
       stopScheduleDialog: false, // 终止计算排程dialog
       stopInput: '', // 确认终止
       trainDateTip: '', // 训练日期提示
@@ -833,7 +833,7 @@ export default {
         if (res.run_flag !== 1) {
           this.$message({
             type: 'warning',
-            message: '未在计算排程，无需终止！'
+            message: this.$t('SchedulePanelPage.TextNoNeedStopTabu')
           })
         } else {
           this.stopScheduleDialog = true
@@ -841,15 +841,15 @@ export default {
       })
     },
     confirmStopSchedule() {
-      if (this.stopInput !== '确认终止') {
+      if (this.stopInput !== this.$t('SchedulePanelPage.TextStopCompute2')) {
         this.$message({
           type: 'error',
-          message: '输入错误！'
+          message: this.$t('PublicText.TextError')
         })
       } else {
         StopSchedule(this.name).then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
@@ -866,7 +866,7 @@ export default {
           this.schedule_result = res.table_data
           this.schedule_mode = res.mode
           this.schedule_time = res.date
-          this.trainDateTip = '当前模型日期：' + res.train_date
+          this.trainDateTip = this.$t('SchedulePanelPage.TextCurrentTrainDate') + res.train_date
           this.pack_holiday_day_list = res.pack_holiday_day_list
         }
       })
@@ -940,11 +940,11 @@ export default {
     // 主板文件上传钩子
     handleChangeMain(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|ABL)(正排|预排).*$/
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(this.$t('FileKeyWord.MainWord'))(this.$t('FileKeyWord.FormalSchedule')|this.$t('FileKeyWord.UnFormalSchedule')).*$/
 
       if (!regex.test(fileName)) {
-        const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排）'
-        this.$alert(tip, '错误', {
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
+        this.$alert(tip, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
           type: 'error'
@@ -963,11 +963,11 @@ export default {
     // 小板文件上传钩子
     handleChangeSmall(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(小板|ABL)(正排|预排).*$/
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(this.$t('FileKeyWord.SmallWord'))(this.$t('FileKeyWord.FormalSchedule')|this.$t('FileKeyWord.UnFormalSchedule')).*$/
 
       if (!regex.test(fileName)) {
-        const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901小板预排）'
-        this.$alert(tip, '错误', {
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
+        this.$alert(tip, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
           type: 'error'
@@ -991,12 +991,12 @@ export default {
       form.append('file_name', uploadFileName)
       await DoCheckScheduleData(form).then(res => {
         if (res.message_type === 'success') {
-          this.$alert(res.message, '检查结果', {
+          this.$alert(res.message, this.$t('SchedulePanelPage.TextCheckResult'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
         } else {
-          this.$alert(res.message, '检查结果', {
+          this.$alert(res.message, this.$t('SchedulePanelPage.TextCheckResult'), {
             customClass: 'checkAlertBox',
             dangerouslyUseHTMLString: true,
             confirmButtonText: this.$t('PublicBtn.Confirm'),
@@ -1013,7 +1013,7 @@ export default {
         this.loadingInstance.close()
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert('检查出现异常：' + err, '错误', {
+        this.$alert(this.$t('SchedulePanelPage.TextCheckError') + err, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
@@ -1030,7 +1030,7 @@ export default {
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '获取失败',
+          message: this.$t('SchedulePanelPage.TextFailedToGet'),
           type: 'error'
         })
       })
@@ -1046,7 +1046,7 @@ export default {
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '获取失败',
+          message: this.$t('SchedulePanelPage.TextFailedToGet'),
           type: 'error'
         })
       })
@@ -1055,8 +1055,8 @@ export default {
     getUploadFileTime() {
       GetUploadFileTime().then(res => {
         if (res.code === 20000) {
-          this.mainUploadName = '获取主板上传文件' + res.main_time
-          this.smallUploadName = '获取小板上传文件' + res.small_time
+          this.mainUploadName = this.$t('SchedulePanelPage.TextGetMainUploadTime') + res.main_time
+          this.smallUploadName = this.$t('SchedulePanelPage.TextGetSmallUploadTime') + res.small_time
         }
       })
     },
@@ -1088,7 +1088,7 @@ export default {
         if (res.run_flag === 1) {
           this.$message({
             type: 'error',
-            message: '正在计算排程，无法训练预测模型！'
+            message: this.$t('SchedulePanelPage.TextTrainTip')
           })
         } else {
           this.listenProgress()
@@ -1098,7 +1098,7 @@ export default {
                 message: res.message,
                 type: 'success'
               })
-              this.trainDateTip = '当前模型日期：' + res.train_date
+              this.trainDateTip = this.$t('SchedulePanelPage.TextCurrentTrainDate') + res.train_date
             }
           })
         }
@@ -1106,11 +1106,11 @@ export default {
     },
     // 导入后更新接口更新提示
     clearUpdateMag() {
-      this.apsMtoolMsg = '未更新'
-      this.apsProgramMsg = '未更新'
-      this.apsMoBaseData = '未更新'
-      this.apsMoProgData = '未更新'
-      this.apsDeliveryDay = '未更新'
+      this.apsMtoolMsg = this.$t('PublicText.MesApiNotUpdate')
+      this.apsProgramMsg = this.$t('PublicText.MesApiNotUpdate')
+      this.apsMoBaseData = this.$t('PublicText.MesApiNotUpdate')
+      this.apsMoProgData = this.$t('PublicText.MesApiNotUpdate')
+      this.apsDeliveryDay = this.$t('PublicText.MesApiNotUpdate')
     },
     // 更新步骤条
     updateApiStepMsg() {
@@ -1123,7 +1123,7 @@ export default {
       if (this.uploadFileNameMain === '') {
         this.$message({
           type: 'warning',
-          message: '未上传排程文件，无法导入'
+          message: this.$t('SchedulePanelPage.TextComputeTip1')
         })
         return
       }
@@ -1131,21 +1131,21 @@ export default {
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
           var confirmText
           if (res.run_flag === 1) {
-            confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+            confirmText = [this.$t('SchedulePanelPage.TextComputeTip3'), this.$t('SchedulePanelPage.TextComputeTip2')]
           } else if (res.ana_run_flag === 1) {
-            confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+            confirmText = [this.$t('SchedulePanelPage.TextComputeTip4'), this.$t('SchedulePanelPage.TextComputeTip2')]
           } else {
-            confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+            confirmText = [this.$t('SchedulePanelPage.TextComputeTip5'), this.$t('SchedulePanelPage.TextComputeTip2')]
           }
           const newDatas = []
           const h = this.$createElement
           for (const i in confirmText) {
             newDatas.push(h('p', null, confirmText[i]))
           }
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定，仍要导入',
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueImport'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -1154,7 +1154,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消计算'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -1167,14 +1167,14 @@ export default {
       if (this.isImportMain === false) {
         this.$message({
           type: 'warning',
-          message: '未导入文件，无法计算排程'
+          message: this.$t('SchedulePanelPage.TextComputeTip7')
         })
         return
       }
       if (this.clickComputeCount >= 1) {
         this.$message({
           type: 'warning',
-          message: '已开始计算排程，请勿重复点击'
+          message: this.$t('SchedulePanelPage.TextComputeTip8')
         })
         return
       }
@@ -1182,21 +1182,21 @@ export default {
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
           var confirmText
           if (res.run_flag === 1) {
-            confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+            confirmText = [this.$t('SchedulePanelPage.TextComputeTip3'), this.$t('SchedulePanelPage.TextComputeTip2')]
           } else if (res.ana_run_flag === 1) {
-            confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+            confirmText = [this.$t('SchedulePanelPage.TextComputeTip4'), this.$t('SchedulePanelPage.TextComputeTip2')]
           } else {
-            confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+            confirmText = [this.$t('SchedulePanelPage.TextComputeTip5'), this.$t('SchedulePanelPage.TextComputeTip2')]
           }
           const newDatas = []
           const h = this.$createElement
           for (const i in confirmText) {
             newDatas.push(h('p', null, confirmText[i]))
           }
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定，仍要计算',
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueCompute'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -1205,7 +1205,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消计算'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -1218,14 +1218,14 @@ export default {
       this.schedule_result = res.table_data
       this.schedule_mode = res.mode
       this.schedule_time = res.date
-      this.trainDateTip = '当前模型日期：' + res.train_date
+      this.trainDateTip = this.$t('SchedulePanelPage.TextCurrentTrainDate') + res.train_date
     },
     // 开始计算主板排程
     computeScheduleMain() {
       this.clickComputeCount = 1
       this.listenProgress()
       var is_click_apsMoProgData
-      if (this.apsMoProgData === '已更新') {
+      if (this.apsMoProgData === this.$t('PublicText.MesApiNotUpdate')) {
         is_click_apsMoProgData = true
       } else {
         is_click_apsMoProgData = false
@@ -1245,7 +1245,7 @@ export default {
           this.refreshComputeShow(res)
         } else {
           this.$message({
-            message: '开始计算失败',
+            message: this.$t('SchedulePanelPage.TextComputeTip11'),
             type: 'error'
           })
         }
@@ -1256,18 +1256,18 @@ export default {
       if (this.uploadFileNameSmall === '') {
         this.$message({
           type: 'warning',
-          message: '未上传排程文件，无法导入'
+          message: this.$t('SchedulePanelPage.TextComputeTip1')
         })
         return
       }
       GetRunFlag().then(res => {
         var confirmText
         if (res.run_flag === 1) {
-          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip3'), this.$t('SchedulePanelPage.TextComputeTip2')]
         } else if (res.ana_run_flag === 1) {
-          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip4'), this.$t('SchedulePanelPage.TextComputeTip2')]
         } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip5'), this.$t('SchedulePanelPage.TextComputeTip2')]
         }
         const newDatas = []
         const h = this.$createElement
@@ -1275,10 +1275,10 @@ export default {
           newDatas.push(h('p', null, confirmText[i]))
         }
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定，仍要导入',
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueImport'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -1287,7 +1287,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消计算'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -1300,18 +1300,18 @@ export default {
       if (this.isImportSmall === false) {
         this.$message({
           type: 'warning',
-          message: '未导入文件，无法计算排程'
+          message: this.$t('SchedulePanelPage.TextComputeTip7')
         })
         return
       }
       if (this.clickComputeCount >= 1) {
         this.$message({
           type: 'warning',
-          message: '已开始计算排程，请勿重复点击'
+          message: this.$t('SchedulePanelPage.TextComputeTip8')
         })
         return
       }
-      const confirmText = ['目前正在计算排程或分析排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
+      const confirmText = [this.$t('SchedulePanelPage.TextComputeTip9'), this.$t('SchedulePanelPage.TextComputeTip10')]
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1319,10 +1319,10 @@ export default {
       }
       GetRunFlag().then(res => {
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定，仍要计算',
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueCompute'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -1331,7 +1331,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消计算'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -1344,7 +1344,7 @@ export default {
       this.clickComputeCount = 1
       this.listenProgress()
       var is_click_apsMoProgData
-      if (this.apsMoProgData === '已更新') {
+      if (this.apsMoProgData === this.$t('PublicText.MesApiNotUpdate')) {
         is_click_apsMoProgData = true
       } else {
         is_click_apsMoProgData = false
@@ -1364,7 +1364,7 @@ export default {
           this.refreshComputeShow(res)
         } else {
           this.$message({
-            message: '开始计算失败',
+            message: this.$t('SchedulePanelPage.TextComputeTip11'),
             type: 'error'
           })
         }
@@ -1408,18 +1408,18 @@ export default {
       if (this.uploadFileNameMain === '' || this.uploadFileNameSmall === '') {
         this.$message({
           type: 'warning',
-          message: '主板和小板的排程文件未全部上传，无法导入'
+          message: this.$t('SchedulePanelPage.TextComputeTip6')
         })
         return
       }
       GetRunFlag().then(res => {
         var confirmText
         if (res.run_flag === 1) {
-          confirmText = ['目前正在计算排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip3'), this.$t('SchedulePanelPage.TextComputeTip2')]
         } else if (res.ana_run_flag === 1) {
-          confirmText = ['目前正在分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip4'), this.$t('SchedulePanelPage.TextComputeTip2')]
         } else {
-          confirmText = ['目前正在计算排程或分析排程，确定要继续导入？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip5'), this.$t('SchedulePanelPage.TextComputeTip2')]
         }
         const newDatas = []
         const h = this.$createElement
@@ -1427,10 +1427,10 @@ export default {
           newDatas.push(h('p', null, confirmText[i]))
         }
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定，仍要导入',
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueImport'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -1439,7 +1439,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消计算'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -1475,18 +1475,18 @@ export default {
       if (this.isImportBoth === false) {
         this.$message({
           type: 'warning',
-          message: '未导入文件，无法计算排程'
+          message: this.$t('SchedulePanelPage.TextComputeTip7')
         })
         return
       }
       if (this.clickComputeCount >= 1) {
         this.$message({
           type: 'warning',
-          message: '已开始计算排程，请勿重复点击'
+          message: this.$t('SchedulePanelPage.TextComputeTip8')
         })
         return
       }
-      const confirmText = ['目前正在计算排程或分析排程，确定要重新开始计算？', '注意：此操作将会中断当前的排程！']
+      const confirmText = [this.$t('SchedulePanelPage.TextComputeTip9'), this.$t('SchedulePanelPage.TextComputeTip10')]
       const newDatas = []
       const h = this.$createElement
       for (const i in confirmText) {
@@ -1494,10 +1494,10 @@ export default {
       }
       GetRunFlag().then(res => {
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定，仍要计算',
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueCompute'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -1506,7 +1506,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消计算'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -1518,7 +1518,7 @@ export default {
       this.clickComputeCount = 1
       this.listenProgress()
       var is_click_apsMoProgData
-      if (this.apsMoProgData === '已更新') {
+      if (this.apsMoProgData === this.$t('PublicText.MesApiNotUpdate')) {
         is_click_apsMoProgData = true
       } else {
         is_click_apsMoProgData = false
@@ -1539,7 +1539,7 @@ export default {
           this.refreshComputeShow(res)
         } else {
           this.$message({
-            message: '开始计算失败',
+            message: this.$t('SchedulePanelPage.TextComputeTip11'),
             type: 'error'
           })
         }
@@ -1547,10 +1547,10 @@ export default {
     },
     // 更新钢网信息前的提示
     getApsMtool(mode) {
-      const tip = '服务器正在计算排程，无法更新信息！' + `<br/>` + '注：请在导入之后，开始计算之前更新'
+      const tip = this.$t('SchedulePanelPage.TextApiUploadTip1') + `<br/>` + this.$t('SchedulePanelPage.TextApiUploadTip2')
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
-          this.$alert(tip, '警告', {
+          this.$alert(tip, this.$t('PublicText.TextWarn'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
@@ -1566,7 +1566,7 @@ export default {
         if (this.isImportMain === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1574,7 +1574,7 @@ export default {
         if (this.isImportSmall === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1582,33 +1582,33 @@ export default {
         if (this.isImportBoth === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
       } else {
         return
       }
-      this.$confirm('提示', {
-        title: '提示',
-        message: '确定要更新钢网信息？',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
+        message: this.$t('SchedulePanelPage.TextApiUploadTip4'),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
-          text: '钢网信息更新中...',
+          title: this.$t('PublicText.MesApiUpdating'),
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
         GetApsMtool().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsMtoolMsg = '已更新'
+            this.apsMtoolMsg = this.$t('PublicText.MesApiNotUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -1619,7 +1619,7 @@ export default {
           }
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '更新信息出错', {
+          this.$alert(err, this.$t('SchedulePanelPage.TextApiUploadTip5'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -1627,16 +1627,16 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消更新'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     // 更新程序信息前的提示
     getApsProgram(mode) {
-      const tip = '服务器正在计算排程，无法更新信息！' + `<br/>` + '注：请在导入之后，开始计算之前更新'
+      const tip = this.$t('SchedulePanelPage.TextApiUploadTip1') + `<br/>` + this.$t('SchedulePanelPage.TextApiUploadTip2')
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
-          this.$alert(tip, '警告', {
+          this.$alert(tip, this.$t('PublicText.TextWarn'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
@@ -1652,7 +1652,7 @@ export default {
         if (this.isImportMain === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1660,7 +1660,7 @@ export default {
         if (this.isImportSmall === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1668,33 +1668,33 @@ export default {
         if (this.isImportBoth === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
       } else {
         return
       }
-      this.$confirm('提示', {
-        title: '提示',
-        message: '确定要更新程序信息？',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
+        message: this.$t('SchedulePanelPage.TextApiUploadTip4'),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
-          text: '程序信息更新中...',
+          title: this.$t('PublicText.MesApiUpdating'),
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
         GetApsProgram().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsProgramMsg = '已更新'
+            this.apsProgramMsg = this.$t('PublicText.MesApiNotUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -1705,7 +1705,7 @@ export default {
           }
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '更新信息错误', {
+          this.$alert(err, this.$t('SchedulePanelPage.TextApiUploadTip5'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -1713,16 +1713,16 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消更新'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     // 更新齐套信息前的提示
     getApsMoBaseData(mode) {
-      const tip = '服务器正在计算排程，无法更新信息！' + `<br/>` + '注：请在导入之后，开始计算之前更新'
+      const tip = this.$t('SchedulePanelPage.TextApiUploadTip1') + `<br/>` + this.$t('SchedulePanelPage.TextApiUploadTip2')
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
-          this.$alert(tip, '警告', {
+          this.$alert(tip, this.$t('PublicText.TextWarn'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
@@ -1738,7 +1738,7 @@ export default {
         if (this.isImportMain === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1746,7 +1746,7 @@ export default {
         if (this.isImportSmall === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1754,33 +1754,33 @@ export default {
         if (this.isImportBoth === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
       } else {
         return
       }
-      this.$confirm('提示', {
-        title: '提示',
-        message: '确定要更新齐套信息？',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
+        message: this.$t('SchedulePanelPage.TextApiUploadTip4'),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
-          text: '齐套信息更新中...',
+          title: this.$t('PublicText.MesApiUpdating'),
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
         GetApsMoBaseData().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsMoBaseData = '已更新'
+            this.apsMoBaseData = this.$t('PublicText.MesApiNotUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -1791,7 +1791,7 @@ export default {
           }
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '更新信息错误', {
+          this.$alert(err, this.$t('SchedulePanelPage.TextApiUploadTip5'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -1799,16 +1799,16 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消更新'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     // 更新工单进度前的提示
     getApsMoProgData(mode) {
-      const tip = '服务器正在计算排程，无法更新信息！' + `<br/>` + '注：请在导入之后，开始计算之前更新'
+      const tip = this.$t('SchedulePanelPage.TextApiUploadTip1') + `<br/>` + this.$t('SchedulePanelPage.TextApiUploadTip2')
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
-          this.$alert(tip, '警告', {
+          this.$alert(tip, this.$t('PublicText.TextWarn'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
@@ -1824,7 +1824,7 @@ export default {
         if (this.isImportMain === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1832,7 +1832,7 @@ export default {
         if (this.isImportSmall === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1840,33 +1840,33 @@ export default {
         if (this.isImportBoth === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
       } else {
         return
       }
-      this.$confirm('提示', {
-        title: '提示',
-        message: '确定要更新工单进度？',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
+        message: this.$t('SchedulePanelPage.TextApiUploadTip4'),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
-          text: '工单进度更新中...',
+          title: this.$t('PublicText.MesApiUpdating'),
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
         GetApsMoProgData().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsMoProgData = '已更新'
+            this.apsMoProgData = this.$t('PublicText.MesApiNotUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -1877,7 +1877,7 @@ export default {
           }
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '更新信息错误', {
+          this.$alert(err, this.$t('SchedulePanelPage.TextApiUploadTip5'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -1885,16 +1885,16 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消更新'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     // 更新包装时间前的提示
     getApsDeliveryDay(mode) {
-      const tip = '服务器正在计算排程，无法更新信息！' + `<br/>` + '注：请在导入之后，开始计算之前更新'
+      const tip = this.$t('SchedulePanelPage.TextApiUploadTip1') + `<br/>` + this.$t('SchedulePanelPage.TextApiUploadTip2')
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
-          this.$alert(tip, '警告', {
+          this.$alert(tip, this.$t('PublicText.TextWarn'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             dangerouslyUseHTMLString: true,
             type: 'warning'
@@ -1910,7 +1910,7 @@ export default {
         if (this.isImportMain === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1918,7 +1918,7 @@ export default {
         if (this.isImportSmall === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
@@ -1926,33 +1926,33 @@ export default {
         if (this.isImportBoth === false) {
           this.$message({
             type: 'warning',
-            message: '未导入文件，无法更新信息'
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
           })
           return
         }
       } else {
         return
       }
-      this.$confirm('提示', {
-        title: '提示',
-        message: '确定要更新包装点时间？',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
+        message: this.$t('SchedulePanelPage.TextApiUploadTip4'),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
-          text: '包装点时间更新中...',
+          title: this.$t('PublicText.MesApiUpdating'),
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
         GetApsDeliveryDay().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert('包装点时间更新成功！', '提示', {
+            this.$alert(this.$t('SchedulePanelPage.TextApiUploadTip7'), this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
-            this.apsDeliveryDay = '已更新'
+            this.apsDeliveryDay = this.$t('PublicText.MesApiNotUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -1963,7 +1963,7 @@ export default {
           }
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '更新信息错误', {
+          this.$alert(err, this.$t('SchedulePanelPage.TextApiUploadTip5'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -1971,7 +1971,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消更新'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -1993,7 +1993,7 @@ export default {
     exportScheduleDataMain() {
       if (!this.isImportMain && !this.isImportBoth) {
         this.$message({
-          message: '未导入文件，无需导出',
+          message: this.$t('SchedulePanelPage.TextExportTip1'),
           type: 'warning'
         })
         return
@@ -2001,13 +2001,13 @@ export default {
       ExportMainScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
-          message: '开始下载',
+          message: this.$t('SchedulePanelPage.TextBeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '导出失败，文件不存在',
+          message: this.$t('SchedulePanelPage.TextExportTip2'),
           type: 'error'
         })
       })
@@ -2016,7 +2016,7 @@ export default {
     exportScheduleDataSmall() {
       if (!this.isImportSmall && !this.isImportBoth) {
         this.$message({
-          message: '未导入文件，无需导出',
+          message: this.$t('SchedulePanelPage.TextExportTip1'),
           type: 'warning'
         })
         return
@@ -2024,13 +2024,13 @@ export default {
       ExportSmallScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
-          message: '开始下载',
+          message: this.$t('SchedulePanelPage.TextBeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '导出失败，文件不存在',
+          message: this.$t('SchedulePanelPage.TextExportTip2'),
           type: 'error'
         })
       })
@@ -2039,13 +2039,13 @@ export default {
       DownloadFile(file_key).then(res => {
         this.downloadFile(res)
         this.$message({
-          message: '开始下载',
+          message: this.$t('SchedulePanelPage.TextBeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '下载失败',
+          message: this.$t('SchedulePanelPage.TextDownloadFailed'),
           type: 'error'
         })
       })
@@ -2079,13 +2079,13 @@ export default {
       DownloadHistoryLog({ 'filename': this.selectLogValue }).then(res => {
         this.downloadFile(res)
         this.$message({
-          message: '开始下载',
+          message: this.$t('SchedulePanelPage.TextBeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '下载失败',
+          message: this.$t('SchedulePanelPage.TextDownloadFailed'),
           type: 'error'
         })
       })
@@ -2095,27 +2095,27 @@ export default {
       DownloadHistoryExcel({ 'filename': this.selectExcelValue }).then(res => {
         this.downloadFile(res)
         this.$message({
-          message: '开始下载',
+          message: this.$t('SchedulePanelPage.TextBeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: '下载失败',
+          message: this.$t('SchedulePanelPage.TextDownloadFailed'),
           type: 'error'
         })
       })
     },
     post_statistics() {
-      this.$confirm('提示', {
-        title: '提示',
-        message: '确定要推送量化结果？',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
+        message: this.$t('SchedulePanelPage.TextApiUploadTip6'),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
-          text: '推送中，请稍等...',
+          text: this.$t('PublicText.MesApiPushing'),
           background: 'rgba(0, 0, 0, 0.5)'
         } // 导入排程动画
         this.loadingInstance = Loading.service(pushLoading)
@@ -2124,13 +2124,13 @@ export default {
         }
         SaveApsOutPutCount(form).then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '推送量化结果成功', {
+            this.$alert(res.message, this.$t('PublicText.MesApiPushSuccess'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
-            this.saveApsOutPutCountTip = '已推送'
+            this.saveApsOutPutCountTip = this.$t('PublicBtn.MesApiPushed')
           } else {
-            this.$alert('推送失败', '错误', {
+            this.$alert(this.$t('PublicText.MesApiPushError'), this.$t('PublicText.TextError'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'error'
             })
@@ -2146,45 +2146,45 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消推送'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     beforeDoBucklePoints(upload_file_name) {
-      if (upload_file_name.includes('主板')) {
+      if (upload_file_name.includes(this.$t('FileKeyWord.MainWord'))) {
         if (this.isImportMain === false) {
           this.$message({
             type: 'warning',
-            message: '主板未导入文件，无法转移扣点'
+            message: this.$t('SchedulePanelPage.TextBucklePoints1')
           })
           return
         }
       }
-      if (upload_file_name.includes('小板')) {
+      if (upload_file_name.includes(this.$t('FileKeyWord.SmallWord'))) {
         if (this.isImportSmall === false) {
           this.$message({
             type: 'warning',
-            message: '小板未导入文件，无法转移扣点'
+            message: this.$t('SchedulePanelPage.TextBucklePoints1')
           })
           return
         }
       }
-      var tip_message = '确定要进行转移扣点操作？'
-      if (this.apsMoProgData !== '已更新') {
-        tip_message = '未更新工单进度，确定要转移扣点操作？'
+      var tip_message = this.$t('SchedulePanelPage.TextBucklePoints2')
+      if (this.apsMoProgData !== this.$t('PublicText.MesApiNotUpdate')) {
+        tip_message = this.$t('SchedulePanelPage.TextBucklePoints3')
       }
       this.doBucklePoints(upload_file_name, tip_message)
     },
     doBucklePoints(upload_file_name, tip_message) {
-      this.$confirm('提示', {
-        title: '提示',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
         message: tip_message,
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const pushLoading = {
-          text: '转移扣点中，请稍等...',
+          text: this.$t('SchedulePanelPage.TextBucklePoints4'),
           background: 'rgba(0, 0, 0, 0.5)'
         } // 导入排程动画
         this.loadingInstance = Loading.service(pushLoading)
@@ -2193,12 +2193,12 @@ export default {
         }
         DoBucklePoints(form).then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '转移扣点成功', {
+            this.$alert(res.message, this.$t('SchedulePanelPage.TextBucklePoints5'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
           } else {
-            this.$alert('扣点失败', '错误', {
+            this.$alert(this.$t('SchedulePanelPage.TextBucklePoints6'), this.$t('PublicText.TextError'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'error'
             })
@@ -2214,12 +2214,12 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消转移扣点'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     modifyHoliday() {
-      this.$confirm('确定要修改放假日期？', '提示', {
+      this.$confirm(this.$t('SchedulePanelPage.TextModifyHoliday'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
@@ -2238,7 +2238,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     }

@@ -1,4 +1,10 @@
 export default {
+  FileKeyWord: {
+    MainWord: 'Main Board', // 主板
+    SmallWord: 'Small Board', // 小板
+    FormalSchedule: 'Formal Schedule', // 正排
+    UnFormalSchedule: 'UnFormal Schedule' // 预排
+  },
   title: {
     Language: 'Language', // 语言
     Login: 'Login', // 登录
@@ -106,9 +112,16 @@ export default {
     CheckLoadiing: 'Checking...', // 检查中...
     ImportLoadiing: 'Importing...', // 导入中...
     ExportLoadiing: 'Exporting...', // 导出中...
-    MesApiUpload: 'Not Updated', // 未更新
+    MesApiNotUpdate: 'Not Updated', // 未更新
+    MesApiUpdate: 'Updated', // 已更新
+    MesApiUpdating: 'Updating...', // 更新中...
+    MesApiPushing: 'Pushing...', // 推送中...
+    MesApiPushed: 'Pushed', // 已推送
+    MesApiPushError: 'Pushed', // 推送失败
+    MesApiPushSuccess: 'Pushing...', // 推送成功
     MesApiPush: 'Not Pushed', // 未推送
     TextError: 'Error', // 错误
+    TextWarn: 'Warn', // 警告
     TextCancel: 'Canceled', // 已取消
     TitleTip: 'Tip' // 提示
   },
@@ -131,7 +144,8 @@ export default {
     ResultValue: 'Result Value', // 目标值
     TaskProgress: 'Task Progress', // 任务进度
     ControlPanel: 'Control Center', // 控制中心
-    TrainPredictModelTitle: 'Train Predict Model', // 训练预测模型
+    TitleTrainPredictModel: 'Train Predict Model', // 训练预测模型
+    TitleRelatedOperate: 'Related Operations', // 排程相关操作
     MainDowload: 'Download Main', // 主板下载
     SmallDowload: 'Download Small', // 小板下载
     LogDownload: 'Download Log', // 日志下载
@@ -153,6 +167,7 @@ export default {
     TextUploadSmallFile: 'Please Upload Main Schedule File', // 请上传小板排程文件
     TextRefreshUploadTime: 'Refresh File Upload Time', // 刷新文件上传时间
     // 提示
+    TextChooseTrainDate: 'Select train date', // 选择预测模型日期
     Progress1: 'Training Prediction Model Not Started | 0%', // 第一个进度条：未开始训练预测模型|0%
     Progress2: 'Not Started | 0%', // 第二个进度条：未开始|0%
     Progress3: 'Initial Solution Not Started | 0%', // 第三个进度条：未开始初始解|0%
@@ -166,7 +181,53 @@ export default {
     TextStopCompute2: 'Comfirm Stop', // 确认终止
     TextStopCompute3: 'Then click Confirm to terminate the schedule!', // 后点击确定以终止排程！
     TextStopTabu: 'Are you sure you want to terminate your deep search?', // 确定要终止深度搜索？
+    TextNoNeedStopTabu: 'No need to terminate if you are not calculating the schedule!', // 未在计算排程，无需终止！
+    TextCurrentTrainDate: 'Current Model Date:', // 当前模型日期：
+    TextFileTypeError1: 'The file name format is wrong, please modify it and upload it again!', // 文件命名格式错误，请修改后重新上传！
+    TextFileTypeError2: '(Example of correct file name: 0901 motherboard pre-arrangement)', // （正确文件名示例：0901主板预排）
+    TextFailedToGet: 'Failed to get', // 获取失败
+    TextGetMainUploadTime: 'Get Main Upload File', // 获取主板上传文件
+    TextGetSmallUploadTime: 'Get Small Upload File', // 获取小板上传文件
+    TextTrainTip: 'Scheduling is being calculated, and the predictive model cannot be trained!', // 正在计算排程，无法训练预测模型！
+    TextBeginDownload: 'Begin Download', // 开始下载
+    TextDownloadFailed: 'Download Failed', // 下载失败
+    TextModifyHoliday: '', // 确定要修改放假日期？
+    // 转移扣点
+    TextBucklePoints1: '', // 未导入文件，无法转移扣点
+    TextBucklePoints2: '', // 确定要进行转移扣点操作？
+    TextBucklePoints3: '', // 未更新工单进度，确定要转移扣点操作？
+    TextBucklePoints4: '', // 转移扣点中，请稍等...
+    TextBucklePoints5: '', // 转移扣点成功
+    TextBucklePoints6: '', // 扣点失败
+    // 检查
+    TextCheckResult: 'Check Result', // 检查结果
+    TextCheckError: 'There was an abnormality in the inspection', // 检查出现异常
+    // 计算排程提示
+    TextComputeTip1: 'The schedule file cannot be imported if the schedule file is not uploaded', // 未上传排程文件，无法导入
+    TextComputeTip2: 'Note: This will affect the results of the currently running schedule!', // 注意：此操作将会影响当前运行的排程结果！
+    TextComputeTip3: 'Currently calculating the schedule and are you sure you want to proceed with the import?', // 目前正在计算排程，确定要继续导入？
+    TextComputeTip4: 'Are you currently analyzing the schedule and are you sure you want to proceed with the import?', // 目前正在分析排程，确定要继续导入？
+    TextComputeTip5: 'Are you currently calculating or analyzing schedules and are sure you want to proceed with the import?', // 目前正在计算排程或分析排程，确定要继续导入？
+    TextComputeTip6: 'The schedule file cannot be imported if the schedule file is not uploaded', // 主板和小板的排程文件未全部上传，无法导入
+    TextComputeTip7: '', // 未导入文件，无法计算排程
+    TextComputeTip8: '', // 已开始计算排程，请勿重复点击
+    TextComputeTip9: '', // 目前正在计算排程或分析排程，确定要重新开始计算？
+    TextComputeTip10: '', // 注意：此操作将会中断当前的排程！
+    TextComputeTip11: 'Failed to start the calculation', // 开始计算失败
+    // 接口更新提示
+    TextApiUploadTip1: '', // 服务器正在计算排程，无法更新信息！
+    TextApiUploadTip2: '', // 注：请在导入之后，开始计算之前更新
+    TextApiUploadTip3: '', // 未导入文件，无法更新信息
+    TextApiUploadTip4: 'Are you sure you want to update?', // 确定要进行更新？
+    TextApiUploadTip5: '', // 更新信息出错
+    TextApiUploadTip6: '', // 确定要推送量化结果？
+    TextApiUploadTip7: '', // 包装点时间更新成功！
+    // 导出提示
+    TextExportTip1: 'No files are imported, no export is required', // 未导入文件，无需导出
+    TextExportTip2: '', // 导出失败，文件不存在
     // 按钮
+    BtnContinueImport: 'Yes, Continue Import', // 确定，仍要导入
+    BtnContinueCompute: 'Yes, Continue Compute', // 确定，仍要计算
     BtnModifyPackHoliday: 'Modify Pack Holiday', // 修改包装放假
     BtnTrainPredictModel: 'Train Predict Model', // 训练预测模型
     BtnComputeMain: 'Compute Main', // 计算主板排程
