@@ -43,11 +43,11 @@
               :cell-style="{'font-size':'20px', 'font-weight':'20px', 'text-align': 'right'}"
             >
               <el-table-column prop="schedule_type" :label="$t('SchedulePanelPage.ScheduleType')" width="100px;" />
-              <el-table-column prop="enable" :label="$t('SchedulePanelPage.Feasible')" width="100px;" />
-              <el-table-column prop="line_balance" :label="$t('SchedulePanelPage.LineBalanceValue')" width="100px;" />
-              <el-table-column prop="idle_value" :label="$t('SchedulePanelPage.IdleValue')" width="100px;" />
-              <el-table-column prop="overdue_value" :label="$t('SchedulePanelPage.OverdueValue')" width="100px;" />
-              <el-table-column prop="obj_value" :label="$t('SchedulePanelPage.ResultValue')" width="110px;" />
+              <el-table-column prop="enable" :label="$t('PublicText.Feasible')" width="100px;" />
+              <el-table-column prop="line_balance" :label="$t('PublicText.LineBalanceValue')" width="100px;" />
+              <el-table-column prop="idle_value" :label="$t('PublicText.IdleValue')" width="100px;" />
+              <el-table-column prop="overdue_value" :label="$t('PublicText.OverdueValue')" width="100px;" />
+              <el-table-column prop="obj_value" :label="$t('PublicText.ResultValue')" width="110px;" />
             </el-table>
           </div>
         </el-col>
@@ -2001,7 +2001,7 @@ export default {
       ExportMainScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextBeginDownload'),
+          message: this.$t('Msg.BeginDownload'),
           type: 'success'
         })
       }).catch(err => {
@@ -2024,7 +2024,7 @@ export default {
       ExportSmallScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextBeginDownload'),
+          message: this.$t('Msg.BeginDownload'),
           type: 'success'
         })
       }).catch(err => {
@@ -2039,13 +2039,13 @@ export default {
       DownloadFile(file_key).then(res => {
         this.downloadFile(res)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextBeginDownload'),
+          message: this.$t('Msg.BeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextDownloadFailed'),
+          message: this.$t('Msg.DownloadFail'),
           type: 'error'
         })
       })
@@ -2079,13 +2079,13 @@ export default {
       DownloadHistoryLog({ 'filename': this.selectLogValue }).then(res => {
         this.downloadFile(res)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextBeginDownload'),
+          message: this.$t('Msg.BeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextDownloadFailed'),
+          message: this.$t('Msg.DownloadFail'),
           type: 'error'
         })
       })
@@ -2095,13 +2095,13 @@ export default {
       DownloadHistoryExcel({ 'filename': this.selectExcelValue }).then(res => {
         this.downloadFile(res)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextBeginDownload'),
+          message: this.$t('Msg.BeginDownload'),
           type: 'success'
         })
       }).catch(err => {
         console.log(err)
         this.$message({
-          message: this.$t('SchedulePanelPage.TextDownloadFailed'),
+          message: this.$t('Msg.DownloadFail'),
           type: 'error'
         })
       })

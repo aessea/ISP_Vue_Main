@@ -24,7 +24,11 @@ export default {
   Msg: {
     InputName: 'Please enter your username', // 请输入用户名
     InputPassword: 'Please enter your password', // 请输入密码
-    LangSwitchSuccess: 'The language switch is successful' // 语言切换成功
+    LangSwitchSuccess: 'The language switch is successful', // 语言切换成功
+    DownloadSuccess: '', // 下载成功
+    DownloadFail: '', // 下载失败
+    BeginDownload: 'Begin Download', // 开始下载
+    DownloadError: 'Download Request Error' // 下载请求出错
   },
   // 表单验证
   Form: {
@@ -33,6 +37,40 @@ export default {
   Placeholder: {
     Enter: 'Please enter', // 请输入
     Select: 'Please select' // 请选择
+  },
+  // 通用文本
+  PublicText: {
+    CheckLoadiing: 'Checking...', // 检查中...
+    ImportLoadiing: 'Importing...', // 导入中...
+    ExportLoadiing: 'Exporting...', // 导出中...
+    MesApiNotUpdate: 'Not Updated', // 未更新
+    MesApiUpdate: 'Updated', // 已更新
+    MesApiUpdating: 'Updating...', // 更新中...
+    MesApiPushing: 'Pushing...', // 推送中...
+    MesApiPushed: 'Pushed', // 已推送
+    MesApiPushError: 'Pushed', // 推送失败
+    MesApiPushSuccess: 'Pushing...', // 推送成功
+    MesApiPush: 'Not Pushed', // 未推送
+    TextError: 'Error', // 错误
+    TextWarn: 'Warn', // 警告
+    TextCancel: 'Canceled', // 已取消
+    TitleTip: 'Tip', // 提示
+    Feasible: 'Feasible', // 是否可行解
+    LineBalanceValue: 'Balance', // 包装线平衡
+    IdleValue: 'Idle', // 停顿
+    OverdueValue: 'Overdue', // 逾期
+    ResultValue: 'Result Value', // 目标值
+    ThreeDayPoints: 'Three Days Points' // 三天总点数
+  },
+  // 通用按钮
+  PublicBtn: {
+    Confirm: 'Confirm', // 确定
+    Close: 'Close', // 关闭
+    Append: 'Append', // 添加
+    Cancel: 'Cancel', // 取消
+    Open: 'Open', // 开启
+    Refresh: 'Refresh', // 刷新
+    BtnGet: '' // 获取
   },
   route: { // 路由
     // 首页
@@ -107,41 +145,11 @@ export default {
     ScheduleResData: 'Schedule Data', // 排程记录
     MesInterfaceLog: 'Interface Log' // 接口日志
   },
-  // 通用文本
-  PublicText: {
-    CheckLoadiing: 'Checking...', // 检查中...
-    ImportLoadiing: 'Importing...', // 导入中...
-    ExportLoadiing: 'Exporting...', // 导出中...
-    MesApiNotUpdate: 'Not Updated', // 未更新
-    MesApiUpdate: 'Updated', // 已更新
-    MesApiUpdating: 'Updating...', // 更新中...
-    MesApiPushing: 'Pushing...', // 推送中...
-    MesApiPushed: 'Pushed', // 已推送
-    MesApiPushError: 'Pushed', // 推送失败
-    MesApiPushSuccess: 'Pushing...', // 推送成功
-    MesApiPush: 'Not Pushed', // 未推送
-    TextError: 'Error', // 错误
-    TextWarn: 'Warn', // 警告
-    TextCancel: 'Canceled', // 已取消
-    TitleTip: 'Tip' // 提示
-  },
-  // 通用按钮
-  PublicBtn: {
-    Confirm: 'Confirm', // 确定
-    Close: 'Close', // 关闭
-    Append: 'Append', // 添加
-    Cancel: 'Cancel' // 取消
-  },
   SchedulePanelPage: { // 控制面板
     // 标题
     ScheduleDateTitle: 'Schedule Title', // 排程标题
     TitleScheduleRunTime: 'Schedule Run Time', // 排程运行时长
     ScheduleType: 'Type', // 排程类型
-    Feasible: 'Feasible', // 是否可行解
-    LineBalanceValue: 'Balance', // 包装线平衡
-    IdleValue: 'Idle', // 停顿(天)
-    OverdueValue: 'Overdue', // 逾期(天)
-    ResultValue: 'Result Value', // 目标值
     TaskProgress: 'Task Progress', // 任务进度
     ControlPanel: 'Control Center', // 控制中心
     TitleTrainPredictModel: 'Train Predict Model', // 训练预测模型
@@ -189,8 +197,6 @@ export default {
     TextGetMainUploadTime: 'Get Main Upload File', // 获取主板上传文件
     TextGetSmallUploadTime: 'Get Small Upload File', // 获取小板上传文件
     TextTrainTip: 'Scheduling is being calculated, and the predictive model cannot be trained!', // 正在计算排程，无法训练预测模型！
-    TextBeginDownload: 'Begin Download', // 开始下载
-    TextDownloadFailed: 'Download Failed', // 下载失败
     TextModifyHoliday: '', // 确定要修改放假日期？
     // 转移扣点
     TextBucklePoints1: '', // 未导入文件，无法转移扣点
@@ -308,5 +314,129 @@ export default {
     MsgExportSuccess: 'Export Successful', // 导出成功
     MsgExportData1: 'A total of ', // 本次共导出了
     MsgExportData2: ' pieces of data were exported' // 条数据
+  },
+  // 分析排程页面
+  AnalysisControlPage: {
+    // 标题
+    TitleTip: 'Tip', // 提示信息
+    TextCheckData1: '', // 数据检查提示信息：还未进行数据检查
+    TitleAnaProgress: '', // 分析进度
+    ControlPanel: 'Control Center', // 控制中心
+    TitleAnaStep1: '', // 上传文件
+    TitleAnaStep2: '', // 检查文件
+    TitleAnaStep3: '', // 分析排程
+    TitleAnaStep4: '', // 推送排程
+    TextUploadFile: '', // 请上传文件
+    BtnUploadFile: '', // 1.上传文件
+    BtnCheckFile: '', // 2.检查文件
+    BtnAnaFile: '', // 3.分析排程
+    BtnAnaPush: '', // 4.分析后推送
+    BtnDownloadLatestFile: '', // 下载最新分析结果文件
+    BtnGetStaResult: '', // 获取量化结果
+    BtnImportPush: '', // 导入后直接推送
+    TextAnaResult: '', // 分析结果
+    FindHistoryAnaRes: '', // 查看历史分析结果
+    TitlePushSchedule: '', // 推送排程
+    BtnPsuhSMTNot: '', // 推送SMT未排
+    BtnPushSMTPre: '', // 推送SMT预排
+    BtnPushSMTNor: '', // 推送SMT正排
+    StatisticsRes1: '', // 量化结果1，
+    TextLine: '', // 线体
+    TextPointType: '', // 点数类别
+    TextPoints: '', // 点数
+    StatisticsRes2: '', // 量化结果2
+    TextType: '', // 量化类型
+    TextHours: '', // 量化结果（小时）
+    TextDays: '', // 量化结果（天）
+    StatisticsRes3: '', // 量化结果3
+    TextPoints2: '', // 值
+    StatisticsRes4: '', // 量化结果4
+    TextTime: '', // 线体完工时间
+    BtnExportExcel: '', // 导出Excel
+    TextProgress1: '', // 预处理|未开始
+    TextProgress2: '', // 分析|未开始
+    TextProgress3: '', // 输出表格|未开始
+    MsgAnalysisTip: '', // 分析排程提示信息：未完成分析排程
+    MsgPushImport1: '', // 确定要直接导入后推送排程
+    MsgPushImport2: '', // 注意：直接导入将不会进行分析排程！
+    MsgCheckData1: '', // 数据检查未通过，确定要导入排程？
+    MsgImportFailed: '', // 导入失败
+    MsgCheckData2: '', // 数据检查提示信息：未进行数据检查
+    MsgGetSuccess: '', // 获取成功
+    MsgGetFail: '', // 获取失败
+    MsgCheckData3: '', // 请先上传文件
+    MsgCheckData4: '', // 数据检查未通过，确定要导入排程?
+    MsgCheckData5: '', // 数据检查未通过，确定要开始分析排程?
+    MsgDoAnalysis1: '', // 目前正在计算排程，确定要开始分析？
+    MsgDoAnalysis2: '', // 目前正在分析排程，确定要开始分析？
+    MsgDoAnalysis3: '', // 注意：此操作将会影响当前运行的排程结果！
+    MsgDoAnalysis4: '', // 开始分析排程，请关注进度条
+    MsgDoAnalysis5: '', // 未完成分析排程，无法获取量化结果！
+    MsgDoAnalysis6: '', // 确定要直接导入后推送排程？
+    MsgDoAnalysis7: '', // 注意：直接导入将不会进行分析排程！
+    MsgDoAnalysis8: '', // 未完成分析排程，无法进行推送！
+    MsgDoAnalysis9: '', // 清空进度条请求出错
+    MsgDoAnalysis10: '', // (最新分析结果)
+    MsgDoAnalysis11: '', // 分析时间：
+    MsgStaRes: '', // 量化结果
+    MsgStaSuccess: '', // 量化成功
+    MsgCloseSta: '' // 确认关闭量化窗口？
+  },
+  // 排程配置
+  ParamsConfig: {
+    MainConfig: 'Main Config', // 主板配置
+    SmallConfig: 'Small Config', // 小板配置
+    OtherConfig: 'Other Config', // 其它配置
+    BtnModifyConfig: 'Modify Config', // 修改配置
+    BtnRestoreDefault: 'Restore Default', // 恢复默认
+    TipRestoreDefault: 'Restore Default' // 确定要该配置恢复到默认值？
+  },
+  HistoryOpera: {
+    user_name: '',
+    table_name: '',
+    action_type: '',
+    action: '',
+    action_time: ''
+  },
+  MesInterfaceLog: {
+    name: '',
+    api_name: '',
+    require_time: '',
+    require_user: '',
+    post_data: '',
+    require_type: '',
+    receive_data: '',
+    remark: '',
+    time_consumed: ''
+  },
+  UserManage: {
+    username: '',
+    password: '',
+    roles: '',
+    remark: '',
+    enable: '',
+    email: '',
+    description: '',
+    create_time: '',
+    last_login_time: ''
+  },
+  RunControlConfigManage: {
+    func_index: '',
+    func_des: '',
+    is_run: '',
+    func_name: '',
+    remark: ''
+  },
+  ButtonPermission: {
+    role_name: '',
+    menu_name: '',
+    menu_name_front: '',
+    all_permission_buttons_list: '',
+    has_permission_buttons: '',
+    has_permission_buttons_front: ''
+  },
+  RolePermission: {
+    role_name: '',
+    role_menus: ''
   }
 }

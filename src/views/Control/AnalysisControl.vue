@@ -2,21 +2,21 @@
   <div id="main">
     <el-card class="card-tip">
       <el-alert
-        title="提示信息"
+        :title="$t('AnalysisControlPage.TitleTip')"
         :type="checkAlertType"
         :closable="false"
         style="margin: 0px;"
       >
         <template slot="title">
           <div id="checkMessage">
-            <div>数据检查提示信息：还未进行数据检查</div>
+            <div>{{ $t('AnalysisControlPage.TextCheckData1') }}</div>
           </div>
         </template>
       </el-alert>
     </el-card>
     <el-card class="card-tip">
       <el-alert
-        title="提示信息"
+        :title="$t('AnalysisControlPage.TitleTip')"
         :type="analysisAlertType"
         :closable="false"
         style="margin: 0px;"
@@ -32,7 +32,7 @@
       <el-col :span="6">
         <el-card class="card-progress">
           <div slot="header" class="clearfix">
-            <span>分析进度</span>
+            <span>{{ $t('AnalysisControlPage.TitleAnaProgress') }}</span>
           </div>
           <el-progress
             :text-inside="true"
@@ -83,15 +83,15 @@
       <el-col :span="12">
         <el-card class="control">
           <div slot="header" class="clearfix">
-            <span>控制中心</span>
+            <span>{{ $t('AnalysisControlPage.ControlPanel') }}</span>
           </div>
           <el-row>
             <el-col :span="24">
               <el-steps :active="stepNow" :align-center="false" finish-status="success" simple>
-                <el-step title="上传文件" />
-                <el-step title="检查文件" />
-                <el-step title="分析排程" />
-                <el-step title="推送排程" />
+                <el-step :title="$t('AnalysisControlPage.TitleAnaStep1')" />
+                <el-step :title="$t('AnalysisControlPage.TitleAnaStep2')" />
+                <el-step :title="$t('AnalysisControlPage.TitleAnaStep3')" />
+                <el-step :title="$t('AnalysisControlPage.TitleAnaStep4')" />
               </el-steps>
               <div class="box-button">
                 <el-row>
@@ -99,7 +99,7 @@
                     <div class="control-button">
                       <el-input
                         :value="uploadFileName"
-                        placeholder="未上传文件"
+                        :placeholder="$t('AnalysisControlPage.TextUploadFile')"
                       />
                       <el-upload
                         ref="upload"
@@ -112,18 +112,18 @@
                         :on-change="loadExcelFile"
                       >
                         <el-button slot="trigger" type="primary">
-                          1.上传排程
+                          {{ "$t('AnalysisControlPage.BtnUploadFile')" }}
                         </el-button>
                       </el-upload>
                       <div>
                         <el-button v-if="buttons.includes('AnalysisControl/doCheckScheduleData')" type="primary" @click="doCheckScheduleData">
-                          2.检查文件
+                          {{ "$t('AnalysisControlPage.BtnCheckFile')" }}
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" type="primary" :disabled="analysisBtnEnable" @click="analysisSchedule">
-                          3.分析排程
+                          {{ "$t('AnalysisControlPage.BtnAnaFile')" }}
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/pushSchedule')" type="apiBtn" @click="pushSchedule">
-                          4.分析后推送
+                          {{ "$t('AnalysisControlPage.BtnAnaPush')" }}
                         </el-button>
                       </div>
                     </div>
@@ -135,13 +135,13 @@
           <el-row>
             <el-col :span="24">
               <el-button v-if="buttons.includes('AnalysisControl/download')" type="success" @click="downloadAnaExcel">
-                下载最新分析结果文件
+                {{ "$t('AnalysisControlPage.BtnDownloadLatestFile')" }}
               </el-button>
               <el-button v-if="buttons.includes('AnalysisControl/statisticsSchedule')" type="apiBtn" @click="statisticsSchedule">
-                获取量化结果
+                {{ "$t('AnalysisControlPage.BtnGetStaResult')" }}
               </el-button>
               <el-button v-if="buttons.includes('AnalysisControl/pushImportSchedule')" type="apiBtn" @click="pushImportSchedule">
-                导入后直接推送
+                {{ "$t('AnalysisControlPage.BtnImportPush')" }}
               </el-button>
             </el-col>
           </el-row>
@@ -150,21 +150,21 @@
       <el-col :span="6">
         <el-card class="card_result">
           <div slot="header" class="clearfix">
-            <span class="ana-res-text">分析结果</span>
+            <span class="ana-res-text">{{ "$t('AnalysisControlPage.TextAnaResult')" }}</span>
           </div>
           <p style="font-weight:bold;line-height: 90%;">{{ schedule_time }}-{{ schedule_mode }}
             <span style="font-weight:normal;">{{ ana_time }}</span>
           </p>
           <p style="line-height:160%">
-            是否可行解：{{ feasible }}<br>
-            目标值：{{ obj_value }}<br>
-            逾期：{{ overdue_value }}<br>
-            停顿：{{ idle_value }}<br>
-            线平衡：{{ line_balance }}<br>
-            三天总点数：{{ three_days_points }}<br>
+            {{ "$t('PublicText.Feasible')" }}: {{ feasible }}<br>
+            {{ "$t('PublicText.ResultValue')" }}: {{ obj_value }}<br>
+            {{ "$t('PublicText.OverdueValue')" }}: {{ overdue_value }}<br>
+            {{ "$t('PublicText.IdleValue')" }}: {{ idle_value }}<br>
+            {{ "$t('PublicText.LineBalanceValue')" }}: {{ line_balance }}<br>
+            {{ "$t('PublicText.ThreeDayPoints')" }}: {{ three_days_points }}<br>
           </p>
           <div class="ana-history">
-            <el-select v-model="selectAnaTime" placeholder="查看历史分析结果" style="width: 200px;" size="mini">
+            <el-select v-model="selectAnaTime" :placeholder="$t('AnalysisControlPage.TextAnaResult')" style="width: 200px;" size="mini">
               <el-option
                 v-for="item in options_history_analysis"
                 :key="item.value"
@@ -173,9 +173,9 @@
               />
             </el-select>
             <el-button style="margin-left: 5px;" type="info" size="mini" @click="getHistoryAnaData">
-              获取
+              {{ "$t('PublicBtn.BtnGet')" }}
             </el-button>
-            <el-tooltip class="item" effect="dark" content="刷新列表" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('PublicBtn.Refresh')" placement="top">
               <el-button style="margin-left: 5px;" size="mini" @click="getHistoryAnaItem">
                 <i class="el-icon-refresh" />
               </el-button>
@@ -184,32 +184,9 @@
         </el-card>
       </el-col>
     </el-row>
-    <!-- <el-row :gutter="10" style="margin: 10px;">
-      <el-col :span="24">
-        <el-card class="card-config">
-          <div slot="header" class="clearfix">
-            <span>历史推送数据</span>
-            <el-button v-if="isUpdateConfig === false" style="float: right; padding: 3px 0" type="text" @click="modifyParamsConfig">修改配置</el-button>
-            <el-button v-else-if="isUpdateConfig === true" style="float: right; padding: 3px 0" type="text" @click="saveParamsConfig">保存修改</el-button>
-          </div>
-          <div class="table-box">
-            <el-table
-              id="mytable"
-              :header-cell-style="{color:'#606266'}"
-              :data="table_data_params_config"
-            >
-              <el-table-column prop="push_name" label="推送对象" width="160" />
-              <el-table-column prop="push_time" label="推送时间" width="160" />
-              <el-table-column prop="push_user" label="推送人" width="160" />
-              <el-table-column prop="push_result" label="推送结果" />
-            </el-table>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row> -->
     <el-dialog
       v-el-drag-dialog
-      title="推送排程"
+      :title="$t('AnalysisControlPage.TitlePushSchedule')"
       :visible.sync="pushDialogVisible"
       width="520px"
       :before-close="handlePushClose"
@@ -219,43 +196,24 @@
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="smtUnscheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_unscheduled">
-              推送SMT未排
+              {{ "$t('AnalysisControlPage.BtnPsuhSMTNot')" }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="smtPrescheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_pre_scheduled">
-              推送SMT预排
+              {{ "$t('PubAnalysisControlPagelicBtn.BtnPushSMTPre')" }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="smtScheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_scheduled">
-              推送SMT正排
+              {{ "$t('AnalysisControlPage.BtnPushSMTNor')" }}
             </el-button>
           </el-tooltip>
         </el-col>
       </el-row>
-      <!-- <el-row style="text-align: center;">
-        <el-col :span="24">
-          <el-tooltip class="item" effect="dark" :content="aiUnscheduledTip" placement="top">
-            <el-button type="apiBtn" style="padding-left: 28px;padding-right: 28px" disabled @click="post_ai_unscheduled">
-              推送AI未排
-            </el-button>
-          </el-tooltip>
-          <el-tooltip class="item" effect="dark" :content="aitPrescheduledTip" placement="top">
-            <el-button type="apiBtn" style="padding-left: 28px;padding-right: 28px" disabled @click="post_ai_pre_scheduled">
-              推送AI预排
-            </el-button>
-          </el-tooltip>
-          <el-tooltip class="item" effect="dark" :content="aitScheduledTip" placement="top">
-            <el-button type="apiBtn" style="padding-left: 28px;padding-right: 28px" disabled @click="post_ai_scheduled">
-              推送AI正排
-            </el-button>
-          </el-tooltip>
-        </el-col>
-      </el-row> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="handlePushClose">
-          关闭
+          {{ "$t('PublicBtn.Close')" }}
         </el-button>
       </span>
     </el-dialog>
@@ -267,7 +225,7 @@
       class="statistics-dialog"
     >
       <el-tabs>
-        <el-tab-pane label="量化结果1">
+        <el-tab-pane :label="$t('AnalysisControlPage.StatisticsRes1')">
           <el-table
             id="table1"
             v-loading="loading_table1"
@@ -278,19 +236,19 @@
           >
             <el-table-column
               prop="line"
-              label="线体"
+              :label="$t('AnalysisControlPage.TextLine')"
             />
             <el-table-column
               prop="points_type"
-              label="点数类别"
+              :label="$t('AnalysisControlPage.TextPointType')"
             />
             <el-table-column
               prop="points"
-              label="点数"
+              :label="$t('AnalysisControlPage.TextPoints')"
             />
           </el-table>
         </el-tab-pane>
-        <el-tab-pane label="量化结果2">
+        <el-tab-pane :label="$t('AnalysisControlPage.StatisticsRes2')">
           <el-table
             id="table2"
             v-loading="loading_table2"
@@ -301,19 +259,19 @@
           >
             <el-table-column
               prop="type"
-              label="量化类型"
+              :label="$t('AnalysisControlPage.TextType')"
             />
             <el-table-column
               prop="hours"
-              label="量化结果(小时)"
+              :label="$t('AnalysisControlPage.TextHours')"
             />
             <el-table-column
               prop="days"
-              label="量化结果(天)"
+              :label="$t('AnalysisControlPage.TextDays')"
             />
           </el-table>
         </el-tab-pane>
-        <el-tab-pane label="量化结果3">
+        <el-tab-pane :label="$t('AnalysisControlPage.StatisticsRes3')">
           <el-table
             id="table3"
             v-loading="loading_table3"
@@ -324,15 +282,15 @@
           >
             <el-table-column
               prop="type"
-              label="量化类型"
+              :label="$t('AnalysisControlPage.TextType')"
             />
             <el-table-column
               prop="points"
-              label="值"
+              :label="$t('AnalysisControlPage.TextPoints2')"
             />
           </el-table>
         </el-tab-pane>
-        <el-tab-pane label="量化结果4">
+        <el-tab-pane :label="$t('AnalysisControlPage.StatisticsRes4')">
           <el-table
             id="table4"
             v-loading="loading_table4"
@@ -343,21 +301,21 @@
           >
             <el-table-column
               prop="line"
-              label="线体"
+              :label="$t('AnalysisControlPage.TextLine')"
             />
             <el-table-column
               prop="time"
-              label="线体完工时间"
+              :label="$t('AnalysisControlPage.TextTime')"
             />
           </el-table>
         </el-tab-pane>
       </el-tabs>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseStatistics">
-          关 闭
+          {{ "$t('PublicBtn.Close')" }}
         </el-button>
         <el-button type="primary" @click="exportStatisticsExcel">
-          导出Excel
+          {{ "$t('AnalysisControlPage.BtnExportExcel')" }}
         </el-button>
       </span>
     </el-dialog>
@@ -371,8 +329,7 @@ import {} from '@/api/Control/AnalysisControl'
 import { DoCheckScheduleData, GetHistoryAnaItem, GetHistoryAnaData,
   AnalysisSchedule, GetRunFlag, ClearAnaProgress, GetAnaProgress, StatisticsSchedule
 } from '@/api/Control/AnalysisControl'
-import { SmtUnscheduled, SmtPrescheduled, SmtScheduled, AiUnscheduled, AiPrescheduled, AiScheduled
-} from '@/api/Control/DockingMes'
+import { SmtUnscheduled, SmtPrescheduled, SmtScheduled } from '@/api/Control/DockingMes'
 import { DoImportPushSchedule } from '@/api/Control/AnalysisControl'
 import { DownloadFile } from '@/api/common'
 import XLSX from 'xlsx'
@@ -384,24 +341,24 @@ export default {
     return {
       progressColor: '#02bafd', // 进度条颜色
       pushLoading: {
-        text: '推送中，请稍等...',
+        text: this.$t('PublicText.MesApiPushing'),
         background: 'rgba(0, 0, 0, 0.5)'
       },
       percentage_1: 0,
       percentage_2: 0,
       percentage_3: 0,
-      progress_text_1: '预处理|未开始',
-      progress_text_2: '分析|未开始',
-      progress_text_3: '输出表格|未开始',
+      progress_text_1: this.$t('AnalysisControlPage.TextProgress1'),
+      progress_text_2: this.$t('AnalysisControlPage.TextProgress2'),
+      progress_text_3: this.$t('AnalysisControlPage.TextProgress3'),
       uploadFiles: [], // 上传的文件列表（限制1个）
       uploadFileName: '',
       pushDialogVisible: false, // 推送排程接口
-      smtUnscheduledTip: '未推送',
-      smtPrescheduledTip: '未推送',
-      smtScheduledTip: '未推送',
-      aiUnscheduledTip: '未推送',
-      aitPrescheduledTip: '未推送',
-      aitScheduledTip: '未推送',
+      smtUnscheduledTip: this.$t('PublicText.MesApiPush'),
+      smtPrescheduledTip: this.$t('PublicText.MesApiPush'),
+      smtScheduledTip: this.$t('PublicText.MesApiPush'),
+      aiUnscheduledTip: this.$t('PublicText.MesApiPush'),
+      aitPrescheduledTip: this.$t('PublicText.MesApiPush'),
+      aitScheduledTip: this.$t('PublicText.MesApiPush'),
       isAnalysis: false,
       schedule_time: '', // 排程时间
       schedule_mode: '', // 正排或预排
@@ -418,7 +375,7 @@ export default {
       analysisAlertType: 'info',
       stepNow: 0,
       ana_progress_refresh: null, // 分析排程刷新进度条
-      analysisMessage: '分析排程提示信息：未完成分析排程',
+      analysisMessage: this.$t('AnalysisControlPage.MsgAnalysisTip'),
       progressCount: 0,
       selectAnaTime: '', // 根据选中的分析时间获取历史分析结果
       tableData_1: [],
@@ -429,7 +386,7 @@ export default {
       loading_table2: true,
       loading_table3: true,
       loading_table4: true,
-      statisticsTitle: '量化结果', // 量化的dialog名称
+      statisticsTitle: this.$t('AnalysisControlPage.MsgStaRes'),
       statisticsDialogVisible: false, // 量化结果dialog显示
       analysisBtnEnable: false
     }
@@ -441,7 +398,6 @@ export default {
     ])
   },
   created() {
-    console.log('12312312:', this.$route.name)
     this.getHistoryAnaItem()
   },
   mounted() {
@@ -459,16 +415,16 @@ export default {
     },
     pushImportSchedule() {
       if (this.checkAlertType !== 'success') {
-        var confirmText = ['确定要直接导入后推送排程？', '注意：直接导入将不会进行分析排程！']
+        var confirmText = [this.$t('AnalysisControlPage.MsgDoAnalysis6'), this.$t('AnalysisControlPage.MsgDoAnalysis7')]
         const newDatas = []
         const h = this.$createElement
         for (const i in confirmText) {
           newDatas.push(h('p', null, confirmText[i]))
         }
-        this.$confirm('提示', {
-          title: '提示',
+        this.$confirm(this.$t('PublicText.TitleTip'), {
+          title: this.$t('PublicText.TitleTip'),
           message: h('div', null, newDatas),
-          confirmButtonText: '确定导入',
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
           cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
         }).then(() => {
@@ -485,7 +441,7 @@ export default {
     },
     checkPushImportSchedule() {
       if (this.checkAlertType !== 'success') {
-        this.$confirm('数据检查未通过，确定要导入排程?', '提示', {
+        this.$confirm(this.$t('AnalysisControlPage.MsgCheckData4'), this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
@@ -494,7 +450,7 @@ export default {
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '取消分析'
+            message: this.$t('PublicText.TextCancel')
           })
         })
       } else {
@@ -508,20 +464,20 @@ export default {
       form.append('file_name', this.uploadFileName)
       form.append('user_name', this.name)
       const importLoading = {
-        text: '导入中...',
+        text: this.$t('PublicBtn.ImportLoadiing'),
         background: 'rgba(0, 0, 0, 0.5)'
       }
       this.loadingInstance = Loading.service(importLoading)
       await DoImportPushSchedule(form).then(res => {
         this.loadingInstance.close()
         this.pushDialogVisible = true
-        this.$alert(res.message, '提示', {
+        this.$alert(res.message, this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'success'
         })
       }).catch(err => {
         this.loadingInstance.close()
-        this.$alert('导入失败' + err, '提示', {
+        this.$alert(this.$t('AnalysisControlPage.MsgImportFailed') + err, this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
@@ -558,11 +514,11 @@ export default {
     // 上传文件
     loadExcelFile(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|小板|ABL)(正排|预排).*$/
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(this.$t('SchedulePanelPage.MainWord')|this.$t('SchedulePanelPage.SmallWord'))(this.$t('SchedulePanelPage.FormalSchedule')|this.$t('SchedulePanelPage.UnFormalSchedule')).*$/
 
       if (!regex.test(fileName)) {
-        const tip = '文件命名格式错误，请修改后重新上传！' + `<br/>` + '（正确文件名示例：0901主板预排）'
-        this.$alert(tip, '错误', {
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
+        this.$alert(tip, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
           type: 'error'
@@ -603,7 +559,7 @@ export default {
         alert_div.removeChild(alert_div.firstChild)
       }
       const div_text = document.createElement('div')
-      div_text.innerHTML = '数据检查提示信息：未进行数据检查'
+      div_text.innerHTML = this.$t('AnalysisControlPage.MsgCheckData2')
       alert_div.appendChild(div_text) // 将标签插入到指定标签中
     },
     showAnalysisAlertMessage(data_list, message_type) {
@@ -624,19 +580,19 @@ export default {
     },
     resetAnalysisAlertMessage() {
       this.analysisAlertType = 'info'
-      this.analysisMessage = '分析排程提示信息：未完成分析排程'
+      this.analysisMessage = this.$t('AnalysisControlPage.MsgAnalysisTip')
     },
     // 后端数据检查
     async doCheckScheduleData() {
       if (this.uploadFileName === '') {
         this.$message({
           type: 'warning',
-          message: '请先上传文件'
+          message: this.$t('AnalysisControlPage.MsgCheckData3')
         })
         return
       }
       const checkLoading = {
-        text: '数据检查中...',
+        text: this.$t('PublicText.CheckLoadiing'),
         background: 'rgba(0, 0, 0, 0.5)'
       }
       this.loadingInstance = Loading.service(checkLoading)
@@ -645,12 +601,12 @@ export default {
       this.stepNow = 2
       await DoCheckScheduleData(form).then(res => {
         if (res.message_type === 'success') {
-          this.$alert(res.message, '检查结果', {
+          this.$alert(res.message, this.$t('SchedulePanelPage.TextCheckResult'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
         } else {
-          this.$alert(res.message, '检查结果', {
+          this.$alert(res.message, this.$t('SchedulePanelPage.TextCheckResult'), {
             customClass: 'checkAlertBox',
             dangerouslyUseHTMLString: true,
             confirmButtonText: this.$t('PublicBtn.Confirm'),
@@ -661,7 +617,7 @@ export default {
         this.loadingInstance.close()
       }).catch(err => {
         this.loadingInstance.close() // 清除动画
-        this.$alert('检查出现错误：' + err, '错误', {
+        this.$alert(this.$t('SchedulePanelPage.TextCheckError') + err, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           type: 'error'
         })
@@ -675,7 +631,7 @@ export default {
       } else {
         this.$message({
           type: 'warning',
-          message: '未完成分析排程，无法进行推送！'
+          message: this.$t('AnalysisControlPage.MsgDoAnalysis8')
         })
       }
     },
@@ -687,20 +643,20 @@ export default {
         console.log(err)
         this.$message({
           type: 'error',
-          message: '清空进度条请求出错'
+          message: this.$t('AnalysisControlPage.MsgDoAnalysis9')
         })
       })
     },
     // 显示分析排程结果
     showAnaData(res, flag) {
       if (flag === 0) {
-        this.ana_time = '(最新分析结果)'
+        this.ana_time = this.$t('AnalysisControlPage.MsgDoAnalysis10')
       } else {
         let time = this.selectAnaTime
         const time_date = time.substring(0, 10)
         const time_time = time.substring(11).replaceAll('-', ':')
         time = time_date + ' ' + time_time
-        this.ana_time = '(分析时间：' + time + ')'
+        this.ana_time = '(' + this.$t('AnalysisControlPage.MsgDoAnalysis11') + time + ')'
       }
       this.schedule_mode = res.new_mode
       this.schedule_time = res.new_time
@@ -717,9 +673,9 @@ export default {
       this.percentage_1 = 0
       this.percentage_2 = 0
       this.percentage_3 = 0
-      this.progress_text_1 = '预处理|未开始'
-      this.progress_text_2 = '分析|未开始'
-      this.progress_text_3 = '输出表格|未开始'
+      this.progress_text_1 = this.$t('AnalysisControlPage.TextProgress1')
+      this.progress_text_2 = this.$t('AnalysisControlPage.TextProgress2')
+      this.progress_text_3 = this.$t('AnalysisControlPage.TextProgress3')
       // 清空上一份排程结果
       this.schedule_time = ''
       this.schedule_mode = ''
@@ -757,13 +713,13 @@ export default {
         this.showAnaData(res, 1)
         this.$message({
           type: 'success',
-          message: '获取成功'
+          message: this.$t('AnalysisControlPage.MsgGetSuccess')
         })
       }).catch(err => {
         console.log(err)
         this.$message({
           type: 'error',
-          message: '获取失败'
+          message: this.$t('AnalysisControlPage.MsgGetFail')
         })
       })
     },
@@ -771,12 +727,12 @@ export default {
       if (this.uploadFileName === '') {
         this.$message({
           type: 'warning',
-          message: '请先上传文件'
+          message: this.$t('AnalysisControlPage.MsgCheckData3')
         })
         return
       }
       if (this.checkAlertType !== 'success') {
-        this.$confirm('数据检查未通过，确定要开始分析排程?', '提示', {
+        this.$confirm(this.$t('AnalysisControlPage.MsgCheckData5'), this.$t('PublicText.TitleTip'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           cancelButtonText: this.$t('PublicBtn.Cancel'),
           type: 'warning'
@@ -785,7 +741,7 @@ export default {
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '取消分析'
+            message: this.$t('PublicText.TextCancel')
           })
         })
       } else {
@@ -796,9 +752,9 @@ export default {
       GetRunFlag().then(res => {
         var confirmText
         if (res.run_flag === 1) {
-          confirmText = ['目前正在计算排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('AnalysisControlPage.MsgDoAnalysis1'), this.$t('AnalysisControlPage.MsgDoAnalysis3')]
         } else if (res.ana_run_flag === 1) {
-          confirmText = ['目前正在分析排程，确定要开始分析？', '注意：此操作将会影响当前运行的排程结果！']
+          confirmText = [this.$t('AnalysisControlPage.MsgDoAnalysis2'), this.$t('AnalysisControlPage.MsgDoAnalysis3')]
         }
         const newDatas = []
         const h = this.$createElement
@@ -806,10 +762,10 @@ export default {
           newDatas.push(h('p', null, confirmText[i]))
         }
         if (res.run_flag === 1 || res.ana_run_flag === 1) {
-          this.$confirm('警告', {
-            title: '警告',
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
             message: h('div', null, newDatas),
-            confirmButtonText: '确定分析',
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             cancelButtonText: this.$t('PublicBtn.Cancel'),
             confirmButtonClass: 'btnDanger',
             type: 'warning'
@@ -818,7 +774,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消分析'
+              message: this.$t('PublicText.TextCancel')
             })
           })
         } else {
@@ -827,7 +783,7 @@ export default {
       })
     },
     async doAnalysis() {
-      this.$alert('开始分析排程，请关注进度条', '提示', {
+      this.$alert(this.$t('AnalysisControlPage.MsgDoAnalysis4'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         type: 'success'
       })
@@ -877,13 +833,13 @@ export default {
       }
       SmtUnscheduled(form).then(res => {
         if (res.code === 20000) {
-          this.$alert(res.message, '推送排程成功', {
+          this.$alert(res.message, this.$t('PublicText.MesApiPushSuccess'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
-          this.smtUnscheduledTip = '已推送'
+          this.smtUnscheduledTip = this.$t('PublicText.MesApiPushed')
         } else {
-          this.$alert('推送失败', '错误', {
+          this.$alert(this.$t('PublicText.MesApiPushError'), this.$t('PublicText.TextError'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -904,13 +860,13 @@ export default {
       }
       SmtPrescheduled(form).then(res => {
         if (res.code === 20000) {
-          this.$alert(res.message, '推送排程成功', {
+          this.$alert(res.message, this.$t('PublicText.MesApiPushSuccess'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
-          this.smtPrescheduledTip = '已推送'
+          this.smtPrescheduledTip = this.$t('PublicText.MesApiPushed')
         } else {
-          this.$alert('推送失败', '错误', {
+          this.$alert(this.$t('PublicText.MesApiPushError'), this.$t('PublicText.TextError'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -931,94 +887,13 @@ export default {
       }
       SmtScheduled(form).then(res => {
         if (res.code === 20000) {
-          this.$alert(res.message, '推送排程成功', {
+          this.$alert(res.message, this.$t('PublicText.MesApiPushSuccess'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
-          this.smtScheduledTip = '已推送'
+          this.smtScheduledTip = this.$t('PublicText.MesApiPushed')
         } else {
-          this.$alert('推送失败', '错误', {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'error'
-          })
-        }
-        this.loadingInstance.close() // 清除动画
-      }).catch(err => {
-        this.loadingInstance.close() // 清除动画
-        this.$alert(err, this.$t('PublicText.TextError'), {
-          confirmButtonText: this.$t('PublicBtn.Confirm'),
-          type: 'error'
-        })
-      })
-    },
-    post_ai_unscheduled() {
-      this.loadingInstance = Loading.service(this.pushLoading)
-      const form = {
-        'user_name': this.name
-      }
-      AiUnscheduled(form).then(res => {
-        if (res.code === 20000) {
-          this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'success'
-          })
-          this.aiUnscheduledTip = '已推送'
-        } else {
-          this.$alert('推送失败', '错误', {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'error'
-          })
-        }
-        this.loadingInstance.close() // 清除动画
-      }).catch(err => {
-        this.loadingInstance.close() // 清除动画
-        this.$alert(err, this.$t('PublicText.TextError'), {
-          confirmButtonText: this.$t('PublicBtn.Confirm'),
-          type: 'error'
-        })
-      })
-    },
-    post_ai_pre_scheduled() {
-      this.loadingInstance = Loading.service(this.pushLoading)
-      const form = {
-        'user_name': this.name
-      }
-      AiPrescheduled(form).then(res => {
-        if (res.code === 20000) {
-          this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'success'
-          })
-          this.aiPrescheduledTip = '已推送'
-        } else {
-          this.$alert('推送失败', '错误', {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'error'
-          })
-        }
-        this.loadingInstance.close() // 清除动画
-      }).catch(err => {
-        this.loadingInstance.close() // 清除动画
-        this.$alert(err, this.$t('PublicText.TextError'), {
-          confirmButtonText: this.$t('PublicBtn.Confirm'),
-          type: 'error'
-        })
-      })
-    },
-    post_ai_scheduled() {
-      this.loadingInstance = Loading.service(this.pushLoading)
-      const form = {
-        'user_name': this.name
-      }
-      AiScheduled(form).then(res => {
-        if (res.code === 20000) {
-          this.$alert(res.message, '推送排程成功', {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'success'
-          })
-          this.aiScheduledTip = '已推送'
-        } else {
-          this.$alert('推送失败', '错误', {
+          this.$alert(this.$t('PublicText.MesApiPushError'), this.$t('PublicText.TextError'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -1038,14 +913,14 @@ export default {
         this.stepNow = 4
         this.$message({
           type: 'success',
-          message: '开始下载'
+          message: this.$t('Msg.BeginDownload')
         })
         this.downloadFile(res)
       }).catch(err => {
         console.log(err)
         this.$message({
           type: 'error',
-          message: '下载请求出错'
+          message: this.$t('Msg.DownloadError')
         })
       })
     },
@@ -1068,21 +943,21 @@ export default {
       if (this.isAnalysis !== true) {
         this.$message({
           type: 'warning',
-          message: '未完成分析排程，无法获取量化结果！'
+          message: this.$t('AnalysisControlPage.MsgDoAnalysis5')
         })
         return
       }
       if (this.uploadFileName !== '') {
-        this.statisticsTitle = '量化结果 - ' + this.uploadFileName
+        this.statisticsTitle = this.$t('AnalysisControlPage.MsgStaRes') + '-' + this.uploadFileName
       } else {
-        this.statisticsTitle = '量化结果'
+        this.statisticsTitle = this.$t('AnalysisControlPage.MsgStaRes')
       }
       this.statisticsDialogVisible = true
       this.stepNow = 4
       StatisticsSchedule().then(res => {
         this.$message({
           type: 'success',
-          message: '量化成功'
+          message: this.$t('AnalysisControlPage.MsgStaSuccess')
         })
         this.tableData_1 = res.table_data1
         this.tableData_2 = res.table_data2
@@ -1118,7 +993,7 @@ export default {
         FileSaver.saveAs(
           new Blob([wbout], {
             type: 'application/octet-stream;charset=utf-8"'
-          }), '量化结果.xlsx')
+          }), this.$t('AnalysisControlPage.MsgStaRes') + '.xlsx')
       } catch (e) {
         if (typeof console !== 'undefined') console.log(e, wbout)
       }
@@ -1129,10 +1004,10 @@ export default {
     },
     // 是否关闭量化结果
     handleCloseStatistics() {
-      this.$confirm('确认关闭量化窗口？', '提示', {
+      this.$confirm(this.$t('AnalysisControlPage.MsgCloseSta'), this.$t('PublicText.TitleTip'), {
         type: 'warning',
-        confirmButtonText: '确认',
-        cancelButtonText: '取消'
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('PublicBtn.Cancel')
       }).then(_ => {
         this.statisticsDialogVisible = false
       }).catch(_ => {})

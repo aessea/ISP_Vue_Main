@@ -30,33 +30,6 @@ export function SmtScheduled(data) {
     data
   })
 }
-// 推送AI未排接口
-export function AiUnscheduled(data) {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsScheduleAiWplan`,
-    method: 'post',
-    timeout: REQUEST_TIMEOUT,
-    data
-  })
-}
-// 推送AI预排接口
-export function AiPrescheduled(data) {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsAiScheduleResultFirst`,
-    method: 'post',
-    timeout: REQUEST_TIMEOUT,
-    data
-  })
-}
-// 推送AI正排接口
-export function AiScheduled(data) {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsAiScheduleResultSecond`,
-    method: 'post',
-    timeout: REQUEST_TIMEOUT,
-    data
-  })
-}
 // 推送自制工单分配结果
 export function SaveApsSelfMo(data) {
   return request({

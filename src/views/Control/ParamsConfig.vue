@@ -32,7 +32,7 @@
       </el-row>
       <div class="table-box">
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-          <el-tab-pane label="主板配置" name="main">
+          <el-tab-pane :label="$t('ParamsConfig.MainConfig')" name="main">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -56,15 +56,15 @@
               </el-table-column>
               <el-table-column prop="param_value" label="配置值">
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
-                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
               <el-table-column prop="param_description" label="配置描述" />
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
-                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
                     <el-button
                       v-if="scope.row.config_enable"
                       type="primary"
@@ -74,7 +74,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnRestoreDefault')" placement="top">
                     <el-button
                       v-if="scope.row.config_enable"
                       type="danger"
@@ -88,7 +88,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="小板配置" name="small">
+          <el-tab-pane :label="$t('ParamsConfig.SmallConfig')" name="small">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -113,15 +113,15 @@
               </el-table-column>
               <el-table-column prop="param_value" label="配置值">
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
-                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
               <el-table-column prop="param_description" label="配置描述" />
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
-                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
                     <el-button
                       v-if="scope.row.config_enable"
                       type="primary"
@@ -131,7 +131,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnRestoreDefault')" placement="top">
                     <el-button
                       v-if="scope.row.config_enable"
                       type="danger"
@@ -250,7 +250,6 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addDataAndContinue">添加并继续</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ this.$t('TablePage.BtnAppend') }}</el-button>
         <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ this.$t('TablePage.BtnModify') }}</el-button>
       </span>
@@ -368,17 +367,17 @@ export default {
       rules: {
         param_name_front: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         param_value: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         param_type: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         param_classify: []
@@ -389,9 +388,9 @@ export default {
       pageSize: 100, // 每页多少条数据
       dataTableSelections: [], // 表格选中的数据
       lineTypeOptions: [
-        { label: '主板配置', value: 'main' },
-        { label: '小板配置', value: 'small' },
-        { label: '其它配置', value: 'other' }
+        { label: this.$t('ParamsConfig.MainConfig'), value: 'main' },
+        { label: this.$t('ParamsConfig.SmallConfig'), value: 'small' },
+        { label: this.$t('ParamsConfig.OtherConfig'), value: 'other' }
       ],
       param_classify_options: [], // 参数分类选项
       all_role_list: []
@@ -481,7 +480,7 @@ export default {
       for (const key in this.model) {
         this.model[key] = row[key]
       }
-      this.$confirm('确定要该配置恢复到默认值？', '提示', {
+      this.$confirm(this.$t('ParamsConfig.TipRestoreDefault'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
@@ -491,7 +490,7 @@ export default {
         RestoreDefault(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: '提示',
+              title: this.$t('PublicText.TitleTip'),
               message: res.message,
               type: res.message_type
             })
@@ -501,7 +500,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },

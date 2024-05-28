@@ -43,7 +43,7 @@
       </el-row>
       <div class="table-box">
         <el-tabs v-model="activeName" type="card">
-          <el-tab-pane label="主板配置" name="main">
+          <el-tab-pane :label="$t('ParamsConfig.MainConfig')" name="main">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -67,8 +67,8 @@
               </el-table-column>
               <el-table-column prop="param_value" label="配置值" width="160">
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
-                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else-if="scope.row.show_value === false">********</span>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
@@ -86,7 +86,7 @@
               </el-table-column>
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
-                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
                     <el-button
                       type="primary"
                       size="mini"
@@ -95,7 +95,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnRestoreDefault')" placement="top">
                     <el-button
                       type="danger"
                       size="mini"
@@ -108,7 +108,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="小板配置" name="small">
+          <el-tab-pane :label="$t('ParamsConfig.SmallConfig')" name="small">
             <el-table
               id="mytable"
               v-loading="loading"
@@ -133,8 +133,8 @@
               </el-table-column>
               <el-table-column prop="param_value" label="配置值" width="160">
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
-                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else-if="scope.row.show_value === false">********</span>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
@@ -152,7 +152,7 @@
               </el-table-column>
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
-                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
                     <el-button
 
                       type="primary"
@@ -162,7 +162,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnRestoreDefault')" placement="top">
                     <el-button
                       type="danger"
                       size="mini"
@@ -200,8 +200,8 @@
               </el-table-column>
               <el-table-column prop="param_value" label="配置值" width="360">
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">开启</el-tag>
-                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">关闭</el-tag>
+                  <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
+                  <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else-if="scope.row.show_value === false">********</span>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
@@ -219,7 +219,7 @@
               </el-table-column>
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
-                  <el-tooltip class="item" effect="dark" content="修改配置" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
                     <el-button
                       type="primary"
                       size="mini"
@@ -228,7 +228,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="恢复默认" placement="top">
+                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnRestoreDefault')" placement="top">
                     <el-button
                       type="danger"
                       size="mini"
