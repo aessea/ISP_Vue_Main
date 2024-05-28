@@ -2,14 +2,7 @@
   <div id="main-box">
     <el-card>
       <el-row>
-        <el-col :span="16">
-          <div>
-            <el-button @click="exportDataDialog">
-              <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
-            </el-button>
-          </div>
-        </el-col>
-        <el-col :span="8">
+        <el-col :span="24">
           <div style="float: right;">
             <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnRefreshTable')" placement="top">
               <el-button
@@ -43,25 +36,25 @@
               @selection-change="handleSelectionChange"
             >
               <el-table-column type="selection" width="55" />
-              <el-table-column prop="param_classify" label="配置分类" width="200" sortable>
+              <el-table-column prop="param_classify" :label="$t('ParamsConfig.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === UNKONWN_CLASSIFY" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_name_front" label="配置名" sortable>
+              <el-table-column prop="param_name_front" :label="$t('ParamsConfig.param_name_front')" sortable>
                 <template slot-scope="scope">
                   <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_value" label="配置值">
+              <el-table-column prop="param_value" :label="$t('ParamsConfig.param_value')">
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column prop="param_description" :label="$t('ParamsConfig.param_description')" />
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
@@ -100,25 +93,25 @@
               @selection-change="handleSelectionChange"
             >
               <el-table-column type="selection" width="55" />
-              <el-table-column prop="param_classify" label="配置分类" width="200" sortable>
+              <el-table-column prop="param_classify" :label="$t('ParamsConfig.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === UNKONWN_CLASSIFY" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_name_front" label="配置名" sortable>
+              <el-table-column prop="param_name_front" :label="$t('ParamsConfig.param_name_front')" sortable>
                 <template slot-scope="scope">
                   <span style="font-weight: bold" type="info">{{ scope.row.param_name_front }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_value" label="配置值">
+              <el-table-column prop="param_value" :label="$t('ParamsConfig.param_value')">
                 <template slot-scope="scope">
                   <el-tag v-if="scope.row.param_value === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
                   <el-tag v-else-if="scope.row.param_value === false" size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
                   <span v-else type="info">{{ scope.row.param_value }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="param_description" label="配置描述" />
+              <el-table-column prop="param_description" :label="$t('ParamsConfig.param_description')" />
               <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
                 <template slot-scope="scope">
                   <el-tooltip class="item" effect="dark" :content="$t('ParamsConfig.BtnModifyConfig')" placement="top">
@@ -169,7 +162,7 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_classify" prop="param_classify" label="配置分类">
+            <el-form-item :rules="rules.param_classify" prop="param_classify" :label="$t('ParamsConfig.param_classify')">
               <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" style="width: 100%" disabled>
                 <el-option
                   v-for="item in param_classify_options"
@@ -181,12 +174,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_name_front" prop="param_name_front" label="配置名">
+            <el-form-item :rules="rules.param_name_front" prop="param_name_front" :label="$t('ParamsConfig.param_name_front')">
               <el-input v-model="model.param_name_front" :placeholder="$t('Placeholder.Enter')" clearable disabled />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_value" prop="param_value" label="配置值">
+            <el-form-item :rules="rules.param_value" prop="param_value" :label="$t('ParamsConfig.param_value')">
               <el-input-number v-if="model.param_value_type === 'int'" v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" clearable />
               <el-input-number v-else-if="model.param_value_type === 'float'" v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" :step="0.1" :style="{width: '100%'}" clearable />
               <el-date-picker v-else-if="model.param_value_type === 'datetime'" v-model="model.param_value" value-format="yyyy-MM-dd HH:00:00" type="datetime" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
@@ -199,47 +192,47 @@
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_before_value" prop="param_before_value" label="上一次配置值">
+            <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfig.param_before_value')">
               <el-input v-model="model.param_before_value" placeholder="" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_default_value" prop="param_default_value" label="配置默认值">
+            <el-form-item :rules="rules.param_default_value" prop="param_default_value" :label="$t('ParamsConfig.param_default_value')">
               <el-input v-model="model.param_default_value" placeholder="" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_default_name" prop="param_default_name" label="默认配置名">
+            <el-form-item :rules="rules.param_default_name" prop="param_default_name" :label="$t('ParamsConfig.param_default_name')">
               <el-input v-model="model.param_default_name" placeholder="" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.serial_number" prop="serial_number" label="序号（用于设置配置显示顺序）">
+            <el-form-item :rules="rules.serial_number" prop="serial_number" :label="$t('ParamsConfig.serial_number')">
               <el-input v-model="model.serial_number" :placeholder="$t('Placeholder.Enter')" clearable disabled />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_description" prop="param_description" label="配置描述">
+            <el-form-item :rules="rules.param_description" prop="param_description" :label="$t('ParamsConfig.param_description')">
               <el-input v-model="model.param_description" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.update_user" prop="update_user" label="修改人">
-              <el-input v-model="model.update_user" placeholder="修改人" disabled />
+            <el-form-item :rules="rules.update_user" prop="update_user" :label="$t('ParamsConfig.update_user')">
+              <el-input v-model="model.update_user" :placeholder="$t('ParamsConfig.update_user')" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.update_time" prop="update_time" label="修改时间">
-              <el-input v-model="model.update_time" placeholder="修改时间" disabled />
+            <el-form-item :rules="rules.update_time" prop="update_time" :label="$t('ParamsConfig.update_time')">
+              <el-input v-model="model.update_time" :placeholder="$t('ParamsConfig.update_time')" disabled />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-form-item :rules="rules.visible_roles" prop="visible_roles" label="可配置的角色">
+          <el-form-item :rules="rules.visible_roles" prop="visible_roles" :label="$t('ParamsConfig.visible_roles')">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-checkbox-group v-model="model.visible_roles" disabled>
                 <el-checkbox v-for="role in all_role_list" :key="role.index" :label="role" />
@@ -393,7 +386,8 @@ export default {
         { label: this.$t('ParamsConfig.OtherConfig'), value: 'other' }
       ],
       param_classify_options: [], // 参数分类选项
-      all_role_list: []
+      all_role_list: [],
+      UNKONWN_CLASSIFY: this.$t('ParamsConfig.UnknownClassify')
     }
   },
   computed: {

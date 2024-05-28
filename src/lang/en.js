@@ -389,7 +389,19 @@ export default {
     OtherConfig: 'Other Config', // 其它配置
     BtnModifyConfig: 'Modify Config', // 修改配置
     BtnRestoreDefault: 'Restore Default', // 恢复默认
-    TipRestoreDefault: 'Restore Default' // 确定要该配置恢复到默认值？
+    TipRestoreDefault: 'Restore Default', // 确定要该配置恢复到默认值？
+    param_classify: 'Config Classification', // 配置分类
+    param_name_front: 'Config Name', // 配置名
+    param_value: 'Config Value', // 配置值
+    param_description: 'Config Description', // 配置描述
+    param_before_value: 'The Last Config Value', // 上一次配置值
+    param_default_value: 'Default Config Value', // 配置默认值
+    param_default_name: 'Default Config Name', // 默认配置名
+    serial_number: 'Display Order', // 显示顺序
+    update_user: 'Update User', // 修改人
+    update_time: 'Update Time', // 修改时间
+    visible_roles: 'Configurable Roles', // 可配置的角色
+    UnknownClassify: 'Unknown Classify' // 未知分类
   },
   HistoryOpera: {
     user_name: '',
