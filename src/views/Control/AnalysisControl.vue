@@ -112,18 +112,18 @@
                         :on-change="loadExcelFile"
                       >
                         <el-button slot="trigger" type="primary">
-                          {{ "$t('AnalysisControlPage.BtnUploadFile')" }}
+                          {{ $t('AnalysisControlPage.BtnUploadFile') }}
                         </el-button>
                       </el-upload>
                       <div>
                         <el-button v-if="buttons.includes('AnalysisControl/doCheckScheduleData')" type="primary" @click="doCheckScheduleData">
-                          {{ "$t('AnalysisControlPage.BtnCheckFile')" }}
+                          {{ $t('AnalysisControlPage.BtnCheckFile') }}
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/analysisSchedule')" type="primary" :disabled="analysisBtnEnable" @click="analysisSchedule">
-                          {{ "$t('AnalysisControlPage.BtnAnaFile')" }}
+                          {{ $t('AnalysisControlPage.BtnAnaFile') }}
                         </el-button>
                         <el-button v-if="buttons.includes('AnalysisControl/pushSchedule')" type="apiBtn" @click="pushSchedule">
-                          {{ "$t('AnalysisControlPage.BtnAnaPush')" }}
+                          {{ $t('AnalysisControlPage.BtnAnaPush') }}
                         </el-button>
                       </div>
                     </div>
@@ -135,13 +135,13 @@
           <el-row>
             <el-col :span="24">
               <el-button v-if="buttons.includes('AnalysisControl/download')" type="success" @click="downloadAnaExcel">
-                {{ "$t('AnalysisControlPage.BtnDownloadLatestFile')" }}
+                {{ $t('AnalysisControlPage.BtnDownloadLatestFile') }}
               </el-button>
               <el-button v-if="buttons.includes('AnalysisControl/statisticsSchedule')" type="apiBtn" @click="statisticsSchedule">
-                {{ "$t('AnalysisControlPage.BtnGetStaResult')" }}
+                {{ $t('AnalysisControlPage.BtnGetStaResult') }}
               </el-button>
               <el-button v-if="buttons.includes('AnalysisControl/pushImportSchedule')" type="apiBtn" @click="pushImportSchedule">
-                {{ "$t('AnalysisControlPage.BtnImportPush')" }}
+                {{ $t('AnalysisControlPage.BtnImportPush') }}
               </el-button>
             </el-col>
           </el-row>
@@ -150,18 +150,18 @@
       <el-col :span="6">
         <el-card class="card_result">
           <div slot="header" class="clearfix">
-            <span class="ana-res-text">{{ "$t('AnalysisControlPage.TextAnaResult')" }}</span>
+            <span class="ana-res-text">{{ $t('AnalysisControlPage.TextAnaResult') }}</span>
           </div>
           <p style="font-weight:bold;line-height: 90%;">{{ schedule_time }}-{{ schedule_mode }}
             <span style="font-weight:normal;">{{ ana_time }}</span>
           </p>
           <p style="line-height:160%">
-            {{ "$t('PublicText.Feasible')" }}: {{ feasible }}<br>
-            {{ "$t('PublicText.ResultValue')" }}: {{ obj_value }}<br>
-            {{ "$t('PublicText.OverdueValue')" }}: {{ overdue_value }}<br>
-            {{ "$t('PublicText.IdleValue')" }}: {{ idle_value }}<br>
-            {{ "$t('PublicText.LineBalanceValue')" }}: {{ line_balance }}<br>
-            {{ "$t('PublicText.ThreeDayPoints')" }}: {{ three_days_points }}<br>
+            {{ $t('PublicText.Feasible') }}: {{ feasible }}<br>
+            {{ $t('PublicText.ResultValue') }}: {{ obj_value }}<br>
+            {{ $t('PublicText.OverdueValue') }}: {{ overdue_value }}<br>
+            {{ $t('PublicText.IdleValue') }}: {{ idle_value }}<br>
+            {{ $t('PublicText.LineBalanceValue') }}: {{ line_balance }}<br>
+            {{ $t('PublicText.ThreeDayPoints') }}: {{ three_days_points }}<br>
           </p>
           <div class="ana-history">
             <el-select v-model="selectAnaTime" :placeholder="$t('AnalysisControlPage.TextAnaResult')" style="width: 200px;" size="mini">
@@ -173,7 +173,7 @@
               />
             </el-select>
             <el-button style="margin-left: 5px;" type="info" size="mini" @click="getHistoryAnaData">
-              {{ "$t('PublicBtn.BtnGet')" }}
+              {{ $t('PublicBtn.BtnGet') }}
             </el-button>
             <el-tooltip class="item" effect="dark" :content="$t('PublicBtn.Refresh')" placement="top">
               <el-button style="margin-left: 5px;" size="mini" @click="getHistoryAnaItem">
@@ -196,24 +196,24 @@
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" :content="smtUnscheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_unscheduled">
-              {{ "$t('AnalysisControlPage.BtnPsuhSMTNot')" }}
+              {{ $t('AnalysisControlPage.BtnPsuhSMTNot') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="smtPrescheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_pre_scheduled">
-              {{ "$t('PubAnalysisControlPagelicBtn.BtnPushSMTPre')" }}
+              {{ $t('PubAnalysisControlPagelicBtn.BtnPushSMTPre') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="smtScheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_scheduled">
-              {{ "$t('AnalysisControlPage.BtnPushSMTNor')" }}
+              {{ $t('AnalysisControlPage.BtnPushSMTNor') }}
             </el-button>
           </el-tooltip>
         </el-col>
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handlePushClose">
-          {{ "$t('PublicBtn.Close')" }}
+          {{ $t('PublicBtn.Close') }}
         </el-button>
       </span>
     </el-dialog>
