@@ -455,6 +455,7 @@ export default {
     role_name: '',
     role_menus: ''
   },
+  // 维护时间表
   BlockTimeData: {
     BtnAddMultiData: 'Add Multi Data', // 添加多个维护
     BtnBackupData: 'Backup Data', // 备份数据
@@ -488,6 +489,7 @@ export default {
     MsgDeleteData3: '', // 个备份？
     MsgSyncData1: '' // 确定要同步排程配置表中指定数据库的维护时间表？
   },
+  // 文件管理
   FileDataPage: {
     BtnDeleteFile: 'Delete File', // 删除文件
     BtnDeleteBulkFiles: 'Delete Files in Date Range', // 批量删除文件

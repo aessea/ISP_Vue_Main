@@ -49,9 +49,9 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="file_name" :label="$t('FileDataPage.file_name')" sortable />
-          <el-table-column prop="file_time" label="$t('FileDataPage.file_time')" sortable width="200" />
-          <el-table-column prop="remark" label="$t('FileDataPage.remark')" width="160" />
-          <el-table-column prop="create_user" label="$t('FileDataPage.create_user')" width="160" />
+          <el-table-column prop="file_time" :label="$t('FileDataPage.file_time')" sortable width="200" />
+          <el-table-column prop="remark" :label="$t('FileDataPage.remark')" width="160" />
+          <el-table-column prop="create_user" :label="$t('FileDataPage.create_user')" width="160" />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
