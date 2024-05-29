@@ -258,7 +258,7 @@ export default {
       CreateRole(data).then(res => {
         if (res.code === 20000) {
           this.$notify({
-            title: '提示',
+            title: this.$t('PublicText.TitleTip'),
             message: res.message,
             type: res.message_type
           })
@@ -296,7 +296,7 @@ export default {
       ModifyRoleInfo(data).then(res => {
         if (res.code === 20000) {
           this.$notify({
-            title: '提示',
+            title: this.$t('PublicText.TitleTip'),
             message: res.message,
             type: res.message_type
           })
@@ -305,7 +305,7 @@ export default {
       })
     },
     handleDeleteRole(index, row) {
-      this.$confirm('确定要删除该角色？', '提示', {
+      this.$confirm('确定要删除该角色？', this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
@@ -316,7 +316,7 @@ export default {
         DeleteRole(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: '提示',
+              title: this.$t('PublicText.TitleTip'),
               message: res.message,
               type: res.message_type
             })

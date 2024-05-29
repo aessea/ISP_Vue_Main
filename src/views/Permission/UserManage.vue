@@ -535,7 +535,7 @@ export default {
       })
     },
     handleDeleteUser(index, row) {
-      this.$confirm('确定要删除该用户？', '提示', {
+      this.$confirm('确定要删除该用户？', this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',

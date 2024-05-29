@@ -554,7 +554,7 @@ export default {
       }
     },
     beforeSyncDatabaseData() {
-      this.$confirm('确定要同步排程配置表中指定数据库的排程配置？', '提示', {
+      this.$confirm('确定要同步排程配置表中指定数据库的排程配置？', this.$t('PublicText.TitleTip'), {
         confirmButtonText: '确定同步',
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
@@ -580,7 +580,7 @@ export default {
       SyncDatabaseData(data).then(res => {
         if (res.code === 20000) {
           this.loadingInstance.close() // 清除动画
-          this.$alert(res.message, '提示', {
+          this.$alert(res.message, this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
@@ -622,7 +622,7 @@ export default {
       for (const key in this.model) {
         this.model[key] = row[key]
       }
-      this.$confirm('确定要该配置恢复到默认值？', '提示', {
+      this.$confirm('确定要该配置恢复到默认值？', this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
@@ -632,7 +632,7 @@ export default {
         RestoreDefault(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: '提示',
+              title: this.$t('PublicText.TitleTip'),
               message: res.message,
               type: res.message_type
             })
@@ -642,7 +642,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -762,7 +762,7 @@ export default {
       }).then(() => {
         DeleteAllJobdataBackup().then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })

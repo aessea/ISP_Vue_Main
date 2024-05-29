@@ -73,7 +73,8 @@ export default {
     Cancel: 'Cancel', // 取消
     Open: 'Open', // 开启
     Refresh: 'Refresh', // 刷新
-    BtnGet: '' // 获取
+    BtnGet: 'Get', // 获取
+    ConfirmDelete: 'Confirm Delete' // 确认删除
   },
   route: { // 路由
     // 首页
@@ -486,5 +487,25 @@ export default {
     MsgDeleteData2: '', // 成功删除选中的
     MsgDeleteData3: '', // 个备份？
     MsgSyncData1: '' // 确定要同步排程配置表中指定数据库的维护时间表？
+  },
+  FileDataPage: {
+    BtnDeleteFile: 'Delete File', // 删除文件
+    BtnDeleteBulkFiles: 'Delete Files in Date Range', // 批量删除文件
+    BtnResetFilesList: 'Reset Files List', // 重置文件列表
+    file_name: 'File Name', // 文件名
+    file_time: 'File Time', // 创建时间
+    remark: 'Remark', // 备注
+    create_user: 'Create User', // 创建人
+    TextDeleteAgoFile: 'Delete files from months ago:', // 删除几个月前的文件：
+    TextInputMonth: 'Please enter the number of months', // 请输入月份数
+    MsgDeleteFile1: 'Please select at least one file', // 请至少选中一个文件
+    MsgDeleteFile2: 'Are you sure you want to delete the selected ', // 确定要删除选中的
+    MsgDeleteFile4: ' files', // 个文件
+    MsgDeleteFile5: 'Are you sure you want to delete files from ', // 确定要删除
+    MsgDeleteFile6: ' months ago?', // 个月前的文件？
+    MsgDeleteFile7: 'Successful deletion of 10 files', // 成功删除:
+    MsgDeleteFile8: 'Files older than ', // 未查找到:
+    MsgDeleteFile9: ' months were not found', // 个月前的文件
+    MsgDeleteFile10: 'Are you sure you want to reset the file list?' // 确定要重置文件列表？
   }
 }

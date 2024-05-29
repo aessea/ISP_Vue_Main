@@ -663,13 +663,13 @@ export default {
       })
     },
     updateConfig() {
-      this.$confirm('确定要更新配置到后台？', '提示', {
+      this.$confirm('确定要更新配置到后台？', this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         UpdateConfig().then(res => {
-          this.$alert(res.message, '提示', {
+          this.$alert(res.message, this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: res.message_type
           })
@@ -682,13 +682,13 @@ export default {
       })
     },
     loadFromConfig() {
-      this.$confirm('确定要从后台加载配置？', '提示', {
+      this.$confirm('确定要从后台加载配置？', this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         LoadFromConfig().then(res => {
-          this.$alert(res.message, '提示', {
+          this.$alert(res.message, this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: res.message_type
           })

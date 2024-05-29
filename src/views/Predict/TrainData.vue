@@ -729,7 +729,7 @@ export default {
       }).then(() => {
         DeleteAllData().then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })

@@ -122,15 +122,15 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item label="删除几个月前的数据：" :label-width="formLabelWidth">
-                <el-input-number v-model="save_months" placeholder="请输入月份数" clearable />
+              <el-form-item :label="$t('FileDataPage.TextDeleteAgoFile')" :label-width="formLabelWidth">
+                <el-input-number v-model="save_months" :placeholder="$t('FileDataPage.TextInputMonth')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFilterClose">关闭</el-button>
+        <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
         <el-button type="danger" @click="filterData">确认删除</el-button>
       </span>
     </el-dialog>
@@ -247,14 +247,14 @@ export default {
       this.filterDialogVisible = false
     },
     filterData() {
-      this.$confirm(`确认要删除${this.save_months}个月前的日志？`, '提示', {
+      this.$confirm(`确认要删除${this.save_months}个月前的日志？`, this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
         if (this.save_months === undefined) {
-          this.$alert('删除失败', '提示', {
+          this.$alert('删除失败', this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -266,7 +266,7 @@ export default {
         }
         FilterTableData(data).then(res => {
           if (res.code === 20000) {
-            this.$alert(res.message, '提示', {
+            this.$alert(res.message, this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })

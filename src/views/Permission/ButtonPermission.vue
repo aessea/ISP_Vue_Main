@@ -227,7 +227,7 @@ export default {
       this.data_dict.menu_name_front = row.menu_name_front
     },
     modifyButton() {
-      this.$confirm('确定要修改按钮权限?', '提示', {
+      this.$confirm('确定要修改按钮权限?', this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
@@ -236,7 +236,7 @@ export default {
         ModifyButton(data).then(res => {
           if (res.code === 20000) {
             this.$notify({
-              title: '提示',
+              title: this.$t('PublicText.TitleTip'),
               message: res.message,
               type: res.message_type
             })
