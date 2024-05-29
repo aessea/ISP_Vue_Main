@@ -479,7 +479,7 @@ export default {
     CustomTime: '', // 自定义时间(方式一)
     CustomTime2: '', // 自定义时间(方式二)
     ConfirmRecovery: '', // 确认恢复
-    SelectAll: '', // 全选 TODO
+    SelectAll: 'Select All', // 全选
     MsgAppendData1: '', // 成功添加
     MsgAppendData2: '', // 条维护数据
     MsgDeleteData1: '', // 确定要删除选中的

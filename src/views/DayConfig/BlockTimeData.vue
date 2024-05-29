@@ -74,29 +74,29 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="line_name" label="维护线体" width="110" sortable />
-          <el-table-column prop="start_time" label="维护开始时间" width="180" sortable />
-          <el-table-column prop="end_time" label="维护结束时间" width="180" sortable />
-          <!-- <el-table-column prop="lock_time" label="手动输入锁定时间" sortable /> -->
-          <el-table-column prop="lock_time" width="180" label="手动输入锁定时间">
+          <el-table-column prop="line_name" :label="lang_dict.line_name" width="110" sortable />
+          <el-table-column prop="start_time" :label="lang_dict.start_time" width="180" sortable />
+          <el-table-column prop="end_time" :label="lang_dict.end_time" width="180" sortable />
+          <!-- <el-table-column prop="lock_time" :label="lang_dict.lock_time" sortable /> -->
+          <el-table-column prop="lock_time" width="180" :label="lang_dict.lock_time">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.flag === true" size="small" type="primary">{{ scope.row.lock_time }}</el-tag>
               <el-tag v-else-if="scope.row.flag === false" size="small" type="info">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="flag" label="是否使用手动输入锁定时间（优先）" width="160">
+          <el-table-column prop="flag" :label="lang_dict.flag" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.flag === true" size="small" type="primary">{{ $t('PublicBtn.Open') }}</el-tag>
               <el-tag v-else-if="scope.row.flag === false" size="small" type="info">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="default_lock_time_flag" width="180" label="是否按照默认锁定时间">
+          <el-table-column prop="default_lock_time_flag" width="180" :label="lang_dict.default_lock_time_flag">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.default_lock_time_flag === true" size="small" type="primary">{{ $t('PublicBtn.Open') }}</el-tag>
               <el-tag v-else-if="scope.row.default_lock_time_flag === false" size="small" type="info">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="remark" label="备注" />
+          <el-table-column prop="remark" :label="lang_dict.remark" />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -224,7 +224,7 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         max-height="460"
       >
-        <el-table-column prop="line_name" label="维护线体" width="100" />
+        <el-table-column prop="line_name" :label="lang_dict.line_name" width="100" />
         <el-table-column prop="dayTime" :label="$t('BlockTimeData.DayTime')" :render-header="renderHeaderDay">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.dayTime">{{ dayTimeText }}</el-checkbox>
@@ -268,63 +268,63 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.line_name" prop="line_name" label="维护线体">
+            <el-form-item :rules="rules.line_name" prop="line_name" :label="lang_dict.line_name">
               <el-select v-model="model.line_name" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in lineOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.start_time" prop="start_time" label="维护开始时间">
+            <el-form-item :rules="rules.start_time" prop="start_time" :label="lang_dict.start_time">
               <el-date-picker v-model="model.start_time" value-format="yyyy-MM-dd HH:00:00" type="datetime" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.end_time" prop="end_time" label="维护结束时间">
+            <el-form-item :rules="rules.end_time" prop="end_time" :label="lang_dict.end_time">
               <el-date-picker v-model="model.end_time" value-format="yyyy-MM-dd HH:00:00" type="datetime" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="model.lock_time ? rules.flag:[{required: false, trigger: 'blur'}]" prop="flag" label="是否使用手动输入锁定时间（优先）">
+            <el-form-item :rules="model.lock_time ? rules.flag:[{required: false, trigger: 'blur'}]" prop="flag" :label="lang_dict.flag">
               <el-switch v-model="model.flag" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="model.flag===true ? rules.lock_time:[{required: false, trigger: 'blur'}]" prop="lock_time" label="手动输入锁定时间">
+            <el-form-item :rules="model.flag===true ? rules.lock_time:[{required: false, trigger: 'blur'}]" prop="lock_time" :label="lang_dict.lock_time">
               <el-date-picker v-model="model.lock_time" type="datetime" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd HH:00:00" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.default_lock_time_flag" prop="default_lock_time_flag" label="按照默认锁定时间">
+            <el-form-item :rules="rules.default_lock_time_flag" prop="default_lock_time_flag" :label="lang_dict.default_lock_time_flag">
               <el-switch v-model="model.default_lock_time_flag" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.remark" prop="remark" label="备注">
+            <el-form-item :rules="rules.remark" prop="remark" :label="lang_dict.remark">
               <el-input v-model="model.remark" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" label="创建人">
+            <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" :label="lang_dict.CREATED_BY">
               <el-input v-model="model.CREATED_BY" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" label="创建时间">
+            <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" :label="lang_dict.CREATED_TIME">
               <el-input v-model="model.CREATED_TIME" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" label="修改人">
+            <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" :label="lang_dict.UPDATED_BY">
               <el-input v-model="model.UPDATED_BY" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" label="修改时间">
+            <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" :label="lang_dict.UPDATED_TIME">
               <el-input v-model="model.UPDATED_TIME" disabled />
             </el-form-item>
           </el-col>
@@ -510,7 +510,7 @@ import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, AddMultiData,
   ExportData, ImportData, GetBackupName, BackupData, RecoverBackupData, DeleteBackupData,
-  GetDefaultData, SyncDatabaseData, AddHolidayLines, GetHolidayLines } from '@/api/DayConfig/BlockTimeData'
+  GetDefaultData, SyncDatabaseData, AddHolidayLines, GetHolidayLines, GetLangDict } from '@/api/DayConfig/BlockTimeData'
 // import { lineOptions, LineOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
 import { deepClone } from '@/utils'
@@ -643,7 +643,8 @@ export default {
       manageBackupDialog: false, // 备份管理dialog
       backupTableData: [], // 备份管理数据
       backupTableSelections: [], // 备份管理选中的数据
-      autoBackup: true // 是否自动备份，默认开启
+      autoBackup: true, // 是否自动备份，默认开启
+      lang_dict: {} // 从后端获取表格列名
     }
   },
   computed: {
@@ -653,6 +654,9 @@ export default {
     ])
   },
   created() {
+    GetLangDict().then(res => {
+      this.lang_dict = res.lang_dict
+    })
     this.getTableData(this.currentPage, this.pageSize)
     this.getDefaultData()
     this.initializeDate()
