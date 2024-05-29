@@ -456,7 +456,7 @@ export default {
     role_menus: ''
   },
   // 维护时间表
-  BlockTimeData: {
+  BlockTimeDataPage: {
     BtnAddMultiData: 'Add Multi Data', // 添加多个维护
     BtnBackupData: 'Backup Data', // 备份数据
     BtnRecoverBackupData: 'Recover Backup Data', // 恢复备份

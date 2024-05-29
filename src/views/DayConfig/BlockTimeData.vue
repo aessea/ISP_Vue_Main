@@ -8,19 +8,19 @@
               <i class="el-icon-plus" />{{ this.$t('TablePage.BtnAppend') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/addMultiDataDialog')" type="primary" @click="addMultiDataDialog">
-              <i class="el-icon-plus" />{{ this.$t('BlockTimeData.BtnAddMultiData') }}
+              <i class="el-icon-plus" />{{ this.$t('BlockTimeDataPage.BtnAddMultiData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />{{ this.$t('TablePage.BtnDelete') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/backupData')" type="backupBtn" @click="backupData">
-              <i class="el-icon-document-copy" />{{ this.$t('BlockTimeData.BtnBackupData') }}
+              <i class="el-icon-document-copy" />{{ this.$t('BlockTimeDataPage.BtnBackupData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/recoverBackupData')" type="backupBtn" @click="recoverBackupData">
-              <i class="el-icon-refresh-left" />{{ this.$t('BlockTimeData.BtnRecoverBackupData') }}
+              <i class="el-icon-refresh-left" />{{ this.$t('BlockTimeDataPage.BtnRecoverBackupData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/manageBackupData')" type="backupBtn" @click="manageBackupData">
-              <i class="el-icon-edit-outline" />{{ this.$t('BlockTimeData.BtnManageBackupData') }}
+              <i class="el-icon-edit-outline" />{{ this.$t('BlockTimeDataPage.BtnManageBackupData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />{{ this.$t('TablePage.BtnImport') }}
@@ -29,13 +29,13 @@
               <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/export')" @click="addHolidayLinesDialog">
-              {{ this.$t('BlockTimeData.BtnAddHolidayLines') }}
+              {{ this.$t('BlockTimeDataPage.BtnAddHolidayLines') }}
             </el-button>
           </div>
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" :content="$t('BlockTimeData.TitleSyncData')" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('BlockTimeDataPage.TitleSyncData')" placement="top">
               <el-button
                 v-if="buttons.includes('BlockTimeData/sync')"
                 size="small"
@@ -133,7 +133,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      :title="$t('BlockTimeData.BtnAddMultiData')"
+      :title="$t('BlockTimeDataPage.BtnAddMultiData')"
       :visible.sync="dialogMultiVisible"
       width="76%"
       :before-close="handleMultiClose"
@@ -156,8 +156,8 @@
             v-model="dayTime"
             type="datetimerange"
             :range-separator="$t('PublicText.To')"
-            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
-            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
+            :start-placeholder="$t('BlockTimeDataPage.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeDataPage.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -166,8 +166,8 @@
             v-model="nightTime"
             type="datetimerange"
             :range-separator="$t('PublicText.To')"
-            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
-            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
+            :start-placeholder="$t('BlockTimeDataPage.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeDataPage.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -176,8 +176,8 @@
             v-model="maintainTime"
             type="datetimerange"
             :range-separator="$t('PublicText.To')"
-            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
-            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
+            :start-placeholder="$t('BlockTimeDataPage.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeDataPage.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -196,8 +196,8 @@
             v-model="customTime"
             type="datetimerange"
             :range-separator="$t('PublicText.To')"
-            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
-            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
+            :start-placeholder="$t('BlockTimeDataPage.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeDataPage.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -206,16 +206,16 @@
             v-model="customDateTime"
             type="daterange"
             :range-separator="$t('PublicText.To')"
-            :start-placeholder="$t('BlockTimeData.DateStart')"
-            :end-placeholder="$t('BlockTimeData.DateEnd')"
+            :start-placeholder="$t('BlockTimeDataPage.DateStart')"
+            :end-placeholder="$t('BlockTimeDataPage.DateEnd')"
             unlink-panels
           />
           <el-time-picker
             v-model="customHourTime"
             is-range
             :range-separator="$t('PublicText.To')"
-            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
-            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
+            :start-placeholder="$t('BlockTimeDataPage.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeDataPage.DateTimeEnd')"
           />
         </el-col>
       </el-row>
@@ -225,27 +225,27 @@
         max-height="460"
       >
         <el-table-column prop="line_name" :label="lang_dict.line_name" width="100" />
-        <el-table-column prop="dayTime" :label="$t('BlockTimeData.DayTime')" :render-header="renderHeaderDay">
+        <el-table-column prop="dayTime" :label="$t('BlockTimeDataPage.DayTime')" :render-header="renderHeaderDay">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.dayTime">{{ dayTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="nightTime" :label="$t('BlockTimeData.NightTime')" :render-header="renderHeaderNight">
+        <el-table-column prop="nightTime" :label="$t('BlockTimeDataPage.NightTime')" :render-header="renderHeaderNight">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.nightTime">{{ nightTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="maintainTime" :label="$t('BlockTimeData.MaintainTime')" :render-header="renderHeaderMaintain">
+        <el-table-column prop="maintainTime" :label="$t('BlockTimeDataPage.MaintainTime')" :render-header="renderHeaderMaintain">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.maintainTime" style="margin-top: 5px;">{{ maintainTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="customTime" :label="$t('BlockTimeData.CustomTime')" :render-header="renderHeaderCustom">
+        <el-table-column prop="customTime" :label="$t('BlockTimeDataPage.CustomTime')" :render-header="renderHeaderCustom">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.customTime" style="margin-top: 5px;">{{ customTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="customTime2" :label="$t('BlockTimeData.CustomTime2')" :render-header="renderHeaderCustom2">
+        <el-table-column prop="customTime2" :label="$t('BlockTimeDataPage.CustomTime2')" :render-header="renderHeaderCustom2">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.customTime2" style="margin-top: 5px;">{{ customTime2Text }}</el-checkbox>
           </template>
@@ -345,7 +345,7 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <p>{{ $t('BlockTimeData.TextBackupData1') }}</p>
+      <p>{{ $t('BlockTimeDataPage.TextBackupData1') }}</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
@@ -353,13 +353,13 @@
 
     <el-dialog
       v-el-drag-dialog
-      :title="$t('BlockTimeData.BtnBackupData')"
+      :title="$t('BlockTimeDataPage.BtnBackupData')"
       :visible.sync="backupDialog"
       width="30%"
       :before-close="handleCloseBackup"
       @dragDialog="handleDrag"
     >
-      <span style="font-size:16px;">{{ $t('BlockTimeData.TextBackupData1') }}</span>
+      <span style="font-size:16px;">{{ $t('BlockTimeDataPage.TextBackupData1') }}</span>
       <el-input v-model="backupName" :placeholder="$t('Placeholder.Enter')" style="width: 200px;" />
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseBackup">{{ $t('PublicBtn.Close') }}</el-button>
@@ -369,13 +369,13 @@
 
     <el-dialog
       v-el-drag-dialog
-      :title="$t('BlockTimeData.BtnRecoverBackupData')"
+      :title="$t('BlockTimeDataPage.BtnRecoverBackupData')"
       :visible.sync="recoverBackupDialog"
       width="30%"
       :before-close="handleCloseRecoverBackup"
       @dragDialog="handleDrag"
     >
-      <span style="font-size:16px;">{{ $t('BlockTimeData.TextBackupData3') }}</span>
+      <span style="font-size:16px;">{{ $t('BlockTimeDataPage.TextBackupData3') }}</span>
       <el-select v-model="backupName" :placeholder="$t('Placeholder.Select')">
         <el-option
           v-for="item in backupOptions"
@@ -384,16 +384,16 @@
           :value="item.value"
         />
       </el-select>
-      <p>{{ $t('BlockTimeData.TextBackupData4') }}</p>
+      <p>{{ $t('BlockTimeDataPage.TextBackupData4') }}</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseRecoverBackup">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="confirmRecoverBackup">{{ $t('BlockTimeData.ConfirmRecovery') }}</el-button>
+        <el-button type="primary" @click="confirmRecoverBackup">{{ $t('BlockTimeDataPage.ConfirmRecovery') }}</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
-      :title="$t('BlockTimeData.BtnManageBackupData')"
+      :title="$t('BlockTimeDataPage.BtnManageBackupData')"
       :visible.sync="manageBackupDialog"
       width="40%"
       :before-close="handleCloseManageBackup"
@@ -426,13 +426,13 @@
       <el-row>
         <el-col :span="10">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
-            <el-radio label="original">{{ this.$t('BlockTimeData.OriginalImport') }}</el-radio>
+            <el-radio label="original">{{ this.$t('BlockTimeDataPage.OriginalImport') }}</el-radio>
             <el-radio label="append">{{ this.$t('TablePage.BtnAppendData') }}</el-radio>
             <el-radio label="replace">{{ this.$t('TablePage.BtnReplaceData') }}</el-radio>
           </el-radio-group>
         </el-col>
         <el-col :span="4">
-          <el-checkbox v-model="autoBackup" style="margin-top:26px;">{{ this.$t('BlockTimeData.AutoBackup') }}</el-checkbox>
+          <el-checkbox v-model="autoBackup" style="margin-top:26px;">{{ this.$t('BlockTimeDataPage.AutoBackup') }}</el-checkbox>
         </el-col>
         <el-col :span="9">
           <div style="display: flex;margin-top: 16px;margin-bottom: 16px;">
@@ -483,7 +483,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      :title="$t('BlockTimeData.BtnAddHolidayLines')"
+      :title="$t('BlockTimeDataPage.BtnAddHolidayLines')"
       :visible.sync="holidayLinesDialogVisible"
       :before-close="handleAddHolidyLinesClose"
       width="70%"
@@ -553,11 +553,11 @@ export default {
       tableDataMulti: [],
       customDateTime: [],
       customHourTime: [],
-      dayTimeText: this.$t('BlockTimeData.DayTime'),
-      nightTimeText: this.$t('BlockTimeData.NightTime'),
-      maintainTimeText: this.$t('BlockTimeData.MaintainTime'),
-      customTimeText: this.$t('BlockTimeData.CustomTime'),
-      customTime2Text: this.$t('BlockTimeData.CustomTime2'),
+      dayTimeText: this.$t('BlockTimeDataPage.DayTime'),
+      nightTimeText: this.$t('BlockTimeDataPage.NightTime'),
+      maintainTimeText: this.$t('BlockTimeDataPage.MaintainTime'),
+      customTimeText: this.$t('BlockTimeDataPage.CustomTime'),
+      customTime2Text: this.$t('BlockTimeDataPage.CustomTime2'),
       // 表单相关数据
       forms: ['$form'],
       model: {
@@ -703,7 +703,7 @@ export default {
     renderHeaderDay() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllDay()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllDay()}>{ this.$t('BlockTimeDataPage.SelectAll') }</el-button>
         </div>
       )
     },
@@ -729,7 +729,7 @@ export default {
     renderHeaderNight() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllNight()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllNight()}>{ this.$t('BlockTimeDataPage.SelectAll') }</el-button>
         </div>
       )
     },
@@ -741,7 +741,7 @@ export default {
     renderHeaderMaintain() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllMaintain()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllMaintain()}>{ this.$t('BlockTimeDataPage.SelectAll') }</el-button>
         </div>
       )
     },
@@ -753,7 +753,7 @@ export default {
     renderHeaderCustom() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllCustom()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllCustom()}>{ this.$t('BlockTimeDataPage.SelectAll') }</el-button>
         </div>
       )
     },
@@ -765,7 +765,7 @@ export default {
     renderHeaderCustom2() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllCustom2()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllCustom2()}>{ this.$t('BlockTimeDataPage.SelectAll') }</el-button>
         </div>
       )
     },
@@ -1127,7 +1127,7 @@ export default {
       for (let i = 0; i < dataLength; i++) {
         nameList.push(this.backupTableSelections[i].backup_name)
       }
-      this.$confirm(this.$t('BlockTimeData.MsgDeleteData1') + dataLength + this.$t('BlockTimeData.MsgDeleteData3'), this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('BlockTimeDataPage.MsgDeleteData1') + dataLength + this.$t('BlockTimeDataPage.MsgDeleteData3'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
@@ -1138,7 +1138,7 @@ export default {
           if (res.code === 20000) {
             this.$notify({
               title: this.$t('PublicText.TitleTip'),
-              message: this.$t('BlockTimeData.MsgDeleteData2') + dataLength + this.$t('BlockTimeData.MsgDeleteData3'),
+              message: this.$t('BlockTimeDataPage.MsgDeleteData2') + dataLength + this.$t('BlockTimeDataPage.MsgDeleteData3'),
               type: 'success'
             })
             this.getBackupName()
@@ -1317,7 +1317,7 @@ export default {
     },
     // 测试库同步正式库的维护时间表（提示）
     beforeSyncDatabaseData() {
-      this.$confirm(this.$t('BlockTimeData.MsgSyncData1'), this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('BlockTimeDataPage.MsgSyncData1'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
