@@ -43,6 +43,7 @@ export default {
     CheckLoadiing: 'Checking...', // 检查中...
     ImportLoadiing: 'Importing...', // 导入中...
     ExportLoadiing: 'Exporting...', // 导出中...
+    SyncLoadiing: '', // 同步中...
     MesApiNotUpdate: 'Not Updated', // 未更新
     MesApiUpdate: 'Updated', // 已更新
     MesApiUpdating: 'Updating...', // 更新中...
@@ -60,7 +61,9 @@ export default {
     IdleValue: 'Idle', // 停顿
     OverdueValue: 'Overdue', // 逾期
     ResultValue: 'Result Value', // 目标值
-    ThreeDayPoints: 'Three Days Points' // 三天总点数
+    ThreeDayPoints: 'Three Days Points', // 三天总点数
+    To: 'to', // 至
+    InitialFailed: '' // 初始化数据出错
   },
   // 通用按钮
   PublicBtn: {
@@ -450,5 +453,38 @@ export default {
   RolePermission: {
     role_name: '',
     role_menus: ''
+  },
+  BlockTimeData: {
+    BtnAddMultiData: 'Add Multi Data', // 添加多个维护
+    BtnBackupData: 'Backup Data', // 备份数据
+    BtnRecoverBackupData: 'Recover Backup Data', // 恢复备份
+    BtnManageBackupData: 'Manage Backup Data', // 备份管理
+    BtnAddHolidayLines: 'Select Default Holiday Lines', // 选择默认锁定时间的线体
+    TitleSyncData: 'Synchronize the maintenance schedule of the specified database', // 同步指定数据库的维护时间表
+    TextBackupData1: '', // 自动备份的备份名为当前时间
+    TitleBackupData: 'Backup Data', // 备份数据
+    TextBackupData2: '', // 请输入备份名称：
+    TextBackupData3: '', // 请选择备份名称：
+    TextBackupData4: '', // （注意：恢复备份将会覆盖当前表）
+    TextBackupName: 'Backup Name', // 备份名称
+    OriginalImport: 'Original Import', // 原方式导入
+    AutoBackup: 'Auto Backup', // 自动备份
+    DateTimeStart: '', // 维护开始时间
+    DateTimeEnd: '', // 维护结束时间
+    DateStart: '', // 开始日期
+    DateEnd: '', // 结束日期
+    DayTime: '', // 白班早下班
+    NightTime: '', // 夜班早下班
+    MaintainTime: '', // 白班保养
+    CustomTime: '', // 自定义时间(方式一)
+    CustomTime2: '', // 自定义时间(方式二)
+    ConfirmRecovery: '', // 确认恢复
+    SelectAll: '', // 全选 TODO
+    MsgAppendData1: '', // 成功添加
+    MsgAppendData2: '', // 条维护数据
+    MsgDeleteData1: '', // 确定要删除选中的
+    MsgDeleteData2: '', // 成功删除选中的
+    MsgDeleteData3: '', // 个备份？
+    MsgSyncData1: '' // 确定要同步排程配置表中指定数据库的维护时间表？
   }
 }

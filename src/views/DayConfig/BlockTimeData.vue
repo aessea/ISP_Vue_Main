@@ -8,19 +8,19 @@
               <i class="el-icon-plus" />{{ this.$t('TablePage.BtnAppend') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/addMultiDataDialog')" type="primary" @click="addMultiDataDialog">
-              <i class="el-icon-plus" />{{ this.$t('TablePage.BtnAppend') }}多个维护
+              <i class="el-icon-plus" />{{ this.$t('BlockTimeData.BtnAddMultiData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/delete')" type="danger" @click="deleteData">
               <i class="el-icon-delete" />{{ this.$t('TablePage.BtnDelete') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/backupData')" type="backupBtn" @click="backupData">
-              <i class="el-icon-document-copy" />备份数据
+              <i class="el-icon-document-copy" />{{ this.$t('BlockTimeData.BtnBackupData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/recoverBackupData')" type="backupBtn" @click="recoverBackupData">
-              <i class="el-icon-refresh-left" />恢复备份
+              <i class="el-icon-refresh-left" />{{ this.$t('BlockTimeData.BtnRecoverBackupData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/manageBackupData')" type="backupBtn" @click="manageBackupData">
-              <i class="el-icon-edit-outline" />备份管理
+              <i class="el-icon-edit-outline" />{{ this.$t('BlockTimeData.BtnManageBackupData') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />{{ this.$t('TablePage.BtnImport') }}
@@ -29,13 +29,13 @@
               <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
             </el-button>
             <el-button v-if="buttons.includes('BlockTimeData/export')" @click="addHolidayLinesDialog">
-              默认锁定时间的线体
+              {{ this.$t('BlockTimeData.BtnAddHolidayLines') }}
             </el-button>
           </div>
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="同步指定数据库的维护时间表" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('BlockTimeData.TitleSyncData')" placement="top">
               <el-button
                 v-if="buttons.includes('BlockTimeData/sync')"
                 size="small"
@@ -81,19 +81,19 @@
           <el-table-column prop="lock_time" width="180" label="手动输入锁定时间">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.flag === true" size="small" type="primary">{{ scope.row.lock_time }}</el-tag>
-              <el-tag v-else-if="scope.row.flag === false" size="small" type="info">关闭</el-tag>
+              <el-tag v-else-if="scope.row.flag === false" size="small" type="info">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="flag" label="是否使用手动输入锁定时间（优先）" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.flag === true" size="small" type="primary">启用</el-tag>
-              <el-tag v-else-if="scope.row.flag === false" size="small" type="info">关闭</el-tag>
+              <el-tag v-if="scope.row.flag === true" size="small" type="primary">{{ $t('PublicBtn.Open') }}</el-tag>
+              <el-tag v-else-if="scope.row.flag === false" size="small" type="info">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="default_lock_time_flag" width="180" label="是否按照默认锁定时间">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.default_lock_time_flag === true" size="small" type="primary">启用</el-tag>
-              <el-tag v-else-if="scope.row.default_lock_time_flag === false" size="small" type="info">关闭</el-tag>
+              <el-tag v-if="scope.row.default_lock_time_flag === true" size="small" type="primary">{{ $t('PublicBtn.Open') }}</el-tag>
+              <el-tag v-else-if="scope.row.default_lock_time_flag === false" size="small" type="info">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="remark" label="备注" />
@@ -133,7 +133,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="添加多个维护"
+      :title="$t('BlockTimeData.BtnAddMultiData')"
       :visible.sync="dialogMultiVisible"
       width="76%"
       :before-close="handleMultiClose"
@@ -141,13 +141,13 @@
     >
       <el-row style="margin-bottom: 3px;">
         <el-col :span="8">
-          <el-input v-model="dayTimeText" class="textBtn" placeholder="请输入内容" />
+          <el-input v-model="dayTimeText" class="textBtn" :placeholder="$t('Placeholder.Enter')" />
         </el-col>
         <el-col :span="8">
-          <el-input v-model="nightTimeText" class="textBtn" placeholder="请输入内容" />
+          <el-input v-model="nightTimeText" class="textBtn" :placeholder="$t('Placeholder.Enter')" />
         </el-col>
         <el-col :span="8">
-          <el-input v-model="maintainTimeText" class="textBtn" placeholder="请输入内容" />
+          <el-input v-model="maintainTimeText" class="textBtn" :placeholder="$t('Placeholder.Enter')" />
         </el-col>
       </el-row>
       <el-row>
@@ -155,9 +155,9 @@
           <el-date-picker
             v-model="dayTime"
             type="datetimerange"
-            range-separator="至"
-            start-placeholder="维护开始时间"
-            end-placeholder="维护结束时间"
+            :range-separator="$t('PublicText.To')"
+            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -165,9 +165,9 @@
           <el-date-picker
             v-model="nightTime"
             type="datetimerange"
-            range-separator="至"
-            start-placeholder="维护开始时间"
-            end-placeholder="维护结束时间"
+            :range-separator="$t('PublicText.To')"
+            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -175,19 +175,19 @@
           <el-date-picker
             v-model="maintainTime"
             type="datetimerange"
-            range-separator="至"
-            start-placeholder="维护开始时间"
-            end-placeholder="维护结束时间"
+            :range-separator="$t('PublicText.To')"
+            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
       </el-row>
       <el-row style="margin-bottom: 3px;">
         <el-col :span="8">
-          <el-input v-model="customTimeText" class="textBtn" placeholder="请输入内容" />
+          <el-input v-model="customTimeText" class="textBtn" :placeholder="$t('Placeholder.Enter')" />
         </el-col>
         <el-col :span="16">
-          <el-input v-model="customTime2Text" class="textBtn" placeholder="请输入内容" />
+          <el-input v-model="customTime2Text" class="textBtn" :placeholder="$t('Placeholder.Enter')" />
         </el-col>
       </el-row>
       <el-row>
@@ -195,9 +195,9 @@
           <el-date-picker
             v-model="customTime"
             type="datetimerange"
-            range-separator="至"
-            start-placeholder="维护开始时间"
-            end-placeholder="维护结束时间"
+            :range-separator="$t('PublicText.To')"
+            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
             style="margin-bottom: 10px;"
           />
         </el-col>
@@ -205,17 +205,17 @@
           <el-date-picker
             v-model="customDateTime"
             type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            :range-separator="$t('PublicText.To')"
+            :start-placeholder="$t('BlockTimeData.DateStart')"
+            :end-placeholder="$t('BlockTimeData.DateEnd')"
             unlink-panels
           />
           <el-time-picker
             v-model="customHourTime"
             is-range
-            range-separator="至"
-            start-placeholder="维护开始时间"
-            end-placeholder="维护结束时间"
+            :range-separator="$t('PublicText.To')"
+            :start-placeholder="$t('BlockTimeData.DateTimeStart')"
+            :end-placeholder="$t('BlockTimeData.DateTimeEnd')"
           />
         </el-col>
       </el-row>
@@ -225,35 +225,35 @@
         max-height="460"
       >
         <el-table-column prop="line_name" label="维护线体" width="100" />
-        <el-table-column prop="dayTime" label="白班早下班" :render-header="renderHeaderDay">
+        <el-table-column prop="dayTime" :label="$t('BlockTimeData.DayTime')" :render-header="renderHeaderDay">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.dayTime">{{ dayTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="nightTime" label="夜班早下班" :render-header="renderHeaderNight">
+        <el-table-column prop="nightTime" :label="$t('BlockTimeData.NightTime')" :render-header="renderHeaderNight">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.nightTime">{{ nightTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="maintainTime" label="白班保养" :render-header="renderHeaderMaintain">
+        <el-table-column prop="maintainTime" :label="$t('BlockTimeData.MaintainTime')" :render-header="renderHeaderMaintain">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.maintainTime" style="margin-top: 5px;">{{ maintainTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="customTime" label="自定义时间(方式一)" :render-header="renderHeaderCustom">
+        <el-table-column prop="customTime" :label="$t('BlockTimeData.CustomTime')" :render-header="renderHeaderCustom">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.customTime" style="margin-top: 5px;">{{ customTimeText }}</el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column prop="customTime2" label="自定义时间(方式二)" :render-header="renderHeaderCustom2">
+        <el-table-column prop="customTime2" :label="$t('BlockTimeData.CustomTime2')" :render-header="renderHeaderCustom2">
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.customTime2" style="margin-top: 5px;">{{ customTime2Text }}</el-checkbox>
           </template>
         </el-table-column>
       </el-table>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleMultiClose">关闭</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addMultiData">添加</el-button>
+        <el-button @click="handleMultiClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addMultiData">{{ "$t('PublicBtn.Append')" }}</el-button>
       </span>
     </el-dialog>
 
@@ -332,7 +332,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addDataAndContinue">添加并继续</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addDataAndContinue">{{ this.$t('TablePage.BtnAppendContinue') }}</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ this.$t('TablePage.BtnAppend') }}</el-button>
         <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ this.$t('TablePage.BtnModify') }}</el-button>
       </span>
@@ -345,7 +345,7 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <p>自动备份的备份名为当前时间</p>
+      <p>{{ $t('BlockTimeData.TextBackupData1') }}</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
@@ -353,30 +353,30 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="备份数据"
+      :title="$t('BlockTimeData.BtnBackupData')"
       :visible.sync="backupDialog"
       width="30%"
       :before-close="handleCloseBackup"
       @dragDialog="handleDrag"
     >
-      <span style="font-size:16px;">请输入备份名称：</span>
+      <span style="font-size:16px;">{{ $t('BlockTimeData.TextBackupData1') }}</span>
       <el-input v-model="backupName" :placeholder="$t('Placeholder.Enter')" style="width: 200px;" />
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleCloseBackup">关闭</el-button>
-        <el-button type="primary" @click="confirmBackup">确定</el-button>
+        <el-button @click="handleCloseBackup">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="confirmBackup">{{ $t('PublicBtn.Confirm') }}</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
-      title="恢复备份"
+      :title="$t('BlockTimeData.BtnRecoverBackupData')"
       :visible.sync="recoverBackupDialog"
       width="30%"
       :before-close="handleCloseRecoverBackup"
       @dragDialog="handleDrag"
     >
-      <span style="font-size:16px;">请选择备份名称：</span>
-      <el-select v-model="backupName" placeholder="选择备份">
+      <span style="font-size:16px;">{{ $t('BlockTimeData.TextBackupData3') }}</span>
+      <el-select v-model="backupName" :placeholder="$t('Placeholder.Select')">
         <el-option
           v-for="item in backupOptions"
           :key="item.value"
@@ -384,16 +384,16 @@
           :value="item.value"
         />
       </el-select>
-      <p>（注意：恢复备份将会覆盖当前表）</p>
+      <p>{{ $t('BlockTimeData.TextBackupData4') }}</p>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleCloseRecoverBackup">关闭</el-button>
-        <el-button type="primary" @click="confirmRecoverBackup">恢复</el-button>
+        <el-button @click="handleCloseRecoverBackup">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="confirmRecoverBackup">{{ $t('BlockTimeData.ConfirmRecovery') }}</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
-      title="备份管理"
+      :title="$t('BlockTimeData.BtnManageBackupData')"
       :visible.sync="manageBackupDialog"
       width="40%"
       :before-close="handleCloseManageBackup"
@@ -407,11 +407,11 @@
         @selection-change="handleBackupSelection"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column prop="backup_name" label="备份名称" />
+        <el-table-column prop="backup_name" :label="$t('PublicBtn.TextBackupName')" />
       </el-table>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleCloseManageBackup">关闭</el-button>
-        <el-button type="danger" @click="deleteBackupData">删除</el-button>
+        <el-button @click="handleCloseManageBackup">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="danger" @click="deleteBackupData">{{ $t('TablePage.BtnDelete') }}</el-button>
       </span>
     </el-dialog>
 
@@ -426,13 +426,13 @@
       <el-row>
         <el-col :span="10">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
-            <el-radio label="original">原方式导入</el-radio>
+            <el-radio label="original">{{ this.$t('BlockTimeData.OriginalImport') }}</el-radio>
             <el-radio label="append">{{ this.$t('TablePage.BtnAppendData') }}</el-radio>
             <el-radio label="replace">{{ this.$t('TablePage.BtnReplaceData') }}</el-radio>
           </el-radio-group>
         </el-col>
         <el-col :span="4">
-          <el-checkbox v-model="autoBackup" style="margin-top:26px;">自动备份</el-checkbox>
+          <el-checkbox v-model="autoBackup" style="margin-top:26px;">{{ this.$t('BlockTimeData.AutoBackup') }}</el-checkbox>
         </el-col>
         <el-col :span="9">
           <div style="display: flex;margin-top: 16px;margin-bottom: 16px;">
@@ -449,7 +449,7 @@
             >
               <el-button slot="trigger" type="primary" style="margin-left: 10px;">
                 <i class="el-icon-upload" />
-                上传文件
+                {{ this.$t('TablePage.BtnUploadFile') }}
               </el-button>
             </el-upload>
           </div>
@@ -483,7 +483,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="添加按默认锁定时间的线体"
+      :title="$t('BlockTimeData.BtnAddHolidayLines')"
       :visible.sync="holidayLinesDialogVisible"
       :before-close="handleAddHolidyLinesClose"
       width="70%"
@@ -495,8 +495,8 @@
         </el-checkbox-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleAddHolidyLinesClose">关闭</el-button>
-        <el-button type="primary" @click="addHolidayLines">确认</el-button>
+        <el-button @click="handleAddHolidyLinesClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="addHolidayLines">{{ this.$t('PublicBtn.Confirm') }}</el-button>
       </span>
     </el-dialog>
 
@@ -553,11 +553,11 @@ export default {
       tableDataMulti: [],
       customDateTime: [],
       customHourTime: [],
-      dayTimeText: '白班早下班',
-      nightTimeText: '夜班早下班',
-      maintainTimeText: '白班保养',
-      customTimeText: '自定义时间(方式一)',
-      customTime2Text: '自定义时间(方式二)',
+      dayTimeText: this.$t('BlockTimeData.DayTime'),
+      nightTimeText: this.$t('BlockTimeData.NightTime'),
+      maintainTimeText: this.$t('BlockTimeData.MaintainTime'),
+      customTimeText: this.$t('BlockTimeData.CustomTime'),
+      customTime2Text: this.$t('BlockTimeData.CustomTime2'),
       // 表单相关数据
       forms: ['$form'],
       model: {
@@ -594,32 +594,32 @@ export default {
       rules: {
         line_name: [{
           required: true,
-          message: '维护线体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         start_time: [{
           required: true,
-          message: '开始时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         end_time: [{
           required: true,
-          message: '结束时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         flag: [{
           required: true,
-          message: '请开启手动修改锁定时间',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         lock_time: [{
           required: true,
-          message: '请填写锁定时间节点',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         default_lock_time_flag: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         remark: [],
@@ -699,7 +699,7 @@ export default {
     renderHeaderDay() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllDay()}>全选</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllDay()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
         </div>
       )
     },
@@ -713,7 +713,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'error',
-          message: '初始化数据出错'
+          message: this.$t('PublicText.InitialFailed')
         })
       })
     },
@@ -725,7 +725,7 @@ export default {
     renderHeaderNight() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllNight()}>全选</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllNight()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
         </div>
       )
     },
@@ -737,7 +737,7 @@ export default {
     renderHeaderMaintain() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllMaintain()}>全选</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllMaintain()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
         </div>
       )
     },
@@ -749,7 +749,7 @@ export default {
     renderHeaderCustom() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllCustom()}>全选</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllCustom()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
         </div>
       )
     },
@@ -761,7 +761,7 @@ export default {
     renderHeaderCustom2() {
       return (
         <div>
-          <el-button size='mini' onClick={() => this.handleChooseAllCustom2()}>全选</el-button>
+          <el-button size='mini' onClick={() => this.handleChooseAllCustom2()}>{ this.$t('BlockTimeData.SelectAll') }</el-button>
         </div>
       )
     },
@@ -946,7 +946,7 @@ export default {
         if (res.code === 20000) {
           this.$notify({
             title: this.$t('PublicText.TitleTip'),
-            message: '成功添加 ' + res.count + ' 个维护数据',
+            message: this.$t('PublicText.MsgAppendData1') + res.count + this.$t('PublicText.MsgAppendData2'),
             type: 'success'
           })
           this.refreshTableData(true)
@@ -1123,7 +1123,7 @@ export default {
       for (let i = 0; i < dataLength; i++) {
         nameList.push(this.backupTableSelections[i].backup_name)
       }
-      this.$confirm('确定要删除选中的 ' + dataLength + ' 个备份？', '提示', {
+      this.$confirm(this.$t('BlockTimeData.MsgDeleteData1') + dataLength + this.$t('BlockTimeData.MsgDeleteData3'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
@@ -1134,7 +1134,7 @@ export default {
           if (res.code === 20000) {
             this.$notify({
               title: this.$t('PublicText.TitleTip'),
-              message: '成功删除选中的 ' + dataLength + ' 个备份',
+              message: this.$t('BlockTimeData.MsgDeleteData2') + dataLength + this.$t('BlockTimeData.MsgDeleteData3'),
               type: 'success'
             })
             this.getBackupName()
@@ -1313,8 +1313,8 @@ export default {
     },
     // 测试库同步正式库的维护时间表（提示）
     beforeSyncDatabaseData() {
-      this.$confirm('确定要同步排程配置表中指定数据库的维护时间表？', '提示', {
-        confirmButtonText: '确定同步',
+      this.$confirm(this.$t('BlockTimeData.MsgSyncData1'), this.$t('PublicText.TitleTip'), {
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
@@ -1323,14 +1323,14 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消同步'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     // 测试库同步正式库的维护时间表
     syncDatabaseData() {
       const syncLoading = {
-        text: '拼命同步中...',
+        text: this.$t('PublicText.SyncLoadiing'),
         background: 'rgba(0, 0, 0, 0.6)'
       }
       this.loadingInstance = Loading.service(syncLoading)
@@ -1340,7 +1340,7 @@ export default {
       SyncDatabaseData(data).then(res => {
         if (res.code === 20000) {
           this.loadingInstance.close() // 清除动画
-          this.$alert(res.message, '提示', {
+          this.$alert(res.message, this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
