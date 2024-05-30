@@ -5,7 +5,7 @@
         <el-col :span="16">
           <div>
             <el-button v-if="createUserDialogDisable === true" type="primary" @click="createUserDialog">
-              <i class="el-icon-plus" />创建用户
+              <i class="el-icon-plus" />{{ $t('UserManagePage.CreateUser') }}
             </el-button>
           </div>
         </el-col>
@@ -19,14 +19,14 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
+            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
                 circle
                 @click="helpTips"
               />
-            </el-tooltip>
+            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>
@@ -40,20 +40,20 @@
 
           stripe
         >
-          <el-table-column prop="username" label="用户名" width="160" />
-          <el-table-column prop="remark" label="备注" width="160" />
-          <el-table-column prop="roles" label="用户角色" width="160" />
-          <el-table-column prop="email" label="电子邮件地址" width="200" />
-          <el-table-column prop="description" label="描述" />
-          <el-table-column prop="enable" label="是否启用" width="120">
+          <el-table-column prop="username" :label="$t('UserManagePage.username')" width="160" />
+          <el-table-column prop="remark" :label="$t('UserManagePage.remark')" width="160" />
+          <el-table-column prop="roles" :label="$t('UserManagePage.roles')" width="160" />
+          <el-table-column prop="email" :label="$t('UserManagePage.email')" width="200" />
+          <el-table-column prop="description" :label="$t('UserManagePage.description')" />
+          <el-table-column prop="enable" :label="$t('UserManagePage.enable')" width="120">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.enable === true" size="small" type="success">已启用</el-tag>
-              <el-tag v-else-if="scope.row.enable === false" size="small" type="danger">未启用</el-tag>
+              <el-tag v-if="scope.row.enable === true" size="small" type="success">{{ $t('PublicText.Enabled') }}</el-tag>
+              <el-tag v-else-if="scope.row.enable === false" size="small" type="danger">{{ $t('PublicText.NotEnabled') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column width="150" fixed="right" label="操作">
+          <el-table-column width="150" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" content="修改密码" placement="top">
+              <el-tooltip class="item" effect="dark" :content="$t('UserManagePage.ModifyPwd')" placement="top">
                 <el-button
                   v-if="handleModifyPasswordDisable === true"
                   type="success"
@@ -63,7 +63,7 @@
                   @click="handleModifyPassword(scope.$index, scope.row)"
                 />
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="查看或修改信息" placement="top">
+              <el-tooltip class="item" effect="dark" :content="$t('UserManagePage.ViewOrModifyInfo')" placement="top">
                 <el-button
                   v-if="handleModifyUserInfoDisable === true"
                   type="primary"
@@ -73,7 +73,7 @@
                   @click="handleModifyUserInfo(scope.$index, scope.row)"
                 />
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="删除用户" placement="top">
+              <el-tooltip class="item" effect="dark" :content="$t('UserManagePage.DeleteUser')" placement="top">
                 <el-button
                   v-if="handleDeleteUserDisable === true"
                   type="danger"
@@ -100,59 +100,59 @@
         <div v-if="dialogBtnType === true">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" tag="div">
-              <el-form-item :rules="rules.username" prop="username" label="用户名">
-                <el-input v-model="model.username" placeholder="请输入用户名" clearable />
+              <el-form-item :rules="rules.username" prop="username" :label="$t('UserManagePage.username')">
+                <el-input v-model="model.username" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" tag="div">
-              <el-form-item :rules="rules.password" prop="password" label="密码">
-                <el-input v-model="model.password" placeholder="请输入密码" clearable show-password />
+              <el-form-item :rules="rules.password" prop="password" :label="$t('UserManagePage.password')">
+                <el-input v-model="model.password" :placeholder="$t('Placeholder.Enter')" clearable show-password />
               </el-form-item>
             </el-col>
           </el-row>
         </div>
         <div v-if="dialogBtnType === false">
-          <el-form-item :rules="rules.username" prop="username" label="用户名">
-            <el-input v-model="model.username" placeholder="请输入用户名" clearable />
+          <el-form-item :rules="rules.username" prop="username" :label="$t('UserManagePage.username')">
+            <el-input v-model="model.username" :placeholder="$t('Placeholder.Enter')" clearable />
           </el-form-item>
         </div>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.roles" prop="roles" label="用户权限">
-              <el-select v-model="model.roles" placeholder="请选择用户权限" :style="{width: '100%'}">
+            <el-form-item :rules="rules.roles" prop="roles" :label="$t('UserManagePage.roles')">
+              <el-select v-model="model.roles" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in rolesOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.remark" prop="remark" label="备注">
+            <el-form-item :rules="rules.remark" prop="remark" :label="$t('UserManagePage.remark')">
               <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.enable" prop="enable" label="是否启用">
+            <el-form-item :rules="rules.enable" prop="enable" :label="$t('UserManagePage.enable')">
               <el-switch v-model="model.enable" />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.email" prop="email" label="电子邮件地址">
+            <el-form-item :rules="rules.email" prop="email" :label="$t('UserManagePage.email')">
               <el-input v-model="model.email" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item :rules="rules.description" prop="description" label="描述">
+        <el-form-item :rules="rules.description" prop="description" :label="$t('UserManagePage.description')">
           <el-input v-model="model.description" :placeholder="$t('Placeholder.Enter')" :rows="2" type="textarea" clearable />
         </el-form-item>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.create_time" prop="create_time" label="创建时间">
+            <el-form-item :rules="rules.create_time" prop="create_time" :label="$t('UserManagePage.create_time')">
               <el-input v-model="model.create_time" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.last_login_time" prop="last_login_time" label="最后一次登录时间">
+            <el-form-item :rules="rules.last_login_time" prop="last_login_time" :label="$t('UserManagePage.last_login_time')">
               <el-input v-model="model.last_login_time" disabled />
             </el-form-item>
           </el-col>
@@ -160,12 +160,12 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="createUser">创建</el-button>
-        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyUserInfo">确认修改</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="createUser">{{ $t('PublicBtn.Crrate') }}</el-button>
+        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyUserInfo">{{ $t('PublicBtn.Modify') }}</el-button>
       </span>
     </el-dialog>
 
-    <el-dialog
+    <!-- <el-dialog
       v-el-drag-dialog
       title="用户权限管理说明"
       :visible.sync="helpDialogVisible"
@@ -178,27 +178,27 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
     <el-dialog
       v-el-drag-dialog
-      title="修改用户密码"
+      :title="$t('UserManagePage.ModifyPwd')"
       :visible.sync="passwordDialogVisible"
       width="30%"
       :before-close="handlePasswordClose"
       @dragDialog="handleDrag"
     >
       <el-form ref="$pwdForm" :model="pwdModel" label-position="left" label-width="100px" size="small">
-        <el-form-item :rules="pwdRules.password" prop="password" label="新的密码">
-          <el-input v-model="pwdModel.password" placeholder="请输入新的密码" :rows="2" show-password clearable />
+        <el-form-item :rules="pwdRules.password" prop="password" :label="$t('UserManagePage.NewPwd')">
+          <el-input v-model="pwdModel.password" :placeholder="$t('UserManagePage.PleInputNewPwd')" :rows="2" show-password clearable />
         </el-form-item>
-        <el-form-item :rules="pwdRules.password_twice" prop="password_twice" label="确认密码">
-          <el-input v-model="pwdModel.password_twice" placeholder="请再次输入密码" :rows="2" show-password clearable />
+        <el-form-item :rules="pwdRules.password_twice" prop="password_twice" :label="$t('UserManagePage.ConfirmPwd')">
+          <el-input v-model="pwdModel.password_twice" :placeholder="$t('UserManagePage.PleReInputNewPwd')" :rows="2" show-password clearable />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handlePasswordClose">关闭</el-button>
-        <el-button type="primary" @click="modifyUserPassword">确认修改</el-button>
+        <el-button @click="handlePasswordClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="modifyUserPassword">{{ $t('PublicBtn.ConfirmModify') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -226,7 +226,7 @@ export default {
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
-      helpDialogVisible: false, // 帮助提示dialog
+      // helpDialogVisible: false, // 帮助提示dialog
       passwordDialogVisible: false, // 修改密码dialog
       isClick: false, // 是否点击了保存或者提交
       // 表单相关数据
@@ -596,11 +596,11 @@ export default {
         this.modelOriginal[key] = ''
       }
       this.$refs['$form'].clearValidate() // 清除表单验证的文字提示信息
-    },
-    // 帮助提示按钮
-    helpTips() {
-      this.helpDialogVisible = true
     }
+    // 帮助提示按钮
+    // helpTips() {
+    //   this.helpDialogVisible = true
+    // }
   }
 }
 </script>

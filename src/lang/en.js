@@ -65,7 +65,9 @@ export default {
     To: 'to', // 至
     InitialFailed: '', // 初始化数据出错
     DeleteFailed: 'Delete failed', // 删除失败
-    BtnDeleteHisLog: 'Delete History Log' // 删除历史日志
+    BtnDeleteHisLog: 'Delete History Log', // 删除历史日志
+    Enabled: 'Enabled', // 已启用
+    NotEnabled: 'Not enabled' // 未启用
   },
   // 通用按钮
   PublicBtn: {
@@ -85,7 +87,9 @@ export default {
     Refresh: 'Refresh', // 刷新
     BtnGet: 'Get', // 获取
     ConfirmDelete: 'Confirm Delete', // 确认删除
-    Search: 'Search' // 搜索
+    ConfirmModify: 'Confirm Modify', // 确认修改
+    Search: 'Search', // 搜索
+    Crrate: 'Create' // 创建
   },
   route: { // 路由
     // 首页
@@ -458,16 +462,25 @@ export default {
     MsgExport4: 'The interface post empty data', // 当前接口发送数据为空
     TextSearchData: 'Search by interface function name or interface name' // 按照接口函数名或接口名称搜索
   },
-  UserManage: {
-    username: '',
-    password: '',
-    roles: '',
-    remark: '',
-    enable: '',
-    email: '',
-    description: '',
-    create_time: '',
-    last_login_time: ''
+  // 用户管理
+  UserManagePage: {
+    username: 'User Name', // 用户名
+    password: 'Password', // 密码
+    roles: 'Roles', // 用户角色
+    remark: 'Remark', // 备注
+    enable: 'Enable', // 是否启用
+    email: 'email', // 邮箱
+    description: 'Description', // 描述
+    create_time: 'Create Time', // 创建时间
+    last_login_time: 'Last Login Time', // 最后一次登录时间
+    CreateUser: 'Create User', // 创建用户
+    ModifyPwd: 'Modify Password', // 修改密码
+    ViewOrModifyInfo: 'View Or Modify Info', // 查看或修改信息
+    DeleteUser: 'Delete User', // 删除用户
+    NewPwd: 'New Password', // 新的密码
+    PleInputNewPwd: 'Please enter new password', // 请输入新的密码
+    PleReInputNewPwd: 'Please enter your password again', // 请再次输入密码
+    ConfirmPwd: 'Confirm your password' // 确认密码
   },
   RunControlConfigManage: {
     func_index: '',
