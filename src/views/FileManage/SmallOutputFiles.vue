@@ -102,7 +102,7 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :label="$t('FileDataPage.TextDeleteAgoFile')" :label-width="formLabelWidth">
+              <el-form-item :label="$t('FileDataPage.TextDeleteAgoFile')">
                 <el-input-number v-model="save_months" :min="3" :placeholder="$t('FileDataPage.TextInputMonth')" clearable />
               </el-form-item>
             </el-col>
