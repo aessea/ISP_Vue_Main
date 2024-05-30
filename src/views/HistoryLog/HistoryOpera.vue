@@ -3,7 +3,7 @@
     <el-card>
       <el-row>
         <el-col :span="20">
-          <el-select v-model="typeValue" placeholder="搜索操作类型" clearable>
+          <el-select v-model="typeValue" :placeholder="$t('HistoryOperaPage.TextSearchType')" clearable>
             <el-option
               v-for="item in typeOptions"
               :key="item.value"
@@ -13,14 +13,14 @@
           </el-select>
           <el-input
             v-model="userValue"
-            placeholder="搜索用户名"
+            :placeholder="$t('HistoryOperaPage.TextSearchUser')"
             prefix-icon="el-icon-search"
             style="width: 200px;margin-left: 10px;"
             clearable
           />
           <el-input
             v-model="tableValue"
-            placeholder="搜索操作对象"
+            :placeholder="$t('HistoryOperaPage.TextSearchObject')"
             prefix-icon="el-icon-search"
             style="width: 200px;margin-left: 10px;"
             clearable
@@ -31,10 +31,10 @@
             style="margin-left: 10px;"
             @click="searchData"
           >
-            搜索
+            {{ $t('PublicBtn.Search') }}
           </el-button>
           <el-button type="danger" icon="el-icon-delete" style="margin-left: 10px;" @click="filterDataDialog">
-            删除历史日志
+            {{ $t('PublicText.BtnDeleteHisLog') }}
           </el-button>
         </el-col>
         <el-col :span="4">
@@ -69,42 +69,42 @@
       >
         <el-table-column
           prop="user_name"
-          label="用户名"
+          :label="$t('HistoryOperaPage.user_name')"
           width="150"
           sortable
         />
         <el-table-column
           prop="table_name"
-          label="操作对象"
+          :label="$t('HistoryOperaPage.table_name')"
           width="180"
           sortable
         />
         <el-table-column
           prop="action"
-          label="操作"
+          :label="$t('HistoryOperaPage.action')"
           sortable
         />
         <el-table-column
           prop="action_type"
-          label="操作类型"
+          :label="$t('HistoryOperaPage.action_type')"
           width="120"
           sortable
         >
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.action_type === 'add'" size="small">添加</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'delete'" size="small" type="danger">删除</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'modify'" size="small" type="success">修改</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'import'" size="small" type="info">导入</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'export'" size="small" type="info">导出</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'run'" size="small" type="warning">运行</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'backup'" size="small" type="success">备份</el-tag>
-            <el-tag v-else-if="scope.row.action_type === 'api'" size="small">接口</el-tag>
-            <el-tag v-else size="small" type="info">其它</el-tag>
+            <el-tag v-if="scope.row.action_type === 'add'" size="small">{{ $t('PublicBtn.Append') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'delete'" size="small" type="danger">{{ $t('PublicBtn.Delete') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'modify'" size="small" type="success">{{ $t('PublicBtn.Modify') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'import'" size="small" type="info">{{ $t('PublicBtn.Import') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'export'" size="small" type="info">{{ $t('PublicBtn.Export') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'run'" size="small" type="warning">{{ $t('PublicBtn.Run') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'backup'" size="small" type="success">{{ $t('PublicBtn.Backup') }}</el-tag>
+            <el-tag v-else-if="scope.row.action_type === 'api'" size="small">{{ $t('PublicBtn.Api') }}</el-tag>
+            <el-tag v-else size="small" type="info">{{ $t('PublicBtn.Other') }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
           prop="action_time"
-          label="操作日期"
+          :label="$t('HistoryOperaPage.action_time')"
           width="230"
           sortable
         />
@@ -123,7 +123,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="删除历史日志"
+      :title="$t('HistoryOperaPage.BtnDeleteHisLog')"
       :visible.sync="filterDialogVisible"
       width="45%"
       @dragDialog="handleDrag"
@@ -132,7 +132,7 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item label="删除几个月前的日志：" :label-width="formLabelWidth">
+              <el-form-item :label="$t('HistoryOperaPage.TextDeleteMonthAgo')" :label-width="formLabelWidth">
                 <el-input-number v-model="save_months" :min="6" :placeholder="$t('FileDataPage.TextInputMonth')" clearable />
               </el-form-item>
             </el-col>
@@ -141,7 +141,7 @@
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button type="danger" @click="filterData">确认删除</el-button>
+        <el-button type="danger" @click="filterData">{{ $t('PublicBtn.ConfirmDelete') }}</el-button>
       </span>
     </el-dialog>
 
@@ -163,28 +163,31 @@ export default {
       // 搜索类型
       typeOptions: [{
         value: 'add',
-        label: '添加'
+        label: this.$t('PublicBtn.Append')
       }, {
         value: 'delete',
-        label: '删除'
+        label: this.$t('PublicBtn.Delete')
       }, {
         value: 'edit',
-        label: '修改'
+        label: this.$t('PublicBtn.Modify')
       }, {
         value: 'import',
-        label: '导入'
+        label: this.$t('PublicBtn.Import')
       }, {
         value: 'export',
-        label: '导出'
+        label: this.$t('PublicBtn.Export')
       }, {
         value: 'run',
-        label: '运行'
+        label: this.$t('PublicBtn.Run')
+      }, {
+        value: 'backup',
+        label: this.$t('PublicBtn.Backup')
       }, {
         value: 'api',
-        label: '接口'
+        label: this.$t('PublicBtn.Api')
       }, {
         value: 'other',
-        label: '其它'
+        label: this.$t('PublicBtn.Other')
       }],
       tableValue: '', // 搜索表名
       typeValue: '', // 搜索类型
@@ -241,7 +244,7 @@ export default {
       if (this.typeValue === '' && this.userValue === '' && this.tableValue === '') {
         this.$message({
           type: 'warning',
-          message: '请至少输入一个关键词'
+          message: this.$t('HistoryOperaPage.SelectOneKeyWord')
         })
         return
       }
@@ -269,14 +272,14 @@ export default {
       this.filterDialogVisible = false
     },
     filterData() {
-      this.$confirm(`确认要删除${this.save_months}个月前的日志？`, this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('HistoryOperaPage.DeleteHisLog1') + this.save_months + this.$t('HistoryOperaPage.DeleteHisLog2'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
         if (this.save_months === undefined) {
-          this.$alert('删除失败', this.$t('PublicText.TitleTip'), {
+          this.$alert(this.$t('PublicText.DeleteFailed'), this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })

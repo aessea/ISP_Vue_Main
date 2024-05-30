@@ -63,18 +63,29 @@ export default {
     ResultValue: 'Result Value', // 目标值
     ThreeDayPoints: 'Three Days Points', // 三天总点数
     To: 'to', // 至
-    InitialFailed: '' // 初始化数据出错
+    InitialFailed: '', // 初始化数据出错
+    DeleteFailed: 'Delete failed', // 删除失败
+    BtnDeleteHisLog: 'Delete History Log' // 删除历史日志
   },
   // 通用按钮
   PublicBtn: {
     Confirm: 'Confirm', // 确定
     Close: 'Close', // 关闭
     Append: 'Append', // 添加
+    Delete: 'Delete', // 删除
+    Modify: 'Modify', // 修改
+    Import: 'Import', // 导入
+    Export: 'Export', // 导出
+    Run: 'Run', // 运行
+    Backup: 'Backup', // 备份
+    Api: 'API', // 接口
+    Other: 'Other', // 其他
     Cancel: 'Cancel', // 取消
     Open: 'Open', // 开启
     Refresh: 'Refresh', // 刷新
     BtnGet: 'Get', // 获取
-    ConfirmDelete: 'Confirm Delete' // 确认删除
+    ConfirmDelete: 'Confirm Delete', // 确认删除
+    Search: 'Search' // 搜索
   },
   route: { // 路由
     // 首页
@@ -407,13 +418,26 @@ export default {
     visible_roles: 'Configurable Roles', // 可配置的角色
     UnknownClassify: 'Unknown Classify' // 未知分类
   },
-  HistoryOpera: {
-    user_name: '',
-    table_name: '',
-    action_type: '',
-    action: '',
-    action_time: ''
+  // 运行日志
+  HistoryRunPage: {
+    SelectLevel: 'Select LEVEL' // 选择LEVEL
   },
+  // 历史操作
+  HistoryOperaPage: {
+    user_name: 'User name', // 用户名
+    table_name: 'Object', // 操作对象
+    action_type: 'Operation Type', // 操作类型
+    action: 'Operation', // 操作
+    action_time: 'Date of operation', // 操作日期
+    TextSearchType: 'Search operation type', // 搜索操作类型
+    TextSearchUser: 'Search user name', // 搜索用户名
+    TextSearchObject: 'Search object', // 搜索操作对象
+    TextDeleteMonthAgo: 'Deleting logs from months ago:', // 删除几个月前的日志：
+    SelectOneKeyWord: 'Please enter at least one keyword', // 请至少输入一个关键词
+    DeleteHisLog1: 'Are you sure you want to delete logs older than ', // 确认要删除
+    DeleteHisLog2: ' months?' // 个月前的日志？
+  },
+  // 接口日志
   MesInterfaceLog: {
     name: '',
     api_name: '',

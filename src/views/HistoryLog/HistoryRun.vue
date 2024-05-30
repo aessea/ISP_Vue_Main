@@ -3,7 +3,7 @@
     <el-card>
       <el-row>
         <el-col :span="20">
-          <el-select v-model="levelValue" placeholder="选择LEVEL" clearable>
+          <el-select v-model="levelValue" :placeholder="$t('HistoryRunPage.SelectLevel')" clearable>
             <el-option
               v-for="item in levelOptions"
               :key="item.value"
@@ -17,10 +17,10 @@
             style="margin-left: 10px;"
             @click="searchData"
           >
-            搜索
+            {{ $t('PublicBtn.Search') }}
           </el-button>
           <el-button type="danger" icon="el-icon-delete" style="margin-left: 10px;" @click="filterDataDialog">
-            删除历史日志
+            {{ $t('PublicText.BtnDeleteHisLog') }}
           </el-button>
         </el-col>
         <el-col :span="4">
@@ -97,7 +97,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="删除历史日志"
+      :title="$t('HistoryOperaPage.BtnDeleteHisLog')"
       :visible.sync="filterDialogVisible"
       width="45%"
       @dragDialog="handleDrag"
@@ -106,7 +106,7 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item label="删除几个月前的日志：" :label-width="formLabelWidth">
+              <el-form-item :label="$t('HistoryOperaPage.TextDeleteMonthAgo')" :label-width="formLabelWidth">
                 <el-input-number v-model="save_months" :placeholder="$t('FileDataPage.TextInputMonth')" clearable />
               </el-form-item>
             </el-col>
@@ -115,7 +115,7 @@
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button type="danger" @click="filterData">确认删除</el-button>
+        <el-button type="danger" @click="filterData">{{ this.$t('PublicBtn.ConfirmDelete') }}</el-button>
       </span>
     </el-dialog>
 
@@ -208,7 +208,7 @@ export default {
       if (this.levelValue === '') {
         this.$message({
           type: 'warning',
-          message: '请选择LEVEL'
+          message: this.$t('HistoryRunPage.SelectLevel')
         })
         return
       }
@@ -234,14 +234,14 @@ export default {
       this.filterDialogVisible = false
     },
     filterData() {
-      this.$confirm(`确认要删除${this.save_months}个月前的日志？`, this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('HistoryOperaPage.DeleteHisLog1') + this.save_months + this.$t('HistoryOperaPage.DeleteHisLog2'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
         if (this.save_months === undefined) {
-          this.$alert('删除失败', this.$t('PublicText.TitleTip'), {
+          this.$alert(this.$t('PublicText.DeleteFailed'), this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
