@@ -9,16 +9,16 @@
             </el-button>
             <el-input
               v-model="api_name"
-              placeholder="按照接口函数名或接口名称搜索"
+              :placeholder="$t('MesInterfaceLogPage.TextSearchData')"
               prefix-icon="el-icon-search"
               style="width: 300px;margin-left: 10px;"
               clearable
             />
             <el-button type="primary" icon="el-icon-search" style="margin-left: 10px;" @click="searchBy_name">
-              搜索
+              {{ $t('PublicBtn.Search') }}
             </el-button>
             <el-button type="danger" icon="el-icon-delete" style="margin-left: 10px;" @click="filterDataDialog">
-              删除历史日志
+              {{ $t('TablePage.BtnDeleteHisLog') }}
             </el-button>
           </div>
         </el-col>
@@ -38,11 +38,11 @@
         :header-cell-style="{ background: '#eef1f6', color: '#606266', padding: '3px' }"
         max-height="1000px"
       >
-        <el-table-column prop="name" label="接口函数名" sortable />
-        <el-table-column prop="api_name" label="接口名称" sortable />
-        <el-table-column prop="require_time" label="发送请求的时间" sortable />
-        <el-table-column prop="require_type" label="请求类型" sortable />
-        <el-table-column prop="time_consumed" label="耗时（单位：秒）" sortable />
+        <el-table-column prop="name" :label="$t('MesInterfaceLogPage.name')" sortable />
+        <el-table-column prop="api_name" :label="$t('MesInterfaceLogPage.api_name')" sortable />
+        <el-table-column prop="require_time" :label="$t('MesInterfaceLogPage.require_time')" sortable />
+        <el-table-column prop="require_type" :label="$t('MesInterfaceLogPage.require_type')" sortable />
+        <el-table-column prop="time_consumed" :label="$t('MesInterfaceLogPage.time_consumed')" sortable />
         <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
           <template slot-scope="scope">
             <el-button
@@ -75,18 +75,18 @@
     >
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-descriptions class="margin-top" :column="1" border>
-          <el-descriptions-item label="接口函数名">
+          <el-descriptions-item :label="$t('MesInterfaceLogPage.name')">
             <el-tag size="small">{{ model.name }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="接口名称">{{ model.api_name }}</el-descriptions-item>
-          <el-descriptions-item label="发送请求的时间">{{ model.require_time }}</el-descriptions-item>
-          <el-descriptions-item label="请求类型">{{ model.require_type }}</el-descriptions-item>
-          <el-descriptions-item label="耗时（单位：秒）">{{ model.time_consumed }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('MesInterfaceLogPage.api_name')">{{ model.api_name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('MesInterfaceLogPage.require_time')">{{ model.require_time }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('MesInterfaceLogPage.require_type')">{{ model.require_type }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('MesInterfaceLogPage.time_consumed')">{{ model.time_consumed }}</el-descriptions-item>
         </el-descriptions>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="exportPostData">导出发送数据</el-button>
-        <el-button type="primary" @click="exportReceiveData">导出接收数据</el-button>
+        <el-button type="primary" @click="exportPostData">{{ this.$t('MesInterfaceLogPage.ExportPostData') }}</el-button>
+        <el-button type="primary" @click="exportReceiveData">{{ this.$t('MesInterfaceLogPage.ExportReceiveData') }}</el-button>
         <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
@@ -113,7 +113,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      title="删除历史数据"
+      :title="$t('MesInterfaceLogPage.DeleteHisData')"
       :visible.sync="filterDialogVisible"
       width="45%"
       @dragDialog="handleDrag"
@@ -131,7 +131,7 @@
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button type="danger" @click="filterData">确认删除</el-button>
+        <el-button type="danger" @click="filterData">{{ this.$t('PublicBtn.ConfirmDelete') }}</el-button>
       </span>
     </el-dialog>
 
@@ -197,7 +197,7 @@ export default {
     handleDetail(index, row) {
       this.scopeIndex = index
       // index是表格行数，row是行数据
-      this.dialogTitle = '数据详情'
+      this.dialogTitle = this.$t('MesInterfaceLogPage.FileDetail')
       this.dataDialogVisible = true
       // 显示表单数据
       for (const key in row) {
@@ -247,14 +247,14 @@ export default {
       this.filterDialogVisible = false
     },
     filterData() {
-      this.$confirm(`确认要删除${this.save_months}个月前的日志？`, this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('HistoryOperaPage.DeleteHisLog1') + this.save_months + this.$t('HistoryOperaPage.DeleteHisLog2'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
       }).then(() => {
         if (this.save_months === undefined) {
-          this.$alert('删除失败', this.$t('PublicText.TitleTip'), {
+          this.$alert(this.$t('PublicText.DeleteFailed'), this.$t('PublicText.TitleTip'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -295,14 +295,14 @@ export default {
         if (res.code === 20000) {
           if (res.receive_data === '' || res.receive_data === null) {
             this.$notify({
-              title: '导出失败',
-              message: '当前接口接收数据为空',
+              title: this.$t('MesInterfaceLogPage.MsgExport1'),
+              message: this.$t('MesInterfaceLogPage.MsgExport2'),
               type: 'error'
             })
             return
           }
           try {
-            const tableName = `${this.table_data[this.scopeIndex].api_name}-接收数据`
+            const tableName = this.table_data[this.scopeIndex].api_name + this.$t('MesInterfaceLogPage.receive_data')
             const jsonString = this.fixJSONString(res.receive_data)
             const receive_data_array = JSON.parse(jsonString)
             const dataCount = receive_data_array.length
@@ -320,7 +320,7 @@ export default {
             })
           } catch (error) {
             this.$message({
-              message: '数据解析错误',
+              message: this.$t('MesInterfaceLogPage.MsgExport3'),
               type: 'error'
             })
           }
@@ -334,14 +334,14 @@ export default {
         if (res.code === 20000) {
           if (res.post_data === '' || res.post_data === null) {
             this.$notify({
-              title: '导出失败',
-              message: '当前接发送数据为空',
+              title: this.$t('MesInterfaceLogPage.MsgExport1'),
+              message: this.$t('MesInterfaceLogPage.MsgExport4'),
               type: 'error'
             })
             return
           }
           try {
-            const tableName = `${this.table_data[this.scopeIndex].api_name}-发送数据`
+            const tableName = this.table_data[this.scopeIndex].api_name + this.$t('MesInterfaceLogPage.post_data')
             const jsonString = this.fixJSONString(res.post_data)
             const post_data_array = JSON.parse(jsonString)
             console.log(post_data_array)
@@ -363,7 +363,7 @@ export default {
             // 这里是针对解析 JSON 字符串出现异常时的处理
             this.$message({
               type: 'error',
-              message: '数据解析错误'
+              message: this.$t('MesInterfaceLogPage.MsgExport3')
             })
           }
         }

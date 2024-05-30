@@ -438,16 +438,25 @@ export default {
     DeleteHisLog2: ' months?' // 个月前的日志？
   },
   // 接口日志
-  MesInterfaceLog: {
-    name: '',
-    api_name: '',
-    require_time: '',
-    require_user: '',
-    post_data: '',
-    require_type: '',
-    receive_data: '',
-    remark: '',
-    time_consumed: ''
+  MesInterfaceLogPage: {
+    name: 'Name', // 接口函数名
+    api_name: 'API Name', // 接口名称
+    require_time: 'Require Time', // 发送请求的时间
+    require_user: 'Require User', // 请求的用户
+    post_data: 'Post Data', // 发送的数据
+    require_type: 'Require Type', // 请求类型
+    receive_data: 'Receive Data', // 接收的数据
+    remark: 'Remark', // 备注
+    time_consumed: 'Time Consumed', // 耗时（单位：秒）
+    ExportPostData: 'Export Post Data', // 导出发送数据
+    ExportReceiveData: 'Export Receive Data', // 导出接收数据
+    DeleteHisData: 'Delete History Data', // 删除历史数据
+    FileDetail: 'File Detail', // 数据详情
+    MsgExport1: 'Export failed', // 导出失败
+    MsgExport2: 'The interface receives empty data', // 当前接口接收数据为空
+    MsgExport3: 'Data parsing errors', // 数据解析错误
+    MsgExport4: 'The interface post empty data', // 当前接口发送数据为空
+    TextSearchData: 'Search by interface function name or interface name' // 按照接口函数名或接口名称搜索
   },
   UserManage: {
     username: '',
