@@ -123,7 +123,7 @@
 
     <el-dialog
       v-el-drag-dialog
-      :title="$t('HistoryOperaPage.BtnDeleteHisLog')"
+      :title="$t('PublicText.BtnDeleteHisLog')"
       :visible.sync="filterDialogVisible"
       width="45%"
       @dragDialog="handleDrag"
@@ -132,7 +132,7 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :label="$t('HistoryOperaPage.TextDeleteMonthAgo')" :label-width="formLabelWidth">
+              <el-form-item :label="$t('HistoryOperaPage.TextDeleteMonthAgo')">
                 <el-input-number v-model="save_months" :min="6" :placeholder="$t('FileDataPage.TextInputMonth')" clearable />
               </el-form-item>
             </el-col>
@@ -150,8 +150,10 @@
 
 <script>
 import { GetTableData, SearchData, DeleteHistoryLog } from '@/api/HistoryLog/HistoryOpera'
+import elDragDialog from '@/directive/el-drag-dialog'
 export default {
   name: 'HistoryOpera',
+  directives: { elDragDialog },
   data() {
     return {
       loading: true, // 表格加载动画
@@ -202,6 +204,9 @@ export default {
     this.getTableData(this.currentPage, this.pageSize, this.isSearch)
   },
   methods: {
+    handleDrag() {
+      // // this.$refs.select.blur()
+    },
     // 分页
     handlePageChange(val) {
       this.currentPage = val

@@ -14,3 +14,10 @@ export function ExportData(data) {
     data
   })
 }
+// 获取表格列名
+export function GetLangDict() {
+  return request({
+    url: '/HistoryLog/ScheduleResData/get_lang_dict/',
+    method: 'get'
+  })
+}

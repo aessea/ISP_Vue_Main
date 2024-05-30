@@ -18,7 +18,7 @@
               {{ $t('PublicBtn.Search') }}
             </el-button>
             <el-button type="danger" icon="el-icon-delete" style="margin-left: 10px;" @click="filterDataDialog">
-              {{ $t('TablePage.BtnDeleteHisLog') }}
+              {{ $t('PublicText.BtnDeleteHisLog') }}
             </el-button>
           </div>
         </el-col>
@@ -122,7 +122,7 @@
         <el-form>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :label="$t('FileDataPage.TextDeleteAgoFile')" :label-width="formLabelWidth">
+              <el-form-item :label="$t('FileDataPage.TextDeleteAgoFile')">
                 <el-input-number v-model="save_months" :placeholder="$t('FileDataPage.TextInputMonth')" clearable />
               </el-form-item>
             </el-col>
@@ -180,6 +180,9 @@ export default {
     this.getTableData(this.currentPage, this.pageSize)
   },
   methods: {
+    handleDrag() {
+      // // this.$refs.select.blur()
+    },
     // 按接口函数名或接口名称搜索
     searchBy_name() {
       // 这样写当接口函数名和接口名称相同时会只有接口函数名搜索结果

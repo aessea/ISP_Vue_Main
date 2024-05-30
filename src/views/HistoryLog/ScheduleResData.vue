@@ -37,16 +37,16 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266', padding: '3px'}"
         max-height="1000px"
       >
-        <el-table-column prop="date" label="排程日期" sortable />
-        <el-table-column prop="schedule_type" label="排程类型" sortable />
-        <el-table-column prop="mode" label="预排/正排" sortable />
-        <el-table-column prop="feasible" label="是否可行解" sortable />
-        <el-table-column prop="obj_value" label="目标值" sortable />
-        <el-table-column prop="overdue_value" label="逾期" sortable />
-        <el-table-column prop="idle_value" label="idle" sortable />
-        <el-table-column prop="line_balance" label="线平衡" sortable />
-        <el-table-column prop="group_count" label="分组数" sortable />
-        <el-table-column prop="run_time" label="排程运行时长（分钟）" width="200" sortable />
+        <el-table-column prop="date" :label="lang_dict.date" sortable />
+        <el-table-column prop="schedule_type" :label="lang_dict.schedule_type" sortable />
+        <el-table-column prop="mode" :label="lang_dict.mode" sortable />
+        <el-table-column prop="feasible" :label="lang_dict.feasible" sortable />
+        <el-table-column prop="obj_value" :label="lang_dict.obj_value" sortable />
+        <el-table-column prop="overdue_value" :label="lang_dict.overdue_value" sortable />
+        <el-table-column prop="idle_value" :label="lang_dict.idle_value" sortable />
+        <el-table-column prop="line_balance" :label="lang_dict.line_balance" sortable />
+        <el-table-column prop="group_count" :label="lang_dict.group_count" sortable />
+        <el-table-column prop="run_time" :label="lang_dict.run_time" width="200" sortable />
       </el-table>
       <el-pagination
         background
@@ -85,10 +85,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { GetTableData, ExportData } from '@/api/HistoryLog/ScheduleResData'
+import { GetTableData, ExportData, GetLangDict } from '@/api/HistoryLog/ScheduleResData'
+import elDragDialog from '@/directive/el-drag-dialog'
 import XLSX from 'xlsx'
 export default {
   name: 'ScheduleResData',
+  directives: { elDragDialog },
   data() {
     return {
       loading: true, // 表格加载动画
@@ -99,7 +101,8 @@ export default {
       currentPage: 1,
       isSearch: false,
       exportDialogVisible: false,
-      exportRadio: 'xlsx' // 导出格式选择（方便以后扩展）
+      exportRadio: 'xlsx', // 导出格式选择（方便以后扩展）
+      lang_dict: {} // 从后端获取表格列名
     }
   },
   computed: {
@@ -109,9 +112,16 @@ export default {
     ])
   },
   created() {
+    GetLangDict().then(res => {
+      this.lang_dict = res.lang_dict
+    })
     this.getTableData(this.currentPage, this.pageSize)
   },
   methods: {
+    // dialog可拖拽
+    handleDrag() {
+      // // this.$refs.select.blur()
+    },
     // 分页
     handlePageChange(val) {
       this.currentPage = val

@@ -407,7 +407,7 @@
         @selection-change="handleBackupSelection"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column prop="backup_name" :label="$t('PublicBtn.TextBackupName')" />
+        <el-table-column prop="backup_name" :label="$t('BlockTimeDataPage.TextBackupName')" />
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleCloseManageBackup">{{ $t('PublicBtn.Close') }}</el-button>
