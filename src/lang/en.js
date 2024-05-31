@@ -518,6 +518,16 @@ export default {
     ConfirmModRole: 'Are you sure you want to modify button permissions?', // 确定要修改按钮权限？
     PleSelectRole: 'Please Select a Role' // 请选择角色
   },
+  // 接口配置管理
+  InterfaceConfigPage: {
+    name: 'API Name', // 接口函数名
+    description: 'Description', // 接口描述
+    url: 'Address', // 接口相对地址
+    remark: 'Remark', // 备注
+    request_test_server: '', // 请求MES的正式服/测试服
+    FormalServer: 'Formal Server', // 正式服
+    TestServer: 'Test Server' // 测试服
+  },
   RunControlConfigManage: {
     func_index: '',
     func_des: '',

@@ -28,14 +28,14 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
+            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
                 circle
                 @click="helpTips"
               />
-            </el-tooltip>
+            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>
@@ -51,18 +51,18 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="name" label="接口函数名" sortable />
-          <el-table-column prop="description" label="接口描述" />
-          <el-table-column prop="url" label="接口相对地址" sortable />
-          <el-table-column prop="remark" label="备注" />
+          <el-table-column prop="name" :label="$t('InterfaceConfigPage.name')" sortable />
+          <el-table-column prop="description" :label="$t('InterfaceConfigPage.description')" />
+          <el-table-column prop="url" :label="$t('InterfaceConfigPage.url')" sortable />
+          <el-table-column prop="remark" :label="$t('InterfaceConfigPage.remark')" />
           <el-table-column
             prop="request_test_server"
-            label="请求MES的正式服/测试服"
+            :label="$t('InterfaceConfigPage.request_test_server')"
             width="160"
           >
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.request_test_server === true" size="small" type="success">正式服</el-tag>
-              <el-tag v-else-if="scope.row.request_test_server === false" size="small" type="danger">测试服</el-tag>
+              <el-tag v-if="scope.row.request_test_server === true" size="small" type="success">{{ $t('InterfaceConfigPage.FormalServer') }}</el-tag>
+              <el-tag v-else-if="scope.row.request_test_server === false" size="small" type="danger">{{ $t('InterfaceConfigPage.TestServer') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
@@ -108,28 +108,28 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <!-- <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.name" prop="name" label="接口函数名">
+            <el-form-item :rules="rules.name" prop="name" :label="$t('InterfaceConfigPage.name')">
               <el-input v-model="model.name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col> -->
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.description" prop="description" label="接口描述">
+            <el-form-item :rules="rules.description" prop="description" :label="$t('InterfaceConfigPage.description')">
               <el-input v-model="model.description" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.url" prop="url" label="接口相对地址">
+            <el-form-item :rules="rules.url" prop="url" :label="$t('InterfaceConfigPage.url')">
               <el-input v-model="model.url" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.request_test_server" prop="request_test_server" label="请求MES的正式服/测试服">
+            <el-form-item :rules="rules.request_test_server" prop="request_test_server" :label="$t('InterfaceConfigPage.request_test_server')">
               <el-switch
                 v-model="model.request_test_server"
-                active-text="正式库"
-                inactive-text="测试库"
+                :active-text="$t('InterfaceConfigPage.FormalServer')"
+                :inactive-text="$t('InterfaceConfigPage.TestServer')"
                 style="width: 100%;"
               />
             </el-form-item>
@@ -137,7 +137,7 @@
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.remark" prop="remark" label="备注">
+            <el-form-item :rules="rules.remark" prop="remark" :label="$t('InterfaceConfigPage.remark')">
               <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
@@ -150,7 +150,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog
+    <!-- <el-dialog
       v-el-drag-dialog
       :title="$t('TablePage.TitleFormDescription')"
       :visible.sync="helpDialogVisible"
@@ -161,7 +161,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
     <el-dialog
       v-el-drag-dialog
@@ -217,7 +217,7 @@ export default {
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
-      helpDialogVisible: false, // 帮助提示dialog
+      // helpDialogVisible: false, // 帮助提示dialog
       scopeIndex: '', // 表格行数index
       scopeRow: '', // 表格行数据
       importDialogVisible: false, // 导入数据dialog
@@ -604,11 +604,11 @@ export default {
     // 导入数据窗口关闭
     handleExportClose() {
       this.exportDialogVisible = false
-    },
-    // 帮助提示按钮
-    helpTips() {
-      this.helpDialogVisible = true
     }
+    // 帮助提示按钮
+    // helpTips() {
+    //   this.helpDialogVisible = true
+    // }
   }
 }
 </script>
