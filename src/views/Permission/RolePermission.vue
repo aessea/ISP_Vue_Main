@@ -5,7 +5,7 @@
         <el-col :span="16">
           <div>
             <el-button v-if="createUserDialogDisable === true" type="primary" @click="createUserDialog">
-              <i class="el-icon-plus" />创建新角色
+              <i class="el-icon-plus" />{{ this.$t('RolePermissionPage.CreateRole') }}
             </el-button>
           </div>
         </el-col>
@@ -40,8 +40,8 @@
 
           stripe
         >
-          <el-table-column prop="role_name" label="用户角色" width="160" />
-          <el-table-column prop="role_menus" label="可访问的页面">
+          <el-table-column prop="role_name" :label="$t('RolePermissionPage.role_name')" width="160" />
+          <el-table-column prop="role_menus" :label="$t('RolePermissionPage.role_menus')">
             <template slot-scope="scope">
               <el-tag
                 v-for="(val, key) in scope.row.role_menus"
@@ -52,9 +52,9 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column width="150" fixed="right" label="操作">
+          <el-table-column width="150" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" content="查看或修改信息" placement="top">
+              <el-tooltip class="item" effect="dark" :content="$t('UserManagePage.ViewOrModifyInfo')" placement="top">
                 <el-button
                   v-if="handleModifyRoleInfoDisable === true && scope.row.role_name !== '超级管理员'"
                   type="primary"
@@ -64,7 +64,7 @@
                   @click="handleModifyRoleInfo(scope.$index, scope.row)"
                 />
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="删除角色" placement="top">
+              <el-tooltip class="item" effect="dark" :content="$t('RolePermissionPage.DeleteRole')" placement="top">
                 <el-button
                   v-if="handleDeleteRoleDisable === true && scope.row.role_name !== '超级管理员'"
                   type="danger"
@@ -89,7 +89,7 @@
     >
       <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
         <el-col :span="8">
-          <el-input v-model="input_role_name" placeholder="请输入角色名称" clearable />
+          <el-input v-model="input_role_name" :placeholder="$t('RolePermissionPage.PleInputRoleName')" clearable />
         </el-col>
       </el-row>
       <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
@@ -104,16 +104,16 @@
         </el-col>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="handleRolePermissionVisible">权限设置</el-button>
-        <el-button v-if="createOrModify === true" type="primary" @click="createRole">创建角色</el-button>
-        <el-button v-if="createOrModify === false" type="primary" @click="modifyRoleInfo">确认修改</el-button>
+        <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="handleRolePermissionVisible">{{ $t('RolePermissionPage.PermissionSet') }}</el-button>
+        <el-button v-if="createOrModify === true" type="primary" @click="createRole">{{ $t('PublicBtn.ConfirmCreate') }}</el-button>
+        <el-button v-if="createOrModify === false" type="primary" @click="modifyRoleInfo">{{ $t('PublicBtn.ConfirmModify') }}</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
-      title="权限选择 "
+      :title="$t('RolePermissionPage.PermissionSelect')"
       :visible.sync="rolePermissionDialogVisible"
       width="60%"
       @dragDialog="handleDrag"
@@ -124,8 +124,8 @@
           style="text-align: left; display: inline-block"
           :left-default-checked="role_data_left"
           :right-default-checked="role_data_right"
-          :titles="['所有权限', '已授权的权限']"
-          :button-texts="['收回权限', '添加权限']"
+          :titles="[$t('RolePermissionPage.AllPermissions'), $t('RolePermissionPage.AutPermissions')]"
+          :button-texts="[$t('RolePermissionPage.RevokePermissions'), $t('RolePermissionPage.AddPermissions')]"
           :format="{
             noChecked: '${total}',
             hasChecked: '${checked}/${total}'
@@ -134,20 +134,20 @@
         />
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleRolePermissionClose">关闭</el-button>
-        <el-button type="primary" @click="handleRolePermissionConfirm">确认</el-button>
+        <el-button @click="handleRolePermissionClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="handleRolePermissionConfirm">{{ $t('PublicBtn.Confirm') }}</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       v-el-drag-dialog
-      title="说明"
+      :title="$t('TablePage.BtnViewInstruction')"
       :visible.sync="helpDialogVisible"
       width="60%"
       @dragDialog="handleDrag"
     >
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
@@ -239,7 +239,7 @@ export default {
     },
     // 创建用户dialog
     createUserDialog() {
-      this.dialogTitle = '创建用户'
+      this.dialogTitle = this.$t('RolePermissionPage.CreateRole')
       this.createOrModify = true
       this.dataDialogVisible = true
       this.isClick = false
@@ -272,7 +272,7 @@ export default {
     // 修改角色信息dialog
     handleModifyRoleInfo(index, row) {
       // 修改dialog
-      this.dialogTitle = '修改角色信息'
+      this.dialogTitle = this.$t('UserManagePage.ViewOrModifyInfo')
       this.createOrModify = false
       this.input_role_name = row['role_name']
       this.input_role_data_list = row['role_menus']
@@ -305,7 +305,7 @@ export default {
       })
     },
     handleDeleteRole(index, row) {
-      this.$confirm('确定要删除该角色？', this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('RolePermissionPage.ConfirmDelRole'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',

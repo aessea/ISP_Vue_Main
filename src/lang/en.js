@@ -93,6 +93,7 @@ export default {
     BtnGet: 'Get', // 获取
     ConfirmDelete: 'Confirm Delete', // 确认删除
     ConfirmModify: 'Confirm Modify', // 确认修改
+    ConfirmCreate: 'Confirm Create', // 确认创建
     Search: 'Search', // 搜索
     Crrate: 'Create' // 创建
   },
@@ -297,7 +298,7 @@ export default {
     BtnImport: 'Import', // 导入
     BtnExport: 'Export', // 导出
     BtnClose: 'Close', // 关闭
-    BtnModify: 'Modify', // 确认修改
+    BtnModify: 'Modify', // 修改
     BtnAppendContinue: 'Append And Continue', // 添加并继续
     BtnRefreshTable: 'Refresh Table', // 刷新表格
     BtnViewInstruction: 'View Instruction', // 查看说明
@@ -481,7 +482,7 @@ export default {
     CreateUser: 'Create User', // 创建用户
     CreateUserSuccess: 'Create User Successfully', // 创建用户成功
     ModifyPwd: 'Modify Password', // 修改密码
-    ViewOrModifyInfo: 'View Or Modify Info', // 查看或修改信息
+    ViewOrModifyInfo: 'View or Modify Info', // 查看或修改信息
     DeleteUser: 'Delete User', // 删除用户
     NewPwd: 'New Password', // 新的密码
     PleInputNewPwd: 'Please enter new password', // 请输入新的密码
@@ -490,6 +491,21 @@ export default {
     TwiceInputError: 'The password entered twice is inconsistent, please re-enter it!', // 两次输入密码不一致，请重新输入！
     ConfirmDeleteUser: 'Confirm Delete User', // 确定要删除该用户？
     PwdVerification: 'The password should be composed of letters, numbers, and symbols, and must be uppercase and lowercase' // 密码应由字母、数字、符号三种组成，且必须包含大小写
+  },
+  // 角色管理
+  RolePermissionPage: {
+    role_name: 'Role Name', // 角色名称
+    role_menus: 'Enable Pages', // 可访问的页面
+    CreateRole: 'Create Role', // 创建角色
+    DeleteRole: 'Delete Role', // 删除角色
+    PleInputRoleName: 'Please input role name', // 请输入角色名称
+    PermissionSet: 'Permission Settings', // 权限设置
+    PermissionSelect: 'Select Permission', // 选择权限
+    AllPermissions: 'All Permissions', // 所有权限
+    AutPermissions: 'Authorized Permissions', // 已授权权限
+    RevokePermissions: 'Revoke Permissions', // 收回权限
+    AddPermissions: 'Add Permissions', // 添加权限
+    ConfirmDelRole: 'Are you sure you want to remove the role?' // 确定要删除该角色？
   },
   RunControlConfigManage: {
     func_index: '',
@@ -505,10 +521,6 @@ export default {
     all_permission_buttons_list: '',
     has_permission_buttons: '',
     has_permission_buttons_front: ''
-  },
-  RolePermission: {
-    role_name: '',
-    role_menus: ''
   },
   // 维护时间表
   BlockTimeDataPage: {
