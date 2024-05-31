@@ -85,9 +85,9 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <span>{{ this.$t('TablePage.MsgIllustrate') }}</span>
+      <span>{{ $t('TablePage.MsgIllustrate') }}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
     <el-dialog
@@ -109,7 +109,7 @@
         </el-form>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFilterClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="danger" @click="deleteBeforeFiles">{{ this.$t('PublicBtn.ConfirmDelete') }}</el-button>
       </span>
     </el-dialog>

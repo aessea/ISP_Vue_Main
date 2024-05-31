@@ -98,7 +98,7 @@
       @dragDialog="handleDrag"
     >
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog> -->
 

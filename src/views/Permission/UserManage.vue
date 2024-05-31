@@ -159,7 +159,7 @@
         </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="createUser">{{ $t('PublicBtn.Crrate') }}</el-button>
         <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyUserInfo">{{ $t('PublicBtn.Modify') }}</el-button>
       </span>
@@ -176,7 +176,7 @@
       <p>普通管理员：支持管理所有表格，但无法管理用户</p>
       <p>程序员：仅支持对程序表进行操作</p>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog> -->
 

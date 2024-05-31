@@ -408,8 +408,8 @@ export default {
     MsgStaSuccess: '', // 量化成功
     MsgCloseSta: '' // 确认关闭量化窗口？
   },
-  // 排程配置
-  ParamsConfig: {
+  // 排程配置/排程配置管理
+  ParamsConfigPage: {
     MainConfig: 'Main Config', // 主板配置
     SmallConfig: 'Small Config', // 小板配置
     OtherConfig: 'Other Config', // 其它配置
@@ -427,7 +427,9 @@ export default {
     update_user: 'Update User', // 修改人
     update_time: 'Update Time', // 修改时间
     visible_roles: 'Configurable Roles', // 可配置的角色
-    UnknownClassify: 'Unknown Classify' // 未知分类
+    UnknownClassify: 'Unknown Classify', // 未知分类
+    BtnClearBackup: 'Clear the scheduled backup table ', // 清空排程备份表
+    TitleSyncData: 'Synchronize the scheduling configuration of the specified database' // 同步指定数据库的排程配置
   },
   // 运行日志
   HistoryRunPage: {

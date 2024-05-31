@@ -14,7 +14,7 @@
               <i class="el-icon-upload2" />{{ this.$t('TablePage.BtnImport') }}
             </el-button>
             <el-button v-if="buttons.includes('ChangeLineData/export')" @click="exportDataDialog">
-              <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
+              <i class="el-icon-download" />{{ $t('TablePage.BtnExport') }}
             </el-button>
           </div>
         </el-col>
@@ -125,7 +125,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ this.$t('TablePage.BtnAppend') }}</el-button>
         <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ this.$t('TablePage.BtnModify') }}</el-button>
       </span>
@@ -138,9 +138,9 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <span>{{ this.$t('TablePage.MsgIllustrate') }}</span>
+      <span>{{ $t('TablePage.MsgIllustrate') }}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
@@ -181,7 +181,7 @@
         </el-col>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleImportClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleImportClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="primary" @click="confirmImport">{{ this.$t('TablePage.BtnConfirmImport') }}</el-button>
       </span>
     </el-dialog>
@@ -195,13 +195,13 @@
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>{{ this.$t('TablePage.MsgExportType') }}</span>
+        <span>{{ $t('TablePage.ConfirmModify') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleExportClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="primary" @click="exportData">{{ this.$t('TablePage.BtnConfirmExport') }}</el-button>
       </span>
     </el-dialog>

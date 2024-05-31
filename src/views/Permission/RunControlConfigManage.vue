@@ -108,7 +108,7 @@
         </el-row>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="primary" @click="modifyData">{{ this.$t('PublicBtn.ConfirmModify') }}</el-button>
       </span>
     </el-dialog>
@@ -120,9 +120,9 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <span>{{ this.$t('TablePage.MsgIllustrate') }}</span>
+      <span>{{ $t('TablePage.MsgIllustrate') }}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog> -->
 

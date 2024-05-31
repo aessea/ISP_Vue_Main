@@ -140,7 +140,7 @@
         </el-form>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFilterClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="danger" @click="filterData">{{ $t('PublicBtn.ConfirmDelete') }}</el-button>
       </span>
     </el-dialog>

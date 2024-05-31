@@ -5,7 +5,7 @@
         <el-col :span="20">
           <div>
             <el-button @click="exportDataDialog">
-              <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
+              <i class="el-icon-download" />{{ $t('TablePage.BtnExport') }}
             </el-button>
             <el-input
               v-model="api_name"
@@ -87,7 +87,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="exportPostData">{{ this.$t('MesInterfaceLogPage.ExportPostData') }}</el-button>
         <el-button type="primary" @click="exportReceiveData">{{ this.$t('MesInterfaceLogPage.ExportReceiveData') }}</el-button>
-        <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
@@ -100,13 +100,13 @@
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>{{ this.$t('TablePage.MsgExportType') }}</span>
+        <span>{{ $t('TablePage.ConfirmModify') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleExportClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="primary" @click="exportData">{{ this.$t('TablePage.BtnConfirmExport') }}</el-button>
       </span>
     </el-dialog>
@@ -130,7 +130,7 @@
         </el-form>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleFilterClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleFilterClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="danger" @click="filterData">{{ this.$t('PublicBtn.ConfirmDelete') }}</el-button>
       </span>
     </el-dialog>

@@ -5,7 +5,7 @@
         <el-col :span="16">
           <div>
             <el-button @click="exportDataDialog">
-              <i class="el-icon-download" />{{ this.$t('TablePage.BtnExport') }}
+              <i class="el-icon-download" />{{ $t('TablePage.BtnExport') }}
             </el-button>
           </div>
         </el-col>
@@ -69,13 +69,13 @@
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>{{ this.$t('TablePage.MsgExportType') }}</span>
+        <span>{{ $t('TablePage.ConfirmModify') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleExportClose">{{ this.$t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button type="primary" @click="exportData">{{ this.$t('TablePage.BtnConfirmExport') }}</el-button>
       </span>
     </el-dialog>
