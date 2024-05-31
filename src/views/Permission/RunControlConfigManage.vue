@@ -12,14 +12,14 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
+            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
                 circle
                 @click="helpTips"
               />
-            </el-tooltip>
+            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>
@@ -34,13 +34,13 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="func_module" label="功能所属模块" sortable />
-          <el-table-column prop="func_des" label="功能名称" sortable />
-          <el-table-column prop="remark" label="备注说明" sortable />
-          <el-table-column prop="is_run" label="是否开启改功能">
+          <el-table-column prop="func_module" :label="$t('FuncManagePage.func_module')" sortable />
+          <el-table-column prop="func_des" :label="$t('FuncManagePage.func_des')" sortable />
+          <el-table-column prop="remark" :label="$t('FuncManagePage.remark')" sortable />
+          <el-table-column prop="is_run" :label="$t('FuncManagePage.is_run')">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_run === true" size="small" type="success">开启</el-tag>
-              <el-tag v-else size="small" type="danger">关闭</el-tag>
+              <el-tag v-if="scope.row.is_run === true" size="small" type="success">{{ $t('PublicBtn.Open') }}</el-tag>
+              <el-tag v-else size="small" type="danger">{{ $t('PublicBtn.Close') }}</el-tag>
             </template>
           </el-table-column>
 
@@ -79,29 +79,29 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.func_index" prop="func_index" label="显示顺序(数字升序)">
-              <el-input v-model="model.func_index" placeholder="请输入数字" clearable />
+            <el-form-item :rules="rules.func_index" prop="func_index" :label="$t('FuncManagePage.func_index')">
+              <el-input v-model="model.func_index" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.func_module" prop="func_module" label="功能所属模块">
+            <el-form-item :rules="rules.func_module" prop="func_module" :label="$t('FuncManagePage.func_module')">
               <el-input v-model="model.func_module" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.func_des" prop="func_des" label="功能名称">
+            <el-form-item :rules="rules.func_des" prop="func_des" :label="$t('FuncManagePage.func_des')">
               <el-input v-model="model.func_des" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.is_run" prop="is_run" label="是否开启">
+            <el-form-item :rules="rules.is_run" prop="is_run" :label="$t('FuncManagePage.is_run')">
               <el-switch v-model="model.is_run" style="width: 100%;" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.remark" prop="remark" label="备注说明">
+            <el-form-item :rules="rules.remark" prop="remark" :label="$t('FuncManagePage.remark')">
               <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
             </el-form-item>
           </el-col>
@@ -109,11 +109,11 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ this.$t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="modifyData">确认修改</el-button>
+        <el-button type="primary" @click="modifyData">{{ this.$t('PublicBtn.ConfirmModify') }}</el-button>
       </span>
     </el-dialog>
 
-    <el-dialog
+    <!-- <el-dialog
       v-el-drag-dialog
       :title="$t('TablePage.TitleFormDescription')"
       :visible.sync="helpDialogVisible"
@@ -124,7 +124,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
   </div>
 </template>
@@ -148,7 +148,7 @@ export default {
       table_data: [], // 表格数据
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
-      helpDialogVisible: false, // 帮助提示dialog
+      // helpDialogVisible: false, // 帮助提示dialog
       scopeIndex: '', // 表格行数index
       scopeRow: '', // 表格行数据
       importDialogVisible: false, // 导入数据dialog
@@ -181,12 +181,12 @@ export default {
       rules: {
         func_des: [{
           required: true,
-          message: '功能描述不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_run: [{
           required: true,
-          message: '需要选择是否开启',
+          message: this.$t('Form.PleaseSelect'),
           trigger: 'blur'
         }]
       },
@@ -333,11 +333,11 @@ export default {
         this.uploadFileName = this.uploadFileList[0].name // 更新文件名
         this.uploadFile = this.uploadFileList[0].raw // 更新文件
       }
-    },
-    // 帮助提示按钮
-    helpTips() {
-      this.helpDialogVisible = true
     }
+    // 帮助提示按钮
+    // helpTips() {
+    //   this.helpDialogVisible = true
+    // }
   }
 }
 </script>

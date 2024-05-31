@@ -33,6 +33,7 @@ export default {
   // 表单验证
   Form: {
     NotNull: 'It cannot be a null value', // 不能为空
+    PleaseSelect: '', // 请选择
     UserNameLength: '', // 用户名长度必须为 5 到 20 个字符
     PasswordLength: '', // 密码长度必须为 8 到 20 个字符
     EmailFormatError: '', // 邮箱格式不正确
@@ -528,12 +529,13 @@ export default {
     FormalServer: 'Formal Server', // 正式服
     TestServer: 'Test Server' // 测试服
   },
-  RunControlConfigManage: {
-    func_index: '',
-    func_des: '',
-    is_run: '',
-    func_name: '',
-    remark: ''
+  // 排程功能管理RunControlConfigManage
+  FuncManagePage: {
+    func_module: 'Function Module', // 功能所属模块
+    func_index: 'Display Order', // 显示顺序
+    func_des: 'Function Name', // 功能名称
+    is_run: 'Enable', // 是否开启
+    remark: 'Remark' // 备注
   },
   // 维护时间表
   BlockTimeDataPage: {
