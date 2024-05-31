@@ -32,7 +32,11 @@ export default {
   },
   // 表单验证
   Form: {
-    NotNull: 'It cannot be a null value' // 不能为空
+    NotNull: 'It cannot be a null value', // 不能为空
+    UserNameLength: '', // 用户名长度必须为 5 到 20 个字符
+    PasswordLength: '', // 密码长度必须为 8 到 20 个字符
+    EmailFormatError: '', // 邮箱格式不正确
+    InputPwdTwice: '' // 请再次输入密码
   },
   Placeholder: {
     Enter: 'Please enter', // 请输入
@@ -65,6 +69,7 @@ export default {
     To: 'to', // 至
     InitialFailed: '', // 初始化数据出错
     DeleteFailed: 'Delete failed', // 删除失败
+    ModifySuccess: 'Modify Successfully', // 修改成功
     BtnDeleteHisLog: 'Delete History Log', // 删除历史日志
     Enabled: 'Enabled', // 已启用
     NotEnabled: 'Not enabled' // 未启用
@@ -474,13 +479,17 @@ export default {
     create_time: 'Create Time', // 创建时间
     last_login_time: 'Last Login Time', // 最后一次登录时间
     CreateUser: 'Create User', // 创建用户
+    CreateUserSuccess: 'Create User Successfully', // 创建用户成功
     ModifyPwd: 'Modify Password', // 修改密码
     ViewOrModifyInfo: 'View Or Modify Info', // 查看或修改信息
     DeleteUser: 'Delete User', // 删除用户
     NewPwd: 'New Password', // 新的密码
     PleInputNewPwd: 'Please enter new password', // 请输入新的密码
     PleReInputNewPwd: 'Please enter your password again', // 请再次输入密码
-    ConfirmPwd: 'Confirm your password' // 确认密码
+    ConfirmPwd: 'Confirm your password', // 确认密码
+    TwiceInputError: 'The password entered twice is inconsistent, please re-enter it!', // 两次输入密码不一致，请重新输入！
+    ConfirmDeleteUser: 'Confirm Delete User', // 确定要删除该用户？
+    PwdVerification: 'The password should be composed of letters, numbers, and symbols, and must be uppercase and lowercase' // 密码应由字母、数字、符号三种组成，且必须包含大小写
   },
   RunControlConfigManage: {
     func_index: '',

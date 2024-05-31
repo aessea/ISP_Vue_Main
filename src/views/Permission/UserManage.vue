@@ -214,7 +214,7 @@ export default {
   data() {
     var validatePass = (rule, value, callback) => {
       if (this.checkPass(value) < 4) {
-        callback(new Error('密码应由字母、数字、符号三种组成，且必须包含大小写'))
+        callback(new Error(this.$t('UserManagePage.PwdVerification')))
       } else {
         callback()
       }
@@ -264,24 +264,24 @@ export default {
       rules: {
         username: [{
           required: true,
-          message: '用户名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }, {
           type: 'string',
           min: 5,
           max: 20,
-          message: '用户名长度必须为 5 到 20 个字符',
+          message: this.$t('Form.UserNameLength'),
           trigger: 'blur'
         }],
         password: [{
           required: true,
-          message: '密码不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }, {
           type: 'string',
           min: 8,
           max: 20,
-          message: '密码长度必须为 8 到 20 个字符',
+          message: this.$t('Form.PasswordLength'),
           trigger: 'blur'
         }, {
           validator: validatePass,
@@ -289,22 +289,22 @@ export default {
         }],
         roles: [{
           required: true,
-          message: '用户权限不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         remark: [{
           required: true,
-          message: '备注不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         enable: [{
           required: true,
-          message: '是否启用不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }],
         email: [{
           type: 'email',
-          message: '邮箱格式不正确',
+          message: this.$t('Form.NotNulEmailFormatErrorl'),
           trigger: 'blur'
         }],
         description: [],
@@ -314,13 +314,13 @@ export default {
       pwdRules: {
         password: [{
           required: true,
-          message: '密码不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }, {
           type: 'string',
           min: 8,
           max: 20,
-          message: '密码长度必须为 8 到 20 个字符',
+          message: this.$t('Form.PasswordLength'),
           trigger: 'blur'
         }, {
           validator: validatePass,
@@ -328,13 +328,13 @@ export default {
         }],
         password_twice: [{
           required: true,
-          message: '请再次输入密码',
+          message: this.$t('Form.InputPwdTwice'),
           trigger: 'blur'
         }, {
           type: 'string',
           min: 8,
           max: 20,
-          message: '密码长度必须为 8 到 20 个字符',
+          message: this.$t('Form.PasswordLength'),
           trigger: 'blur'
         }, {
           validator: validatePass,
@@ -408,7 +408,7 @@ export default {
     },
     // 创建用户dialog
     createUserDialog() {
-      this.dialogTitle = '创建用户'
+      this.dialogTitle = this.$t('UserManagePage.CreateUser')
       this.dialogBtnType = true
       this.dataDialogVisible = true
       this.isClick = false
@@ -422,7 +422,7 @@ export default {
           CreateUser(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
-                title: '创建成功',
+                title: this.$t('UserManagePage.CreateUserSuccess'),
                 message: res.message,
                 type: 'success'
               })
@@ -435,7 +435,7 @@ export default {
         } else {
           this.$message({
             type: 'error',
-            message: '提交失败，请按照要求填写信息！'
+            message: this.$t('TablePage.MsgModifyError')
           })
         }
       })
@@ -456,7 +456,7 @@ export default {
       if (this.pwdModel['password'] !== this.pwdModel['password_twice']) {
         this.$message({
           type: 'error',
-          message: '两次输入密码不一致，请重新输入！'
+          message: this.$t('UserManagePage.TwiceInputError')
         })
         return
       }
@@ -467,7 +467,7 @@ export default {
           ModifyUserPassword(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
-                title: '修改成功',
+                title: this.$t('UserManagePage.ModifySuccess'),
                 message: res.message,
                 type: 'success'
               })
@@ -479,7 +479,7 @@ export default {
         } else {
           this.$message({
             type: 'error',
-            message: '提交失败，请按照要求填写密码！'
+            message: this.$t('TablePage.MsgModifyError')
           })
         }
       })
@@ -487,7 +487,7 @@ export default {
     // 修改用户信息dialog
     handleModifyUserInfo(index, row) {
       // 修改dialog
-      this.dialogTitle = '修改用户信息'
+      this.dialogTitle = this.$t('UserManagePage.ViewOrModifyInfo')
       this.dialogBtnType = false
       this.scopeIndex = index
       this.scopeRow = row
@@ -519,7 +519,7 @@ export default {
           ModifyUserInfo(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
-                title: '修改成功',
+                title: this.$t('UserManagePage.ModifySuccess'),
                 message: res.message,
                 type: 'success'
               })
@@ -529,13 +529,13 @@ export default {
         } else {
           this.$message({
             type: 'error',
-            message: '提交失败，请按照要求填写信息！'
+            message: this.$t('TablePage.MsgModifyError')
           })
         }
       })
     },
     handleDeleteUser(index, row) {
-      this.$confirm('确定要删除该用户？', this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('UserManagePage.ConfirmDeleteUser'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('TablePage.BtnConfirmDelete'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
