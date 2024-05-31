@@ -3,7 +3,7 @@
     <el-card>
       <el-row>
         <el-col :span="16">
-          <el-select v-model="roleNameValue" placeholder="搜索角色名称" clearable>
+          <el-select v-model="roleNameValue" :placeholder="$t('ButtonPermissionPage.SearchRoleName')" clearable>
             <el-option
               v-for="item in role_name_list"
               :key="item.value"
@@ -17,7 +17,7 @@
             style="margin-left: 10px;"
             @click="searchData"
           >
-            搜索
+            {{ $t('title.Search') }}
           </el-button>
         </el-col>
         <el-col :span="8">
@@ -30,14 +30,14 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
+            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
                 circle
                 @click="helpTips"
               />
-            </el-tooltip>
+            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>
@@ -50,9 +50,9 @@
           :cell-style="{padding: '3px'}"
           stripe
         >
-          <el-table-column prop="role_name" label="角色名称" width="200" />
-          <el-table-column prop="menu_name_front" label="菜单名" width="280" />
-          <el-table-column prop="has_permission_buttons_front" label="拥有权限的按钮">
+          <el-table-column prop="role_name" :label="$t('ButtonPermissionPage.role_name')" width="200" />
+          <el-table-column prop="menu_name_front" :label="$t('ButtonPermissionPage.menu_name_front')" width="280" />
+          <el-table-column prop="has_permission_buttons_front" :label="$t('ButtonPermissionPage.has_permission_buttons_front')">
             <template slot-scope="scope">
               <el-tag
                 v-for="(val, key) in scope.row.has_permission_buttons_front"
@@ -63,9 +63,9 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column width="150" fixed="right" label="操作">
+          <el-table-column width="150" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" content="修改按钮权限" placement="top">
+              <el-tooltip class="item" effect="dark" :content="$t('ButtonPermissionPage.ModifyBtnPer')" placement="top">
                 <el-button
                   type="primary"
                   size="mini"
@@ -90,7 +90,7 @@
       </div>
     </el-card>
 
-    <el-dialog
+    <!-- <el-dialog
       v-el-drag-dialog
       title="用户权限管理说明"
       :visible.sync="helpDialogVisible"
@@ -100,11 +100,11 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ this.$t('PublicBtn.Close') }}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
     <el-dialog
       v-el-drag-dialog
-      title="按钮权限设置"
+      :title="$t('ButtonPermissionPage.ButtonPerSet')"
       :visible.sync="buttonpDialogVisible"
       width="60%"
       @dragDialog="handleDrag"
@@ -113,8 +113,8 @@
         <el-checkbox v-for="button_permission in data_dict.all_permission_buttons_list" :key="button_permission.index" :label="button_permission" />
       </el-checkbox-group>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="modifyButton">确认修改</el-button>
-        <el-button @click="buttonpDialogVisible = false">关闭</el-button>
+        <el-button type="primary" @click="modifyButton">{{ $t('PublicBtn.ConfirmModify') }}</el-button>
+        <el-button @click="buttonpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
     </el-dialog>
 
@@ -133,7 +133,7 @@ export default {
       loading: true, // 表格加载动画
       loadingInstance: null,
       table_data: [], // 表格数据
-      helpDialogVisible: false, // 帮助提示dialog
+      // helpDialogVisible: false, // 帮助提示dialog
       role_name_list: [],
       // 分页相关
       total_num: 0,
@@ -227,7 +227,7 @@ export default {
       this.data_dict.menu_name_front = row.menu_name_front
     },
     modifyButton() {
-      this.$confirm('确定要修改按钮权限?', this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('ButtonPermissionPage.ConfirmModRole'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
@@ -246,7 +246,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消修改'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
@@ -254,17 +254,17 @@ export default {
       if (this.roleNameValue === '') {
         this.$message({
           type: 'warning',
-          message: '请选择角色名称'
+          message: this.$t('ButtonPermissionPage.PleSelectRole')
         })
         return
       }
       this.isSearch = true
       this.getTableData(1, this.pageSize, true)
-    },
-    // 帮助提示按钮
-    helpTips() {
-      this.helpDialogVisible = true
     }
+    // 帮助提示按钮
+    // helpTips() {
+    //   this.helpDialogVisible = true
+    // }
   }
 }
 </script>

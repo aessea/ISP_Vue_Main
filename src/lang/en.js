@@ -507,20 +507,23 @@ export default {
     AddPermissions: 'Add Permissions', // 添加权限
     ConfirmDelRole: 'Are you sure you want to remove the role?' // 确定要删除该角色？
   },
+  // 按钮权限管理
+  ButtonPermissionPage: {
+    SearchRoleName: 'Search role name', // 搜索角色名称
+    role_name: 'Role Name', // 角色名称
+    menu_name_front: 'Menu Name', // 菜单名
+    has_permission_buttons_front: 'Buttons with permissions', // 拥有权限的按钮
+    ModifyBtnPer: 'Modify Button Permission', // 修改按钮权限
+    ButtonPerSet: 'Button permission settings', // 按钮权限设置
+    ConfirmModRole: 'Are you sure you want to modify button permissions?', // 确定要修改按钮权限？
+    PleSelectRole: 'Please Select a Role' // 请选择角色
+  },
   RunControlConfigManage: {
     func_index: '',
     func_des: '',
     is_run: '',
     func_name: '',
     remark: ''
-  },
-  ButtonPermission: {
-    role_name: '',
-    menu_name: '',
-    menu_name_front: '',
-    all_permission_buttons_list: '',
-    has_permission_buttons: '',
-    has_permission_buttons_front: ''
   },
   // 维护时间表
   BlockTimeDataPage: {
