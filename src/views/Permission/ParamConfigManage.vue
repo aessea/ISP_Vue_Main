@@ -56,7 +56,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -122,7 +122,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -189,7 +189,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="120" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === '未知分类'" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -353,7 +353,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog
+    <!-- <el-dialog
       v-el-drag-dialog
       :title="$t('TablePage.TitleFormDescription')"
       :visible.sync="helpDialogVisible"
@@ -364,7 +364,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
     <el-dialog
       v-el-drag-dialog
@@ -412,7 +412,7 @@ export default {
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
-      helpDialogVisible: false, // 帮助提示dialog
+      // helpDialogVisible: false, // 帮助提示dialog
       scopeIndex: '', // 表格行数index
       scopeRow: '', // 表格行数据
       importDialogVisible: false, // 导入数据dialog
@@ -554,8 +554,8 @@ export default {
       }
     },
     beforeSyncDatabaseData() {
-      this.$confirm('确定要同步排程配置表中指定数据库的排程配置？', this.$t('PublicText.TitleTip'), {
-        confirmButtonText: '确定同步',
+      this.$confirm(this.$t('ParamsConfigPage.ConfirmSyncDatabase'), this.$t('PublicText.TitleTip'), {
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
@@ -564,13 +564,13 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消同步'
+          message: this.$t('PublicText.TextCancel')
         })
       })
     },
     syncDatabaseData() {
       const syncLoading = {
-        text: '拼命同步中...',
+        text: this.$t('PublicText.SyncLoadiing'),
         background: 'rgba(0, 0, 0, 0.6)'
       }
       this.loadingInstance = Loading.service(syncLoading)
@@ -622,7 +622,7 @@ export default {
       for (const key in this.model) {
         this.model[key] = row[key]
       }
-      this.$confirm('确定要该配置恢复到默认值？', this.$t('PublicText.TitleTip'), {
+      this.$confirm(this.$t('ParamsConfigPage.ConfirmRestoreDefau'), this.$t('PublicText.TitleTip'), {
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
@@ -750,12 +750,12 @@ export default {
       this.exportDialogVisible = false
     },
     // 帮助提示按钮
-    helpTips() {
-      this.helpDialogVisible = true
-    },
+    // helpTips() {
+    //   this.helpDialogVisible = true
+    // },
     deleteAllJobdataBackup() {
-      this.$confirm('确定要清空排程备份表？', '警告', {
-        confirmButtonText: '确定清空',
+      this.$confirm(this.$t('ParamsConfigPage.ConfirmClearBackup'), '警告', {
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'

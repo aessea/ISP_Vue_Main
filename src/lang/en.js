@@ -429,7 +429,11 @@ export default {
     visible_roles: 'Configurable Roles', // 可配置的角色
     UnknownClassify: 'Unknown Classify', // 未知分类
     BtnClearBackup: 'Clear the scheduled backup table ', // 清空排程备份表
-    TitleSyncData: 'Synchronize the scheduling configuration of the specified database' // 同步指定数据库的排程配置
+    TitleSyncData: 'Synchronize the scheduling configuration of the specified database', // 同步指定数据库的排程配置
+    ConfirmSyncDatabase: 'Are you sure you want to synchronize the schedule configuration of the database specified in the schedule configuration table?', // 确定要同步排程配置表中指定数据库的排程配置？
+    ConfirmRestoreDefau: 'Are you sure you want the configuration to revert to its default values?', // 确定要该配置恢复到默认值？
+    ConfirmClearBackup: 'Are you sure you want to empty your scheduled backup table?', // 确定要清空排程备份表？
+    Unknownclassify: 'Unknown Classify' // 未知分类
   },
   // 运行日志
   HistoryRunPage: {
