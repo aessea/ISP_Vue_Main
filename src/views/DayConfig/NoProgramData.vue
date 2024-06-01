@@ -419,92 +419,92 @@ export default {
       rules: {
         line: [{
           required: true,
-          message: '需求线体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         package_stage: [{
           required: true,
-          message: '需求包装阶不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         machine_name: [{
           required: true,
-          message: '机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         raw_order_id: [{
           required: true,
-          message: '订单号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         order_num: [{
           required: true,
-          message: '工单量不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process: [{
           required: true,
-          message: '板号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         no_program_flag: [{
           required: true,
-          message: '有无程序不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         no_package_flag: [{
           required: true,
-          message: '有无包装阶不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         program_line: [{
           required: true,
-          message: '已有程序的线体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         connecting_plates: [{
           required: true,
-          message: '联板数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         single_points: [{
           required: true,
-          message: '单面点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         long: [{
           required: true,
-          message: '长不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         width: [{
           required: true,
-          message: '宽不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         thick: [{
           required: true,
-          message: '厚不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         program_CT: [{
           required: true,
-          message: '程序CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         component_bind: [{
           required: true,
-          message: '组件绑定不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         require_time: [{
           required: true,
-          message: '程序需求时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }],
         finish_time: [{
           required: true,
-          message: '程序完成时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }]
       },

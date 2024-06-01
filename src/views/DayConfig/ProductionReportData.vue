@@ -524,149 +524,149 @@ export default {
       rules: {
         date: [{
           required: true,
-          message: '日期不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line: [{
           required: true,
-          message: '线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         package_line: [{
           required: true,
-          message: '包装线不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         single_hand_insert_points: [],
         total_points: [{
           required: true,
-          message: '总点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process: [{
           required: true,
-          message: '制程面不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         product_type: [{
           required: true,
-          message: '产品类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         machine_name: [{
           required: true,
-          message: '机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         board: [{
           required: true,
-          message: '板号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         job_ix: [{
           required: true,
-          message: '工单号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         job_quantity: [{
           required: true,
-          message: '工单量不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         CT: [{
           required: true,
-          message: 'CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         completed_quantity: [{
           required: true,
-          message: '产出片数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         connecting_plates: [{
           required: true,
-          message: '联片数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         single_points: [{
           required: true,
-          message: '单板点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         production_time: [{
           required: true,
-          message: '生产时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         first_plate_time: [{
           required: true,
-          message: '首片时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         setup_time: [],
         wait_material_time: [{
           required: true,
-          message: '物料等待时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         small_stop_time: [{
           required: true,
-          message: '小停止时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         downtime: [{
           required: true,
-          message: '设备故障时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         program_adjustment_time: [{
           required: true,
-          message: '程序调整时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process_adjustment_time: [{
           required: true,
-          message: '工艺调整时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         power_failed_time: [{
           required: true,
-          message: '停气停电不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         clear_mantissa_time: [{
           required: true,
-          message: '清尾数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         wait_spares_time: [{
           required: true,
-          message: '待备件时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         substitute_material_time: [{
           required: true,
-          message: '代用料时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         factory: [{
           required: true,
-          message: '工厂别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         package_product_type: [{
           required: true,
-          message: '包装产品类别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         SMT_product_type: [{
           required: true,
-          message: 'SMT产品类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         setup_type: [{
           required: true,
-          message: '切换类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

@@ -377,49 +377,49 @@ export default {
       rules: {
         time: [{
           required: true,
-          message: '制作时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         bind_state: [],
         bind_detail: [],
         line: [{
           required: true,
-          message: '线体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process: [{
           required: true,
-          message: '制程不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         board: [{
           required: true,
-          message: '板号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         SMT_machine_name: [{
           required: true,
-          message: 'SMT机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         size: [{
           required: true,
-          message: '长宽厚不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         connecting_plates: [{
           required: true,
-          message: '联片数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         single_points: [{
           required: true,
-          message: '单板点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         program_CT: [{
           required: true,
-          message: '程序CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         unknown1: [],

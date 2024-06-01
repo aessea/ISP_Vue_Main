@@ -252,12 +252,12 @@ export default {
       rules: {
         param_name: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         param_value: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

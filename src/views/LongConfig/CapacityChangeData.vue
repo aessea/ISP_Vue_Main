@@ -266,27 +266,27 @@ export default {
       rules: {
         line: [{
           required: true,
-          message: '线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         start_time: [{
           required: true,
-          message: '开始时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }],
         end_time: [{
           required: true,
-          message: '结束时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }],
         capacity_change: [{
           required: true,
-          message: 'capacity_change不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         remark: [{
           required: true,
-          message: '备注不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

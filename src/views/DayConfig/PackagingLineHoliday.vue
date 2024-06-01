@@ -243,12 +243,12 @@ export default {
       rules: {
         packaging_line_name: [{
           required: true,
-          message: '线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         holiday_days: [{
           required: true,
-          message: '点数界限不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

@@ -251,17 +251,17 @@ export default {
       rules: {
         post_process_name: [{
           required: true,
-          message: '包装线不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         holiday_begin: [{
           required: true,
-          message: '放假开始时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         holiday_end: [{
           required: true,
-          message: '放假结束时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },
