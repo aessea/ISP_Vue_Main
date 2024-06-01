@@ -243,8 +243,8 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ this.$t('TablePage.BtnAppend') }}</el-button>
-        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ this.$t('TablePage.BtnModify') }}</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ $t('TablePage.BtnAppend') }}</el-button>
+        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ $t('TablePage.BtnModify') }}</el-button>
       </span>
     </el-dialog>
 

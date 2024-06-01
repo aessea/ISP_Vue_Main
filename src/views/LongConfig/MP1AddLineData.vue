@@ -5,13 +5,13 @@
         <el-col :span="16">
           <div>
             <el-button v-if="buttons.includes('MP1AddLineData/add')" type="primary" @click="addDataDialog">
-              <i class="el-icon-plus" />{{ this.$t('TablePage.BtnAppend') }}
+              <i class="el-icon-plus" />{{ $t('TablePage.BtnAppend') }}
             </el-button>
             <el-button v-if="buttons.includes('MP1AddLineData/delete')" type="danger" @click="deleteData">
-              <i class="el-icon-delete" />{{ this.$t('TablePage.BtnDelete') }}
+              <i class="el-icon-delete" />{{ $t('TablePage.BtnDelete') }}
             </el-button>
             <!-- <el-button v-if="buttons.includes('MP1AddLineData/import')" @click="importDataDialog">
-              <i class="el-icon-upload2" />{{ this.$t('TablePage.BtnImport') }}
+              <i class="el-icon-upload2" />{{ $t('TablePage.BtnImport') }}
             </el-button> -->
             <el-button v-if="buttons.includes('MP1AddLineData/export')" @click="exportDataDialog">
               <i class="el-icon-download" />{{ $t('TablePage.BtnExport') }}
@@ -131,8 +131,8 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ this.$t('TablePage.BtnAppend') }}</el-button>
-        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ this.$t('TablePage.BtnModify') }}</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ $t('TablePage.BtnAppend') }}</el-button>
+        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ $t('TablePage.BtnModify') }}</el-button>
       </span>
     </el-dialog>
 
@@ -160,8 +160,8 @@
       <el-row>
         <el-col :span="8">
           <el-radio-group v-model="importMode" style="margin-top: 26px;">
-            <el-radio label="append">{{ this.$t('TablePage.BtnAppendData') }}</el-radio>
-            <el-radio label="replace">{{ this.$t('TablePage.BtnReplaceData') }}</el-radio>
+            <el-radio label="append">{{ $t('TablePage.BtnAppendData') }}</el-radio>
+            <el-radio label="replace">{{ $t('TablePage.BtnReplaceData') }}</el-radio>
           </el-radio-group>
         </el-col>
         <el-col :span="16">
@@ -187,7 +187,7 @@
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleImportClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="confirmImport">{{ this.$t('TablePage.BtnConfirmImport') }}</el-button>
+        <el-button type="primary" @click="confirmImport">{{ $t('TablePage.BtnConfirmImport') }}</el-button>
       </span>
     </el-dialog>
 
