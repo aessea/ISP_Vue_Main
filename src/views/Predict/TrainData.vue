@@ -283,7 +283,7 @@
             >
               <el-button slot="trigger" type="primary" style="margin-left: 10px;">
                 <i class="el-icon-upload" />
-                上传文件
+                {{ $t('TablePage.BtnUploadFile') }}
               </el-button>
             </el-upload>
           </div>
