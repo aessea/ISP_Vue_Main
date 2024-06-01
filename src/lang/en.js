@@ -173,7 +173,7 @@ export default {
   },
   // 首页
   DashboardPage: {
-    QuickActions: 'Quick Actions', // 快捷操作
+    QuickActions: 'Quick Actions' // 快捷操作
   },
   SchedulePanelPage: { // 控制面板
     // 标题
