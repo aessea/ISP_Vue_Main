@@ -20,7 +20,7 @@
         </el-col>
         <el-col :span="8">
           <div style="float: right;">
-            <el-tooltip class="item" effect="dark" content="同步指定数据库的生产报表" placement="top">
+            <el-tooltip class="item" effect="dark" :content="$t('ProductionReportDataPage.SyncDatabase')" placement="top">
               <el-button
                 v-if="buttons.includes('ProductionReportData/sync')"
                 size="small"
@@ -59,14 +59,14 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="line" label="线别" width="120" sortable />
-          <el-table-column prop="package_line" label="包装线" width="120" sortable />
-          <el-table-column prop="machine_name" label="机种名" sortable />
-          <el-table-column prop="board" label="板号" sortable />
-          <el-table-column prop="process" label="制程面" width="120" sortable />
-          <el-table-column prop="date" label="日期" width="120" sortable />
-          <el-table-column prop="job_quantity" label="工单量" width="120" sortable />
-          <el-table-column prop="total_points" label="总点数" width="160" sortable />
+          <el-table-column prop="line" :label="lang_dict.line" width="120" sortable />
+          <el-table-column prop="package_line" :label="lang_dict.package_line" width="120" sortable />
+          <el-table-column prop="machine_name" :label="lang_dict.machine_name" sortable />
+          <el-table-column prop="board" :label="lang_dict.board" sortable />
+          <el-table-column prop="process" :label="lang_dict.process" width="120" sortable />
+          <el-table-column prop="date" :label="lang_dict.date" width="120" sortable />
+          <el-table-column prop="job_quantity" :label="lang_dict.job_quantity" width="120" sortable />
+          <el-table-column prop="total_points" :label="lang_dict.total_points" width="160" sortable />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -112,197 +112,197 @@
         <el-form ref="$form" :model="model" label-position="left" size="small">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.date" prop="date" label="日期">
+              <el-form-item :rules="rules.date" prop="date" :label="lang_dict.date">
                 <el-date-picker v-model="model.date" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.line" prop="line" label="线别">
+              <el-form-item :rules="rules.line" prop="line" :label="lang_dict.line">
                 <el-input v-model="model.line" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.package_line" prop="package_line" label="包装线">
+              <el-form-item :rules="rules.package_line" prop="package_line" :label="lang_dict.package_line">
                 <el-input v-model="model.package_line" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.product_type" prop="product_type" label="产品类型">
+              <el-form-item :rules="rules.product_type" prop="product_type" :label="lang_dict.product_type">
                 <el-input v-model="model.product_type" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.machine_name" prop="machine_name" label="机种名">
+              <el-form-item :rules="rules.machine_name" prop="machine_name" :label="lang_dict.machine_name">
                 <el-input v-model="model.machine_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.board" prop="board" label="板号">
+              <el-form-item :rules="rules.board" prop="board" :label="lang_dict.board">
                 <el-input v-model="model.board" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.single_hand_insert_points" prop="single_hand_insert_points" label="单板手插点数">
+              <el-form-item :rules="rules.single_hand_insert_points" prop="single_hand_insert_points" :label="lang_dict.single_hand_insert_points">
                 <el-input-number v-model="model.single_hand_insert_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.total_points" prop="total_points" label="总点数">
+              <el-form-item :rules="rules.total_points" prop="total_points" :label="lang_dict.total_points">
                 <el-input-number v-model="model.total_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.process" prop="process" label="制程面">
+              <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
                 <el-input v-model="model.process" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.job_ix" prop="job_ix" label="工单号">
+              <el-form-item :rules="rules.job_ix" prop="job_ix" :label="lang_dict.job_ix">
                 <el-input v-model="model.job_ix" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.job_quantity" prop="job_quantity" label="工单量">
+              <el-form-item :rules="rules.job_quantity" prop="job_quantity" :label="lang_dict.job_quantity">
                 <el-input-number v-model="model.job_quantity" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CT" prop="CT" label="CT">
+              <el-form-item :rules="rules.CT" prop="CT" :label="lang_dict.CT">
                 <el-input-number v-model="model.CT" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.completed_quantity" prop="completed_quantity" label="产出片数">
+              <el-form-item :rules="rules.completed_quantity" prop="completed_quantity" :label="lang_dict.completed_quantity">
                 <el-input-number v-model="model.completed_quantity" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.connecting_plates" prop="connecting_plates" label="联片数">
+              <el-form-item :rules="rules.connecting_plates" prop="connecting_plates" :label="lang_dict.connecting_plates">
                 <el-input-number v-model="model.connecting_plates" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.single_points" prop="single_points" label="单板点数">
+              <el-form-item :rules="rules.single_points" prop="single_points" :label="lang_dict.single_points">
                 <el-input-number v-model="model.single_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.production_time" prop="production_time" label="生产时间">
+              <el-form-item :rules="rules.production_time" prop="production_time" :label="lang_dict.production_time">
                 <el-input-number v-model="model.production_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.first_plate_time" prop="first_plate_time" label="首片时间">
+              <el-form-item :rules="rules.first_plate_time" prop="first_plate_time" :label="lang_dict.first_plate_time">
                 <el-input-number v-model="model.first_plate_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.setup_time" prop="setup_time" label="切换时间">
+              <el-form-item :rules="rules.setup_time" prop="setup_time" :label="lang_dict.setup_time">
                 <el-input-number v-model="model.setup_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.wait_material_time" prop="wait_material_time" label="物料等待时间">
+              <el-form-item :rules="rules.wait_material_time" prop="wait_material_time" :label="lang_dict.wait_material_time">
                 <el-input-number v-model="model.wait_material_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.small_stop_time" prop="small_stop_time" label="小停止时间">
+              <el-form-item :rules="rules.small_stop_time" prop="small_stop_time" :label="lang_dict.small_stop_time">
                 <el-input-number v-model="model.small_stop_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.downtime" prop="downtime" label="设备故障时间">
+              <el-form-item :rules="rules.downtime" prop="downtime" :label="lang_dict.downtime">
                 <el-input-number v-model="model.downtime" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_adjustment_time" prop="program_adjustment_time" label="程序调整时间">
+              <el-form-item :rules="rules.program_adjustment_time" prop="program_adjustment_time" :label="lang_dict.program_adjustment_time">
                 <el-input-number v-model="model.program_adjustment_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.process_adjustment_time" prop="process_adjustment_time" label="工艺调整时间">
+              <el-form-item :rules="rules.process_adjustment_time" prop="process_adjustment_time" :label="lang_dict.process_adjustment_time">
                 <el-input-number v-model="model.process_adjustment_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.power_failed_time" prop="power_failed_time" label="停气停电">
+              <el-form-item :rules="rules.power_failed_time" prop="power_failed_time" :label="lang_dict.power_failed_time">
                 <el-input-number v-model="model.power_failed_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.clear_mantissa_time" prop="clear_mantissa_time" label="清尾数">
+              <el-form-item :rules="rules.clear_mantissa_time" prop="clear_mantissa_time" :label="lang_dict.clear_mantissa_time">
                 <el-input-number v-model="model.clear_mantissa_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.wait_spares_time" prop="wait_spares_time" label="待备件时间">
+              <el-form-item :rules="rules.wait_spares_time" prop="wait_spares_time" :label="lang_dict.wait_spares_time">
                 <el-input-number v-model="model.wait_spares_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.substitute_material_time" prop="substitute_material_time" label="代用料时间">
+              <el-form-item :rules="rules.substitute_material_time" prop="substitute_material_time" :label="lang_dict.substitute_material_time">
                 <el-input-number v-model="model.substitute_material_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.factory" prop="factory" label="工厂别">
+              <el-form-item :rules="rules.factory" prop="factory" :label="lang_dict.factory">
                 <el-input v-model="model.factory" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.package_product_type" prop="package_product_type" label="包装产品类型">
+              <el-form-item :rules="rules.package_product_type" prop="package_product_type" :label="lang_dict.package_product_type">
                 <el-input v-model="model.package_product_type" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.SMT_product_type" prop="SMT_product_type" label="SMT产品类型">
+              <el-form-item :rules="rules.SMT_product_type" prop="SMT_product_type" :label="lang_dict.SMT_product_type">
                 <el-input v-model="model.SMT_product_type" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.setup_type" prop="setup_type" label="切换类型">
+              <el-form-item :rules="rules.setup_type" prop="setup_type" :label="lang_dict.setup_type">
                 <el-input v-model="model.setup_type" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" label="创建人">
+              <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" :label="lang_dict.CREATED_BY">
                 <el-input v-model="model.CREATED_BY" disabled />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" label="创建时间">
+              <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" :label="lang_dict.CREATED_TIME">
                 <el-input v-model="model.CREATED_TIME" disabled />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" label="修改人">
+              <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" :label="lang_dict.UPDATED_BY">
                 <el-input v-model="model.UPDATED_BY" disabled />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" label="修改时间">
+              <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" :label="lang_dict.UPDATED_TIME">
                 <el-input v-model="model.UPDATED_TIME" disabled />
               </el-form-item>
             </el-col>
@@ -380,13 +380,13 @@
       @dragDialog="handleDrag"
     >
       <el-row style="margin-bottom: 10px;">
-        <span class="demonstration">导出日期范围：</span>
+        <span class="demonstration">{{ $t('ProductionReportDataPage.ExportDateRange') }}</span>
         <el-date-picker
           v-model="date_range"
           type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+          range-separator="$t('PublicText.To')"
+          :start-placeholder="$t('BlockTimeDataPage.DateStart')"
+          :end-placeholder="$t('BlockTimeDataPage.DateEnd')"
         />
       </el-row>
       <el-row>

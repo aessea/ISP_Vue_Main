@@ -439,6 +439,11 @@ export default {
     ConfirmClearBackup: 'Are you sure you want to empty your scheduled backup table?', // 确定要清空排程备份表？
     Unknownclassify: 'Unknown Classify' // 未知分类
   },
+  // 生产报表
+  ProductionReportDataPage: {
+    ExportDateRange: 'Export Date Range:', // 导出日期范围：
+    SyncDatabase: 'Synchronize production reports for the specified database' // 同步指定数据库的生产报表
+  },
   // 运行日志
   HistoryRunPage: {
     SelectLevel: 'Select LEVEL' // 选择LEVEL
