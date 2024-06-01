@@ -214,7 +214,7 @@
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="exportData">{{ this.$t('TablePage.BtnConfirmExport') }}</el-button>
+        <el-button type="primary" @click="exportData">{{ $t('TablePage.BtnConfirmExport') }}</el-button>
       </span>
     </el-dialog>
   </div>
