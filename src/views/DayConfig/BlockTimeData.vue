@@ -519,6 +519,7 @@ export default {
   directives: { elDragDialog },
   data() {
     return {
+      lang_dict: {}, // 从后端获取表格列名
       loading: true, // 表格加载动画
       importLoading: {
         text: this.$t('PublicText.ImportLoadiing'),
@@ -643,8 +644,7 @@ export default {
       manageBackupDialog: false, // 备份管理dialog
       backupTableData: [], // 备份管理数据
       backupTableSelections: [], // 备份管理选中的数据
-      autoBackup: true, // 是否自动备份，默认开启
-      lang_dict: {} // 从后端获取表格列名
+      autoBackup: true // 是否自动备份，默认开启
     }
   },
   computed: {

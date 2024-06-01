@@ -209,6 +209,7 @@ export default {
   directives: { elDragDialog },
   data() {
     return {
+      lang_dict: {}, // 从后端获取表格列名
       loading: true, // 表格加载动画
       importLoading: {
         text: this.$t('PublicText.ImportLoadiing'),
@@ -267,8 +268,7 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      dataTableSelections: [], // 表格选中的数据
-      lang_dict: {}
+      dataTableSelections: [] // 表格选中的数据
     }
   },
   computed: {

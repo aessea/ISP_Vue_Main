@@ -293,6 +293,7 @@ export default {
   directives: { elDragDialog },
   data() {
     return {
+      lang_dict: {}, // 从后端获取表格列名
       loading: true, // 表格加载动画
       importLoading: {
         text: this.$t('PublicText.ImportLoadiing'),
