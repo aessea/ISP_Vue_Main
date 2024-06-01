@@ -50,31 +50,31 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="serial_number" label="序列号" width="110" sortable />
-          <el-table-column prop="pcb_number" label="PCB料号" width="220" sortable />
-          <el-table-column prop="substitute_pcb" label="代用" width="180" />
-          <el-table-column prop="front_back" label="正反面" width="100" sortable />
-          <el-table-column prop="model_name" label="机种名" width="138" sortable />
-          <el-table-column prop="storage_spaces" label="储位" width="120" sortable />
-          <el-table-column prop="state" label="状态" width="150" sortable />
-          <el-table-column prop="backup_wash" label="备洗" width="100" sortable />
-          <el-table-column prop="remark" label="备注" width="380" />
-          <el-table-column prop="last_used_line" label="最后使用线" width="120" sortable />
-          <el-table-column prop="last_used_time" label="最后一次操作时间" width="200" sortable />
-          <el-table-column prop="used_times" label="已用次数" width="120" sortable />
-          <el-table-column prop="double_sticker" label="双贴" width="100" />
-          <el-table-column prop="double_sticker_remark" label="双贴 备注" width="120" />
-          <el-table-column prop="inventory_date" label="入库日期" width="120" sortable />
-          <el-table-column prop="big_or_small" label="大/小" width="100" />
-          <el-table-column prop="type" label="类型" width="100" sortable />
-          <el-table-column prop="thickness" label="厚度" width="80" sortable />
-          <el-table-column prop="supplier" label="供应商" width="100" sortable />
-          <el-table-column prop="warehousing_number" label="入库编号" width="160" sortable />
-          <el-table-column prop="furnace_fixture" label="过炉治具" width="120" sortable />
-          <el-table-column prop="pin" label="印刷机下PIN治具" width="160" sortable />
-          <el-table-column prop="status_change_time" label="状态变更时间" width="200" sortable />
-          <el-table-column prop="total_num" label="网板数量" width="120" sortable />
-          <el-table-column prop="process" label="制程（工序）" width="140" sortable />
+          <el-table-column prop="serial_number" :label="lang_dict.serial_number" width="110" sortable />
+          <el-table-column prop="pcb_number" :label="lang_dict.pcb_number" width="220" sortable />
+          <el-table-column prop="substitute_pcb" :label="lang_dict.substitute_pcb" width="180" />
+          <el-table-column prop="front_back" :label="lang_dict.front_back" width="100" sortable />
+          <el-table-column prop="model_name" :label="lang_dict.model_name" width="138" sortable />
+          <el-table-column prop="storage_spaces" :label="lang_dict.storage_spaces" width="120" sortable />
+          <el-table-column prop="state" :label="lang_dict.state" width="150" sortable />
+          <el-table-column prop="backup_wash" :label="lang_dict.backup_wash" width="100" sortable />
+          <el-table-column prop="remark" :label="lang_dict.remark" width="380" />
+          <el-table-column prop="last_used_line" :label="lang_dict.last_used_line" width="120" sortable />
+          <el-table-column prop="last_used_time" :label="last_used_time" width="200" sortable />
+          <el-table-column prop="used_times" :label="lang_dict.used_times" width="120" sortable />
+          <el-table-column prop="double_sticker" :label="lang_dict.input_1665235991812" width="100" />
+          <el-table-column prop="double_sticker_remark" :label="lang_dict.double_sticker_remark" width="120" />
+          <el-table-column prop="inventory_date" :label="lang_dict.inventory_date" width="120" sortable />
+          <el-table-column prop="big_or_small" :label="lang_dict.big_or_small" width="100" />
+          <el-table-column prop="type" :label="lang_dict.type" width="100" sortable />
+          <el-table-column prop="thickness" :label="lang_dict.thickness" width="80" sortable />
+          <el-table-column prop="supplier" :label="lang_dict.supplier" width="100" sortable />
+          <el-table-column prop="warehousing_number" :label="lang_dict.warehousing_number" width="160" sortable />
+          <el-table-column prop="furnace_fixture" :label="lang_dict.furnace_fixture" width="120" sortable />
+          <el-table-column prop="pin" :label="lang_dict.pin" width="160" sortable />
+          <el-table-column prop="status_change_time" :label="lang_dict.status_change_time" width="200" sortable />
+          <el-table-column prop="total_num" :label="lang_dict.total_num" width="120" sortable />
+          <el-table-column prop="process" :label="lang_dict.process" width="140" sortable />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -120,141 +120,141 @@
         <el-form ref="$form" :model="model" label-position="left" size="small">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.serial_number" prop="serial_number" label="序列号">
+              <el-form-item :rules="rules.serial_number" prop="serial_number" :label="lang_dict.serial_number">
                 <el-input v-model="model.serial_number" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.pcb_number" prop="pcb_number" label="PCB料号">
+              <el-form-item :rules="rules.pcb_number" prop="pcb_number" :label="lang_dict.pcb_number">
                 <el-input v-model="model.pcb_number" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.substitute_pcb" prop="substitute_pcb" label="代用">
+              <el-form-item :rules="rules.substitute_pcb" prop="substitute_pcb" :label="lang_dict.substitute_pcb">
                 <el-input v-model="model.substitute_pcb" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.front_back" prop="front_back" label="正反面">
+              <el-form-item :rules="rules.front_back" prop="front_back" :label="lang_dict.front_back">
                 <el-input v-model="model.front_back" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.model_name" prop="model_name" label="机种名">
+              <el-form-item :rules="rules.model_name" prop="model_name" :label="lang_dict.model_name">
                 <el-input v-model="model.model_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.storage_spaces" prop="storage_spaces" label="储位">
+              <el-form-item :rules="rules.storage_spaces" prop="storage_spaces" :label="lang_dict.storage_spaces">
                 <el-input v-model="model.storage_spaces" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.state" prop="state" label="状态">
+              <el-form-item :rules="rules.state" prop="state" :label="lang_dict.state">
                 <el-input v-model="model.state" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.backup_wash" prop="backup_wash" label="备洗">
+              <el-form-item :rules="rules.backup_wash" prop="backup_wash" :label="lang_dict.backup_wash">
                 <el-input v-model="model.backup_wash" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.remark" prop="remark" label="备注">
+              <el-form-item :rules="rules.remark" prop="remark" :label="lang_dict.remark">
                 <el-input v-model="model.remark" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.last_used_line" prop="last_used_line" label="最后使用线">
+              <el-form-item :rules="rules.last_used_line" prop="last_used_line" :label="lang_dict.last_used_line">
                 <el-input v-model="model.last_used_line" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.last_used_time" prop="last_used_time" label="最后一次操作时间">
+              <el-form-item :rules="rules.last_used_time" prop="last_used_time" :label="lang_dict.last_used_time">
                 <el-date-picker v-model="model.last_used_time" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.used_times" prop="used_times" label="已用次数">
+              <el-form-item :rules="rules.used_times" prop="used_times" :label="lang_dict.used_times">
                 <el-input-number v-model="model.used_times" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.input_1665235991812" prop="input_1665235991812" label="双贴">
+              <el-form-item :rules="rules.input_1665235991812" prop="input_1665235991812" :label="lang_dict.input_1665235991812">
                 <el-input v-model="model.input_1665235991812" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.double_sticker_remark" prop="double_sticker_remark" label="双贴 备注">
+              <el-form-item :rules="rules.double_sticker_remark" prop="double_sticker_remark" :label="lang_dict.double_sticker_remark">
                 <el-input v-model="model.double_sticker_remark" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.inventory_date" prop="inventory_date" label="入库日期">
+              <el-form-item :rules="rules.inventory_date" prop="inventory_date" :label="lang_dict.inventory_date">
                 <el-date-picker v-model="model.inventory_date" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.big_or_small" prop="big_or_small" label="大/小">
+              <el-form-item :rules="rules.big_or_small" prop="big_or_small" :label="lang_dict.big_or_small">
                 <el-input v-model="model.big_or_small" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.type" prop="type" label="类型">
+              <el-form-item :rules="rules.type" prop="type" :label="lang_dict.type">
                 <el-input v-model="model.type" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.thickness" prop="thickness" label="厚度">
+              <el-form-item :rules="rules.thickness" prop="thickness" :label="lang_dict.thickness">
                 <el-input-number v-model="model.thickness" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.status_change_time" prop="status_change_time" label="状态变更时间">
+              <el-form-item :rules="rules.status_change_time" prop="status_change_time" :label="lang_dict.status_change_time">
                 <el-date-picker v-model="model.status_change_time" type="datetime" :placeholder="$t('Placeholder.Select')" format="yyyy-MM-dd HH:mm:ss" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.total_num" prop="total_num" label="网板数量">
+              <el-form-item :rules="rules.total_num" prop="total_num" :label="lang_dict.total_num">
                 <el-input-number v-model="model.total_num" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.process" prop="process" label="制程（工序）">
+              <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
                 <el-input v-model="model.process" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.supplier" prop="supplier" label="供应商">
+              <el-form-item :rules="rules.supplier" prop="supplier" :label="lang_dict.supplier">
                 <el-input v-model="model.supplier" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.warehousing_number" prop="warehousing_number" label="入库编号">
+              <el-form-item :rules="rules.warehousing_number" prop="warehousing_number" :label="lang_dict.warehousing_number">
                 <el-input v-model="model.warehousing_number" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.furnace_fixture" prop="furnace_fixture" label="印刷机下PIN治具">
-                <el-input v-model="model.furnace_fixture" :placeholder="$t('Placeholder.Enter')" clearable />
+              <el-form-item :rules="rules.pin" prop="pin" :label="lang_dict.pin">
+                <el-input v-model="model.pin" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.furnace_fixture" prop="furnace_fixture" label="过炉治具">
+              <el-form-item :rules="rules.furnace_fixture" prop="furnace_fixture" :label="lang_dict.furnace_fixture">
                 <el-input v-model="model.furnace_fixture" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
@@ -349,7 +349,7 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/DayConfig/NetworkBoard'
+import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetLangDict } from '@/api/DayConfig/NetworkBoard'
 import { deepClone } from '@/utils'
 export default {
   name: 'NetworkBoard',
@@ -439,68 +439,68 @@ export default {
       rules: {
         serial_number: [{
           required: true,
-          message: '序列号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         pcb_number: [{
           required: true,
-          message: 'PCB料号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         substitute_pcb: [],
         front_back: [{
           required: true,
-          message: '正反面不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         model_name: [],
         storage_spaces: [{
           required: true,
-          message: '储位不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         state: [{
           required: true,
-          message: '状态不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         backup_wash: [{
           required: true,
-          message: '备洗不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         remark: [],
         last_used_line: [{
           required: true,
-          message: '最后使用线不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         last_used_time: [],
         used_times: [{
           required: true,
-          message: '已用次数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         input_1665235991812: [],
         double_sticker_remark: [],
         inventory_date: [{
           required: true,
-          message: '入库日期不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }],
         big_or_small: [{
           required: true,
-          message: '大/小不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         type: [{
           required: true,
-          message: '类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         thickness: [{
           required: true,
-          message: '厚度不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         status_change_time: [],
@@ -508,17 +508,17 @@ export default {
         process: [],
         supplier: [{
           required: true,
-          message: '供应商不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         warehousing_number: [{
           required: true,
-          message: '入库编号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         furnace_fixture: [{
           required: true,
-          message: '过炉治具不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },
@@ -526,7 +526,8 @@ export default {
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
       pageSize: 20, // 每页多少条数据
-      dataTableSelections: [] // 表格选中的数据
+      dataTableSelections: [], // 表格选中的数据
+      lang_dict: {} // 从后端获取表格列名
     }
   },
   computed: {
@@ -536,6 +537,9 @@ export default {
     ])
   },
   created() {
+    GetLangDict().then(res => {
+      this.lang_dict = res.lang_dict
+    })
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
