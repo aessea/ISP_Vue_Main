@@ -65,3 +65,10 @@ export function GetAllProgramData(data) {
     data
   })
 }
+// 获取表格列名
+export function GetLangDict() {
+  return request({
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/get_lang_dict/`,
+    method: 'get'
+  })
+}
