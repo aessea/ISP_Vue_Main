@@ -30,14 +30,14 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
+            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
               <el-button
                 size="small"
                 icon="el-icon-warning-outline"
                 circle
                 @click="helpTips"
               />
-            </el-tooltip>
+            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>

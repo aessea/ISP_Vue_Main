@@ -171,6 +171,10 @@ export default {
     ScheduleResData: 'Schedule Data', // 排程记录
     MesInterfaceLog: 'Interface Log' // 接口日志
   },
+  // 首页
+  DashboardPage: {
+    QuickActions: 'Quick Actions', // 快捷操作
+  },
   SchedulePanelPage: { // 控制面板
     // 标题
     ScheduleDateTitle: 'Schedule Title', // 排程标题

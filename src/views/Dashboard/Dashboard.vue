@@ -4,14 +4,14 @@
       <el-col :span="8">
         <el-card class="quick-action">
           <div slot="header" class="clearfix">
-            <span>快捷操作</span>
+            <span>{{ $t('DashboardPage.QuickActions') }}</span>
           </div>
           <el-row>
             <el-col :span="12">
               <div @click="toCompute">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-monitor" /></span>
-                  <span style="margin-left: 10px;">计算排程面板</span>
+                  <span style="margin-left: 10px;">{{ $t('route.SchedulePanel') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -19,7 +19,7 @@
               <div @click="toAnalysis">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-monitor" /></span>
-                  <span style="margin-left: 10px;">分析推送</span>
+                  <span style="margin-left: 10px;">{{ $t('route.AnalysisControl') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -29,7 +29,7 @@
               <div @click="toParamsConfig">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-setting" /></span>
-                  <span style="margin-left: 10px;">查看排程配置</span>
+                  <span style="margin-left: 10px;">{{ $t('route.ParamsConfig') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -37,7 +37,7 @@
               <div @click="toLineConfig">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-setting" /></span>
-                  <span style="margin-left: 10px;">查看产线配置</span>
+                  <span style="margin-left: 10px;">{{ $t('route.LineData') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -47,7 +47,7 @@
               <div @click="toLoggingdb">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-document" /></span>
-                  <span style="margin-left: 10px;">查看运行日志</span>
+                  <span style="margin-left: 10px;">{{ $t('route.HistoryRun') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -55,7 +55,7 @@
               <div @click="toHistory">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-document" /></span>
-                  <span style="margin-left: 10px;">查看历史操作</span>
+                  <span style="margin-left: 10px;">{{ $t('route.HistoryOpera') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -65,15 +65,15 @@
               <div @click="toBlockTimeData">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-s-data" /></span>
-                  <span style="margin-left: 10px;">维护时间表</span>
+                  <span style="margin-left: 10px;">{{ $t('route.BlockTimeData') }}</span>
                 </el-card>
               </div>
             </el-col>
             <el-col :span="12">
-              <div @click="toOutsource">
+              <div @click="toProcessData">
                 <el-card shadow="hover" class="btn-card">
                   <span class="btn-icon"><i class="el-icon-monitor" /></span>
-                  <span style="margin-left: 10px;">外包控制面板</span>
+                  <span style="margin-left: 10px;">{{ $t('route.ProcessData') }}</span>
                 </el-card>
               </div>
             </el-col>
@@ -95,7 +95,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-card style="margin: 16px;">
+    <!-- <el-card style="margin: 16px;">
       <div slot="header" class="clearfix">
         <span>历史排程数据变化趋势图</span>
         <el-dropdown style="float: right; padding: 3px 0" @command="handleCommand">
@@ -114,7 +114,7 @@
         </el-dropdown>
       </div>
       <div id="scheduleCharts" style="width: 100%; height: 420px" />
-    </el-card>
+    </el-card> -->
   </div>
 </template>
 <script>
@@ -166,8 +166,8 @@ export default {
     toBlockTimeData() {
       this.$router.push({ path: 'dayconfig/blocktimetata' })
     },
-    toOutsource() {
-      this.$router.push({ path: 'Control/outsourcecontrol' })
+    toProcessData() {
+      this.$router.push({ path: 'longconfig/mainprocessdata' })
     },
     // 画图
     drawCharts(days) {
