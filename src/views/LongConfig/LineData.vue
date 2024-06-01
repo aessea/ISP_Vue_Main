@@ -637,7 +637,7 @@ export default {
         }],
         is_points: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         capacity: [{
@@ -652,132 +652,132 @@ export default {
         }],
         program_class: [{
           required: true,
-          message: '程序类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         balance_class: [{
           required: true,
-          message: '线平衡类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         big_able: [{
           required: true,
-          message: '可否大工单不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         middle_able: [{
           required: true,
-          message: '可否中工单不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         small_able: [{
           required: true,
-          message: '可否小工单不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         min_threshold: [{
           required: true,
-          message: '最低生产阈值不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         max_threshold: [{
           required: true,
-          message: '最高生产阈值不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         offset_threshold: [{
           required: true,
-          message: '阈值偏差不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_burn_in: [{
           required: true,
-          message: '是否烧录不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         enable_process_list: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line_type: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_AX_line: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_Big_line_remove22: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_Non_big_line: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_special_line: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_cannot_binding_line: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_big_small_line: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         big_setup: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         small_setup: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         setup_program: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         output_order: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         max_points: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         max_process_time: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line_size_type: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         enable: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         min_min_threshold: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

@@ -285,22 +285,22 @@ export default {
       rules: {
         line: [{
           required: true,
-          message: '线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         SMT_machine_name: [{
           required: true,
-          message: 'SMT机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process: [{
           required: true,
-          message: '制程不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         CT: [{
           required: true,
-          message: '指定CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

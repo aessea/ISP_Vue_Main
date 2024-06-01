@@ -290,22 +290,22 @@ export default {
       rules: {
         machine_name: [{
           required: true,
-          message: '机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         ct: [{
           required: true,
-          message: 'CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         trial_run_timedelta: [{
           required: true,
-          message: '试跑工单停线时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         batch_production_timedelta: [{
           required: true,
-          message: '量产工单停线时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

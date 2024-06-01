@@ -417,94 +417,94 @@ export default {
       rules: {
         name: [{
           required: true,
-          message: '制程不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         TB: [{
           required: true,
-          message: '面不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }],
         paired_process: [{
         }],
         grouping_factor_day: [{
           required: true,
-          message: '第一块和第二块工单划分参数(天)不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         grouping_factor_hour: [{
           required: true,
-          message: '第二块工单控制大小(时)不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         grouping_factor_overtime: [{
           required: true,
-          message: '第三块划分参数(天)不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         grouping_combination_flag: [{
           required: true,
-          message: '第三块是否可并不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         first_second_combination_flag: [{
           required: true,
-          message: '没有第三块时，前两块是否可并不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_point: [{
           required: true,
-          message: '是否按点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         buffer_time: [{
           required: true,
-          message: '上下板间隔时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         first_second_flag: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         locked_buffer_time: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         netboard_buffer_time: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         ct_predict_lower: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         ct_predict_upper: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process_sequence: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process_order: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         switch_name: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         deleted_process_flag: [{
           required: true,
-          message: '不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

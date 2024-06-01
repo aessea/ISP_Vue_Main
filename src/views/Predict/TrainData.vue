@@ -407,35 +407,35 @@ export default {
       rules: {
         board: [{
           required: true,
-          message: '板号前八位不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         SMT_machine_name: [{
           required: true,
-          message: 'SMT机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line: [{
           required: true,
-          message: '线体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line_classify: [],
         process: [{
           required: true,
-          message: '制程不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         connecting_plates: [],
         passing_plates: [{
           required: true,
-          message: '过板数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         single_points: [],
         completed_quantity: [{
           required: true,
-          message: '产出片数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         long: [],
@@ -444,7 +444,7 @@ export default {
         total_points: [],
         process_time: [{
           required: true,
-          message: '加工时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         other_time: [],

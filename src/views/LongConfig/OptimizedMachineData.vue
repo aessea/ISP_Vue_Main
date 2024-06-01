@@ -244,12 +244,12 @@ export default {
       rules: {
         machine_name: [{
           required: true,
-          message: '机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         optimized_lines: [{
           required: true,
-          message: '优化线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

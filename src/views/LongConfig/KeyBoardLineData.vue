@@ -244,12 +244,12 @@ export default {
       rules: {
         line: [{
           required: true,
-          message: '线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         points_limit: [{
           required: true,
-          message: '点数界限不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

@@ -260,22 +260,22 @@ export default {
       rules: {
         line: [{
           required: true,
-          message: '线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         big_setup: [{
           required: true,
-          message: '大切换不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         small_setup: [{
           required: true,
-          message: '小切换不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         setup_program: [{
           required: true,
-          message: '切软体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

@@ -391,92 +391,92 @@ export default {
       rules: {
         board: [{
           required: true,
-          message: '板号前八位不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         SMT_machine_name: [{
           required: true,
-          message: 'SMT机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line: [{
           required: true,
-          message: '线体不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         line_classify: [{
           required: true,
-          message: '线别类不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process: [{
           required: true,
-          message: '制程不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         connecting_plates: [{
           required: true,
-          message: '联片数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         passing_plates: [{
           required: true,
-          message: '过板数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         single_points: [{
           required: true,
-          message: '单板点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         completed_quantity: [{
           required: true,
-          message: '产出片数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         long: [{
           required: true,
-          message: '长不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         wide: [{
           required: true,
-          message: '宽不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         thick: [{
           required: true,
-          message: '厚不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         total_points: [{
           required: true,
-          message: '总点数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         process_time: [{
           required: true,
-          message: '加工时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         other_time: [{
           required: true,
-          message: '其他时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         program_CT: [{
           required: true,
-          message: '程序CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         average_CT: [{
           required: true,
-          message: '平均CT不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         data_time: [{
           required: true,
-          message: '数据时间不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'change'
         }]
       },

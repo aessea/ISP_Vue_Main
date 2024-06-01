@@ -244,12 +244,12 @@ export default {
       rules: {
         board8: [{
           required: true,
-          message: '板号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         advance_days: [{
           required: true,
-          message: '提前天数不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

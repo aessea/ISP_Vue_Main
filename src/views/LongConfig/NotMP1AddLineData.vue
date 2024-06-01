@@ -288,17 +288,17 @@ export default {
       rules: {
         process: [{
           required: true,
-          message: '制程不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         under_single_points: [{
           required: true,
-          message: '单板点数[以下]不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         add_feasible_line: [{
           required: true,
-          message: '补充的可排线别不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

@@ -252,17 +252,16 @@ export default {
       rules: {
         board: [{
           required: true,
-          message: '板号不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         top_SMT_mac_name: [{
           required: true,
-          message: '前配套板名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         bottom_SMT_mac_name: [{
-          required: true,
-          message: '后配套板名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },

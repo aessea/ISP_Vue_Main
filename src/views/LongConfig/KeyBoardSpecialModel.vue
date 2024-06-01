@@ -246,7 +246,7 @@ export default {
       rules: {
         SMT_machine_name: [{
           required: true,
-          message: '机种名不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }]
       },
