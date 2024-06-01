@@ -56,6 +56,8 @@ export default {
     MesApiPushed: 'Pushed', // 已推送
     MesApiPushError: 'Pushed', // 推送失败
     MesApiPushSuccess: 'Pushing...', // 推送成功
+    UpdateSuccess: 'Update Successfully', // 更新成功
+    UpdateError: 'Update Error', // 更新出错
     MesApiPush: 'Not Pushed', // 未推送
     TextError: 'Error', // 错误
     TextWarn: 'Warn', // 警告
@@ -443,6 +445,10 @@ export default {
   ProductionReportDataPage: {
     ExportDateRange: 'Export Date Range:', // 导出日期范围：
     SyncDatabase: 'Synchronize production reports for the specified database' // 同步指定数据库的生产报表
+  },
+  // 量产程序表
+  ProductProgramDataPage: {
+    UpdateMesData: 'Update Mes Data' // 更新MES程序
   },
   // 运行日志
   HistoryRunPage: {

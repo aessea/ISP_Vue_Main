@@ -5,7 +5,7 @@
         <el-col :span="16">
           <div>
             <el-button v-if="buttons.includes('ProductProgramData/getAllProgramData')" type="primary" @click="getAllProgramData">
-              <i class="el-icon-refresh" />更新MES程序
+              <i class="el-icon-refresh" />{{ $t('ProductProgramDataPage.UpdateMesData') }}
             </el-button>
             <el-button v-if="buttons.includes('ProductProgramData/add')" type="primary" @click="addDataDialog">
               <i class="el-icon-plus" />{{ $t('TablePage.BtnAppend') }}
@@ -53,25 +53,25 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="status" label="程序表类型" width="120" sortable />
-          <el-table-column prop="model_name" label="SMT机种名" width="130" sortable />
-          <el-table-column prop="program_line_type" label="程序线别" width="120" sortable />
-          <el-table-column prop="board_no" label="板号" width="160" sortable />
-          <el-table-column prop="process" label="制程" width="80" sortable />
-          <el-table-column prop="workmanship" label="工艺" />
-          <el-table-column prop="connecting_plates" label="联片数" width="100" sortable />
-          <el-table-column prop="points" label="点数" width="80" sortable />
+          <el-table-column prop="status" :label="lang_dict.status" width="120" sortable />
+          <el-table-column prop="model_name" :label="lang_dict.model_name" width="130" sortable />
+          <el-table-column prop="program_line_type" :label="lang_dict.program_line_type" width="120" sortable />
+          <el-table-column prop="board_no" :label="lang_dict.board_no" width="160" sortable />
+          <el-table-column prop="process" :label="lang_dict.process" width="80" sortable />
+          <el-table-column prop="workmanship" :label="lang_dict.workmanship" />
+          <el-table-column prop="connecting_plates" :label="lang_dict.connecting_plates" width="100" sortable />
+          <el-table-column prop="points" :label="lang_dict.points" width="80" sortable />
           <el-table-column prop="length" label="长" width="80" sortable />
           <el-table-column prop="width" label="宽" width="80" sortable />
           <el-table-column prop="height" label="高" width="80" sortable />
-          <el-table-column prop="program_CT" label="标准CT" width="100" sortable />
-          <el-table-column prop="yin_yang_board" label="阴阳板" width="100" />
-          <el-table-column prop="component_merge" label="组件合并" width="120" />
-          <el-table-column prop="component_bind" label="组件绑定" width="120" />
-          <el-table-column prop="package_name" label="包装阶" width="100" />
-          <el-table-column prop="is_rivet" label="是否打铆钉" width="120" />
-          <el-table-column prop="program_time" label="程序制作时间" width="150" sortable />
-          <el-table-column prop="program_id" label="MES程序ID" width="150" sortable />
+          <el-table-column prop="program_CT" :label="lang_dict.program_CT" width="100" sortable />
+          <el-table-column prop="yin_yang_board" :label="lang_dict.yin_yang_board" width="100" />
+          <el-table-column prop="component_merge" :label="lang_dict.component_merge" width="120" />
+          <el-table-column prop="component_bind" :label="lang_dict.component_bind" width="120" />
+          <el-table-column prop="package_name" :label="lang_dict.package_name" width="100" />
+          <el-table-column prop="is_rivet" :label="lang_dict.is_rivet" width="120" />
+          <el-table-column prop="program_time" :label="lang_dict.program_time" width="150" sortable />
+          <el-table-column prop="program_id" :label="lang_dict.program_id" width="150" sortable />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -117,51 +117,51 @@
         <el-form ref="$form" :model="model" label-position="left" size="small">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.status" prop="status" label="程序表类型">
+              <el-form-item :rules="rules.status" prop="status" :label="lang_dict.status">
                 <el-input-number v-model="model.status" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.model_name" prop="model_name" label="SMT机种名">
+              <el-form-item :rules="rules.model_name" prop="model_name" :label="lang_dict.model_name">
                 <el-input v-model="model.model_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_line_type" prop="program_line_type" label="程序线别">
+              <el-form-item :rules="rules.program_line_type" prop="program_line_type" :label="lang_dict.program_line_type">
                 <el-input v-model="model.program_line_type" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.board_no" prop="board_no" label="板号">
+              <el-form-item :rules="rules.board_no" prop="board_no" :label="lang_dict.board_no">
                 <el-input v-model="model.board_no" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.process" prop="process" label="制程">
+              <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
                 <el-input v-model="model.process" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.workmanship" prop="workmanship" label="工艺">
+              <el-form-item :rules="rules.workmanship" prop="workmanship" :label="lang_dict.workmanship">
                 <el-input v-model="model.workmanship" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.connecting_plates" prop="connecting_plates" label="联片数">
+              <el-form-item :rules="rules.connecting_plates" prop="connecting_plates" :label="lang_dict.connecting_plates">
                 <el-input-number v-model="model.connecting_plates" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.points" prop="points" label="点数">
+              <el-form-item :rules="rules.points" prop="points" :label="lang_dict.points">
                 <el-input-number v-model="model.points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_CT" prop="program_CT" label="标准CT">
+              <el-form-item :rules="rules.program_CT" prop="program_CT" :label="lang_dict.program_CT">
                 <el-input-number v-model="model.program_CT" :placeholder="$t('Placeholder.Enter')" :step="0.1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>
@@ -185,63 +185,63 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.yin_yang_board" prop="yin_yang_board" label="阴阳板">
+              <el-form-item :rules="rules.yin_yang_board" prop="yin_yang_board" :label="lang_dict.yin_yang_board">
                 <el-input v-model="model.yin_yang_board" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.component_merge" prop="component_merge" label="组件合并">
+              <el-form-item :rules="rules.component_merge" prop="component_merge" :label="lang_dict.component_merge">
                 <el-input v-model="model.component_merge" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.component_bind" prop="component_bind" label="组件绑定">
+              <el-form-item :rules="rules.component_bind" prop="component_bind" :label="lang_dict.component_bind">
                 <el-input v-model="model.component_bind" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.package_name" prop="package_name" label="包装阶">
+              <el-form-item :rules="rules.package_name" prop="package_name" :label="lang_dict.package_name">
                 <el-input v-model="model.package_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_rivet" prop="is_rivet" label="是否打铆钉">
+              <el-form-item :rules="rules.is_rivet" prop="is_rivet" :label="lang_dict.is_rivet">
                 <el-input v-model="model.is_rivet" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_time" prop="program_time" label="程序制作时间">
+              <el-form-item :rules="rules.program_time" prop="program_time" :label="lang_dict.program_time">
                 <el-date-picker v-model="model.program_time" :placeholder="$t('Placeholder.Select')" value-format="yyyy-MM-dd" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_id" prop="program_id" label="MES程序ID">
+              <el-form-item :rules="rules.program_id" prop="program_id" :label="lang_dict.program_id">
                 <el-input v-model="model.is_rivet" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" label="创建人">
+              <el-form-item :rules="rules.CREATED_BY" prop="CREATED_BY" :label="lang_dict.CREATED_BY">
                 <el-input v-model="model.CREATED_BY" disabled />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" label="创建时间">
+              <el-form-item :rules="rules.CREATED_TIME" prop="CREATED_TIME" :label="lang_dict.CREATED_TIME">
                 <el-input v-model="model.CREATED_TIME" disabled />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" label="修改人">
+              <el-form-item :rules="rules.UPDATED_BY" prop="UPDATED_BY" :label="lang_dict.UPDATED_BY">
                 <el-input v-model="model.UPDATED_BY" disabled />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" label="修改时间">
+              <el-form-item :rules="rules.UPDATED_TIME" prop="UPDATED_TIME" :label="lang_dict.UPDATED_TIME">
                 <el-input v-model="model.UPDATED_TIME" disabled />
               </el-form-item>
             </el-col>
@@ -800,22 +800,22 @@ export default {
       for (const i in confirmText) {
         newDatas.push(h('p', null, confirmText[i]))
       }
-      this.$confirm('提示', {
-        title: '提示',
+      this.$confirm(this.$t('PublicText.TitleTip'), {
+        title: this.$t('PublicText.TitleTip'),
         message: h('div', null, newDatas),
         confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         type: 'warning'
       }).then(() => {
         const updateLoading = {
-          text: '量产程序表更新中...',
+          text: this.$t('PublicText.MesApiUpdating'),
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
         GetAllProgramData().then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
-            this.$alert('量产程序表更新成功！', '提示', {
+            this.$alert(this.$t('PublicText.UpdateSuccess'), this.$t('PublicText.TitleTip'), {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
@@ -823,7 +823,7 @@ export default {
           }
         }).catch(err => {
           this.loadingInstance.close() // 清除动画
-          this.$alert(err, '更新信息出错', {
+          this.$alert(err, this.$t('PublicText.UpdateError'), {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
@@ -831,7 +831,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消更新'
+          message: this.$t('PublicBtn.TextCancel')
         })
       })
     },
