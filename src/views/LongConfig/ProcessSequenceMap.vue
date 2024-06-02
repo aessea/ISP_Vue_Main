@@ -28,14 +28,6 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
-              <el-button
-                size="small"
-                icon="el-icon-warning-outline"
-                circle
-                @click="helpTips"
-              />
-            </el-tooltip>
           </div>
         </el-col>
       </el-row>
@@ -53,7 +45,7 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="classify" :label="lang_dict.classify">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.classify === 'common'" size="small" type="info">普通工单</el-tag>
+              <el-tag v-if="scope.row.classify === 'common'" size="small" type="info">{{ $t('ProcessSequenceMapPage.GeneralJob') }}</el-tag>
               <el-tag v-else size="small" type="primary">{{ scope.row.classify }}</el-tag>
             </template>
           </el-table-column>
@@ -144,23 +136,6 @@
         <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ $t('TablePage.BtnModify') }}</el-button>
       </span>
     </el-dialog>
-
-    <el-dialog
-      v-el-drag-dialog
-      :title="$t('TablePage.TitleFormDescription')"
-      :visible.sync="helpDialogVisible"
-      width="60%"
-      @dragDialog="handleDrag"
-    >
-      <span>如果特殊客户的先后加工顺序和制程的匹配关系有维护在该表中，就会按照表中的关系进行数据检查。</span>
-      <span>如果特殊客户没有进行维护，就按照普通工单的逻辑进行数据检查。</span>
-      <span>（可以设置一个制程可匹配多个先后加工顺序）</span>
-      <p>该表维护的注意事项：普通工单的所有制程都必须维护，特殊客户可以选择性维护。</p>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
-      </span>
-    </el-dialog>
-
     <el-dialog
       v-el-drag-dialog
       :title="$t('TablePage.TitleImportData')"
@@ -249,7 +224,7 @@ export default {
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮
-      helpDialogVisible: false, // 帮助提示dialog
+      // helpDialogVisible: false, // 帮助提示dialog
       scopeIndex: '', // 表格行数index
       scopeRow: '', // 表格行数据
       importDialogVisible: false, // 导入数据dialog
@@ -653,10 +628,6 @@ export default {
     // 导入数据窗口关闭
     handleExportClose() {
       this.exportDialogVisible = false
-    },
-    // 帮助提示按钮
-    helpTips() {
-      this.helpDialogVisible = true
     }
   }
 }

@@ -56,33 +56,33 @@
           <el-table-column prop="grouping_factor_hour" :label="lang_dict.grouping_factor_hour" width="170" />
           <el-table-column prop="grouping_combination_flag" :label="lang_dict.grouping_combination_flag" width="130">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.grouping_combination_flag === 1" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.grouping_combination_flag === 0" size="small" type="danger">否</el-tag>
+              <el-tag v-if="scope.row.grouping_combination_flag === 1" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.grouping_combination_flag === 0" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="first_second_flag" :label="lang_dict.first_second_flag" width="180">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.first_second_flag === 1" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.first_second_flag === 0" size="small" type="danger">否</el-tag>
+              <el-tag v-if="scope.row.first_second_flag === 1" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.first_second_flag === 0" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="first_second_combination_flag" :label="lang_dict.first_second_combination_flag" width="260">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.first_second_combination_flag === 1" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.first_second_combination_flag === 0" size="small" type="danger">否</el-tag>
+              <el-tag v-if="scope.row.first_second_combination_flag === 1" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.first_second_combination_flag === 0" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="buffer_time" :label="lang_dict.buffer_time" width="130" />
           <el-table-column prop="is_point" :label="lang_dict.is_point" width="100">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_point === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_point === false" size="small" type="danger">否</el-tag>
+              <el-tag v-if="scope.row.is_point === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_point === false" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="deleted_process_flag" :label="lang_dict.deleted_process_flag" width="200">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.deleted_process_flag === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.deleted_process_flag === false" size="small" type="danger">否</el-tag>
+              <el-tag v-if="scope.row.deleted_process_flag === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.deleted_process_flag === false" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="locked_buffer_time" :label="lang_dict.locked_buffer_time" width="200" />
@@ -142,58 +142,58 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.TB" prop="TB" :label="lang_dict.TB">
-                <el-select v-model="model.TB" placeholder="Top面/Button面/Single面" :style="{width: '100%'}">
+                <el-select v-model="model.TB" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                   <el-option v-for="(item) in TBOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.paired_process" prop="paired_process" :label="lang_dict.paired_process">
-                <el-input v-model="model.paired_process" placeholder="对应的另一面，如果是单面则为空" clearable />
+                <el-input v-model="model.paired_process" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.process_order" prop="process_order" :label="lang_dict.process_order">
-                <el-input v-model="model.process_order" placeholder="制程分配点数的优先顺序" clearable />
+                <el-input v-model="model.process_order" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.process_sequence" prop="process_sequence" :label="lang_dict.process_sequence">
-                <el-input v-model="model.process_sequence" placeholder="请输入0或1或2" oninput="this.value=this.value.replace(/[^0-2]/g, '')" clearable />
+                <el-input v-model="model.process_sequence" :placeholder="$t('Placeholder.PleInput012')" oninput="this.value=this.value.replace(/[^0-2]/g, '')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_day" prop="grouping_factor_day" :label="lang_dict.grouping_factor_day">
-                <el-input-number v-model="model.grouping_factor_day" placeholder="第一块和第二块工单划分参数" :style="{width: '100%'}" />
+                <el-input-number v-model="model.grouping_factor_day" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_overtime" prop="grouping_factor_overtime" :label="lang_dict.grouping_factor_overtime">
-                <el-input-number v-model="model.grouping_factor_overtime" placeholder="第三块划分参数" :style="{width: '100%'}" />
+                <el-input-number v-model="model.grouping_factor_overtime" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_factor_hour" prop="grouping_factor_hour" :label="lang_dict.grouping_factor_hour">
-                <el-input-number v-model="model.grouping_factor_hour" placeholder="第二块工单控制大小" :style="{width: '100%'}" />
+                <el-input-number v-model="model.grouping_factor_hour" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.first_second_flag" prop="first_second_flag" :label="lang_dict.first_second_flag">
-                <el-input v-model="model.first_second_flag" placeholder="0否,1是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+                <el-input v-model="model.first_second_flag" :placeholder="$t('Placeholder.No0Yes1')" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.grouping_combination_flag" prop="grouping_combination_flag" :label="lang_dict.grouping_combination_flag">
-                <el-input v-model="model.grouping_combination_flag" placeholder="0否,1是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+                <el-input v-model="model.grouping_combination_flag" :placeholder="$t('Placeholder.No0Yes1')" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.first_second_combination_flag" prop="first_second_combination_flag" :label="lang_dict.first_second_combination_flag">
-                <el-input v-model="model.first_second_combination_flag" placeholder="0否,1是" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+                <el-input v-model="model.first_second_combination_flag" :placeholder="$t('Placeholder.No0Yes1')" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
           </el-row>

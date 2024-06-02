@@ -41,7 +41,9 @@ export default {
   },
   Placeholder: {
     Enter: 'Please enter', // 请输入
-    Select: 'Please select' // 请选择
+    Select: 'Please select', // 请选择
+    PleInput012: 'Please enter 0 or 1 or 2', // 请输入0或1或2
+    No0Yes1: 'Enter 0 for no and 1 for yes' // 输入0表示否,1表示是
   },
   // 通用文本
   PublicText: {
@@ -75,7 +77,9 @@ export default {
     ModifySuccess: 'Modify Successfully', // 修改成功
     BtnDeleteHisLog: 'Delete History Log', // 删除历史日志
     Enabled: 'Enabled', // 已启用
-    NotEnabled: 'Not enabled' // 未启用
+    NotEnabled: 'Not enabled', // 未启用
+    Yes: 'Yes', // 是
+    No: 'No' // 否
   },
   // 通用按钮
   PublicBtn: {
@@ -449,6 +453,9 @@ export default {
   // 量产程序表
   ProductProgramDataPage: {
     UpdateMesData: 'Update Mes Data' // 更新MES程序
+  },
+  ProcessSequenceMapPage: {
+    GeneralJob: 'General Job' // 普通工单
   },
   // 运行日志
   HistoryRunPage: {

@@ -103,7 +103,7 @@
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.line_name" prop="line_name" :label="lang_dict.line_name">
-              <el-select v-model="model.line_name" placeholder="请选择线别" :style="{width: '100%'}">
+              <el-select v-model="model.line_name" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in lineOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
