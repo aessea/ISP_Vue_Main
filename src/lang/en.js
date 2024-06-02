@@ -39,6 +39,7 @@ export default {
     EmailFormatError: '', // 邮箱格式不正确
     InputPwdTwice: '' // 请再次输入密码
   },
+  // 请输入
   Placeholder: {
     Enter: 'Please enter', // 请输入
     Select: 'Please select', // 请选择
@@ -181,7 +182,8 @@ export default {
   DashboardPage: {
     QuickActions: 'Quick Actions' // 快捷操作
   },
-  SchedulePanelPage: { // 控制面板
+  // 控制面板
+  SchedulePanelPage: {
     // 标题
     ScheduleDateTitle: 'Schedule Title', // 排程标题
     TitleScheduleRunTime: 'Schedule Run Time', // 排程运行时长
