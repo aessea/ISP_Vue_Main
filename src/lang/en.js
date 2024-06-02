@@ -33,11 +33,11 @@ export default {
   // 表单验证
   Form: {
     NotNull: 'It cannot be a null value', // 不能为空
-    PleaseSelect: '', // 请选择
-    UserNameLength: '', // 用户名长度必须为 5 到 20 个字符
-    PasswordLength: '', // 密码长度必须为 8 到 20 个字符
-    EmailFormatError: '', // 邮箱格式不正确
-    InputPwdTwice: '' // 请再次输入密码
+    PleaseSelect: 'Please select', // 请选择
+    UserNameLength: 'Username length must be between 5 and 20 characters', // 用户名长度必须为 5 到 20 个字符
+    PasswordLength: 'Password length must be between 8 and 20 characters', // 密码长度必须为 8 到 20 个字符
+    EmailFormatError: 'Email format is incorrect', // 邮箱格式不正确
+    InputPwdTwice: 'Please enter your password again' // 请再次输入密码
   },
   // 请输入
   Placeholder: {
@@ -235,14 +235,14 @@ export default {
     TextGetMainUploadTime: 'Get Main Upload File', // 获取主板上传文件
     TextGetSmallUploadTime: 'Get Small Upload File', // 获取小板上传文件
     TextTrainTip: 'Scheduling is being calculated, and the predictive model cannot be trained!', // 正在计算排程，无法训练预测模型！
-    TextModifyHoliday: '', // 确定要修改放假日期？
+    TextModifyHoliday: 'Are you sure you want to modify the holiday date?', // 确定要修改放假日期？
     // 转移扣点
-    TextBucklePoints1: '', // 未导入文件，无法转移扣点
-    TextBucklePoints2: '', // 确定要进行转移扣点操作？
-    TextBucklePoints3: '', // 未更新工单进度，确定要转移扣点操作？
-    TextBucklePoints4: '', // 转移扣点中，请稍等...
-    TextBucklePoints5: '', // 转移扣点成功
-    TextBucklePoints6: '', // 扣点失败
+    TextBucklePoints1: 'File not imported, cannot transfer penalty points', // 未导入文件，无法转移扣点
+    TextBucklePoints2: 'Are you sure you want to transfer penalty points?', // 确定要进行转移扣点操作？
+    TextBucklePoints3: 'Work order progress not updated, are you sure you want to transfer penalty points?', // 未更新工单进度，确定要转移扣点操作？
+    TextBucklePoints4: 'Transferring penalty points, please wait...', // 转移扣点中，请稍等...
+    TextBucklePoints5: 'Penalty points transferred successfully', // 转移扣点成功
+    TextBucklePoints6: 'Penalty points deduction failed', // 扣点失败
     // 检查
     TextCheckResult: 'Check Result', // 检查结果
     TextCheckError: 'There was an abnormality in the inspection', // 检查出现异常
@@ -253,22 +253,22 @@ export default {
     TextComputeTip4: 'Are you currently analyzing the schedule and are you sure you want to proceed with the import?', // 目前正在分析排程，确定要继续导入？
     TextComputeTip5: 'Are you currently calculating or analyzing schedules and are sure you want to proceed with the import?', // 目前正在计算排程或分析排程，确定要继续导入？
     TextComputeTip6: 'The schedule file cannot be imported if the schedule file is not uploaded', // 主板和小板的排程文件未全部上传，无法导入
-    TextComputeTip7: '', // 未导入文件，无法计算排程
-    TextComputeTip8: '', // 已开始计算排程，请勿重复点击
-    TextComputeTip9: '', // 目前正在计算排程或分析排程，确定要重新开始计算？
-    TextComputeTip10: '', // 注意：此操作将会中断当前的排程！
+    TextComputeTip7: 'File not imported, cannot calculate schedule', // 未导入文件，无法计算排程
+    TextComputeTip8: 'Schedule calculation has started, please do not click repeatedly', // 已开始计算排程，请勿重复点击
+    TextComputeTip9: 'Currently calculating or analyzing schedule, are you sure you want to restart the calculation?', // 目前正在计算排程或分析排程，确定要重新开始计算？
+    TextComputeTip10: 'Note: This operation will interrupt the current schedule!', // 注意：此操作将会中断当前的排程！
     TextComputeTip11: 'Failed to start the calculation', // 开始计算失败
     // 接口更新提示
-    TextApiUploadTip1: '', // 服务器正在计算排程，无法更新信息！
-    TextApiUploadTip2: '', // 注：请在导入之后，开始计算之前更新
-    TextApiUploadTip3: '', // 未导入文件，无法更新信息
+    TextApiUploadTip1: 'The server is calculating the schedule, unable to update information!', // 服务器正在计算排程，无法更新信息！
+    TextApiUploadTip2: 'Note: Please update after importing and before starting the calculation', // 注：请在导入之后，开始计算之前更新
+    TextApiUploadTip3: 'File not imported, cannot update information', // 未导入文件，无法更新信息
     TextApiUploadTip4: 'Are you sure you want to update?', // 确定要进行更新？
-    TextApiUploadTip5: '', // 更新信息出错
-    TextApiUploadTip6: '', // 确定要推送量化结果？
-    TextApiUploadTip7: '', // 包装点时间更新成功！
+    TextApiUploadTip5: 'Error updating information', // 更新信息出错
+    TextApiUploadTip6: 'Are you sure you want to push the quantification results?', // 确定要推送量化结果？
+    TextApiUploadTip7: 'Package point time updated successfully!', // 包装点时间更新成功！
     // 导出提示
     TextExportTip1: 'No files are imported, no export is required', // 未导入文件，无需导出
-    TextExportTip2: '', // 导出失败，文件不存在
+    TextExportTip2: 'Export failed, file does not exist', // 导出失败，文件不存在
     // 按钮
     BtnContinueImport: 'Yes, Continue Import', // 确定，仍要导入
     BtnContinueCompute: 'Yes, Continue Compute', // 确定，仍要计算
@@ -357,68 +357,68 @@ export default {
   AnalysisControlPage: {
     // 标题
     TitleTip: 'Tip', // 提示信息
-    TextCheckData1: '', // 数据检查提示信息：还未进行数据检查
-    TitleAnaProgress: '', // 分析进度
+    TextCheckData1: 'Data check prompt: Data check has not been performed yet', // 数据检查提示信息：还未进行数据检查
+    TitleAnaProgress: 'Analysis Progress', // 分析进度
     ControlPanel: 'Control Center', // 控制中心
-    TitleAnaStep1: '', // 上传文件
-    TitleAnaStep2: '', // 检查文件
-    TitleAnaStep3: '', // 分析排程
-    TitleAnaStep4: '', // 推送排程
-    TextUploadFile: '', // 请上传文件
-    BtnUploadFile: '', // 1.上传文件
-    BtnCheckFile: '', // 2.检查文件
-    BtnAnaFile: '', // 3.分析排程
-    BtnAnaPush: '', // 4.分析后推送
-    BtnDownloadLatestFile: '', // 下载最新分析结果文件
-    BtnGetStaResult: '', // 获取量化结果
-    BtnImportPush: '', // 导入后直接推送
-    TextAnaResult: '', // 分析结果
-    FindHistoryAnaRes: '', // 查看历史分析结果
-    TitlePushSchedule: '', // 推送排程
-    BtnPsuhSMTNot: '', // 推送SMT未排
-    BtnPushSMTPre: '', // 推送SMT预排
-    BtnPushSMTNor: '', // 推送SMT正排
-    StatisticsRes1: '', // 量化结果1，
-    TextLine: '', // 线体
-    TextPointType: '', // 点数类别
-    TextPoints: '', // 点数
-    StatisticsRes2: '', // 量化结果2
-    TextType: '', // 量化类型
-    TextHours: '', // 量化结果（小时）
-    TextDays: '', // 量化结果（天）
-    StatisticsRes3: '', // 量化结果3
-    TextPoints2: '', // 值
-    StatisticsRes4: '', // 量化结果4
-    TextTime: '', // 线体完工时间
-    BtnExportExcel: '', // 导出Excel
-    TextProgress1: '', // 预处理|未开始
-    TextProgress2: '', // 分析|未开始
-    TextProgress3: '', // 输出表格|未开始
-    MsgAnalysisTip: '', // 分析排程提示信息：未完成分析排程
-    MsgPushImport1: '', // 确定要直接导入后推送排程
-    MsgPushImport2: '', // 注意：直接导入将不会进行分析排程！
-    MsgCheckData1: '', // 数据检查未通过，确定要导入排程？
-    MsgImportFailed: '', // 导入失败
-    MsgCheckData2: '', // 数据检查提示信息：未进行数据检查
-    MsgGetSuccess: '', // 获取成功
-    MsgGetFail: '', // 获取失败
-    MsgCheckData3: '', // 请先上传文件
-    MsgCheckData4: '', // 数据检查未通过，确定要导入排程?
-    MsgCheckData5: '', // 数据检查未通过，确定要开始分析排程?
-    MsgDoAnalysis1: '', // 目前正在计算排程，确定要开始分析？
-    MsgDoAnalysis2: '', // 目前正在分析排程，确定要开始分析？
-    MsgDoAnalysis3: '', // 注意：此操作将会影响当前运行的排程结果！
-    MsgDoAnalysis4: '', // 开始分析排程，请关注进度条
-    MsgDoAnalysis5: '', // 未完成分析排程，无法获取量化结果！
-    MsgDoAnalysis6: '', // 确定要直接导入后推送排程？
-    MsgDoAnalysis7: '', // 注意：直接导入将不会进行分析排程！
-    MsgDoAnalysis8: '', // 未完成分析排程，无法进行推送！
-    MsgDoAnalysis9: '', // 清空进度条请求出错
-    MsgDoAnalysis10: '', // (最新分析结果)
-    MsgDoAnalysis11: '', // 分析时间：
-    MsgStaRes: '', // 量化结果
-    MsgStaSuccess: '', // 量化成功
-    MsgCloseSta: '' // 确认关闭量化窗口？
+    TitleAnaStep1: 'Upload File', // 上传文件
+    TitleAnaStep2: 'Check File', // 检查文件
+    TitleAnaStep3: 'Analyze Schedule', // 分析排程
+    TitleAnaStep4: 'Push Schedule', // 推送排程
+    TextUploadFile: 'Please upload file', // 请上传文件
+    BtnUploadFile: '1. Upload File', // 1.上传文件
+    BtnCheckFile: '2. Check File', // 2.检查文件
+    BtnAnaFile: '3. Analyze Schedule', // 3.分析排程
+    BtnAnaPush: '4. Push after Analysis', // 4.分析后推送
+    BtnDownloadLatestFile: 'Download Latest Analysis Result File', // 下载最新分析结果文件
+    BtnGetStaResult: 'Get Quantitative Results', // 获取量化结果
+    BtnImportPush: 'Import and Push Directly', // 导入后直接推送
+    TextAnaResult: 'Analysis Result', // 分析结果
+    FindHistoryAnaRes: 'View Historical Analysis Results', // 查看历史分析结果
+    TitlePushSchedule: 'Push Schedule', // 推送排程
+    BtnPsuhSMTNot: 'Push SMT Unarranged', // 推送SMT未排
+    BtnPushSMTPre: 'Push SMT Prearranged', // 推送SMT预排
+    BtnPushSMTNor: 'Push SMT Arranged', // 推送SMT正排
+    StatisticsRes1: 'Quantitative Result 1', // 量化结果1，
+    TextLine: 'Line', // 线体
+    TextPointType: 'Point Type', // 点数类别
+    TextPoints: 'Points', // 点数
+    StatisticsRes2: 'Quantitative Result 2', // 量化结果2
+    TextType: 'Quantification Type', // 量化类型
+    TextHours: 'Quantitative Result (Hours)', // 量化结果（小时）
+    TextDays: 'Quantitative Result (Days)', // 量化结果（天）
+    StatisticsRes3: 'Quantitative Result 3', // 量化结果3
+    TextPoints2: 'Value', // 值
+    StatisticsRes4: 'Quantitative Result 4', // 量化结果4
+    TextTime: 'Line Completion Time', // 线体完工时间
+    BtnExportExcel: 'Export to Excel', // 导出Excel
+    TextProgress1: 'Preprocessing | Not Started', // 预处理|未开始
+    TextProgress2: 'Analysis | Not Started', // 分析|未开始
+    TextProgress3: 'Output Table | Not Started', // 输出表格|未开始
+    MsgAnalysisTip: 'Analysis Schedule Prompt: Analysis schedule is not completed', // 分析排程提示信息：未完成分析排程
+    MsgPushImport1: 'Are you sure you want to import and push schedule directly?', // 确定要直接导入后推送排程
+    MsgPushImport2: 'Note: Direct import will not perform analysis of the schedule!', // 注意：直接导入将不会进行分析排程！
+    MsgCheckData1: 'Data check failed, are you sure you want to import schedule?', // 数据检查未通过，确定要导入排程？
+    MsgImportFailed: 'Import failed', // 导入失败
+    MsgCheckData2: 'Data check prompt: Data check has not been performed yet', // 数据检查提示信息：未进行数据检查
+    MsgGetSuccess: 'Get successful', // 获取成功
+    MsgGetFail: 'Get failed', // 获取失败
+    MsgCheckData3: 'Please upload file first', // 请先上传文件
+    MsgCheckData4: 'Data check failed, are you sure you want to import schedule?', // 数据检查未通过，确定要导入排程?
+    MsgCheckData5: 'Data check failed, are you sure you want to start analyzing schedule?', // 数据检查未通过，确定要开始分析排程?
+    MsgDoAnalysis1: 'Currently calculating schedule, are you sure you want to start analysis?', // 目前正在计算排程，确定要开始分析？
+    MsgDoAnalysis2: 'Currently analyzing schedule, are you sure you want to start analysis?', // 目前正在分析排程，确定要开始分析？
+    MsgDoAnalysis3: 'Note: This operation will affect the current running schedule results!', // 注意：此操作将会影响当前运行的排程结果！
+    MsgDoAnalysis4: 'Analysis schedule started, please pay attention to the progress bar', // 开始分析排程，请关注进度条
+    MsgDoAnalysis5: 'Analysis schedule is not completed, unable to get quantitative results!', // 未完成分析排程，无法获取量化结果！
+    MsgDoAnalysis6: 'Are you sure you want to import and push schedule directly?', // 确定要直接导入后推送排程？
+    MsgDoAnalysis7: 'Note: Direct import will not perform analysis of the schedule!', // 注意：直接导入将不会进行分析排程！
+    MsgDoAnalysis8: 'Analysis schedule is not completed, unable to push!', // 未完成分析排程，无法进行推送！
+    MsgDoAnalysis9: 'Error requesting clear progress bar', // 清空进度条请求出错
+    MsgDoAnalysis10: '(Latest analysis result)', // (最新分析结果)
+    MsgDoAnalysis11: 'Analysis Time:', // 分析时间：
+    MsgStaRes: 'Quantitative Results', // 量化结果
+    MsgStaSuccess: 'Quantification Successful', // 量化成功
+    MsgCloseSta: 'Confirm to close quantification window?' // 确认关闭量化窗口？
   },
   // 排程配置/排程配置管理
   ParamsConfigPage: {
@@ -555,7 +555,7 @@ export default {
     description: 'Description', // 接口描述
     url: 'Address', // 接口相对地址
     remark: 'Remark', // 备注
-    request_test_server: '', // 请求MES的正式服/测试服
+    request_test_server: 'Request MES formal/test server', // 请求MES的正式服/测试服
     FormalServer: 'Formal Server', // 正式服
     TestServer: 'Test Server' // 测试服
   },
@@ -575,31 +575,31 @@ export default {
     BtnManageBackupData: 'Manage Backup Data', // 备份管理
     BtnAddHolidayLines: 'Select Default Holiday Lines', // 选择默认锁定时间的线体
     TitleSyncData: 'Synchronize the maintenance schedule of the specified database', // 同步指定数据库的维护时间表
-    TextBackupData1: '', // 自动备份的备份名为当前时间
+    TextBackupData1: 'Automatic backup name is the current time', // 自动备份的备份名为当前时间
     TitleBackupData: 'Backup Data', // 备份数据
-    TextBackupData2: '', // 请输入备份名称：
-    TextBackupData3: '', // 请选择备份名称：
-    TextBackupData4: '', // （注意：恢复备份将会覆盖当前表）
+    TextBackupData2: 'Please enter backup name:', // 请输入备份名称：
+    TextBackupData3: 'Please select backup name:', // 请选择备份名称：
+    TextBackupData4: '(Note: Restoring backup will overwrite the current table)', // （注意：恢复备份将会覆盖当前表）
     TextBackupName: 'Backup Name', // 备份名称
     OriginalImport: 'Original Import', // 原方式导入
     AutoBackup: 'Auto Backup', // 自动备份
-    DateTimeStart: '', // 维护开始时间
-    DateTimeEnd: '', // 维护结束时间
-    DateStart: '', // 开始日期
-    DateEnd: '', // 结束日期
-    DayTime: '', // 白班早下班
-    NightTime: '', // 夜班早下班
-    MaintainTime: '', // 白班保养
-    CustomTime: '', // 自定义时间(方式一)
-    CustomTime2: '', // 自定义时间(方式二)
-    ConfirmRecovery: '', // 确认恢复
+    DateTimeStart: 'Maintenance start time', // 维护开始时间
+    DateTimeEnd: 'Maintenance end time', // 维护结束时间
+    DateStart: 'Start date', // 开始日期
+    DateEnd: 'End date', // 结束日期
+    DayTime: 'Day shift early off', // 白班早下班
+    NightTime: 'Night shift early off', // 夜班早下班
+    MaintainTime: 'Day shift maintenance', // 白班保养
+    CustomTime: 'Custom time (Method One)', // 自定义时间(方式一)
+    CustomTime2: 'Custom time (Method Two)', // 自定义时间(方式二)
+    ConfirmRecovery: 'Confirm Restore', // 确认恢复
     SelectAll: 'Select All', // 全选
-    MsgAppendData1: '', // 成功添加
-    MsgAppendData2: '', // 条维护数据
-    MsgDeleteData1: '', // 确定要删除选中的
-    MsgDeleteData2: '', // 成功删除选中的
-    MsgDeleteData3: '', // 个备份？
-    MsgSyncData1: '' // 确定要同步排程配置表中指定数据库的维护时间表？
+    MsgAppendData1: 'Successfully added', // 成功添加
+    MsgAppendData2: 'maintenance data entries', // 条维护数据
+    MsgDeleteData1: 'Are you sure you want to delete selected', // 确定要删除选中的
+    MsgDeleteData2: 'Successfully deleted selected', // 成功删除选中的
+    MsgDeleteData3: 'backup(s)?', // 个备份？
+    MsgSyncData1: 'Are you sure you want to synchronize maintenance schedule table of specified database in the schedule configuration table?' // 确定要同步排程配置表中指定数据库的维护时间表？
   },
   // 文件管理
   FileDataPage: {
