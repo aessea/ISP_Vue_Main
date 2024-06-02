@@ -51,15 +51,15 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="classify" label="客户类型">
+          <el-table-column prop="classify" :label="lang_dict.classify">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.classify === 'common'" size="small" type="info">普通工单</el-tag>
               <el-tag v-else size="small" type="primary">{{ scope.row.classify }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="process" label="制程" sortable />
+          <el-table-column prop="process" :label="lang_dict.process" sortable />
           <!-- <el-table-column prop="sequence_list" label="先后加工顺序" /> -->
-          <el-table-column prop="sequence_list" label="先后加工顺序">
+          <el-table-column prop="sequence_list" :label="lang_dict.sequence_list">
             <template slot-scope="scope">
               <el-tag
                 v-for="(val, key) in scope.row.sequence_list"
@@ -114,14 +114,14 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.classify" prop="classify" label="客户类型">
+            <el-form-item :rules="rules.classify" prop="classify" :label="lang_dict.classify">
               <el-select v-model="model.classify" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in all_classify_list" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.process" prop="process" label="制程">
+            <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
               <el-select v-model="model.process" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in all_process_list" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
@@ -129,7 +129,7 @@
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-form-item :rules="rules.sequence_list" prop="sequence_list" label="先后加工顺序">
+          <el-form-item :rules="rules.sequence_list" prop="sequence_list" :label="lang_dict.sequence_list">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-checkbox-group v-model="model.sequence_list">
                 <el-checkbox v-for="sequence in all_sequence_list" :key="sequence.index" :label="sequence" />

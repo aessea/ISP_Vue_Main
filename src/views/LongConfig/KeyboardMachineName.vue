@@ -51,8 +51,8 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="machine_name" label="组件" sortable />
-          <el-table-column prop="delay_value" label="延后时间(单位:天)" />
+          <el-table-column prop="machine_name" :label="lang_dict.machine_name" sortable />
+          <el-table-column prop="delay_value" :label="lang_dict.delay_value" />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -95,18 +95,17 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.machine_name" prop="machine_name" label="组件">
+            <el-form-item :rules="rules.machine_name" prop="machine_name" :label="lang_dict.machine_name">
               <el-input v-model="model.machine_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.delay_value" prop="delay_value" label="延后时间(单位:天)">
+            <el-form-item :rules="rules.delay_value" prop="delay_value" :label="lang_dict.delay_value">
               <el-input-number v-model="model.delay_value" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
         <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ $t('TablePage.BtnAppend') }}</el-button>

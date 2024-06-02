@@ -51,12 +51,11 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="process" label="制程" width="160" sortable />
-          <el-table-column prop="above_connecting_points" width="160" label="联板点数[以上]" />
-          <el-table-column prop="under_single_points" label="单板点数[以下]" width="160" />
-          <el-table-column prop="above_connecting_plates" label="联板数[以上]" width="160" />
-          <!-- <el-table-column prop="add_feasible_line" label="补充的可排线别" /> -->
-          <el-table-column prop="add_feasible_line" label="补充的可排线别">
+          <el-table-column prop="process" :label="lang_dict.process" width="160" sortable />
+          <el-table-column prop="above_connecting_points" width="160" :label="lang_dict.above_connecting_points" />
+          <el-table-column prop="under_single_points" width="160" :label="lang_dict.under_single_points" />
+          <el-table-column prop="above_connecting_plates" width="160" :label="lang_dict.above_connecting_plates" />
+          <el-table-column prop="add_feasible_line" :label="lang_dict.add_feasible_line">
             <template slot-scope="scope">
               <el-tag
                 v-for="(val, key) in scope.row.add_feasible_line"
@@ -111,30 +110,30 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.process" prop="process" label="制程">
+            <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
               <el-input v-model="model.process" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.above_connecting_points" prop="above_connecting_points" label="联板点数[以上]">
+            <el-form-item :rules="rules.above_connecting_points" prop="above_connecting_points" :label="lang_dict.above_connecting_points">
               <el-input-number v-model="model.above_connecting_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.under_single_points" prop="under_single_points" label="单板点数[以下]">
+            <el-form-item :rules="rules.under_single_points" prop="under_single_points" :label="lang_dict.under_single_points">
               <el-input-number v-model="model.under_single_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.above_connecting_plates" prop="above_connecting_plates" label="联板数[以上]">
+            <el-form-item :rules="rules.above_connecting_plates" prop="above_connecting_plates" :label="lang_dict.above_connecting_plates">
               <el-input-number v-model="model.above_connecting_plates" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-form-item :rules="rules.add_feasible_line" prop="add_feasible_line" label="补充的可排线别">
+          <el-form-item :rules="rules.add_feasible_line" prop="add_feasible_line" :label="lang_dict.add_feasible_line">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-checkbox-group v-model="model.add_feasible_line">
                 <el-checkbox v-for="process in all_line_list" :key="process.index" :label="process" />

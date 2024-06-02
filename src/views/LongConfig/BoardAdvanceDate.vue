@@ -98,12 +98,12 @@
       <el-form ref="$form" :model="model" label-position="left" size="small">
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_name" prop="param_name" label="后工序">
+            <el-form-item :rules="rules.param_name" prop="param_name" :label="lang_dict.param_name">
               <el-input v-model="model.param_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_value" prop="param_value" label="提前打板时间(单位:时)">
+            <el-form-item :rules="rules.param_value" prop="param_value" :label="lang_dict.param_value">
               <el-input v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>

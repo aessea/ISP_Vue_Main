@@ -51,14 +51,14 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="name" label="产线名字" width="110" sortable fixed />enable
-          <el-table-column prop="enable" label="是否启用该线体" width="130">
+          <el-table-column prop="name" :label="lang_dict.name" width="110" sortable fixed />
+          <el-table-column prop="enable" :label="lang_dict.enable" width="130">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.enable === true" size="small" type="success">是</el-tag>
               <el-tag v-else-if="scope.row.enable === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="line_type" label="线体类型" width="110">
+          <el-table-column prop="line_type" :label="lang_dict.line_type" width="110">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">非BPR线</el-tag>
               <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">BPR线</el-tag>
@@ -66,7 +66,7 @@
               <el-tag v-else size="small" type="info">未知</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="line_size_type" label="智能阈值线体类型" width="110">
+          <el-table-column prop="line_size_type" :label="lang_dict.intelligent_threshold_line_type" width="110">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.line_size_type === 1" size="small" type="primary">小工单线</el-tag>
               <el-tag v-else-if="scope.row.line_size_type === 2" size="small" type="primary">中小工单线</el-tag>
@@ -76,79 +76,75 @@
               <el-tag v-else size="small" type="info">未知</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="enable_process_list" label="可生产制程" width="400">
+          <el-table-column prop="enable_process_list" :label="lang_dict.producible_processes" width="400">
             <template slot-scope="scope">
-              <el-tag
-                v-for="(val, key) in scope.row.enable_process_list"
-                :key="key"
-                style="margin-right: 5px;"
-              >
+              <el-tag v-for="(val, key) in scope.row.enable_process_list" :key="key" style="margin-right: 5px;">
                 {{ val }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_AX_line" label="是否安必昂不能绑定线体" width="160">
+          <el-table-column prop="is_AX_line" :label="lang_dict.ABOM_cannot_bind_line" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_AX_line === true" size="small" type="success">是</el-tag>
               <el-tag v-else-if="scope.row.is_AX_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_Big_line_remove22" label="是否为优先排大工单线" width="160">
+          <el-table-column prop="is_Big_line_remove22" :label="lang_dict.priority_big_order_line" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_Big_line_remove22 === true" size="small" type="success">是</el-tag>
               <el-tag v-else-if="scope.row.is_Big_line_remove22 === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_Non_big_line" label="该线体工单是否优先排大工单线" width="160">
+          <el-table-column prop="is_Non_big_line" :label="lang_dict.order_prioritize_big_order_line" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_Non_big_line === true" size="small" type="success">是</el-tag>
               <el-tag v-else-if="scope.row.is_Non_big_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_special_line" label="是否为满足特殊板宽优先排线体" width="160">
+          <el-table-column prop="is_special_line" :label="lang_dict.satisfy_special_board_priority_line" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_special_line === true" size="small" type="success">是</el-tag>
               <el-tag v-else-if="scope.row.is_special_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_cannot_binding_line" label="是否为不能绑定的线体" width="160">
+          <el-table-column prop="is_cannot_binding_line" :label="lang_dict.not_bindable_line" width="160">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_cannot_binding_line === true" size="small" type="success">是</el-tag>
               <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="min_min_threshold" label="最低生产阈值的下限" width="110" />
-          <el-table-column prop="min_threshold" label="最低生产阈值设定值" width="110" />
-          <el-table-column prop="max_threshold" label="最高生产阈值" width="110" />
-          <el-table-column prop="big_able" label="可否大工单" width="100">
+          <el-table-column prop="min_min_threshold" :label="lang_dict.min_production_threshold_lower_limit" width="110" />
+          <el-table-column prop="min_threshold" :label="lang_dict.min_production_threshold_setting_value" width="110" />
+          <el-table-column prop="max_threshold" :label="lang_dict.max_production_threshold" width="110" />
+          <el-table-column prop="big_able" :label="lang_dict.can_big_order" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.big_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.big_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="middle_able" label="可否中工单" width="100">
+          <el-table-column prop="middle_able" :label="lang_dict.can_medium_order" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.middle_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.middle_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="small_able" label="可否小工单" width="100">
+          <el-table-column prop="small_able" :label="lang_dict.can_small_order" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.small_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.small_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="balance_class" label="线平衡类型" width="100" />
-          <el-table-column prop="big_setup" label="大切换" />
-          <el-table-column prop="small_setup" label="小切换" />
-          <el-table-column prop="setup_program" label="切软体" />
-          <el-table-column prop="output_order" label="线体输出顺序" sortable width="170" />
-          <el-table-column prop="max_process_time" label="新增锁定加工时长上限" width="170" />
-          <el-table-column prop="max_points" label="新增锁定点(片)数上限" width="170" />
-          <el-table-column prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值(点数或片数)" width="170" />
-          <el-table-column prop="type_of_big_small_line" label="大小穿插的类型" width="160" />
-          <el-table-column prop="fixed_ct" label="指定CT默认值(单位:秒)" width="160" />
-          <el-table-column prop="is_open_program" label="是否开放程序" width="120" />
+          <el-table-column prop="balance_class" :label="lang_dict.line_balance_type" width="100" />
+          <el-table-column prop="big_setup" :label="lang_dict.big_switch" />
+          <el-table-column prop="small_setup" :label="lang_dict.small_switch" />
+          <el-table-column prop="setup_program" :label="lang_dict.switch_soft" />
+          <el-table-column prop="output_order" :label="lang_dict.line_output_order" sortable width="170" />
+          <el-table-column prop="max_process_time" :label="lang_dict.add_lock_process_time_limit" width="170" />
+          <el-table-column prop="max_points" :label="lang_dict.add_lock_points_limit" width="170" />
+          <el-table-column prop="default_threshould_of_big_small_line" :label="lang_dict.default_threshold_of_big_small_line" width="170" />
+          <el-table-column prop="type_of_big_small_line" :label="lang_dict.type_of_big_small_line" width="160" />
+          <el-table-column prop="fixed_ct" :label="lang_dict.default_CT_value" width="160" />
+          <el-table-column prop="is_open_program" :label="lang_dict.is_open_program" width="120" />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -194,17 +190,17 @@
         <el-form ref="$form" :model="model" label-position="left" size="small">
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.name" prop="name" label="产线名字">
+              <el-form-item :rules="rules.name" prop="name" :label="lang_dict.name">
                 <el-input v-model="model.name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.enable" prop="enable" label="是否为启用该线体">
+              <el-form-item :rules="rules.enable" prop="enable" :label="lang_dict.enable">
                 <el-switch v-model="model.enable" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.line_type" prop="line_type" label="线体类型">
+              <el-form-item :rules="rules.line_type" prop="line_type" :label="lang_dict.line_type">
                 <el-select v-model="model.line_type" :placeholder="$t('Placeholder.Select')">
                   <el-option
                     v-for="item in lineTypeOptions"
@@ -216,7 +212,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.line_size_type" prop="line_size_type" label="智能阈值线体类型">
+              <el-form-item :rules="rules.line_size_type" prop="line_size_type" :label="lang_dict.line_size_type">
                 <el-select v-model="model.line_size_type" :placeholder="$t('Placeholder.Select')">
                   <el-option
                     v-for="item in lineSizeTypeOptions"
@@ -230,23 +226,23 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.config_class" prop="config_class" label="配置类型">
-                <el-input v-model="model.config_class" placeholder="请输入数字" clearable />
+              <el-form-item :rules="rules.config_class" prop="config_class" :label="lang_dict.config_class">
+                <el-input v-model="model.config_class" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_class" prop="program_class" label="程序类型">
-                <el-input v-model="model.program_class" placeholder="请输入数字" clearable />
+              <el-form-item :rules="rules.program_class" prop="program_class" :label="lang_dict.program_class">
+                <el-input v-model="model.program_class" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_points" prop="is_points" label="是否按点数分大中小工单">
-                <el-input v-model="model.is_points" placeholder="1按点数，0按工单量区分大中小工单" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+              <el-form-item :rules="rules.is_points" prop="is_points" :label="lang_dict.is_points">
+                <el-input v-model="model.is_points" :placeholder="$t('Placeholder.Enter')" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.balance_class" prop="balance_class" label="线平衡类型">
-                <el-input v-model="model.balance_class" placeholder="请输入数字" clearable />
+              <el-form-item :rules="rules.balance_class" prop="balance_class" :label="lang_dict.balance_class">
+                <el-input v-model="model.balance_class" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -258,78 +254,73 @@
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.big_able" prop="big_able" label="可否大工单">
-                <el-input v-model="model.big_able" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+                <el-input v-model="model.big_able" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.middle_able" prop="middle_able" label="可否中工单">
-                <el-input v-model="model.middle_able" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+                <el-input v-model="model.middle_able" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.small_able" prop="small_able" label="可否小工单">
-                <el-input v-model="model.small_able" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
+                <el-input v-model="model.small_able" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" label="最低生产阈值的下限">
+              <el-form-item :rules="rules.min_min_threshold" prop="min_min_threshold" :label="lang_dict.min_min_threshold">
                 <el-input-number v-model="model.min_min_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.min_threshold" prop="min_threshold" label="最低生产阈值设定值">
+              <el-form-item :rules="rules.min_threshold" prop="min_threshold" :label="lang_dict.min_threshold">
                 <el-input-number v-model="model.min_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.max_threshold" prop="max_threshold" label="最高生产阈值">
+              <el-form-item :rules="rules.max_threshold" prop="max_threshold" :label="lang_dict.max_threshold">
                 <el-input-number v-model="model.max_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.offset_threshold" prop="offset_threshold" label="阈值偏差">
+              <el-form-item :rules="rules.offset_threshold" prop="offset_threshold" :label="lang_dict.offset_threshold">
                 <el-input-number v-model="model.offset_threshold" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_burn_in" prop="is_burn_in" label="是否烧录">
-                <el-input v-model="model.is_burn_in" placeholder="1表示是，0表示否" oninput="this.value=this.value.replace(/[^0-1]/g, '')" clearable />
-              </el-form-item>
-            </el-col> -->
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_Big_line_remove22" prop="is_Big_line_remove22" label="是否为优先排大工单线">
+              <el-form-item :rules="rules.is_Big_line_remove22" prop="is_Big_line_remove22" :label="lang_dict.is_Big_line_remove22">
                 <el-switch v-model="model.is_Big_line_remove22" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_Non_big_line" prop="is_Non_big_line" label="该线体工单是否优先排大工单线">
+              <el-form-item :rules="rules.is_Non_big_line" prop="is_Non_big_line" :label="lang_dict.is_Non_big_line">
                 <el-switch v-model="model.is_Non_big_line" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_special_line" prop="is_special_line" label="是否为满足特殊板宽优先排线体">
+              <el-form-item :rules="rules.is_special_line" prop="is_special_line" :label="lang_dict.is_special_line">
                 <el-switch v-model="model.is_special_line" style="width: 100%" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_AX_line" prop="is_AX_line" label="是否安必昂不能绑定线体">
+              <el-form-item :rules="rules.is_AX_line" prop="is_AX_line" :label="lang_dict.is_AX_line">
                 <el-switch v-model="model.is_AX_line" style="width: 100%" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_cannot_binding_line" prop="is_cannot_binding_line" label="是否为不能绑定的线体">
+              <el-form-item :rules="rules.is_cannot_binding_line" prop="is_cannot_binding_line" :label="lang_dict.is_cannot_binding_line">
                 <el-switch v-model="model.is_cannot_binding_line" style="width: 100%" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-            <el-form-item :rules="rules.enable_process_list" prop="enable_process_list" label="可生产制程">
+            <el-form-item :rules="rules.enable_process_list" prop="enable_process_list" :label="lang_dict.enable_process_list">
               <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
                 <el-checkbox-group v-model="model.enable_process_list">
                   <el-checkbox v-for="process in all_process_list" :key="process.index" :label="process" />
@@ -339,56 +330,56 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.big_setup" prop="big_setup" label="大切换">
+              <el-form-item :rules="rules.big_setup" prop="big_setup" :label="lang_dict.big_setup">
                 <el-input-number v-model="model.big_setup" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.small_setup" prop="small_setup" label="小切换">
+              <el-form-item :rules="rules.small_setup" prop="small_setup" :label="lang_dict.small_setup">
                 <el-input-number v-model="model.small_setup" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.setup_program" prop="setup_program" label="切软体">
+              <el-form-item :rules="rules.setup_program" prop="setup_program" :label="lang_dict.setup_program">
                 <el-input-number v-model="model.setup_program" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.output_order" prop="output_order" label="线体输出顺序">
+              <el-form-item :rules="rules.output_order" prop="output_order" :label="lang_dict.output_order">
                 <el-input v-model="model.output_order" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.max_process_time" prop="max_process_time" label="新增锁定加工时长上限">
+              <el-form-item :rules="rules.max_process_time" prop="max_process_time" :label="lang_dict.max_process_time">
                 <el-input-number v-model="model.max_process_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.max_points" prop="max_points" label="新增锁定点(片)数上限">
+              <el-form-item :rules="rules.max_points" prop="max_points" :label="lang_dict.max_points">
                 <el-input-number v-model="model.max_points" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.default_threshould_of_big_small_line" prop="default_threshould_of_big_small_line" label="大小穿插线体阈值的默认值(点数或片数)">
-                <el-input-number v-model="model.default_threshould_of_big_small_line" placeholder="请输入数字" :style="{width: '100%'}" />
+              <el-form-item :rules="rules.default_threshould_of_big_small_line" prop="default_threshould_of_big_small_line" :label="lang_dict.default_threshould_of_big_small_line">
+                <el-input-number v-model="model.default_threshould_of_big_small_line" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.type_of_big_small_line" prop="type_of_big_small_line" label="大小穿插的类型">
-                <el-input v-model="model.type_of_big_small_line" placeholder="请输入数字" clearable />
+              <el-form-item :rules="rules.type_of_big_small_line" prop="type_of_big_small_line" :label="lang_dict.type_of_big_small_line">
+                <el-input v-model="model.type_of_big_small_line" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.fixed_ct" prop="fixed_ct" label="指定CT默认值(单位:秒)">
+              <el-form-item :rules="rules.fixed_ct" prop="fixed_ct" :label="lang_dict.fixed_ct">
                 <el-input-number v-model="model.fixed_ct" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.is_open_program" prop="is_open_program" label="是否开放程序">
+              <el-form-item :rules="rules.is_open_program" prop="is_open_program" :label="lang_dict.is_open_program">
                 <el-switch v-model="model.is_open_program" style="width: 100%" />
               </el-form-item>
             </el-col>
