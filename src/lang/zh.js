@@ -621,5 +621,18 @@ export default {
     MsgDeleteFile8: '未查找到', // 未查找到:
     MsgDeleteFile9: ' 个月前的文件', // 个月前的文件
     MsgDeleteFile10: '确定要重置文件列表？' // 确定要重置文件列表？
+  },
+  // 产线配置表
+  LineDataPage: {
+    NotBPRLine: '非BPR线', // 非BPR线
+    IsBPRLine: 'BPR线', // BPR线
+    SmallBoardLine: '小板线', // 小板线
+    SmallLine: '小工单线', // 小工单线
+    SmallMiddleLine: '中小工单线', // 中小工单线
+    MiddleLine: '中工单线', // 中工单线
+    MiddleBigLine: '中大工单线', // 中大工单线
+    BigLine: '大工单线', // 大工单线
+    UnkonwnLine: '未知', // 未知
+    MsgAppendData: '' // 成功添加 1 条数据（注：如有需要，请记得同时维护MP1补线表、非MP1补线表、车间指定CT表、先后加工顺序对照表）
   }
 }

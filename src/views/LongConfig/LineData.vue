@@ -54,96 +54,96 @@
           <el-table-column prop="name" :label="lang_dict.name" width="110" sortable fixed />
           <el-table-column prop="enable" :label="lang_dict.enable" width="130">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.enable === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.enable === false" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.enable === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.enable === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="line_type" :label="lang_dict.line_type" width="110">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">非BPR线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">BPR线</el-tag>
-              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">小板线</el-tag>
-              <el-tag v-else size="small" type="info">未知</el-tag>
+              <el-tag v-if="scope.row.line_type === 1" size="small" type="primary">{{ $t('LineDataPage.NotBPRLine') }}</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 2" size="small" type="primary">{{ $t('LineDataPage.IsBPRLine') }}</el-tag>
+              <el-tag v-else-if="scope.row.line_type === 3" size="small" type="primary">{{ $t('LineDataPage.SmallBoardLine') }}</el-tag>
+              <el-tag v-else size="small" type="info">{{ $t('LineDataPage.UnkonwnLine') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="line_size_type" :label="lang_dict.intelligent_threshold_line_type" width="110">
+          <el-table-column prop="line_size_type" :label="lang_dict.line_size_type" width="110">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.line_size_type === 1" size="small" type="primary">小工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_size_type === 2" size="small" type="primary">中小工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_size_type === 3" size="small" type="primary">中工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_size_type === 4" size="small" type="primary">中大工单线</el-tag>
-              <el-tag v-else-if="scope.row.line_size_type === 5" size="small" type="primary">大工单线</el-tag>
-              <el-tag v-else size="small" type="info">未知</el-tag>
+              <el-tag v-if="scope.row.line_size_type === 1" size="small" type="primary">{{ $t('LineDataPage.SmallLine') }}</el-tag>
+              <el-tag v-else-if="scope.row.line_size_type === 2" size="small" type="primary">{{ $t('LineDataPage.SmallMiddleLine') }}</el-tag>
+              <el-tag v-else-if="scope.row.line_size_type === 3" size="small" type="primary">{{ $t('LineDataPage.MiddleLine') }}</el-tag>
+              <el-tag v-else-if="scope.row.line_size_type === 4" size="small" type="primary">{{ $t('LineDataPage.MiddleBigLine') }}</el-tag>
+              <el-tag v-else-if="scope.row.line_size_type === 5" size="small" type="primary">{{ $t('LineDataPage.BigLine') }}</el-tag>
+              <el-tag v-else size="small" type="info">{{ $t('LineDataPage.UnkonwnLine') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="enable_process_list" :label="lang_dict.producible_processes" width="400">
+          <el-table-column prop="enable_process_list" :label="lang_dict.enable_process_list" width="400">
             <template slot-scope="scope">
               <el-tag v-for="(val, key) in scope.row.enable_process_list" :key="key" style="margin-right: 5px;">
                 {{ val }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_AX_line" :label="lang_dict.ABOM_cannot_bind_line" width="160">
+          <el-table-column prop="is_AX_line" :label="lang_dict.is_AX_line" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_AX_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_AX_line === false" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.is_AX_line === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_AX_line === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_Big_line_remove22" :label="lang_dict.priority_big_order_line" width="160">
+          <el-table-column prop="is_Big_line_remove22" :label="lang_dict.is_Big_line_remove22" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_Big_line_remove22 === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_Big_line_remove22 === false" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.is_Big_line_remove22 === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_Big_line_remove22 === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_Non_big_line" :label="lang_dict.order_prioritize_big_order_line" width="160">
+          <el-table-column prop="is_Non_big_line" :label="lang_dict.is_Non_big_line" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_Non_big_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_Non_big_line === false" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.is_Non_big_line === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_Non_big_line === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_special_line" :label="lang_dict.satisfy_special_board_priority_line" width="160">
+          <el-table-column prop="is_special_line" :label="lang_dict.is_special_line" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_special_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_special_line === false" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.is_special_line === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_special_line === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="is_cannot_binding_line" :label="lang_dict.not_bindable_line" width="160">
+          <el-table-column prop="is_cannot_binding_line" :label="lang_dict.is_cannot_binding_line" width="160">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_cannot_binding_line === true" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.is_cannot_binding_line === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="min_min_threshold" :label="lang_dict.min_production_threshold_lower_limit" width="110" />
-          <el-table-column prop="min_threshold" :label="lang_dict.min_production_threshold_setting_value" width="110" />
-          <el-table-column prop="max_threshold" :label="lang_dict.max_production_threshold" width="110" />
-          <el-table-column prop="big_able" :label="lang_dict.can_big_order" width="100">
+          <el-table-column prop="min_min_threshold" :label="lang_dict.min_min_threshold" width="110" />
+          <el-table-column prop="min_threshold" :label="lang_dict.min_threshold" width="110" />
+          <el-table-column prop="max_threshold" :label="lang_dict.max_threshold" width="110" />
+          <el-table-column prop="big_able" :label="lang_dict.big_able" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.big_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.big_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="middle_able" :label="lang_dict.can_medium_order" width="100">
+          <el-table-column prop="middle_able" :label="lang_dict.middle_able" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.middle_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.middle_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="small_able" :label="lang_dict.can_small_order" width="100">
+          <el-table-column prop="small_able" :label="lang_dict.small_able" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.small_able === 1" size="small" type="success">✔</el-tag>
               <el-tag v-else-if="scope.row.small_able === 0" size="small" type="info">×</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="balance_class" :label="lang_dict.line_balance_type" width="100" />
-          <el-table-column prop="big_setup" :label="lang_dict.big_switch" />
-          <el-table-column prop="small_setup" :label="lang_dict.small_switch" />
-          <el-table-column prop="setup_program" :label="lang_dict.switch_soft" />
-          <el-table-column prop="output_order" :label="lang_dict.line_output_order" sortable width="170" />
-          <el-table-column prop="max_process_time" :label="lang_dict.add_lock_process_time_limit" width="170" />
-          <el-table-column prop="max_points" :label="lang_dict.add_lock_points_limit" width="170" />
-          <el-table-column prop="default_threshould_of_big_small_line" :label="lang_dict.default_threshold_of_big_small_line" width="170" />
+          <el-table-column prop="balance_class" :label="lang_dict.balance_class" width="100" />
+          <el-table-column prop="big_setup" :label="lang_dict.big_setup" />
+          <el-table-column prop="small_setup" :label="lang_dict.small_setup" />
+          <el-table-column prop="setup_program" :label="lang_dict.setup_program" />
+          <el-table-column prop="output_order" :label="lang_dict.output_order" sortable width="170" />
+          <el-table-column prop="max_process_time" :label="lang_dict.max_process_time" width="170" />
+          <el-table-column prop="max_points" :label="lang_dict.max_points" width="170" />
+          <el-table-column prop="default_threshould_of_big_small_line" :label="lang_dict.default_threshould_of_big_small_line" width="170" />
           <el-table-column prop="type_of_big_small_line" :label="lang_dict.type_of_big_small_line" width="160" />
-          <el-table-column prop="fixed_ct" :label="lang_dict.default_CT_value" width="160" />
+          <el-table-column prop="fixed_ct" :label="lang_dict.fixed_ct" width="160" />
           <el-table-column prop="is_open_program" :label="lang_dict.is_open_program" width="120" />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
@@ -248,22 +248,22 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.capacity" prop="capacity" label="日产能">
+              <el-form-item :rules="rules.capacity" prop="capacity" :label="lang_dict.capacity">
                 <el-input-number v-model="model.capacity" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.big_able" prop="big_able" label="可否大工单">
+              <el-form-item :rules="rules.big_able" prop="big_able" :label="lang_dict.big_able">
                 <el-input v-model="model.big_able" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.middle_able" prop="middle_able" label="可否中工单">
+              <el-form-item :rules="rules.middle_able" prop="middle_able" :label="lang_dict.middle_able">
                 <el-input v-model="model.middle_able" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.small_able" prop="small_able" label="可否小工单">
+              <el-form-item :rules="rules.small_able" prop="small_able" :label="lang_dict.small_able">
                 <el-input v-model="model.small_able" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
@@ -475,7 +475,6 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetLangDict } from '@/api/LongConfig/LineData'
-import { lineTypeOptions, lineSizeTypeOptions } from '@/utils/items'
 import { GetLineProcess } from '@/api/common'
 import { isEqual } from '@/utils/common'
 import { deepClone } from '@/utils'
@@ -524,20 +523,8 @@ export default {
         min_threshold: undefined,
         max_threshold: undefined,
         offset_threshold: undefined,
-        // T_unable: null,
-        // B_unable: null,
-        // T_BPR_unable: null,
-        // B_BPR_unable: null,
-        // S_BPR_unable: null,
-        // S_BPR_M_unable: null,
-        // T_AD_unable: null,
-        // S_unable: null,
-        // S_THR_unable: null,
         is_burn_in: undefined,
         enable_process_list: [],
-
-        // single_point_lower: undefined,
-        // single_point_upper: undefined,
         line_type: undefined,
         is_AX_line: false,
         is_Big_line_remove22: false,
@@ -558,11 +545,6 @@ export default {
         default_threshould_of_big_small_line: undefined,
         fixed_ct: undefined,
         is_open_program: false
-        // is_BPR_line: false
-        // CREATED_BY: null,
-        // CREATED_TIME: null,
-        // UPDATED_BY: null,
-        // UPDATED_TIME: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -579,21 +561,9 @@ export default {
         min_threshold: undefined,
         max_threshold: undefined,
         offset_threshold: undefined,
-        // T_unable: null,
-        // B_unable: null,
-        // T_BPR_unable: null,
-        // B_BPR_unable: null,
-        // S_BPR_unable: null,
-        // S_BPR_M_unable: null,
-        // S_unable: null,
-        // S_THR_unable: null,
-        // T_AD_unable: null,
         is_burn_in: undefined,
         enable: false,
         enable_process_list: [],
-
-        // single_point_lower: undefined,
-        // single_point_upper: undefined,
         line_type: undefined,
         is_AX_line: false,
         is_Big_line_remove22: false,
@@ -613,17 +583,12 @@ export default {
         default_threshould_of_big_small_line: undefined,
         fixed_ct: undefined,
         is_open_program: false
-        // is_BPR_line: false
-        // CREATED_BY: null,
-        // CREATED_TIME: null,
-        // UPDATED_BY: null,
-        // UPDATED_TIME: null
       },
       modelBackup: {},
       rules: {
         name: [{
           required: true,
-          message: '产线名字不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         is_points: [{
@@ -633,12 +598,12 @@ export default {
         }],
         capacity: [{
           required: true,
-          message: '日产能不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         config_class: [{
           required: true,
-          message: '配置类型不能为空',
+          message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
         program_class: [{
@@ -777,8 +742,20 @@ export default {
       currentPage: 1, // 当前在第几页
       pageSize: 30, // 每页多少条数据
       dataTableSelections: [], // 表格选中的数据
-      lineTypeOptions: lineTypeOptions,
-      lineSizeTypeOptions: lineSizeTypeOptions
+      lineTypeOptions: [
+        { label: this.$t('LineDataPage.NotBPRLine'), value: 1 },
+        { label: this.$t('LineDataPage.IsBPRLine'), value: 2 },
+        { label: this.$t('LineDataPage.SmallBoardLine'), value: 3 },
+        { label: this.$t('LineDataPage.UnkonwnLine'), value: 0 }
+      ],
+      lineSizeTypeOptions: [
+        { label: this.$t('LineDataPage.SmallLine'), value: 1 },
+        { label: this.$t('LineDataPage.SmallMiddleLine'), value: 2 },
+        { label: this.$t('LineDataPage.MiddleLine'), value: 3 },
+        { label: this.$t('LineDataPage.MiddleBigLine'), value: 4 },
+        { label: this.$t('LineDataPage.BigLine'), value: 5 },
+        { label: this.$t('LineDataPage.UnkonwnLine'), value: 0 }
+      ]
     }
   },
   computed: {
@@ -855,7 +832,7 @@ export default {
                 message: this.$t('TablePage.MsgAppendSuccess'),
                 type: 'success'
               })
-              this.$alert('成功添加 1 条数据（注：如有需要，请记得同时维护MP1补线表、非MP1补线表、车间指定CT表、先后加工顺序对照表）', this.$t('PublicText.TitleTip'), {
+              this.$alert(this.$t('LineDataPage.MsgAppendData'), this.$t('PublicText.TitleTip'), {
                 confirmButtonText: this.$t('PublicBtn.Confirm'),
                 type: 'success'
               })
