@@ -114,7 +114,7 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.line" prop="line" :label="lang_dict.line">
-              <el-select v-model="model.line" placeholder="请选择线别" :style="{width: '100%'}">
+              <el-select v-model="model.line" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in lineOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>
@@ -126,7 +126,7 @@
           </el-col>
           <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
-              <el-select v-model="model.process" placeholder="请选择制程" :style="{width: '100%'}">
+              <el-select v-model="model.process" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in processOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
               </el-select>
             </el-form-item>

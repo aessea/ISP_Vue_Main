@@ -65,8 +65,8 @@
           <el-table-column prop="total_points" :label="lang_dict.total_points" width="95" sortable />
           <el-table-column prop="is_irr_spilt" :label="lang_dict.is_irr_spilt" width="100">
             <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_irr_spilt === 1" size="small" type="success">是</el-tag>
-              <el-tag v-else-if="scope.row.is_irr_spilt === 0" size="small" type="info">否</el-tag>
+              <el-tag v-if="scope.row.is_irr_spilt === 1" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_irr_spilt === 0" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="process_time" :label="lang_dict.process_time" width="110" sortable />
@@ -130,7 +130,7 @@
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.line" prop="line" :label="lang_dict.line">
-                <el-select v-model="model.line" placeholder="请选择线体" :style="{width: '100%'}">
+                <el-select v-model="model.line" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                   <el-option v-for="(item) in lineOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
                 </el-select>
               </el-form-item>
@@ -144,7 +144,7 @@
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.process" prop="process" :label="lang_dict.process">
-                <el-select v-model="model.process" placeholder="请选择制程" :style="{width: '100%'}">
+                <el-select v-model="model.process" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                   <el-option v-for="(item) in processOptions" :key="item.value" :label="item.label" :value="item.value" :disabled="!!item.disabled" />
                 </el-select>
               </el-form-item>
