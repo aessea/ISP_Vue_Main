@@ -166,7 +166,7 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.program_line" prop="program_line" label="已有程序的线体">
+              <el-form-item :rules="rules.program_line" prop="program_line" :label="lang_dict.program_line">
                 <el-input v-model="model.program_line" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
