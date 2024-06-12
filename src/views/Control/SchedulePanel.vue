@@ -701,9 +701,9 @@
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain, GetLogSelectItem, DownloadHistoryLog,
-  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, ExportMainScheduleData, GetExcelSelectItem,
-  DownloadHistoryExcel, ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday, DownloadUploadFileMain,
+import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain,
+  GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, ExportMainScheduleData,
+  ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday, DownloadUploadFileMain,
   DownloadUploadFileSmall, DoBucklePoints, GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData,
   DoCheckScheduleData
 } from '@/api/Control/SchedulePanel'
@@ -743,11 +743,7 @@ export default {
       }, // 导入排程动画
       loadingInstance: null, // 动画实例
       trainDate: new Date(), // 训练预测模型日期
-
-      options_history_log: [], // 历史日志列表
-      selectLogValue: '', // 当前选中的历史日志
       options_history_excel: [], // 历史排程列表
-      selectExcelValue: '', // 当前选中的要下载的历史日志
       isImportMain: false, // 是否上传文件
       isImportMainSmall: false, // 是否上传小板
       isImportBoth: false, // 是否上传主板小板
@@ -799,8 +795,6 @@ export default {
     ])
   },
   created() {
-    this.getLogSelectItem()
-    this.getExcelSelectItem()
     this.listenProgress()
     this.getScheduleRes()
   },
@@ -940,7 +934,7 @@ export default {
     // 主板文件上传钩子
     handleChangeMain(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(this.$t('FileKeyWord.MainWord'))(this.$t('FileKeyWord.FormalSchedule')|this.$t('FileKeyWord.UnFormalSchedule')).*$/
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板)(正排|预排).*$/
 
       if (!regex.test(fileName)) {
         const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
@@ -2037,62 +2031,6 @@ export default {
     },
     downloadFileBackend(file_key) {
       DownloadFile(file_key).then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: this.$t('Msg.BeginDownload'),
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: this.$t('Msg.DownloadFail'),
-          type: 'error'
-        })
-      })
-    },
-    // 获取历史日志选择器选项
-    getLogSelectItem() {
-      this.options_history_log = []
-      GetLogSelectItem().then(res => {
-        for (const key in res.log_data) {
-          const temp = {}
-          temp['value'] = res.log_data[key]
-          temp['label'] = res.log_data[key]
-          this.options_history_log.push(temp)
-        }
-      })
-    },
-    // 获取历史日志选择器选项
-    getExcelSelectItem() {
-      this.options_history_excel = []
-      GetExcelSelectItem().then(res => {
-        for (const key in res.excel_data) {
-          const temp = {}
-          temp['value'] = res.excel_data[key]
-          temp['label'] = res.excel_data[key]
-          this.options_history_excel.push(temp)
-        }
-      })
-    },
-    // 下载历史日志
-    downloadHistoryLog() {
-      DownloadHistoryLog({ 'filename': this.selectLogValue }).then(res => {
-        this.downloadFile(res)
-        this.$message({
-          message: this.$t('Msg.BeginDownload'),
-          type: 'success'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          message: this.$t('Msg.DownloadFail'),
-          type: 'error'
-        })
-      })
-    },
-    // 下载历史排程
-    downloadHistoryExcel() {
-      DownloadHistoryExcel({ 'filename': this.selectExcelValue }).then(res => {
         this.downloadFile(res)
         this.$message({
           message: this.$t('Msg.BeginDownload'),

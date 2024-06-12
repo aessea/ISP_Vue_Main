@@ -514,8 +514,7 @@ export default {
     // 上传文件
     loadExcelFile(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(this.$t('SchedulePanelPage.MainWord')|this.$t('SchedulePanelPage.SmallWord'))(this.$t('SchedulePanelPage.FormalSchedule')|this.$t('SchedulePanelPage.UnFormalSchedule')).*$/
-
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板)(正排|预排).*$/
       if (!regex.test(fileName)) {
         const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
         this.$alert(tip, this.$t('PublicText.TextError'), {

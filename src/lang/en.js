@@ -155,8 +155,8 @@ export default {
     FileManage: 'System Files', // 系统文件（一级菜单）
     InputFiles: 'Compute Input Files', // 计算输入文件
     AnalysisInputFiles: 'Analysis Input Files', // 分析输入文件
-    MainOutputFiles: 'Main Input Files', // 主板输入文件
-    SmallOutputFiles: 'Small Input Files', // 小板输入文件
+    MainOutputFiles: 'Main Output Files', // 主板输入文件
+    SmallOutputFiles: 'Small Output Files', // 小板输入文件
     AnalysisFiles: 'Analysis Output Files', // 分析输出文件
     IdleFiles: 'Idle Files', // Idle明细文件
     AnalyseProgramFiles: 'No Program Files', // 无程序清单文件

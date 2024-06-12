@@ -77,38 +77,6 @@ export function GetProgress() {
     method: 'get'
   })
 }
-// 获取历史日志选择器选项
-export function GetLogSelectItem() {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/get_history_log_item/`,
-    method: 'get'
-  })
-}
-// 获取历史排程选择器选项
-export function GetExcelSelectItem() {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/get_history_excel_item/`,
-    method: 'get'
-  })
-}
-// 下载历史日志
-export function DownloadHistoryLog(data) {
-  return request({
-    method: 'post',
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/download_history_log/`,
-    responseType: 'blob',
-    data
-  })
-}
-// 下载历史日志
-export function DownloadHistoryExcel(data) {
-  return request({
-    method: 'post',
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/download_history_excel/`,
-    responseType: 'blob',
-    data
-  })
-}
 // 下载最新排程
 export function DownloadSchedule() {
   return request({
