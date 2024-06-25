@@ -888,7 +888,7 @@ export default {
           this.clearListenProgress()
           this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime2')
           this.$alert(this.$t('SchedulePanelPage.TextScheduleRunTime2') + ':' + res.err_message, this.$t('PublicText.TextError'), {
-            confirmButtonText: this.$t('PublicBtn.BtnConfirm'),
+            confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'error'
           })
           this.schedule_run_time = this.$t('SchedulePanelPage.TextScheduleRunTime4') + hour.toString() + ' h ' + minute.toString() + ' m ' + second.toString() + ' s'
