@@ -94,11 +94,11 @@ export function GetApsDeliveryDay(data) {
   })
 }
 // 推送量化结果
-export function SaveApsOutPutCount(data) {
-  return request({
-    url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsOutPutCount`,
-    method: 'post',
-    timeout: REQUEST_TIMEOUT,
-    data
-  })
-}
+// export function SaveApsOutPutCount(data) {
+//   return request({
+//     url: `/${API_URL_FIRST}/${API_URL_SECOND}/saveApsOutPutCount`,
+//     method: 'post',
+//     timeout: REQUEST_TIMEOUT,
+//     data
+//   })
+// }

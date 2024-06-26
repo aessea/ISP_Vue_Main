@@ -185,12 +185,12 @@
                       {{ $t('SchedulePanelPage.BtnEndCompute') }}
                     </el-button>
                   </el-col>
-                  <el-col :span="8">
+                  <!-- <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/post_statistics')" type="pushBtn" plain @click="post_statistics">
                       <i class="el-icon-upload2" />
                       {{ $t('SchedulePanelPage.BtnPushStatistics') }}
                     </el-button>
-                  </el-col>
+                  </el-col> -->
                 </el-row>
               </div>
             </el-col>
@@ -707,7 +707,7 @@ import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain,
   DownloadUploadFileSmall, DoBucklePoints, GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData,
   DoCheckScheduleData
 } from '@/api/Control/SchedulePanel'
-import { GetApsMtool, GetApsMoBaseData, GetApsMoProgData, SaveApsOutPutCount, GetApsProgram, GetApsDeliveryDay
+import { GetApsMtool, GetApsMoBaseData, GetApsMoProgData, GetApsProgram, GetApsDeliveryDay
 } from '@/api/Control/DockingMes'
 import { DownloadFile } from '@/api/common'
 export default {
@@ -2044,50 +2044,50 @@ export default {
         })
       })
     },
-    post_statistics() {
-      this.$confirm(this.$t('PublicText.TitleTip'), {
-        title: this.$t('PublicText.TitleTip'),
-        message: this.$t('SchedulePanelPage.TextApiUploadTip6'),
-        confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('PublicBtn.Cancel'),
-        type: 'warning'
-      }).then(() => {
-        const pushLoading = {
-          text: this.$t('PublicText.MesApiPushing'),
-          background: 'rgba(0, 0, 0, 0.5)'
-        } // 导入排程动画
-        this.loadingInstance = Loading.service(pushLoading)
-        const form = {
-          'user_name': this.name
-        }
-        SaveApsOutPutCount(form).then(res => {
-          if (res.code === 20000) {
-            this.$alert(res.message, this.$t('PublicText.MesApiPushSuccess'), {
-              confirmButtonText: this.$t('PublicBtn.Confirm'),
-              type: 'success'
-            })
-            this.saveApsOutPutCountTip = this.$t('PublicBtn.MesApiPushed')
-          } else {
-            this.$alert(this.$t('PublicText.MesApiPushError'), this.$t('PublicText.TextError'), {
-              confirmButtonText: this.$t('PublicBtn.Confirm'),
-              type: 'error'
-            })
-          }
-          this.loadingInstance.close() // 清除动画
-        }).catch(err => {
-          this.loadingInstance.close() // 清除动画
-          this.$alert(err, this.$t('PublicText.TextError'), {
-            confirmButtonText: this.$t('PublicBtn.Confirm'),
-            type: 'error'
-          })
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: this.$t('PublicText.TextCancel')
-        })
-      })
-    },
+    // post_statistics() {
+    //   this.$confirm(this.$t('PublicText.TitleTip'), {
+    //     title: this.$t('PublicText.TitleTip'),
+    //     message: this.$t('SchedulePanelPage.TextApiUploadTip6'),
+    //     confirmButtonText: this.$t('PublicBtn.Confirm'),
+    //     cancelButtonText: this.$t('PublicBtn.Cancel'),
+    //     type: 'warning'
+    //   }).then(() => {
+    //     const pushLoading = {
+    //       text: this.$t('PublicText.MesApiPushing'),
+    //       background: 'rgba(0, 0, 0, 0.5)'
+    //     } // 导入排程动画
+    //     this.loadingInstance = Loading.service(pushLoading)
+    //     const form = {
+    //       'user_name': this.name
+    //     }
+    //     SaveApsOutPutCount(form).then(res => {
+    //       if (res.code === 20000) {
+    //         this.$alert(res.message, this.$t('PublicText.MesApiPushSuccess'), {
+    //           confirmButtonText: this.$t('PublicBtn.Confirm'),
+    //           type: 'success'
+    //         })
+    //         this.saveApsOutPutCountTip = this.$t('PublicBtn.MesApiPushed')
+    //       } else {
+    //         this.$alert(this.$t('PublicText.MesApiPushError'), this.$t('PublicText.TextError'), {
+    //           confirmButtonText: this.$t('PublicBtn.Confirm'),
+    //           type: 'error'
+    //         })
+    //       }
+    //       this.loadingInstance.close() // 清除动画
+    //     }).catch(err => {
+    //       this.loadingInstance.close() // 清除动画
+    //       this.$alert(err, this.$t('PublicText.TextError'), {
+    //         confirmButtonText: this.$t('PublicBtn.Confirm'),
+    //         type: 'error'
+    //       })
+    //     })
+    //   }).catch(() => {
+    //     this.$message({
+    //       type: 'info',
+    //       message: this.$t('PublicText.TextCancel')
+    //     })
+    //   })
+    // },
     beforeDoBucklePoints(upload_file_name) {
       if (upload_file_name.includes(this.$t('FileKeyWord.MainWord'))) {
         if (this.isImportMain === false) {
