@@ -110,58 +110,58 @@ export default {
     Dashboard: 'Dashboard', // 首页（一级菜单）
     // 控制面板
     Control: 'Control Panel', // 控制面板（一级菜单）
-    SchedulePanel: 'Compute Panel', // 计算排程面板
-    ParamsConfig: 'Params Config', // 排程配置
-    AnalysisControl: 'Analysis Panel', // 分析排程面板
+    SchedulePanel: 'Calculate Panel', // 计算排程面板
+    ParamsConfig: 'Params Configuration', // 排程配置
+    AnalysisControl: 'Analyse Panel', // 分析排程面板
     // 每日配置
-    DayConfig: 'Daily Config', // 每日配置（一级菜单）
-    BlockTimeData: 'Maintenance Data', // 维护时间表
-    ProcessAiHoliday: 'Process AI Holiday', // AI放假维护表
-    PackagingLineHoliday: 'Packaging Line Holiday', // 包装线提前天数表
-    PackHoliday: 'Pack Holiday', // 包装线放假表
+    DayConfig: 'Daily Configuration', // 每日配置（一级菜单）
+    BlockTimeData: 'Date Maintenance', // 维护时间表
+    ProcessAiHoliday: 'AI day-off Maintenance', // AI放假维护表
+    PackagingLineHoliday: 'FA Line Advance Maintenance', // 包装线提前天数表
+    PackHoliday: 'FA Line day-off Maintenance', // 包装线放假表
     ProgramData: 'Program Data', // 程序表
-    ProductionReportData: 'Production Report Data', // 生产报表
+    ProductionReportData: 'Production Report', // 生产报表
     NoProgramData: 'No Program Data', // 无程序清单表
-    NetworkBoard: 'Network Board', // 网板信息表
+    NetworkBoard: 'Screen Board Data', // 网板信息表
     TestProgramData: 'Test Program Data', // 试跑程序表
-    ProductProgramData: 'Product Program Data', // 量产程序表
+    ProductProgramData: 'Mass Production Program', // 量产程序表
     // 长期配置
-    LongConfig: 'Long Config', // 长期配置（一级菜单）
-    MP1AddLineData: 'MP1 AddLine Data', // MP1补线表
-    NotMP1AddLineData: 'Not MP1 AddLine Data', // 非MP1补线表
+    LongConfig: 'Long Configuration', // 长期配置（一级菜单）
+    MP1AddLineData: 'MP1 Line Filing Data', // MP1补线表
+    NotMP1AddLineData: 'Non-MP1 Line Filing Data', // 非MP1补线表
     ExchangeLineData: 'Exchange Line Data', // 交换线别表
-    LineData: 'Line Data', // 产线配置表
+    LineData: 'Line Configuration', // 产线配置表
     CapacityChangeData: 'Capacity Change Data', // 产能变化表
-    OptimizedMachineData: 'Optimized Machine Data', // 优化机种表
-    ProcessData: 'Main Process Data', // 主板制程配置表
-    SmallProcessData: 'Small Process Data', // 小板制程配置表
-    KeyBoardLineData: 'KeyBoard Line Data', // 按键板表
-    EarlyDueDateBoard8: 'Early DueDate Board', // 板号提早交期表
+    OptimizedMachineData: 'Optimized Model Data', // 优化机种表
+    ProcessData: 'MainBoard Process Config', // 主板制程配置表
+    SmallProcessData: 'SmallBoard Process Config', // 小板制程配置表
+    KeyBoardLineData: 'KeyBoard Data', // 按键板表
+    EarlyDueDateBoard8: 'Board Early Delivery Data', // 板号提早交期表
     ChangeLineData: 'Change Line Data', // 线体变化表
-    PairedSMTMachineData: 'Paired SMT Machine Data', // 配套板表
-    KeyBoardSpecialModel: 'KeyBoard Special Model', // 无需打板机种表
+    PairedSMTMachineData: 'Related Board Data', // 配套板表
+    KeyBoardSpecialModel: 'Model Data No Need AI', // 无需打板机种表
     BoardAdvanceDate: 'Board Advance Date', // 后工序提早交期表
     ProcessSequenceMap: 'Process Sequence Map', // 先后加工循序对照表
     CustomerData: 'Customer Data', // 客户识别表
-    DelayPackingLine: 'Delay Packing Line', // 包装线延后表
-    KeyboardMachineName: 'Keyboard Machine Name', // 小板同订单号上排程表
+    DelayPackingLine: 'FA Line Delay Data', // 包装线延后表
+    KeyboardMachineName: 'SmallBoard the Same Order', // 小板同订单号上排程表
     // 预测数据
     Predict: 'Predict Data', // 预测数据（一级菜单）
     TrainLEDTData: 'LED Train Data', // LED训练数据
     TrainData: 'Train Data', // 训练数据
     FixedCTData: 'Fixed CT Data', // 车间指定CT表
-    TrainDataMap: 'Train Data Map', // 新线体预测参考表
+    TrainDataMap: 'New Line Refer Data', // 新线体预测参考表
     // 系统文件
     FileManage: 'System Files', // 系统文件（一级菜单）
-    InputFiles: 'Compute Input Files', // 计算输入文件
+    InputFiles: 'Calculate Input Files', // 计算输入文件
     AnalysisInputFiles: 'Analysis Input Files', // 分析输入文件
-    MainOutputFiles: 'Main Output Files', // 主板输入文件
-    SmallOutputFiles: 'Small Output Files', // 小板输入文件
-    AnalysisFiles: 'Analysis Output Files', // 分析输出文件
-    IdleFiles: 'Idle Files', // Idle明细文件
+    MainOutputFiles: 'MainBoard Output Files', // 主板输出文件
+    SmallOutputFiles: 'SmallBoard Output Files', // 小板输出文件
+    AnalysisFiles: 'Analyse Output Files', // 分析输出文件
+    IdleFiles: 'Idle Detail Files', // Idle明细文件
     AnalyseProgramFiles: 'No Program Files', // 无程序清单文件
-    StatisticsFiles: 'Statistics Files', // 量化文件
-    ApiStatisticsFiles: 'API Statistics Files', // 接口量化文件
+    StatisticsFiles: 'Quantized Files', // 量化文件
+    ApiStatisticsFiles: 'API Quantized Files', // 接口量化文件
     LogFiles: 'Log Files', // 日志文件
     // 系统管理
     Permission: 'System Manage', // 系统管理（一级菜单）
@@ -186,31 +186,31 @@ export default {
   SchedulePanelPage: {
     // 标题
     ScheduleDateTitle: 'Schedule Title', // 排程标题
-    TitleScheduleRunTime: 'Schedule Run Time', // 排程运行时长
+    TitleScheduleRunTime: 'Running Time', // 排程运行时长
     ScheduleType: 'Type', // 排程类型
-    TaskProgress: 'Task Progress', // 任务进度
+    TaskProgress: 'Task Progress Bar', // 任务进度
     ControlPanel: 'Control Center', // 控制中心
     TitleTrainPredictModel: 'Train Predict Model', // 训练预测模型
     TitleRelatedOperate: 'Related Operations', // 排程相关操作
-    MainDowload: 'Download Main', // 主板下载
-    SmallDowload: 'Download Small', // 小板下载
+    MainDowload: 'Download MainBoard', // 主板下载
+    SmallDowload: 'Download SmallBoard', // 小板下载
     LogDownload: 'Download Log', // 日志下载
     Config: 'Config', // 配置
-    TitleDownloadNewMain: 'Download New Main', // 下载主板最新排程
-    TitleDownloadNewSmall: 'Download New Small', // 下载小板最新排程
-    TitleDownloadNewLog: 'Download New Log', // 下载最新日志
-    TitleComputeBoth: 'Compute Main and Small', // 计算主板和小板排程
-    TitleComputeMain: 'Compute Main', // 计算主板排程
-    TitleComputeSmall: 'Compute Small', // 计算小板排程
+    TitleDownloadNewMain: 'Download the latest output file', // 下载主板最新排程
+    TitleDownloadNewSmall: 'Download the latest output file', // 下载小板最新排程
+    TitleDownloadNewLog: 'Download the latest log file', // 下载最新日志
+    TitleComputeBoth: 'Calculate MainBoard and SmallBoard', // 计算主板和小板排程
+    TitleComputeMain: 'Calculate MainBoard', // 计算主板排程
+    TitleComputeSmall: 'Calculate SmallBoard', // 计算小板排程
     ComputeTextStep1: 'Upload File', // 上传排程
     ComputeTextStep2: 'Import File', // 导入排程
-    ComputeTextStep3: 'Update Data', // 更新信息
-    ComputeTextStep4: 'Compute Schedule', // 计算排程
+    ComputeTextStep3: 'Update File', // 更新信息
+    ComputeTextStep4: 'Begin Calculate', // 计算排程
     TextMainUploadName: 'Retrieve Main Upload File', // 获取主板上传文件
     TextSmallUploadName: 'Retrieve Small Upload File', // 获取小板上传文件
     TextChooseHoliday: 'Select one or more holiday dates', // 选择一个或多个包装放假日期
-    TextUploadMainFile: 'Please Upload Main Schedule File', // 请上传主板排程文件
-    TextUploadSmallFile: 'Please Upload Main Schedule File', // 请上传小板排程文件
+    TextUploadMainFile: 'Please upload MainBoard file', // 请上传主板排程文件
+    TextUploadSmallFile: 'Please upload SmallBoard file', // 请上传小板排程文件
     TextRefreshUploadTime: 'Refresh File Upload Time', // 刷新文件上传时间
     // 提示
     TextChooseTrainDate: 'Select train date', // 选择预测模型日期
@@ -222,7 +222,7 @@ export default {
     TextScheduleRunTime2: 'Calculation Error', // 计算排程出错
     TextScheduleRunTime3: 'Calculating:', // 计算中：
     TextScheduleRunTime4: 'Calculation Error, Total Time Taken:', // 计算排程出错，耗时：
-    TextScheduleRunTime5: 'Calculation Completed, Total Time Taken:', // 计算完毕，总耗时：
+    TextScheduleRunTime5: 'Calculation completed, total time cost:', // 计算完毕，总耗时：
     TextStopCompute1: 'Please enter below, please enter in the input box below', // 请在下方输入框输入
     TextStopCompute2: 'Comfirm Stop', // 确认终止
     TextStopCompute3: 'Then click Confirm to terminate the schedule!', // 后点击确定以终止排程！
@@ -271,37 +271,37 @@ export default {
     TextExportTip2: 'Export failed, file does not exist', // 导出失败，文件不存在
     // 按钮
     BtnContinueImport: 'Yes, Continue Import', // 确定，仍要导入
-    BtnContinueCompute: 'Yes, Continue Compute', // 确定，仍要计算
-    BtnModifyPackHoliday: 'Modify Pack Holiday', // 修改包装放假
+    BtnContinueCompute: 'Yes, Continue Calculate', // 确定，仍要计算
+    BtnModifyPackHoliday: 'Modify Packaging Holiday', // 修改包装放假
     BtnTrainPredictModel: 'Train Predict Model', // 训练预测模型
-    BtnComputeMain: 'Compute Main', // 计算主板排程
-    BtnComputeSmall: 'Compute Small', // 计算小板排程
-    BtnComputeBoth: 'Compute Both', // 计算主板小板
+    BtnComputeMain: 'Calculate MainBoard', // 计算主板排程
+    BtnComputeSmall: 'Calculate SmallBoard', // 计算小板排程
+    BtnComputeBoth: 'Calculate BothBoard', // 计算主板小板
     BtnEndDeepSearch: 'Stop DeepSearch', // 终止深度搜索
-    BtnEndCompute: 'Stop Compute', // 终止计算排程
+    BtnEndCompute: 'Stop Calculate', // 终止计算排程
     BtnPushStatistics: 'Push Stastic', // 推送量化结果
-    BtnDownloadMain: 'Download Main', // 下载主板排程
-    BtnDownloadSmall: 'Download Small', // 下载小板排程
-    BtnDownloadIdle: 'Download Idle', // 下载idle明细
-    BtnDownloadStastic: 'Download Stastic', // 下载量化结果
-    BtnDownloadNoPro: 'Download NoProgram', // 下载无程序表
-    BtnDownloadLog: 'Download Log', // 下载最新日志
-    BtnUploadMain: 'Upload Main File', // 上传主板排程
-    BtnUploadSmall: 'Upload Small File', // 上传小板排程
+    BtnDownloadMain: 'Schedule File', // 下载主板排程
+    BtnDownloadSmall: 'Schedule File', // 下载小板排程
+    BtnDownloadIdle: 'Idle Detail File', // 下载idle明细
+    BtnDownloadStastic: 'Quantized File', // 下载量化结果
+    BtnDownloadNoPro: 'NoProgram File', // 下载无程序表
+    BtnDownloadLog: 'Log File', // 下载最新日志
+    BtnUploadMain: 'Upload File', // 上传主板排程
+    BtnUploadSmall: 'Upload File', // 上传小板排程
     BtnImportFile: 'Import File', // 导入排程
     BtnTransferMain: 'Transfer Main', // 主板转移扣点
     BtnTransferSmall: 'Transfer Small', // 小板转移扣点
-    BtnTransfer: 'Transfer', // 转移扣点
-    BtnExportMain: 'Export Main', // 导出主板
-    BtnExportSmall: 'Export Small', // 导出小板
+    BtnTransfer: 'Transfer Points', // 转移扣点
+    BtnExportMain: 'Export File', // 导出主板
+    BtnExportSmall: 'Export File', // 导出小板
     BtnGetMainUpload: 'Get Main Upload File', // 获取主板上传文件
     BtnGetSmallUpload: 'Get Small Upload File', // 获取小板上传文件
-    BtnGetApsProgram: 'Get Small Upload File', // 更新程序信息
-    BtnGetApsMtool: 'Get Small Upload File', // 更新钢网信息
-    BtnGetApsMoBaseData: 'Get Small Upload File', // 更新齐套信息
-    BtnGetApsMoProgData: 'Get Small Upload File', // 更新工单进度
-    BtnGetApsDeliveryDay: 'Get Small Upload File', // 更新包装时间
-    BtnBeginCompute: 'Begin Conpute' // 开始计算排程
+    BtnGetApsProgram: 'Update Program Info', // 更新程序信息
+    BtnGetApsMtool: 'Update Stencil Info', // 更新钢网信息
+    BtnGetApsMoBaseData: 'Update Material Info', // 更新齐套信息
+    BtnGetApsMoProgData: 'Update Ticket Progress', // 更新工单进度
+    BtnGetApsDeliveryDay: 'Update Packaging Time', // 更新包装时间
+    BtnBeginCompute: 'Begin Calculate' // 开始计算排程
   },
   // 通用
   TablePage: {
@@ -358,21 +358,21 @@ export default {
     // 标题
     TitleTip: 'Tip', // 提示信息
     TextCheckData1: 'Data check prompt: Data check has not been performed yet', // 数据检查提示信息：还未进行数据检查
-    TitleAnaProgress: 'Analysis Progress', // 分析进度
+    TitleAnaProgress: 'Analyse Progress', // 分析进度
     ControlPanel: 'Control Center', // 控制中心
-    TitleAnaStep1: 'Upload File', // 上传文件
+    TitleAnaStep1: 'Upload', // 上传文件
     TitleAnaStep2: 'Check File', // 检查文件
-    TitleAnaStep3: 'Analyze Schedule', // 分析排程
-    TitleAnaStep4: 'Push Schedule', // 推送排程
+    TitleAnaStep3: 'Do Analyse', // 分析排程
+    TitleAnaStep4: 'Push to Mes', // 推送排程
     TextUploadFile: 'Please upload file', // 请上传文件
-    BtnUploadFile: '1. Upload File', // 1.上传文件
-    BtnCheckFile: '2. Check File', // 2.检查文件
-    BtnAnaFile: '3. Analyze Schedule', // 3.分析排程
-    BtnAnaPush: '4. Push after Analysis', // 4.分析后推送
-    BtnDownloadLatestFile: 'Download Latest Analysis Result File', // 下载最新分析结果文件
-    BtnGetStaResult: 'Get Quantitative Results', // 获取量化结果
-    BtnImportPush: 'Import and Push Directly', // 导入后直接推送
-    TextAnaResult: 'Analysis Result', // 分析结果
+    BtnUploadFile: '1.Upload File', // 1.上传文件
+    BtnCheckFile: '2.Check File', // 2.检查文件
+    BtnAnaFile: '3.Do Analyze', // 3.分析排程
+    BtnAnaPush: '4.Push to Mes', // 4.分析后推送
+    BtnDownloadLatestFile: 'Download Analyse Result File', // 下载最新分析结果文件
+    BtnGetStaResult: 'Get Quantized Data', // 获取量化结果
+    BtnImportPush: 'Import then Push to Mes', // 导入后直接推送
+    TextAnaResult: 'Analyse Result', // 分析结果
     FindHistoryAnaRes: 'View Historical Analysis Results', // 查看历史分析结果
     TitlePushSchedule: 'Push Schedule', // 推送排程
     BtnPsuhSMTNot: 'Push SMT Unarranged', // 推送SMT未排

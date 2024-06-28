@@ -61,9 +61,9 @@
           <el-table-column prop="workmanship" :label="lang_dict.workmanship" />
           <el-table-column prop="connecting_plates" :label="lang_dict.connecting_plates" width="100" sortable />
           <el-table-column prop="points" :label="lang_dict.points" width="80" sortable />
-          <el-table-column prop="length" label="长" width="80" sortable />
-          <el-table-column prop="width" label="宽" width="80" sortable />
-          <el-table-column prop="height" label="高" width="80" sortable />
+          <el-table-column prop="length" :label="lang_dict.length" width="80" sortable />
+          <el-table-column prop="width" :label="lang_dict.width" width="80" sortable />
+          <el-table-column prop="height" :label="lang_dict.height" width="80" sortable />
           <el-table-column prop="program_CT" :label="lang_dict.program_CT" width="100" sortable />
           <el-table-column prop="yin_yang_board" :label="lang_dict.yin_yang_board" width="100" />
           <el-table-column prop="component_merge" :label="lang_dict.component_merge" width="120" />
@@ -168,17 +168,17 @@
           </el-row>
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.length" prop="length" label="长">
+              <el-form-item :rules="rules.length" prop="length" :label="lang_dict.length">
                 <el-input-number v-model="model.length" :placeholder="$t('Placeholder.Enter')" :step="0.1" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.width" prop="width" label="宽">
+              <el-form-item :rules="rules.width" prop="width" :label="lang_dict.width">
                 <el-input-number v-model="model.width" :placeholder="$t('Placeholder.Enter')" :step="0.1" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-              <el-form-item :rules="rules.height" prop="height" label="高">
+              <el-form-item :rules="rules.height" prop="height" :label="lang_dict.height">
                 <el-input-number v-model="model.height" :placeholder="$t('Placeholder.Enter')" :step="0.1" :style="{width: '100%'}" clearable />
               </el-form-item>
             </el-col>

@@ -149,50 +149,54 @@
                 type="info"
                 :closable="false"
               />
-              <div class="box-button">
+              <el-row class="button-row">
+                <el-button v-if="buttons.includes('SchedulePanel/computeDialogMain')" type="primary" plain @click="computeDialogMain">
+                  <i class="el-icon-monitor" />
+                  {{ $t('SchedulePanelPage.BtnComputeMain') }}
+                </el-button>
+                <el-button v-if="buttons.includes('SchedulePanel/computeDialogSmall')" type="primary" plain class="button-margin" @click="computeDialogSmall">
+                  <i class="el-icon-monitor" />
+                  {{ $t('SchedulePanelPage.BtnComputeSmall') }}
+                </el-button>
+              </el-row>
+              <el-row class="button-row">
+                <el-button v-if="buttons.includes('SchedulePanel/computeDialogBoth')" type="primary" plain @click="computeDialogBoth">
+                  <i class="el-icon-monitor" />
+                  {{ $t('SchedulePanelPage.BtnComputeBoth') }}
+                </el-button>
+              </el-row>
+              <el-row class="button-row">
+                <el-button v-if="buttons.includes('SchedulePanel/stopTabu')" type="stopBtn" plain @click="stopTabu">
+                  <i class="el-icon-warning-outline" />
+                  {{ $t('SchedulePanelPage.BtnEndDeepSearch') }}
+                </el-button>
+                <el-button v-if="buttons.includes('SchedulePanel/stopSchedule')" type="stopBtn" plain @click="stopSchedule">
+                  <i class="el-icon-warning-outline" />
+                  {{ $t('SchedulePanelPage.BtnEndCompute') }}
+                </el-button>
+              </el-row>
+              <!-- <div class="box-button">
                 <el-row>
-                  <el-col :span="8">
-                    <el-button v-if="buttons.includes('SchedulePanel/computeDialogMain')" type="primary" plain @click="computeDialogMain">
-                      <i class="el-icon-monitor" />
-                      {{ $t('SchedulePanelPage.BtnComputeMain') }}
-                    </el-button>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-button v-if="buttons.includes('SchedulePanel/computeDialogSmall')" type="primary" plain @click="computeDialogSmall">
-                      <i class="el-icon-monitor" />
-                      {{ $t('SchedulePanelPage.BtnComputeSmall') }}
-                    </el-button>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-button v-if="buttons.includes('SchedulePanel/computeDialogBoth')" type="primary" plain @click="computeDialogBoth">
-                      <i class="el-icon-monitor" />
-                      {{ $t('SchedulePanelPage.BtnComputeBoth') }}
-                    </el-button>
-                  </el-col>
-                </el-row>
-              </div>
-              <div class="box-button">
-                <el-row>
-                  <el-col :span="8">
+                  <el-col :span="12">
                     <el-button v-if="buttons.includes('SchedulePanel/stopTabu')" type="stopBtn" plain @click="stopTabu">
                       <i class="el-icon-warning-outline" />
                       {{ $t('SchedulePanelPage.BtnEndDeepSearch') }}
                     </el-button>
                   </el-col>
-                  <el-col :span="8">
+                  <el-col :span="12">
                     <el-button v-if="buttons.includes('SchedulePanel/stopSchedule')" type="stopBtn" plain @click="stopSchedule">
                       <i class="el-icon-warning-outline" />
                       {{ $t('SchedulePanelPage.BtnEndCompute') }}
                     </el-button>
                   </el-col>
-                  <!-- <el-col :span="8">
+                  <el-col :span="8">
                     <el-button v-if="buttons.includes('SchedulePanel/post_statistics')" type="pushBtn" plain @click="post_statistics">
                       <i class="el-icon-upload2" />
                       {{ $t('SchedulePanelPage.BtnPushStatistics') }}
                     </el-button>
-                  </el-col> -->
+                  </el-col>
                 </el-row>
-              </div>
+              </div> -->
             </el-col>
           </el-row>
         </el-card>
@@ -208,7 +212,27 @@
                     type="info"
                     :closable="false"
                   />
-                  <div class="box-button">
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadMain') }}
+                    </el-button>
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
+                    </el-button>
+                  </el-row>
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
+                    </el-button>
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
+                    </el-button>
+                  </el-row>
+                  <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
@@ -229,8 +253,8 @@
                         </el-button>
                       </el-col>
                     </el-row>
-                  </div>
-                  <div class="box-button">
+                  </div> -->
+                  <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
@@ -239,7 +263,7 @@
                         </el-button>
                       </el-col>
                     </el-row>
-                  </div>
+                  </div> -->
                 </el-col>
               </el-row>
             </el-tab-pane>
@@ -251,7 +275,27 @@
                     type="info"
                     :closable="false"
                   />
-                  <div class="box-button">
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadSmall') }}
+                    </el-button>
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
+                    </el-button>
+                  </el-row>
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
+                    </el-button>
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
+                    </el-button>
+                  </el-row>
+                  <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
@@ -272,8 +316,8 @@
                         </el-button>
                       </el-col>
                     </el-row>
-                  </div>
-                  <div class="box-button">
+                  </div> -->
+                  <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
@@ -282,7 +326,7 @@
                         </el-button>
                       </el-col>
                     </el-row>
-                  </div>
+                  </div> -->
                 </el-col>
               </el-row>
             </el-tab-pane>
@@ -294,7 +338,13 @@
                     type="info"
                     :closable="false"
                   />
-                  <div class="box-button">
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('log_file_path')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadLog') }}
+                    </el-button>
+                  </el-row>
+                  <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
                         <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('log_file_path')">
@@ -303,7 +353,7 @@
                         </el-button>
                       </el-col>
                     </el-row>
-                  </div>
+                  </div> -->
                 </el-col>
               </el-row>
             </el-tab-pane>
@@ -457,11 +507,11 @@
               {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
             </el-button>
           </el-tooltip>
-          <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
+          <!-- <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
             <el-button type="primary" @click="getApsDeliveryDay('both')">
               {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
             </el-button>
-          </el-tooltip>
+          </el-tooltip> -->
         </el-col>
       </el-row>
       <el-alert
@@ -559,11 +609,11 @@
               {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
             </el-button>
           </el-tooltip>
-          <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
+          <!-- <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
             <el-button type="primary" @click="getApsDeliveryDay('main')">
               {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
             </el-button>
-          </el-tooltip>
+          </el-tooltip> -->
         </el-col>
       </el-row>
       <el-alert
@@ -656,11 +706,11 @@
               {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
             </el-button>
           </el-tooltip>
-          <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
+          <!-- <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
             <el-button type="primary" @click="getApsDeliveryDay('small')">
               {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
             </el-button>
-          </el-tooltip>
+          </el-tooltip> -->
         </el-col>
       </el-row>
       <el-alert
@@ -2230,6 +2280,17 @@ export default {
   width: 46%;
   word-break: break-all !important;
   overflow: auto;
+}
+.box-button {
+  text-align: left;
+}
+.button-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.button-margin {
+  margin-left: 10px;
 }
 </style>
 

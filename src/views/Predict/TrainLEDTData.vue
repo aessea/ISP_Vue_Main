@@ -64,7 +64,7 @@
           <el-table-column prop="other_time" :label="lang_dict.other_time" width="110" sortable />
           <el-table-column prop="program_CT" :label="lang_dict.program_CT" width="100" sortable />
           <el-table-column prop="average_CT" :label="lang_dict.average_CT" width="110" sortable />
-          <el-table-column prop="data_time" :label="lang_dict.data_time" sortable />
+          <el-table-column prop="data_time" :label="lang_dict.data_time" width="110" sortable />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button

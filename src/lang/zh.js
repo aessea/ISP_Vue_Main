@@ -67,7 +67,7 @@ export default {
     TextCancel: '已取消', // 已取消
     TitleTip: '提示', // 提示
     Feasible: '是否可行解', // 是否可行解
-    LineBalanceValue: 'Balance', // 包装线平衡
+    LineBalanceValue: '包装线平衡', // 包装线平衡
     IdleValue: '停顿', // 停顿
     OverdueValue: '逾期', // 逾期
     ResultValue: '结果值', // 目标值
