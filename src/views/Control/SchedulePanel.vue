@@ -984,7 +984,7 @@ export default {
     // 主板文件上传钩子
     handleChangeMain(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板)(正排|预排).*$/
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|Main Board)(正排|预排|Preliminary|Regular).*$/
 
       if (!regex.test(fileName)) {
         const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
@@ -1007,7 +1007,7 @@ export default {
     // 小板文件上传钩子
     handleChangeSmall(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(this.$t('FileKeyWord.SmallWord'))(this.$t('FileKeyWord.FormalSchedule')|this.$t('FileKeyWord.UnFormalSchedule')).*$/
+      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(小板|Small Board)(正排|预排|Preliminary|Regular).*$/
 
       if (!regex.test(fileName)) {
         const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
