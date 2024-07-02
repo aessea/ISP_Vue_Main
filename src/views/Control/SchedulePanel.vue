@@ -42,12 +42,12 @@
               :header-cell-style="{'font-weight':'normal', 'text-align':'right'}"
               :cell-style="{'font-size':'20px', 'font-weight':'20px', 'text-align': 'right'}"
             >
-              <el-table-column prop="schedule_type" :label="$t('SchedulePanelPage.ScheduleType')" width="100px;" />
+              <el-table-column prop="schedule_type" :label="$t('SchedulePanelPage.ScheduleType')" width="120px;" />
               <el-table-column prop="enable" :label="$t('PublicText.Feasible')" width="100px;" />
               <el-table-column prop="line_balance" :label="$t('PublicText.LineBalanceValue')" width="100px;" />
               <el-table-column prop="idle_value" :label="$t('PublicText.IdleValue')" width="100px;" />
-              <el-table-column prop="overdue_value" :label="$t('PublicText.OverdueValue')" width="100px;" />
-              <el-table-column prop="obj_value" :label="$t('PublicText.ResultValue')" width="110px;" />
+              <el-table-column prop="overdue_value" :label="$t('PublicText.OverdueValue')" width="85px;" />
+              <el-table-column prop="obj_value" :label="$t('PublicText.ResultValue')" width="105px;" />
             </el-table>
           </div>
         </el-col>
@@ -841,7 +841,8 @@ export default {
   computed: {
     ...mapGetters([
       'name',
-      'buttons'
+      'buttons',
+      'language'
     ])
   },
   created() {
@@ -984,10 +985,16 @@ export default {
     // 主板文件上传钩子
     handleChangeMain(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|Main Board)(正排|预排|Preliminary|Regular).*$/
-
+      let regex, TextFileTypeError2
+      if (sessionStorage.getItem('lang') === 'zh') {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板)(正排|预排).*$/
+        TextFileTypeError2 = '（正确文件名示例：0901主板预排）'
+      } else {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])_(MainBoard)_(Preliminary|Regular).*$/
+        TextFileTypeError2 = '(Example of correct file name: 0901_MainBoard_Regular.xlsx)'
+      }
       if (!regex.test(fileName)) {
-        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + TextFileTypeError2
         this.$alert(tip, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
@@ -1007,10 +1014,16 @@ export default {
     // 小板文件上传钩子
     handleChangeSmall(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(小板|Small Board)(正排|预排|Preliminary|Regular).*$/
-
+      let regex, TextFileTypeError2
+      if (sessionStorage.getItem('lang') === 'zh') {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(小板)(正排|预排).*$/
+        TextFileTypeError2 = '（正确文件名示例：0901主板预排）'
+      } else {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])_(SmallBoard)_(Preliminary|Regular).*$/
+        TextFileTypeError2 = '(Example of correct file name: 0901_MainBoard_Regular.xlsx)'
+      }
       if (!regex.test(fileName)) {
-        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + TextFileTypeError2
         this.$alert(tip, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,

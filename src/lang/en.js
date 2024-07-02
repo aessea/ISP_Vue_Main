@@ -1,7 +1,7 @@
 export default {
   FileKeyWord: {
-    MainWord: 'Main Board', // 主板
-    SmallWord: 'Small Board', // 小板
+    MainWord: 'MainBoard', // 主板
+    SmallWord: 'SmallBoard', // 小板
     FormalSchedule: 'Formal Schedule', // 正排
     UnFormalSchedule: 'UnFormal Schedule' // 预排
   },
@@ -188,7 +188,7 @@ export default {
     ScheduleDateTitle: 'Schedule Title', // 排程标题
     TitleScheduleRunTime: 'Running Time', // 排程运行时长
     ScheduleType: 'Type', // 排程类型
-    TaskProgress: 'Task Progress Bar', // 任务进度
+    TaskProgress: 'Task Progress', // 任务进度
     ControlPanel: 'Control Center', // 控制中心
     TitleTrainPredictModel: 'Train Predict Model', // 训练预测模型
     TitleRelatedOperate: 'Related Operations', // 排程相关操作
@@ -230,7 +230,7 @@ export default {
     TextNoNeedStopTabu: 'No need to terminate if you are not calculating the schedule!', // 未在计算排程，无需终止！
     TextCurrentTrainDate: 'Current Model Date:', // 当前模型日期：
     TextFileTypeError1: 'The file name format is wrong, please modify it and upload it again!', // 文件命名格式错误，请修改后重新上传！
-    TextFileTypeError2: '(Example of correct file name: 0901 motherboard pre-arrangement)', // （正确文件名示例：0901主板预排）
+    TextFileTypeError2: '(Example of correct file name: 0701 MainBoard Regular.xlsx)', // （正确文件名示例：0901主板预排）
     TextFailedToGet: 'Failed to get', // 获取失败
     TextGetMainUploadTime: 'Get Main Upload File', // 获取主板上传文件
     TextGetSmallUploadTime: 'Get Small Upload File', // 获取小板上传文件

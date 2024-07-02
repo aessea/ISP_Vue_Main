@@ -514,9 +514,16 @@ export default {
     // 上传文件
     loadExcelFile(file, fileList) {
       const fileName = file.name.replace(/\.xlsx$/, '')
-      const regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|小板|Main Board|Small Board)(正排|预排|Preliminary|Regular).*$/
+      let regex, TextFileTypeError2
+      if (sessionStorage.getItem('lang') === 'zh') {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(主板|小板)(正排|预排).*$/
+        TextFileTypeError2 = '（正确文件名示例：0901主板预排）'
+      } else {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])_(MainBoard|SmallBoard)_(Preliminary|Regular).*$/
+        TextFileTypeError2 = '(Example of correct file name: 0901_MainBoard_Regular.xlsx)'
+      }
       if (!regex.test(fileName)) {
-        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + this.$t('SchedulePanelPage.TextFileTypeError2')
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + TextFileTypeError2
         this.$alert(tip, this.$t('PublicText.TextError'), {
           confirmButtonText: this.$t('PublicBtn.Confirm'),
           dangerouslyUseHTMLString: true,
