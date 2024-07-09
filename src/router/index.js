@@ -108,7 +108,7 @@ export const asyncRoutes = [
   LoggingRouter,
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/401', hidden: true }
 ]
 
 const createRouter = () => new Router({
