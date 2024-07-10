@@ -4,13 +4,13 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="buttons.includes('AnalysisFiles/delete')" type="danger" @click="deleteFiles">
+            <el-button v-if="buttons.includes('ABLOutputFiles/delete')" type="danger" @click="deleteFiles">
               <i class="el-icon-delete" />{{ this.$t('FileDataPage.BtnDeleteFile') }}
             </el-button>
-            <el-button v-if="buttons.includes('AnalysisFiles/deleteOld')" type="danger" @click="filterDataDialog">
+            <el-button v-if="buttons.includes('ABLOutputFiles/deleteOld')" type="danger" @click="filterDataDialog">
               <i class="el-icon-delete" />{{ this.$t('FileDataPage.BtnDeleteBulkFiles') }}
             </el-button>
-            <el-button v-if="buttons.includes('AnalysisFiles/reset')" type="primary" @click="resetAllFileList">
+            <el-button v-if="buttons.includes('ABLOutputFiles/reset')" type="primary" @click="resetAllFileList">
               <i class="el-icon-refresh" />{{ this.$t('FileDataPage.BtnResetFilesList') }}
             </el-button>
           </div>
@@ -55,7 +55,7 @@
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
-                v-if="buttons.includes('AnalysisFiles/download')"
+                v-if="buttons.includes('SmallOutputFiles/download')"
                 type="primary"
                 size="mini"
                 icon="el-icon-download"
@@ -120,9 +120,9 @@
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetFilesList, DeleteFiles, DownloadFile, DeleteBeforeFiles, ResetAllFileList } from '@/api/FileManage/AnalysisFiles'
+import { GetFilesList, DeleteFiles, DownloadFile, DeleteBeforeFiles, ResetAllFileList } from '@/api/FileManage/ABLOutputFiles'
 export default {
-  name: 'AnalysisFiles',
+  name: 'SmallOutputFiles',
   directives: { elDragDialog },
   data() {
     return {

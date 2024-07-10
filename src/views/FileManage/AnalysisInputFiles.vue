@@ -7,7 +7,7 @@
             <el-button v-if="buttons.includes('AnalysisInputFiles/delete')" type="danger" @click="deleteFiles">
               <i class="el-icon-delete" />{{ this.$t('FileDataPage.BtnDeleteFile') }}
             </el-button>
-            <el-button v-if="buttons.includes('AnalyseProgramFiles/deleteOld')" type="danger" @click="filterDataDialog">
+            <el-button v-if="buttons.includes('AnalysisInputFiles/deleteOld')" type="danger" @click="filterDataDialog">
               <i class="el-icon-delete" />{{ this.$t('FileDataPage.BtnDeleteBulkFiles') }}
             </el-button>
             <el-button v-if="buttons.includes('AnalysisInputFiles/reset')" type="primary" @click="resetAllFileList">

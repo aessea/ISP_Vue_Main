@@ -10,7 +10,7 @@ const FileManageRouter = {
   meta: {
     title: 'FileManage',
     icon: 'el-icon-download',
-    roles: ['InputFiles', 'MainOutputFiles', 'SmallOutputFiles', 'AnalysisFiles', 'IdleFiles', 'AnalyseProgramFiles', 'StatisticsFiles', 'ApiStatisticsFiles', 'LogFiles']
+    roles: ['InputFiles', 'MainOutputFiles', 'SmallOutputFiles', 'AnalysisFiles', 'IdleFiles', 'AnalyseProgramFiles', 'StatisticsFiles', 'ApiStatisticsFiles', 'LogFiles', 'ABLOutputFiles']
   },
   children: [
     {
@@ -47,6 +47,15 @@ const FileManageRouter = {
       meta: {
         title: 'SmallOutputFiles',
         roles: ['SmallOutputFiles']
+      }
+    },
+    {
+      path: 'abloutputfiles',
+      component: () => import('@/views/FileManage/ABLOutputFiles'),
+      name: 'ABLOutputFiles',
+      meta: {
+        title: 'ABLOutputFiles',
+        roles: ['ABLOutputFiles']
       }
     },
     {

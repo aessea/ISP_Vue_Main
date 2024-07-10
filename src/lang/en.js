@@ -157,6 +157,7 @@ export default {
     AnalysisInputFiles: 'Analysis Input Files', // 分析输入文件
     MainOutputFiles: 'MainBoard Output Files', // 主板输出文件
     SmallOutputFiles: 'SmallBoard Output Files', // 小板输出文件
+    ABLOutputFiles: 'ABLBoard Output Files', // ABL输出文件
     AnalysisFiles: 'Analyse Output Files', // 分析输出文件
     IdleFiles: 'Idle Detail Files', // Idle明细文件
     AnalyseProgramFiles: 'No Program Files', // 无程序清单文件
