@@ -202,6 +202,7 @@ export default {
     TitleComputeBoth: '计算主板和小板', // 计算主板和小板排程
     TitleComputeMain: '计算主板', // 计算主板排程
     TitleComputeSmall: '计算小板', // 计算小板排程
+    TitleComputeABL: '计算ABL', // 计算ABL排程
     ComputeTextStep1: '上传排程文件', // 上传排程
     ComputeTextStep2: '导入排程文件', // 导入排程
     ComputeTextStep3: '更新排程信息', // 更新信息
@@ -211,6 +212,7 @@ export default {
     TextChooseHoliday: '选择一个或多个包装放假日期', // 选择一个或多个包装放假日期
     TextUploadMainFile: '请上传主板排程文件', // 请上传主板排程文件
     TextUploadSmallFile: '请上传主板排程文件', // 请上传小板排程文件
+    TextUploadABLFile: '请上传ABL排程文件', // 请上传ABL排程文件
     TextRefreshUploadTime: '刷新文件上传时间', // 刷新文件上传时间
     // 提示
     TextChooseTrainDate: '选择预测模型日期', // 选择预测模型日期
@@ -230,7 +232,6 @@ export default {
     TextNoNeedStopTabu: '未在计算排程，无需终止！', // 未在计算排程，无需终止！
     TextCurrentTrainDate: '当前模型日期：', // 当前模型日期：
     TextFileTypeError1: '文件命名格式错误，请修改后重新上传！', // 文件命名格式错误，请修改后重新上传！
-    TextFileTypeError2: '（正确文件名示例：0901主板预排）', // （正确文件名示例：0901主板预排）
     TextFailedToGet: '获取失败', // 获取失败
     TextGetMainUploadTime: '获取主板上传文件', // 获取主板上传文件
     TextGetSmallUploadTime: '获取小板上传文件', // 获取小板上传文件
@@ -276,6 +277,7 @@ export default {
     BtnTrainPredictModel: '训练预测模型', // 训练预测模型
     BtnComputeMain: '计算主板排程', // 计算主板排程
     BtnComputeSmall: '计算小板排程', // 计算小板排程
+    BtnComputeABL: '计算ABL排程', // 计算ABL排程
     BtnComputeBoth: '计算主板小板', // 计算主板小板
     BtnEndDeepSearch: '终止深度搜索', // 终止深度搜索
     BtnEndCompute: '终止计算排程', // 终止计算排程
@@ -288,12 +290,14 @@ export default {
     BtnDownloadLog: '下载最新日志', // 下载最新日志
     BtnUploadMain: '上传主板排程', // 上传主板排程
     BtnUploadSmall: '上传小板排程', // 上传小板排程
+    BtnUploadABL: '上传ABL排程', // 上传ABL排程
     BtnImportFile: '导入排程', // 导入排程
     BtnTransferMain: '主板转移扣点', // 主板转移扣点
     BtnTransferSmall: '小板转移扣点', // 小板转移扣点
     BtnTransfer: '转移扣点', // 转移
     BtnExportMain: '导出主板', // 导出主板
     BtnExportSmall: '导出小板', // 导出小板
+    BtnExportABL: '导出ABL', // 导出ABL
     BtnGetMainUpload: '获取主板上传文件', // 获取主板上传文件
     BtnGetSmallUpload: '获取小板上传文件', // 获取小板上传文件
     BtnGetApsProgram: '更新程序信息', // 更新程序信息

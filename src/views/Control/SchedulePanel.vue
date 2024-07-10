@@ -160,6 +160,10 @@
                 </el-button>
               </el-row>
               <el-row class="button-row">
+                <el-button v-if="buttons.includes('SchedulePanel/computeDialogABL')" type="primary" plain @click="computeDialogABL">
+                  <i class="el-icon-monitor" />
+                  {{ $t('SchedulePanelPage.BtnComputeABL') }}
+                </el-button>
                 <el-button v-if="buttons.includes('SchedulePanel/computeDialogBoth')" type="primary" plain @click="computeDialogBoth">
                   <i class="el-icon-monitor" />
                   {{ $t('SchedulePanelPage.BtnComputeBoth') }}
@@ -731,6 +735,103 @@
 
     <el-dialog
       v-el-drag-dialog
+      :title="$t('SchedulePanelPage.TitleComputeABL')"
+      :visible.sync="computeABLDialogVisible"
+      width="50%"
+      :close-on-click-modal="false"
+      :before-close="handleCloseABL"
+      @dragDialog="handleDrag"
+    >
+      <el-steps :active="stepNowABL" finish-status="success" simple>
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep1')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep2')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep3')" />
+        <el-step :title="$t('SchedulePanelPage.ComputeTextStep4')" />
+      </el-steps>
+      <el-row style="margin-top:10px;">
+        <el-col :span="8">
+          <el-input :placeholder="$t('SchedulePanelPage.TextUploadABLFile')" :value="uploadFileNameABL" />
+        </el-col>
+        <el-col :span="16">
+          <el-upload
+            ref="upload"
+            class="upload-demo"
+            action=""
+            accept=".xlsx"
+            :on-change="handleChangeABL"
+            :auto-upload="false"
+            :show-file-list="false"
+            :file-list="uploadFileListABL"
+            style="margin-left: 10px;"
+          >
+            <el-button slot="trigger" type="primary">
+              {{ $t('SchedulePanelPage.BtnUploadABL') }}
+            </el-button>
+            <el-button type="success" style="margin-left:10px;" @click="beforeImportABL">
+              {{ $t('SchedulePanelPage.BtnImportFile') }}
+            </el-button>
+            <el-button type="success" style="margin-left:10px;" @click="beforeDoBucklePoints(uploadFileNameABL)">
+              {{ $t('SchedulePanelPage.BtnTransfer') }}
+            </el-button>
+            <el-button @click="exportScheduleDataABL">
+              {{ $t('SchedulePanelPage.BtnExportABL') }}
+            </el-button>
+          </el-upload>
+        </el-col>
+      </el-row>
+      <el-alert
+        :title="$t('SchedulePanelPage.ComputeTextStep3')"
+        type="info"
+        :closable="false"
+        style="margin-top: 10px;margin-bottom: 10px;"
+      />
+      <el-row>
+        <el-col :span="24">
+          <el-tooltip class="item" effect="dark" :content="apsProgramMsg" placement="top">
+            <el-button type="primary" @click="getApsProgram('abl')">
+              {{ $t('SchedulePanelPage.BtnGetApsProgram') }}
+            </el-button>
+          </el-tooltip>
+          <el-tooltip class="item" effect="dark" :content="apsMtoolMsg" placement="top">
+            <el-button type="primary" @click="getApsMtool('abl')">
+              {{ $t('SchedulePanelPage.BtnGetApsMtool') }}
+            </el-button>
+          </el-tooltip>
+          <el-tooltip class="item" effect="dark" :content="apsMoBaseData" placement="top">
+            <el-button type="primary" @click="getApsMoBaseData('abl')">
+              {{ $t('SchedulePanelPage.BtnGetApsMoBaseData') }}
+            </el-button>
+          </el-tooltip>
+          <el-tooltip class="item" effect="dark" :content="apsMoProgData" placement="top">
+            <el-button type="primary" @click="getApsMoProgData('abl')">
+              {{ $t('SchedulePanelPage.BtnGetApsMoProgData') }}
+            </el-button>
+          </el-tooltip>
+          <!-- <el-tooltip class="item" effect="dark" :content="apsDeliveryDay" placement="top">
+            <el-button type="primary" @click="getApsDeliveryDay('abl')">
+              {{ $t('SchedulePanelPage.BtnGetApsDeliveryDay') }}
+            </el-button>
+          </el-tooltip> -->
+        </el-col>
+      </el-row>
+      <el-alert
+        :title="$t('SchedulePanelPage.ComputeTextStep4')"
+        type="info"
+        :closable="false"
+        style="margin-top: 10px;margin-bottom: 10px;"
+      />
+      <el-button type="primary" @click="beforeComputeABL">
+        {{ $t('SchedulePanelPage.BtnBeginCompute') }}
+      </el-button>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleCloseABL">
+          {{ $t('PublicBtn.Close') }}
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      v-el-drag-dialog
       :title="$t('PublicText.TitleTip')"
       :visible.sync="stopScheduleDialog"
       width="30%"
@@ -755,7 +856,7 @@ import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain,
   GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, ExportMainScheduleData,
   ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday, DownloadUploadFileMain,
   DownloadUploadFileSmall, DoBucklePoints, GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData,
-  DoCheckScheduleData
+  DoCheckScheduleData, ComputeScheduleABL, ExportABLScheduleData
 } from '@/api/Control/SchedulePanel'
 import { GetApsMtool, GetApsMoBaseData, GetApsMoProgData, GetApsProgram, GetApsDeliveryDay
 } from '@/api/Control/DockingMes'
@@ -769,10 +870,12 @@ export default {
 
       computeMainDialogVisible: false, // 计算主板排程dialog
       computeSmallDialogVisible: false, // 计算小板排程dialog
+      computeABLDialogVisible: false, // 计算ABL排程dialog
       computeBothDialogVisible: false, // 计算主板+小板排程dialog
 
       stepNowMain: 0, // 计算主板排程
-      stepNowSmall: 0, // 计算主板排程
+      stepNowSmall: 0, // 计算小板排程
+      stepNowABL: 0, // 计算ABL排程
       stepNowBoth: 0, // 计算主板+小板排程
 
       uploadFileListMain: [], // 主板上传的文件列表
@@ -782,6 +885,10 @@ export default {
       uploadFileListSmall: [], // 小板上传的文件列表
       uploadFileSmall: null, // 小板上传的文件
       uploadFileNameSmall: '', // 小板文件名
+
+      uploadFileListABL: [], // ABL上传的文件列表
+      uploadFileABL: null, // ABL上传的文件
+      uploadFileNameABL: '', // ABL文件名
 
       checkLoading: {
         text: this.$t('PublicText.CheckLoadiing'),
@@ -795,7 +902,8 @@ export default {
       trainDate: new Date(), // 训练预测模型日期
       options_history_excel: [], // 历史排程列表
       isImportMain: false, // 是否上传文件
-      isImportMainSmall: false, // 是否上传小板
+      isImportSmall: false, // 是否上传小板
+      isImportABL: false, // 是否ABL小板
       isImportBoth: false, // 是否上传主板小板
       // 进度条相关
       percentage_1: 0,
@@ -962,6 +1070,10 @@ export default {
     computeDialogSmall() {
       this.computeSmallDialogVisible = true
     },
+    // 计算小板排程
+    computeDialogABL() {
+      this.computeABLDialogVisible = true
+    },
     // 计算主板+小板
     computeDialogBoth() {
       this.computeBothDialogVisible = true
@@ -976,6 +1088,11 @@ export default {
     handleCloseSmall() {
       this.clickComputeCount = 0
       this.computeSmallDialogVisible = false
+    },
+    // 关闭计算ABL
+    handleCloseABL() {
+      this.clickComputeCount = 0
+      this.computeABLDialogVisible = false
     },
     // 关闭计算主板+小板
     handleCloseBoth() {
@@ -1040,6 +1157,35 @@ export default {
         this.doCheckScheduleData(this.uploadFileSmall, this.uploadFileNameSmall)
       }
     },
+    // ABL文件上传钩子
+    handleChangeABL(file, fileList) {
+      const fileName = file.name.replace(/\.xlsx$/, '')
+      let regex, TextFileTypeError2
+      if (sessionStorage.getItem('lang') === 'zh') {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])(ABL)(正排|预排).*$/
+        TextFileTypeError2 = '（正确文件名示例：0901ABL预排）'
+      } else {
+        regex = /^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])_(ABLBoard)_(Preliminary|Regular).*$/
+        TextFileTypeError2 = '(Example of correct file name: 0901_ABLBoard_Regular.xlsx)'
+      }
+      if (!regex.test(fileName)) {
+        const tip = this.$t('SchedulePanelPage.TextFileTypeError1') + `<br/>` + TextFileTypeError2
+        this.$alert(tip, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
+          dangerouslyUseHTMLString: true,
+          type: 'error'
+        })
+        return
+      }
+      if (file.status === 'ready') {
+        if (fileList.length > 0) {
+          this.uploadFileListABL = [fileList[fileList.length - 1]] // 选择最后一次选择文件
+          this.uploadFileNameABL = this.uploadFileListABL[0].name // 更新文件名
+          this.uploadFileABL = this.uploadFileListABL[0].raw // 更新文件
+        }
+        this.doCheckScheduleData(this.uploadFileABL, this.uploadFileNameABL)
+      }
+    },
     // 检查
     async doCheckScheduleData(uploadFile, uploadFileName) {
       this.loadingInstance = Loading.service(this.checkLoading)
@@ -1062,9 +1208,14 @@ export default {
         }
         if (this.uploadFileNameMain !== '') {
           this.stepNowMain = 1
-        } else if (this.uploadFileListSmall !== '') {
+        }
+        if (this.uploadFileNameSmall !== '') {
           this.stepNowSmall = 1
-        } else if (this.uploadFileNameMain !== '' && this.uploadFileNameSmall !== '') {
+        }
+        if (this.uploadFileNameABL !== '') {
+          this.stepNowABL = 1
+        }
+        if (this.uploadFileNameMain !== '' && this.uploadFileNameSmall !== '') {
           this.stepNowBoth = 1
         }
         this.loadingInstance.close()
@@ -1173,6 +1324,7 @@ export default {
     updateApiStepMsg() {
       this.stepNowBoth = 3
       this.stepNowMain = 3
+      this.stepNowABL = 3
       this.stepNowSmall = 3
     },
     // 导入主板前判断是否在跑排程
@@ -1427,6 +1579,125 @@ export default {
         }
       })
     },
+    // 导入ABL前判断是否在跑排程
+    beforeImportABL() {
+      if (this.uploadFileNameSmall === '') {
+        this.$message({
+          type: 'warning',
+          message: this.$t('SchedulePanelPage.TextComputeTip1')
+        })
+        return
+      }
+      GetRunFlag().then(res => {
+        var confirmText
+        if (res.run_flag === 1) {
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip3'), this.$t('SchedulePanelPage.TextComputeTip2')]
+        } else if (res.ana_run_flag === 1) {
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip4'), this.$t('SchedulePanelPage.TextComputeTip2')]
+        } else {
+          confirmText = [this.$t('SchedulePanelPage.TextComputeTip5'), this.$t('SchedulePanelPage.TextComputeTip2')]
+        }
+        const newDatas = []
+        const h = this.$createElement
+        for (const i in confirmText) {
+          newDatas.push(h('p', null, confirmText[i]))
+        }
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
+            message: h('div', null, newDatas),
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueImport'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
+            confirmButtonClass: 'btnDanger',
+            type: 'warning'
+          }).then(() => {
+            this.submitUploadFile(3)
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: this.$t('PublicText.TextCancel')
+            })
+          })
+        } else {
+          this.submitUploadFile(3)
+        }
+      })
+    },
+    // 计算ABL前判断是否在跑排程
+    beforeComputeABL() {
+      if (this.isImportABL === false) {
+        this.$message({
+          type: 'warning',
+          message: this.$t('SchedulePanelPage.TextComputeTip7')
+        })
+        return
+      }
+      if (this.clickComputeCount >= 1) {
+        this.$message({
+          type: 'warning',
+          message: this.$t('SchedulePanelPage.TextComputeTip8')
+        })
+        return
+      }
+      const confirmText = [this.$t('SchedulePanelPage.TextComputeTip9'), this.$t('SchedulePanelPage.TextComputeTip10')]
+      const newDatas = []
+      const h = this.$createElement
+      for (const i in confirmText) {
+        newDatas.push(h('p', null, confirmText[i]))
+      }
+      GetRunFlag().then(res => {
+        if (res.run_flag === 1 || res.ana_run_flag === 1) {
+          this.$confirm(this.$t('PublicText.TextWarn'), {
+            title: this.$t('PublicText.TextWarn'),
+            message: h('div', null, newDatas),
+            confirmButtonText: this.$t('SchedulePanelPage.BtnContinueCompute'),
+            cancelButtonText: this.$t('PublicBtn.Cancel'),
+            confirmButtonClass: 'btnDanger',
+            type: 'warning'
+          }).then(() => {
+            this.computeScheduleABL()
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: this.$t('PublicText.TextCancel')
+            })
+          })
+        } else {
+          this.computeScheduleABL()
+        }
+      })
+    },
+    // 开始计算ABL排程
+    computeScheduleABL() {
+      this.clickComputeCount = 1
+      this.listenProgress()
+      var is_click_apsMoProgData
+      if (this.apsMoProgData === this.$t('PublicText.MesApiNotUpdate')) {
+        is_click_apsMoProgData = true
+      } else {
+        is_click_apsMoProgData = false
+      }
+      const data = {
+        'file_name_abl': this.uploadFileNameABL,
+        'user_name': this.name,
+        'is_click_apsMoProgData': is_click_apsMoProgData
+      }
+      ComputeScheduleABL(data).then(res => {
+        if (res.code === 20000) {
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+          this.stepNowABL = 4
+          this.refreshComputeShow(res)
+        } else {
+          this.$message({
+            message: this.$t('SchedulePanelPage.TextComputeTip11'),
+            type: 'error'
+          })
+        }
+      })
+    },
     // 导入排程
     async submitUploadFile(mode) {
       this.clickComputeCount = 0
@@ -1436,6 +1707,8 @@ export default {
         form['file_name'] = this.uploadFileNameMain
       } else if (mode === 2) {
         form['file_name'] = this.uploadFileNameSmall
+      } else if (mode === 3) {
+        form['file_name'] = this.uploadFileNameABL
       } else {
         return
       }
@@ -1451,6 +1724,9 @@ export default {
         } else if (mode === 2) {
           this.stepNowSmall = 2
           this.isImportSmall = true
+        } else if (mode === 3) {
+          this.stepNowABL = 2
+          this.isImportABL = true
         }
         this.clearUpdateMag()
       }).catch(err => {
@@ -1635,6 +1911,14 @@ export default {
           })
           return
         }
+      } else if (mode === 'abl') {
+        if (this.isImportABL === false) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
+          })
+          return
+        }
       } else if (mode === 'both') {
         if (this.isImportBoth === false) {
           this.$message({
@@ -1670,6 +1954,8 @@ export default {
               this.stepNowMain = 3
             } else if (mode === 'small') {
               this.stepNowSmall = 3
+            } else if (mode === 'abl') {
+              this.stepNowABL = 3
             } else if (mode === 'both') {
               this.stepNowBoth = 3
             }
@@ -1721,6 +2007,14 @@ export default {
           })
           return
         }
+      } else if (mode === 'abl') {
+        if (this.isImportABL === false) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
+          })
+          return
+        }
       } else if (mode === 'both') {
         if (this.isImportBoth === false) {
           this.$message({
@@ -1756,6 +2050,8 @@ export default {
               this.stepNowMain = 3
             } else if (mode === 'small') {
               this.stepNowSmall = 3
+            } else if (mode === 'abl') {
+              this.stepNowABL = 3
             } else if (mode === 'both') {
               this.stepNowBoth = 3
             }
@@ -1807,6 +2103,14 @@ export default {
           })
           return
         }
+      } else if (mode === 'abl') {
+        if (this.isImportABL === false) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
+          })
+          return
+        }
       } else if (mode === 'both') {
         if (this.isImportBoth === false) {
           this.$message({
@@ -1842,6 +2146,8 @@ export default {
               this.stepNowMain = 3
             } else if (mode === 'small') {
               this.stepNowSmall = 3
+            } else if (mode === 'abl') {
+              this.stepNowABL = 3
             } else if (mode === 'both') {
               this.stepNowBoth = 3
             }
@@ -1893,6 +2199,14 @@ export default {
           })
           return
         }
+      } else if (mode === 'abl') {
+        if (this.isImportABL === false) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
+          })
+          return
+        }
       } else if (mode === 'both') {
         if (this.isImportBoth === false) {
           this.$message({
@@ -1928,6 +2242,8 @@ export default {
               this.stepNowMain = 3
             } else if (mode === 'small') {
               this.stepNowSmall = 3
+            } else if (mode === 'abl') {
+              this.stepNowABL = 3
             } else if (mode === 'both') {
               this.stepNowBoth = 3
             }
@@ -1979,6 +2295,14 @@ export default {
           })
           return
         }
+      } else if (mode === 'abl') {
+        if (this.isImportABL === false) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('SchedulePanelPage.TextApiUploadTip3')
+          })
+          return
+        }
       } else if (mode === 'both') {
         if (this.isImportBoth === false) {
           this.$message({
@@ -2014,6 +2338,8 @@ export default {
               this.stepNowMain = 3
             } else if (mode === 'small') {
               this.stepNowSmall = 3
+            } else if (mode === 'abl') {
+              this.stepNowABL = 3
             } else if (mode === 'both') {
               this.stepNowBoth = 3
             }
@@ -2079,6 +2405,29 @@ export default {
         return
       }
       ExportSmallScheduleData().then(res => {
+        this.downloadFile(res)
+        this.$message({
+          message: this.$t('Msg.BeginDownload'),
+          type: 'success'
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$message({
+          message: this.$t('SchedulePanelPage.TextExportTip2'),
+          type: 'error'
+        })
+      })
+    },
+    // 导出ABL
+    exportScheduleDataABL() {
+      if (!this.isImportSmall && !this.isImportBoth) {
+        this.$message({
+          message: this.$t('SchedulePanelPage.TextExportTip1'),
+          type: 'warning'
+        })
+        return
+      }
+      ExportABLScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
           message: this.$t('Msg.BeginDownload'),

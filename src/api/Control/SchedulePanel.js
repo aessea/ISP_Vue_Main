@@ -54,6 +54,14 @@ export function ComputeScheduleSmall(data) {
     data
   })
 }
+export function ComputeScheduleABL(data) {
+  return request({
+    url: `/${API_URL_FIRST}/${API_URL_SECOND}/compute_schedule_abl/`,
+    method: 'post',
+    timeout: 100 * 60 * 1000,
+    data
+  })
+}
 export function ComputeScheduleBoth(data) {
   return request({
     url: `/${API_URL_FIRST}/${API_URL_SECOND}/compute_schedule_both/`,
@@ -168,6 +176,14 @@ export function ExportSmallScheduleData(data) {
   return request({
     method: 'get',
     url: '/schedule/api/exportSmallScheduleData',
+    responseType: 'blob'
+  })
+}
+// 导出ABL接口
+export function ExportABLScheduleData(data) {
+  return request({
+    method: 'get',
+    url: '/schedule/api/exportABLScheduleData',
     responseType: 'blob'
   })
 }

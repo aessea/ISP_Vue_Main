@@ -202,6 +202,7 @@ export default {
     TitleComputeBoth: 'Calculate MainBoard and SmallBoard', // 计算主板和小板排程
     TitleComputeMain: 'Calculate MainBoard', // 计算主板排程
     TitleComputeSmall: 'Calculate SmallBoard', // 计算小板排程
+    TitleComputeABL: 'Calculate ABLBoard', // 计算ABL排程
     ComputeTextStep1: 'Upload File', // 上传排程
     ComputeTextStep2: 'Import File', // 导入排程
     ComputeTextStep3: 'Update File', // 更新信息
@@ -211,6 +212,7 @@ export default {
     TextChooseHoliday: 'Select one or more holiday dates', // 选择一个或多个包装放假日期
     TextUploadMainFile: 'Please upload MainBoard file', // 请上传主板排程文件
     TextUploadSmallFile: 'Please upload SmallBoard file', // 请上传小板排程文件
+    TextUploadABLFile: 'Please upload ABLBoard file', // 请上传ABL排程文件
     TextRefreshUploadTime: 'Refresh File Upload Time', // 刷新文件上传时间
     // 提示
     TextChooseTrainDate: 'Select train date', // 选择预测模型日期
@@ -230,7 +232,6 @@ export default {
     TextNoNeedStopTabu: 'No need to terminate if you are not calculating the schedule!', // 未在计算排程，无需终止！
     TextCurrentTrainDate: 'Current Model Date:', // 当前模型日期：
     TextFileTypeError1: 'The file name format is wrong, please modify it and upload it again!', // 文件命名格式错误，请修改后重新上传！
-    TextFileTypeError2: '(Example of correct file name: 0701 MainBoard Regular.xlsx)', // （正确文件名示例：0901主板预排）
     TextFailedToGet: 'Failed to get', // 获取失败
     TextGetMainUploadTime: 'Get Main Upload File', // 获取主板上传文件
     TextGetSmallUploadTime: 'Get Small Upload File', // 获取小板上传文件
@@ -276,6 +277,7 @@ export default {
     BtnTrainPredictModel: 'Train Predict Model', // 训练预测模型
     BtnComputeMain: 'Calculate MainBoard', // 计算主板排程
     BtnComputeSmall: 'Calculate SmallBoard', // 计算小板排程
+    BtnComputeABL: 'Calculate ABLBoard', // 计算ABL排程
     BtnComputeBoth: 'Calculate BothBoard', // 计算主板小板
     BtnEndDeepSearch: 'Stop DeepSearch', // 终止深度搜索
     BtnEndCompute: 'Stop Calculate', // 终止计算排程
@@ -288,6 +290,7 @@ export default {
     BtnDownloadLog: 'Log File', // 下载最新日志
     BtnUploadMain: 'Upload File', // 上传主板排程
     BtnUploadSmall: 'Upload File', // 上传小板排程
+    BtnUploadABL: 'Upload File', // 上传ABL排程
     BtnImportFile: 'Import File', // 导入排程
     BtnTransferMain: 'Transfer Main', // 主板转移扣点
     BtnTransferSmall: 'Transfer Small', // 小板转移扣点
