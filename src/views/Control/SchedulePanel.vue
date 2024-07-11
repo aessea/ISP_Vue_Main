@@ -856,7 +856,7 @@ import { GetProgress, TrainModel, ImportSchedule, ComputeScheduleMain,
   GetRunFlag, StopTabu, GeScheduleRes, StopSchedule, ExportMainScheduleData,
   ImportScheduleBoth, ComputeScheduleSmall, ModifyHoliday, DownloadUploadFileMain,
   DownloadUploadFileSmall, DoBucklePoints, GetUploadFileTime, ComputeScheduleBoth, ExportSmallScheduleData,
-  DoCheckScheduleData, ComputeScheduleABL, ExportABLScheduleData
+  DoCheckScheduleData, ComputeScheduleABL
 } from '@/api/Control/SchedulePanel'
 import { GetApsMtool, GetApsMoBaseData, GetApsMoProgData, GetApsProgram, GetApsDeliveryDay
 } from '@/api/Control/DockingMes'
@@ -1581,7 +1581,7 @@ export default {
     },
     // 导入ABL前判断是否在跑排程
     beforeImportABL() {
-      if (this.uploadFileNameSmall === '') {
+      if (this.uploadFileNameABL === '') {
         this.$message({
           type: 'warning',
           message: this.$t('SchedulePanelPage.TextComputeTip1')
@@ -2427,7 +2427,7 @@ export default {
         })
         return
       }
-      ExportABLScheduleData().then(res => {
+      ExportMainScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
           message: this.$t('Msg.BeginDownload'),
