@@ -201,7 +201,7 @@
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="smtPrescheduledTip" placement="top">
             <el-button type="apiBtn" @click="post_pre_scheduled">
-              {{ $t('PubAnalysisControlPagelicBtn.BtnPushSMTPre') }}
+              {{ $t('AnalysisControlPage.BtnPushSMTPre') }}
             </el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" :content="smtScheduledTip" placement="top">
