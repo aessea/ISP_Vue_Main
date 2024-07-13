@@ -23,6 +23,13 @@ export default {
   },
   created() {
     this.language = this.$i18n.locale === 'zh' ? '中文' : 'English'
+    let temp_language
+    if (this.language === '中文') {
+      temp_language = 'zh'
+    } else {
+      temp_language = 'en'
+    }
+    sessionStorage.setItem('lang', temp_language)
   },
   methods: {
     // 根据下拉框的中被选中的值切换语言
