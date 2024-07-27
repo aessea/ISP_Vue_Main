@@ -36,12 +36,13 @@ export default {
         }
         sessionStorage.setItem('lang', res.language_code)
       }).catch(err => {
+        console.log(err)
         // 获取失败则默认设置为中文
         this.language = '中文'
         sessionStorage.setItem('lang', 'zh')
         this.$message({
-          type: 'error',
-          message: err
+          type: 'info',
+          message: '默认设置为中文'
         })
       })
     },
