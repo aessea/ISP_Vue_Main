@@ -141,7 +141,7 @@ export default {
     this.getCalendarData()
   },
   mounted() {
-    this.drawCharts(7)
+    // this.drawCharts(7)
   },
   methods: {
     // 一些快捷路由跳转

@@ -41,3 +41,10 @@ export function SwitchLanguage(data) {
     data
   })
 }
+// 获取语言
+export function GetLanguage() {
+  return request({
+    url: `/${API_URL_FIRST}/get_language_code/`,
+    method: 'get'
+  })
+}

@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import { SwitchLanguage } from '@/api/common'
+import { SwitchLanguage, GetLanguage } from '@/api/common'
 export default {
   name: 'LanguageSelect',
   data() {
@@ -22,22 +22,35 @@ export default {
     }
   },
   created() {
-    this.language = this.$i18n.locale === 'zh' ? '中文' : 'English'
-    let temp_language
-    if (this.language === '中文') {
-      temp_language = 'zh'
-    } else {
-      temp_language = 'en'
-    }
-    sessionStorage.setItem('lang', temp_language)
+    this.getLanguage()
+    // this.language = this.$i18n.locale === 'zh' ? '中文' : 'English'
   },
   methods: {
+    // 获取语言
+    getLanguage() {
+      GetLanguage().then(res => {
+        if (res.language_code === 'zh') {
+          this.language = '中文'
+        } else {
+          this.language = 'English'
+        }
+        sessionStorage.setItem('lang', res.language_code)
+      }).catch(err => {
+        // 获取失败则默认设置为中文
+        this.language = '中文'
+        sessionStorage.setItem('lang', 'zh')
+        this.$message({
+          type: 'error',
+          message: err
+        })
+      })
+    },
     // 根据下拉框的中被选中的值切换语言
     handleCommand(command) {
       if (command === 'zh') {
-        this.lang = '中文'
+        this.language = '中文'
       } else {
-        this.lang = 'English'
+        this.language = 'English'
       }
       const data = {
         'lang': command
