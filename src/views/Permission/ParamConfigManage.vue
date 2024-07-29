@@ -349,7 +349,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="modifyData">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="modifyData">{{ $t('PublicBtn.Confirm') }}</el-button>
       </span>
     </el-dialog>
 
