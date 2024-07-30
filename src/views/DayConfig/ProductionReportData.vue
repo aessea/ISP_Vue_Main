@@ -532,11 +532,11 @@ export default {
           message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
-        package_line: [{
-          required: true,
-          message: this.$t('Form.NotNull'),
-          trigger: 'blur'
-        }],
+        // package_line: [{
+        //   required: true,
+        //   message: this.$t('Form.NotNull'),
+        //   trigger: 'blur'
+        // }],
         single_hand_insert_points: [],
         total_points: [{
           required: true,
@@ -548,11 +548,11 @@ export default {
           message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
-        product_type: [{
-          required: true,
-          message: this.$t('Form.NotNull'),
-          trigger: 'blur'
-        }],
+        // product_type: [{
+        //   required: true,
+        //   message: this.$t('Form.NotNull'),
+        //   trigger: 'blur'
+        // }],
         machine_name: [{
           required: true,
           message: this.$t('Form.NotNull'),
@@ -649,21 +649,21 @@ export default {
           message: this.$t('Form.NotNull'),
           trigger: 'blur'
         }],
-        factory: [{
-          required: true,
-          message: this.$t('Form.NotNull'),
-          trigger: 'blur'
-        }],
-        package_product_type: [{
-          required: true,
-          message: this.$t('Form.NotNull'),
-          trigger: 'blur'
-        }],
-        SMT_product_type: [{
-          required: true,
-          message: this.$t('Form.NotNull'),
-          trigger: 'blur'
-        }],
+        // factory: [{
+        //   required: true,
+        //   message: this.$t('Form.NotNull'),
+        //   trigger: 'blur'
+        // }],
+        // package_product_type: [{
+        //   required: true,
+        //   message: this.$t('Form.NotNull'),
+        //   trigger: 'blur'
+        // }],
+        // SMT_product_type: [{
+        //   required: true,
+        //   message: this.$t('Form.NotNull'),
+        //   trigger: 'blur'
+        // }],
         setup_type: [{
           required: true,
           message: this.$t('Form.NotNull'),
