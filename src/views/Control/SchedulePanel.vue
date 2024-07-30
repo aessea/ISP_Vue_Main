@@ -217,21 +217,21 @@
                     :closable="false"
                   />
                   <el-row class="button-row">
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadMain') }}
                     </el-button>
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
                     </el-button>
                   </el-row>
                   <el-row class="button-row">
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
                     </el-button>
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
                     </el-button>
@@ -239,19 +239,19 @@
                   <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadMain') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
                         </el-button>
@@ -261,7 +261,7 @@
                   <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
                         </el-button>
@@ -280,21 +280,21 @@
                     :closable="false"
                   />
                   <el-row class="button-row">
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadSmall') }}
                     </el-button>
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
                     </el-button>
                   </el-row>
                   <el-row class="button-row">
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
                     </el-button>
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
                     </el-button>
@@ -302,19 +302,19 @@
                   <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('result_file_path_small')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadSmall') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_small')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
                         </el-button>
                       </el-col>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('statistics_file_path_small')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
                         </el-button>
@@ -324,7 +324,7 @@
                   <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('no_program_file_path_small')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
                         </el-button>
@@ -343,7 +343,7 @@
                     :closable="false"
                   />
                   <el-row class="button-row">
-                    <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('log_file_path')">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('log_file_path')">
                       <i class="el-icon-download" />
                       {{ $t('SchedulePanelPage.BtnDownloadLog') }}
                     </el-button>
@@ -351,7 +351,7 @@
                   <!-- <div class="box-button">
                     <el-row>
                       <el-col :span="8">
-                        <el-button v-if="buttons.includes('SchedulePanel/download')" type="primary" plain @click="downloadFileBackend('log_file_path')">
+                        <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('log_file_path')">
                           <i class="el-icon-download" />
                           {{ $t('SchedulePanelPage.BtnDownloadLog') }}
                         </el-button>
