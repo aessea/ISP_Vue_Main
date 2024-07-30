@@ -165,21 +165,6 @@
       </span>
     </el-dialog>
 
-    <!-- <el-dialog
-      v-el-drag-dialog
-      title="用户权限管理说明"
-      :visible.sync="helpDialogVisible"
-      width="60%"
-      @dragDialog="handleDrag"
-    >
-      <p>超级管理员：拥有最高权限，支持管理所有表格和用户</p>
-      <p>普通管理员：支持管理所有表格，但无法管理用户</p>
-      <p>程序员：仅支持对程序表进行操作</p>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
-      </span>
-    </el-dialog> -->
-
     <el-dialog
       v-el-drag-dialog
       :title="$t('UserManagePage.ModifyPwd')"

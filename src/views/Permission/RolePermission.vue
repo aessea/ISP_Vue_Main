@@ -56,7 +56,7 @@
             <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" :content="$t('UserManagePage.ViewOrModifyInfo')" placement="top">
                 <el-button
-                  v-if="handleModifyRoleInfoDisable === true && scope.row.role_name !== '超级管理员'"
+                  v-if="handleModifyRoleInfoDisable === true && scope.row.modify_enable === true"
                   type="primary"
                   size="mini"
                   icon="el-icon-edit-outline"
@@ -66,7 +66,7 @@
               </el-tooltip>
               <el-tooltip class="item" effect="dark" :content="$t('RolePermissionPage.DeleteRole')" placement="top">
                 <el-button
-                  v-if="handleDeleteRoleDisable === true && scope.row.role_name !== '超级管理员'"
+                  v-if="handleDeleteRoleDisable === true && scope.row.modify_enable === true"
                   type="danger"
                   size="mini"
                   icon="el-icon-delete"
@@ -279,8 +279,10 @@ export default {
       this.role_data_value = []
       this.row_id = row['id']
       for (const key in row['role_menus']) {
+        console.log(row['role_menus'][key])
         this.role_data_value.push(this.menu_role_dict[row['role_menus'][key]])
       }
+      console.log('')
       // 显示dialog
       this.dataDialogVisible = true
       this.isClick = false
