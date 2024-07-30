@@ -4,13 +4,13 @@
       <el-row>
         <el-col :span="16">
           <div>
-            <el-button v-if="buttons.includes('AnalysisInputFiles/delete')" type="danger" @click="deleteFiles">
+            <el-button v-if="buttons.includes('AnalysisInputFiles/deleteFile')" type="danger" @click="deleteFiles">
               <i class="el-icon-delete" />{{ this.$t('FileDataPage.BtnDeleteFile') }}
             </el-button>
-            <el-button v-if="buttons.includes('AnalysisInputFiles/deleteOld')" type="danger" @click="filterDataDialog">
+            <el-button v-if="buttons.includes('AnalysisInputFiles/deleteBulkFiles')" type="danger" @click="filterDataDialog">
               <i class="el-icon-delete" />{{ this.$t('FileDataPage.BtnDeleteBulkFiles') }}
             </el-button>
-            <el-button v-if="buttons.includes('AnalysisInputFiles/reset')" type="primary" @click="resetAllFileList">
+            <el-button v-if="buttons.includes('AnalysisInputFiles/resetFileList')" type="primary" @click="resetAllFileList">
               <i class="el-icon-refresh" />{{ this.$t('FileDataPage.BtnResetFilesList') }}
             </el-button>
           </div>
@@ -55,7 +55,7 @@
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
-                v-if="buttons.includes('AnalysisInputFiles/download')"
+                v-if="buttons.includes('AnalysisInputFiles/downloadFile')"
                 type="primary"
                 size="mini"
                 icon="el-icon-download"
