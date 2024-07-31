@@ -530,7 +530,7 @@ export default {
   // 角色管理
   RolePermissionPage: {
     role_name: 'Role Name', // 角色名称
-    role_menus: 'Enable Pages', // 可访问的页面
+    enable_menu_list: 'Enable Pages', // 可访问的页面
     CreateRole: 'Create Role', // 创建角色
     DeleteRole: 'Delete Role', // 删除角色
     PleInputRoleName: 'Please input role name', // 请输入角色名称
@@ -546,8 +546,8 @@ export default {
   ButtonPermissionPage: {
     SearchRoleName: 'Search role name', // 搜索角色名称
     role_name: 'Role Name', // 角色名称
-    menu_name_front: 'Menu Name', // 菜单名
-    has_permission_buttons_front: 'Buttons with permissions', // 拥有权限的按钮
+    menu_name: 'Menu Name', // 菜单名
+    enable_button_list: 'Buttons with permissions', // 拥有权限的按钮
     ModifyBtnPer: 'Modify Button Permission', // 修改按钮权限
     ButtonPerSet: 'Button permission settings', // 按钮权限设置
     ConfirmModRole: 'Are you sure you want to modify button permissions?', // 确定要修改按钮权限？

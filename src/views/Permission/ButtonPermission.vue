@@ -5,7 +5,7 @@
         <el-col :span="16">
           <el-select v-model="roleNameValue" :placeholder="$t('ButtonPermissionPage.SearchRoleName')" clearable>
             <el-option
-              v-for="item in role_name_list"
+              v-for="item in all_role_name_list"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -50,12 +50,12 @@
           :cell-style="{padding: '3px'}"
           stripe
         >
-          <el-table-column prop="role_name" :label="$t('ButtonPermissionPage.role_name')" width="200" />
-          <el-table-column prop="menu_name_front" :label="$t('ButtonPermissionPage.menu_name_front')" width="280" />
-          <el-table-column prop="has_permission_buttons_front" :label="$t('ButtonPermissionPage.has_permission_buttons_front')">
+          <el-table-column prop="role_name_display" :label="$t('ButtonPermissionPage.role_name')" width="200" />
+          <el-table-column prop="menu_name_display" :label="$t('ButtonPermissionPage.menu_name')" width="280" />
+          <el-table-column prop="enable_button_list" :label="$t('ButtonPermissionPage.enable_button_list')">
             <template slot-scope="scope">
               <el-tag
-                v-for="(val, key) in scope.row.has_permission_buttons_front"
+                v-for="(val, key) in scope.row.enable_button_list"
                 :key="key"
                 style="margin-right: 5px;"
               >
@@ -109,8 +109,8 @@
       width="60%"
       @dragDialog="handleDrag"
     >
-      <el-checkbox-group v-model="data_dict.has_permission_buttons_front">
-        <el-checkbox v-for="button_permission in data_dict.all_permission_buttons_list" :key="button_permission.index" :label="button_permission" />
+      <el-checkbox-group v-model="data_dict.enable_button_list">
+        <el-checkbox v-for="button_permission in data_dict.all_enable_button_list" :key="button_permission.index" :label="button_permission" />
       </el-checkbox-group>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="modifyButton">{{ $t('PublicBtn.ConfirmModify') }}</el-button>
@@ -134,7 +134,7 @@ export default {
       loadingInstance: null,
       table_data: [], // 表格数据
       // helpDialogVisible: false, // 帮助提示dialog
-      role_name_list: [],
+      all_role_name_list: [],
       // 分页相关
       total_num: 0,
       pageSize: 30,
@@ -145,12 +145,12 @@ export default {
       // 权限修改相关
       data_dict: {
         row_id: -1,
-        role_name: '',
+        role_name_display: '',
         menu_name: '',
-        menu_name_front: '',
-        all_permission_buttons_list: [],
+        menu_name_display: '',
+        all_enable_button_list: [],
         has_permission_buttons: [],
-        has_permission_buttons_front: []
+        enable_button_list: []
       }
     }
   },
@@ -189,7 +189,7 @@ export default {
           if (res.code === 20000) {
             this.table_data = res.table_data
             this.total_num = res.total_num
-            this.role_name_list = res.role_name_list
+            this.all_role_name_list = res.all_role_name_list
             this.loading = false
           }
         })
@@ -203,7 +203,7 @@ export default {
           if (res.code === 20000) {
             this.table_data = res.table_data
             this.total_num = res.total_num
-            this.role_name_list = res.role_name_list
+            this.all_role_name_list = res.all_role_name_list
             this.loading = false
           }
         })
@@ -219,12 +219,11 @@ export default {
     handleModifyButton(index, row) {
       this.buttonpDialogVisible = true
       this.data_dict.has_permission_buttons = row.has_permission_buttons
-      this.data_dict.has_permission_buttons_front = row.has_permission_buttons_front
-      this.data_dict.all_permission_buttons_list = row.all_permission_buttons_list
+      this.data_dict.enable_button_list = row.enable_button_list
+      this.data_dict.all_enable_button_list = row.all_enable_button_list
       this.data_dict.row_id = row.id
-      this.data_dict.role_name = row.role_name
-      this.data_dict.menu_name = row.menu_name
-      this.data_dict.menu_name_front = row.menu_name_front
+      this.data_dict.role_name_display = row.role_name_display
+      this.data_dict.menu_name_display = row.menu_name_display
     },
     modifyButton() {
       this.$confirm(this.$t('ButtonPermissionPage.ConfirmModRole'), this.$t('PublicText.TitleTip'), {

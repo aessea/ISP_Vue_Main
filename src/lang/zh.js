@@ -531,7 +531,7 @@ export default {
   // 角色管理
   RolePermissionPage: {
     role_name: '角色名称', // 角色名称
-    role_menus: '可访问的页面', // 可访问的页面
+    enable_menu_list: '可访问的页面', // 可访问的页面
     CreateRole: '创建角色', // 创建角色
     DeleteRole: '删除角色', // 删除角色
     PleInputRoleName: '请输入角色名称', // 请输入角色名称
@@ -547,8 +547,8 @@ export default {
   ButtonPermissionPage: {
     SearchRoleName: '搜索角色名称', // 搜索角色名称
     role_name: '角色名称', // 角色名称
-    menu_name_front: '菜单名', // 菜单名
-    has_permission_buttons_front: '拥有权限的按钮', // 拥有权限的按钮
+    menu_name: '菜单名', // 菜单名
+    enable_button_list: '拥有权限的按钮', // 拥有权限的按钮
     ModifyBtnPer: '修改按钮权限', // 修改按钮权限
     ButtonPerSet: '按钮权限设置', // 按钮权限设置
     ConfirmModRole: '确定要修改按钮权限？', // 确定要修改按钮权限？

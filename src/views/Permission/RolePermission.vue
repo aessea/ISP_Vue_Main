@@ -41,10 +41,10 @@
           stripe
         >
           <el-table-column prop="role_name" :label="$t('RolePermissionPage.role_name')" width="160" />
-          <el-table-column prop="role_menus" :label="$t('RolePermissionPage.role_menus')">
+          <el-table-column prop="enable_menu_list" :label="$t('RolePermissionPage.enable_menu_list')">
             <template slot-scope="scope">
               <el-tag
-                v-for="(val, key) in scope.row.role_menus"
+                v-for="(val, key) in scope.row.enable_menu_list"
                 :key="key"
                 style="margin-right: 5px;"
               >
@@ -56,7 +56,7 @@
             <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" :content="$t('UserManagePage.ViewOrModifyInfo')" placement="top">
                 <el-button
-                  v-if="handleModifyRoleInfoDisable === true && scope.row.modify_enable === true"
+                  v-if="handleModifyRoleInfoDisable === true"
                   type="primary"
                   size="mini"
                   icon="el-icon-edit-outline"
@@ -66,7 +66,7 @@
               </el-tooltip>
               <el-tooltip class="item" effect="dark" :content="$t('RolePermissionPage.DeleteRole')" placement="top">
                 <el-button
-                  v-if="handleDeleteRoleDisable === true && scope.row.modify_enable === true"
+                  v-if="handleDeleteRoleDisable === true"
                   type="danger"
                   size="mini"
                   icon="el-icon-delete"
@@ -120,7 +120,7 @@
     >
       <div class="transfer-dev">
         <el-transfer
-          v-model="role_data_value"
+          v-model="select_enable_menu_list"
           style="text-align: left; display: inline-block"
           :left-default-checked="role_data_left"
           :right-default-checked="role_data_right"
@@ -163,7 +163,7 @@ export default {
   directives: { elDragDialog },
   data() {
     return {
-      role_data_value: [],
+      select_enable_menu_list: [],
       role_data_list: [],
       role_data_left: [],
       role_data_right: [],
@@ -208,13 +208,13 @@ export default {
       this.role_name_backend_to_front()
     },
     role_name_backend_to_front() {
-      for (const key in this.role_data_value) {
-        this.input_role_data_list.push(this.role_menu_dict[this.role_data_value[key]])
+      for (const key in this.select_enable_menu_list) {
+        this.input_role_data_list.push(this.role_menu_dict[this.select_enable_menu_list[key]])
       }
     },
     handleRolePermissionClose() {
       this.rolePermissionDialogVisible = false
-      this.role_data_value = []
+      this.select_enable_menu_list = []
       this.input_role_data_list = []
     },
     // 获取所有用户信息
@@ -244,7 +244,7 @@ export default {
       this.dataDialogVisible = true
       this.isClick = false
       this.input_role_name = ''
-      this.role_data_value = []
+      this.select_enable_menu_list = []
       this.input_role_data_list = []
     },
     // 创建用户
@@ -253,7 +253,7 @@ export default {
       const data = {
         'id': this.row_id,
         'role_name': this.input_role_name,
-        'role_menu_list': this.role_data_value
+        'enable_menu_list': this.select_enable_menu_list
       }
       CreateRole(data).then(res => {
         if (res.code === 20000) {
@@ -275,12 +275,12 @@ export default {
       this.dialogTitle = this.$t('UserManagePage.ViewOrModifyInfo')
       this.createOrModify = false
       this.input_role_name = row['role_name']
-      this.input_role_data_list = row['role_menus']
-      this.role_data_value = []
+      this.input_role_data_list = row['enable_menu_list']
+      this.select_enable_menu_list = []
       this.row_id = row['id']
-      for (const key in row['role_menus']) {
-        console.log(row['role_menus'][key])
-        this.role_data_value.push(this.menu_role_dict[row['role_menus'][key]])
+      for (const key in row['enable_menu_list']) {
+        console.log(row['enable_menu_list'][key])
+        this.select_enable_menu_list.push(this.menu_role_dict[row['enable_menu_list'][key]])
       }
       console.log('')
       // 显示dialog
@@ -293,7 +293,7 @@ export default {
       const data = {
         'id': this.row_id,
         'role_name': this.input_role_name,
-        'role_menu_list': this.role_data_value
+        'enable_menu_list': this.select_enable_menu_list
       }
       ModifyRoleInfo(data).then(res => {
         if (res.code === 20000) {

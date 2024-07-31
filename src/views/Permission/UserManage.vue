@@ -452,7 +452,7 @@ export default {
           ModifyUserPassword(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
-                title: this.$t('UserManagePage.ModifySuccess'),
+                title: this.$t('PublicText.ModifySuccess'),
                 message: res.message,
                 type: 'success'
               })
@@ -504,7 +504,7 @@ export default {
           ModifyUserInfo(data).then(res => {
             if (res.code === 20000) {
               this.$notify({
-                title: this.$t('UserManagePage.ModifySuccess'),
+                title: this.$t('PublicText.ModifySuccess'),
                 message: res.message,
                 type: 'success'
               })
