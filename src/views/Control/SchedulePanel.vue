@@ -1949,7 +1949,7 @@ export default {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsMtoolMsg = this.$t('PublicText.MesApiNotUpdate')
+            this.apsMtoolMsg = this.$t('PublicText.MesApiUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -2045,7 +2045,7 @@ export default {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsProgramMsg = this.$t('PublicText.MesApiNotUpdate')
+            this.apsProgramMsg = this.$t('PublicText.MesApiUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -2141,7 +2141,7 @@ export default {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsMoBaseData = this.$t('PublicText.MesApiNotUpdate')
+            this.apsMoBaseData = this.$t('PublicText.MesApiUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -2237,7 +2237,7 @@ export default {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: res.message_type
             })
-            this.apsMoProgData = this.$t('PublicText.MesApiNotUpdate')
+            this.apsMoProgData = this.$t('PublicText.MesApiUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
@@ -2333,7 +2333,7 @@ export default {
               confirmButtonText: this.$t('PublicBtn.Confirm'),
               type: 'success'
             })
-            this.apsDeliveryDay = this.$t('PublicText.MesApiNotUpdate')
+            this.apsDeliveryDay = this.$t('PublicText.MesApiUpdate')
             if (mode === 'main') {
               this.stepNowMain = 3
             } else if (mode === 'small') {
