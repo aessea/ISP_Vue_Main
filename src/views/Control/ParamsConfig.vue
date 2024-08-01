@@ -38,7 +38,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === UNKONWN_CLASSIFY" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === UNKONWN_CLASSIFY" size="small">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -191,31 +191,31 @@
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfigPage.param_before_value')">
               <el-input v-model="model.param_before_value" placeholder="" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_value" prop="param_default_value" :label="$t('ParamsConfigPage.param_default_value')">
               <el-input v-model="model.param_default_value" placeholder="" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+          <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_name" prop="param_default_name" :label="$t('ParamsConfigPage.param_default_name')">
               <el-input v-model="model.param_default_name" placeholder="" disabled />
             </el-form-item>
-          </el-col>
-          <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+          </el-col> -->
+          <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.serial_number" prop="serial_number" :label="$t('ParamsConfigPage.serial_number')">
               <el-input v-model="model.serial_number" :placeholder="$t('Placeholder.Enter')" clearable disabled />
             </el-form-item>
-          </el-col>
+          </el-col> -->
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_description" prop="param_description" :label="$t('ParamsConfigPage.param_description')">
-              <el-input v-model="model.param_description" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable />
+              <el-input v-model="model.param_description" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable disabled />
             </el-form-item>
           </el-col>
         </el-row>
@@ -231,7 +231,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
+        <!-- <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-form-item :rules="rules.visible_roles" prop="visible_roles" :label="$t('ParamsConfigPage.visible_roles')">
             <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
               <el-checkbox-group v-model="model.visible_roles" disabled>
@@ -239,7 +239,7 @@
               </el-checkbox-group>
             </el-col>
           </el-form-item>
-        </el-row>
+        </el-row> -->
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
