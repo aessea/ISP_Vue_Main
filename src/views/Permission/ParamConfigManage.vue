@@ -56,7 +56,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -122,7 +122,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -189,7 +189,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="120" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === $t('ParamsConfigPage.Unknownclassify')" size="small">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -266,12 +266,15 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_classify" prop="param_classify" :label="$t('ParamsConfigPage.param_classify')">
-              <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" style="width: 100%">
+              <!-- <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" style="width: 100%">
                 <el-option
                   v-for="item in param_classify_options"
                   :key="item.value"
                   :label="item.label"
                 />
+              </el-select> -->
+              <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
+                <el-option v-for="(item) in param_classify_options" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
           </el-col>
@@ -374,14 +377,14 @@
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>{{ $t('TablePage.ConfirmModify') }}</span>
+        <span>{{ $t('PublicBtn.ConfirmModify') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="exportData">{{ $t('TablePage.ConfirmModify') }}</el-button>
+        <el-button type="primary" @click="exportData">{{ $t('PublicBtn.ConfirmModify') }}</el-button>
       </span>
     </el-dialog>
   </div>

@@ -95,7 +95,7 @@
               <el-table-column type="selection" width="55" />
               <el-table-column prop="param_classify" :label="$t('ParamsConfigPage.param_classify')" width="200" sortable>
                 <template slot-scope="scope">
-                  <el-tag v-if="scope.row.param_classify === UNKONWN_CLASSIFY" size="small" type="info">{{ scope.row.param_classify }}</el-tag>
+                  <el-tag v-if="scope.row.param_classify === UNKONWN_CLASSIFY" size="small">{{ scope.row.param_classify }}</el-tag>
                   <el-tag v-else size="small" type="primary">{{ scope.row.param_classify }}</el-tag>
                 </template>
               </el-table-column>
@@ -270,7 +270,7 @@
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>{{ $t('TablePage.ConfirmModify') }}</span>
+        <span>{{ $t('PublicBtn.ConfirmModify') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
