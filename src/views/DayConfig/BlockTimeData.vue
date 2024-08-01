@@ -253,7 +253,7 @@
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleMultiClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addMultiData">{{ "$t('PublicBtn.Append')" }}</el-button>
+        <el-button v-if="dialogBtnType === true" type="primary" @click="addMultiData">{{ $t('PublicBtn.Append') }}</el-button>
       </span>
     </el-dialog>
 
