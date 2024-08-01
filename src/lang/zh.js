@@ -2,8 +2,9 @@ export default {
   FileKeyWord: {
     MainWord: '主板', // 主板
     SmallWord: '小板', // 小板
-    FormalSchedule: '正排', // 正排
-    UnFormalSchedule: '预排' // 预排
+    DulySchedule: '正排', // 正排
+    PrepSchedule: '预排', // 预排
+    Holiday: '放假' // 放假
   },
   title: {
     Language: '语言', // 语言
