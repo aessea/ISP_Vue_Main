@@ -95,7 +95,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
+                  <!-- <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
                     <el-button
                       type="danger"
                       size="mini"
@@ -103,7 +103,7 @@
                       circle
                       @click="restoreDefault(scope.$index, scope.row)"
                     />
-                  </el-tooltip>
+                  </el-tooltip> -->
                 </template>
               </el-table-column>
             </el-table>
@@ -162,7 +162,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
+                  <!-- <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
                     <el-button
                       type="danger"
                       size="mini"
@@ -170,7 +170,7 @@
                       circle
                       @click="restoreDefault(scope.$index, scope.row)"
                     />
-                  </el-tooltip>
+                  </el-tooltip> -->
                 </template>
               </el-table-column>
             </el-table>
@@ -228,7 +228,7 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
+                  <!-- <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
                     <el-button
                       type="danger"
                       size="mini"
@@ -236,7 +236,7 @@
                       circle
                       @click="restoreDefault(scope.$index, scope.row)"
                     />
-                  </el-tooltip>
+                  </el-tooltip> -->
                 </template>
               </el-table-column>
             </el-table>
@@ -297,24 +297,24 @@
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfigPage.param_before_value')">
               <el-input v-if="model.show_value === false" v-model="model.param_before_value" show-password disabled />
               <el-input v-else v-model="model.param_before_value" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+          <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_value" prop="param_default_value" :label="$t('ParamsConfigPage.param_default_value')">
               <el-input v-if="model.show_value === false" v-model="model.param_default_value" show-password disabled />
               <el-input v-else v-model="model.param_default_value" disabled />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_name" prop="param_default_name" :label="$t('ParamsConfigPage.param_default_name')">
               <el-input v-model="model.param_default_name" placeholder="" />
             </el-form-item>
           </el-col> -->
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.serial_number" prop="serial_number" :label="$t('ParamsConfigPage.serial_number')">
               <el-input v-model="model.serial_number" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>

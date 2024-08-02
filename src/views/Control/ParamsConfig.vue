@@ -191,16 +191,16 @@
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <!-- <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfigPage.param_before_value')">
               <el-input v-model="model.param_before_value" placeholder="" disabled />
             </el-form-item>
-          </el-col>
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          </el-col> -->
+          <!-- <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_value" prop="param_default_value" :label="$t('ParamsConfigPage.param_default_value')">
               <el-input v-model="model.param_default_value" placeholder="" disabled />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_default_name" prop="param_default_name" :label="$t('ParamsConfigPage.param_default_name')">
               <el-input v-model="model.param_default_name" placeholder="" disabled />
@@ -220,12 +220,17 @@
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfigPage.param_before_value')">
+              <el-input v-model="model.param_before_value" placeholder="" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.update_user" prop="update_user" :label="$t('ParamsConfigPage.update_user')">
               <el-input v-model="model.update_user" :placeholder="$t('ParamsConfigPage.update_user')" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.update_time" prop="update_time" :label="$t('ParamsConfigPage.update_time')">
               <el-input v-model="model.update_time" :placeholder="$t('ParamsConfigPage.update_time')" disabled />
             </el-form-item>
