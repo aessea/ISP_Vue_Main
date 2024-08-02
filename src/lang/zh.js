@@ -81,7 +81,8 @@ export default {
     Enabled: '已启用', // 已启用
     NotEnabled: '未启用', // 未启用
     Yes: '是', // 是
-    No: '否' // 否
+    No: '否', // 否
+    SwitchLanguageTip: '正在计算或分析排程，无法切换语言' // 正在计算或分析排程，无法切换语言
   },
   // 通用按钮
   PublicBtn: {

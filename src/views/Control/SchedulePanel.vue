@@ -1295,7 +1295,7 @@ export default {
       GetRunFlag().then(res => {
         if (res.run_flag === 1) {
           this.$message({
-            type: 'error',
+            type: 'warning',
             message: this.$t('SchedulePanelPage.TextTrainTip')
           })
         } else {

@@ -81,7 +81,8 @@ export default {
     Enabled: 'Enabled', // 已启用
     NotEnabled: 'Not enabled', // 未启用
     Yes: 'Yes', // 是
-    No: 'No' // 否
+    No: 'No', // 否
+    SwitchLanguageTip: 'The schedule is being calculated or analyzed, and the language cannot be switched' // 正在计算或分析排程，无法切换语言
   },
   // 通用按钮
   PublicBtn: {
@@ -299,6 +300,7 @@ export default {
     BtnTransfer: 'Transfer Points', // 转移扣点
     BtnExportMain: 'Export File', // 导出主板
     BtnExportSmall: 'Export File', // 导出小板
+    BtnExportABL: 'Export File', // 导出ABL
     BtnGetMainUpload: 'Get Main Upload File', // 获取主板上传文件
     BtnGetSmallUpload: 'Get Small Upload File', // 获取小板上传文件
     BtnGetApsProgram: 'Update Program Info', // 更新程序信息

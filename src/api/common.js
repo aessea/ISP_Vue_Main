@@ -41,6 +41,12 @@ export function SwitchLanguage(data) {
     data
   })
 }
+export function GetRunFlag() {
+  return request({
+    method: 'get',
+    url: `/${API_URL_FIRST}//get_run_flag_lang/`
+  })
+}
 // 获取语言
 export function GetLanguage() {
   return request({

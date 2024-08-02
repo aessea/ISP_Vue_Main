@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import { SwitchLanguage, GetLanguage } from '@/api/common'
+import { SwitchLanguage, GetLanguage, GetRunFlag } from '@/api/common'
 export default {
   name: 'LanguageSelect',
   data() {
@@ -48,25 +48,35 @@ export default {
     },
     // 根据下拉框的中被选中的值切换语言
     handleCommand(command) {
-      if (command === 'zh') {
-        this.language = '中文'
-      } else {
-        this.language = 'English'
-      }
       const data = {
         'lang': command
       }
-      SwitchLanguage(data).then(res => {
+      GetRunFlag().then(res => {
+        if (res.all_run_flag === 1) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('PublicText.SwitchLanguageTip')
+          })
+          return
+        } else {
+          SwitchLanguage(data).then(res => {
 
-      })
-      this.$i18n.locale = command
-      // console.log('this.$i18n.locale', this.$i18n.locale)
-      sessionStorage.setItem('lang', command)
-      // console.log(sessionStorage.getItem('lang'))
-      window.location.reload()
-      this.$message({
-        type: 'success',
-        message: this.$t('Msg.LangSwitchSuccess')
+          })
+          if (command === 'zh') {
+            this.language = '中文'
+          } else {
+            this.language = 'English'
+          }
+          this.$i18n.locale = command
+          // console.log('this.$i18n.locale', this.$i18n.locale)
+          sessionStorage.setItem('lang', command)
+          // console.log(sessionStorage.getItem('lang'))
+          window.location.reload()
+          this.$message({
+            type: 'success',
+            message: this.$t('Msg.LangSwitchSuccess')
+          })
+        }
       })
     }
   }

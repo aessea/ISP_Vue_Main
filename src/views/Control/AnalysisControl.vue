@@ -134,7 +134,7 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-button v-if="buttons.includes('AnalysisControl/download')" type="success" @click="downloadAnaExcel">
+              <el-button v-if="buttons.includes('AnalysisControl/downloadAnaResult')" type="success" @click="downloadAnaExcel">
                 {{ $t('AnalysisControlPage.BtnDownloadLatestFile') }}
               </el-button>
               <el-button v-if="buttons.includes('AnalysisControl/statisticsSchedule')" type="apiBtn" @click="statisticsSchedule">
