@@ -23,8 +23,8 @@
           </div>
         </el-col>
       </el-row>
-      <div class="table-box">
-        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+      <div class="table-box" @tab-click="handleClick">
+        <el-tabs v-model="activeName" type="card">
           <el-tab-pane :label="$t('ParamsConfigPage.MainConfig')" name="main">
             <el-table
               id="mytable"
@@ -243,8 +243,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleFormClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button v-if="dialogBtnType === true" type="primary" @click="addData">{{ $t('TablePage.BtnAppend') }}</el-button>
-        <el-button v-else-if="dialogBtnType === false" type="primary" @click="modifyData">{{ $t('TablePage.BtnModify') }}</el-button>
+        <el-button type="primary" @click="modifyData">{{ $t('TablePage.BtnModify') }}</el-button>
       </span>
     </el-dialog>
 
@@ -604,6 +603,9 @@ export default {
           }, 1000)
         }
       })
+    },
+    handleClick() {
+
     },
     // 导入数据窗口关闭
     handleExportClose() {
