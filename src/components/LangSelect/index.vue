@@ -1,6 +1,6 @@
 <template>
   <div class="ChannelSelected mr">
-    <el-dropdown split-button placement="bottom-start" @command="handleCommand">
+    <el-dropdown split-button placement="bottom-start" @command="beforeSwitchLanguage">
       <span class="el-dropdown-link">
         {{ language }}
       </span>
@@ -46,6 +46,20 @@ export default {
         })
       })
     },
+    beforeSwitchLanguage(command) {
+      this.$confirm(this.$t('Msg.ConfirmSwitchLanguage'), this.$t('PublicText.TitleTip'), {
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
+        cancelButtonText: this.$t('PublicBtn.Cancel'),
+        type: 'warning'
+      }).then(() => {
+        this.handleCommand(command)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: this.$t('PublicText.TextCancel')
+        })
+      })
+    },
     // 根据下拉框的中被选中的值切换语言
     handleCommand(command) {
       const data = {
@@ -55,7 +69,7 @@ export default {
         if (res.all_run_flag === 1) {
           this.$message({
             type: 'warning',
-            message: this.$t('PublicText.SwitchLanguageTip')
+            message: this.$t('Msg.SwitchLanguageTip')
           })
           return
         } else {

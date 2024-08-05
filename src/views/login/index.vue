@@ -51,7 +51,7 @@
       </div>
     </el-card>
     <div style="position:fixed;text-align:center;bottom:0;margin:0 auto;width:100%;color: #5c6b77">
-      <el-link style="text-align: center;" href="https://beian.miit.gov.cn/" target="_blank">闽ICP备2021015611号</el-link>
+      <!-- <el-link style="text-align: center;" href="https://beian.miit.gov.cn/" target="_blank">闽ICP备2021015611号</el-link> -->
     </div>
   </body>
 </template>

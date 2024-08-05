@@ -26,6 +26,8 @@ export default {
     InputName: '请输入用户名', // 请输入用户名
     InputPassword: '请输入密码', // 请输入密码
     LangSwitchSuccess: '语言切换成功', // 语言切换成功
+    SwitchLanguageTip: '正在计算或分析排程，无法切换语言', // 正在计算或分析排程，无法切换语言
+    ConfirmSwitchLanguage: '确定要切换语言？', // 语言切换成功
     DownloadSuccess: '下载成功', // 下载成功
     DownloadFail: '下载失败', // 下载失败
     BeginDownload: '开始下载', // 开始下载
@@ -81,8 +83,7 @@ export default {
     Enabled: '已启用', // 已启用
     NotEnabled: '未启用', // 未启用
     Yes: '是', // 是
-    No: '否', // 否
-    SwitchLanguageTip: '正在计算或分析排程，无法切换语言' // 正在计算或分析排程，无法切换语言
+    No: '否' // 否
   },
   // 通用按钮
   PublicBtn: {

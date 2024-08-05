@@ -26,8 +26,10 @@ export default {
     InputName: 'Please enter your username', // 请输入用户名
     InputPassword: 'Please enter your password', // 请输入密码
     LangSwitchSuccess: 'The language switch is successful', // 语言切换成功
-    DownloadSuccess: '', // 下载成功
-    DownloadFail: '', // 下载失败
+    SwitchLanguageTip: 'The schedule is being calculated or analyzed, and the language cannot be switched', // 正在计算或分析排程，无法切换语言
+    ConfirmSwitchLanguage: 'Are you sure you want to switch languages?', // 语言切换成功
+    DownloadSuccess: 'Download successfully', // 下载成功
+    DownloadFail: 'Download failed', // 下载失败
     BeginDownload: 'Begin Download', // 开始下载
     DownloadError: 'Download Request Error' // 下载请求出错
   },
@@ -81,8 +83,7 @@ export default {
     Enabled: 'Enabled', // 已启用
     NotEnabled: 'Not enabled', // 未启用
     Yes: 'Yes', // 是
-    No: 'No', // 否
-    SwitchLanguageTip: 'The schedule is being calculated or analyzed, and the language cannot be switched' // 正在计算或分析排程，无法切换语言
+    No: 'No' // 否
   },
   // 通用按钮
   PublicBtn: {
