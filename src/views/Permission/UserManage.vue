@@ -101,12 +101,12 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" tag="div">
               <el-form-item :rules="rules.username" prop="username" :label="$t('UserManagePage.username')">
-                <el-input v-model="model.username" :placeholder="$t('Placeholder.Enter')" clearable />
+                <el-input v-model="model.username" :placeholder="$t('Placeholder.Enter')" clearable autocomplete="new-username" />
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" tag="div">
               <el-form-item :rules="rules.password" prop="password" :label="$t('UserManagePage.password')">
-                <el-input v-model="model.password" :placeholder="$t('Placeholder.Enter')" clearable show-password />
+                <el-input v-model="model.password" :placeholder="$t('Placeholder.Enter')" clearable show-password autocomplete="new-password" />
               </el-form-item>
             </el-col>
           </el-row>
