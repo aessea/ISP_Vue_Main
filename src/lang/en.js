@@ -536,6 +536,7 @@ export default {
     role_name: 'Role Name', // 角色名称
     enable_menu_list: 'Enable Pages', // 可访问的页面
     CreateRole: 'Create Role', // 创建角色
+    EnableSwitchRoles: 'Modify Enable Switch Roles', // 可切换语言的角色
     DeleteRole: 'Delete Role', // 删除角色
     PleInputRoleName: 'Please input role name', // 请输入角色名称
     PermissionSet: 'Permission Settings', // 权限设置

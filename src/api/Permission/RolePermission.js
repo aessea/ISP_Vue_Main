@@ -31,3 +31,12 @@ export function DeleteRole(data) {
     data
   })
 }
+// 可切换语言的角色
+export function AddEnableSwitchRoles(data) {
+  return request({
+    url: `/${API_URL_FIRST}/add_enable_switch_roles/`,
+    method: 'post',
+    data
+  })
+}
+

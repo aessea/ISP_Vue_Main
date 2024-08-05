@@ -7,6 +7,9 @@
             <el-button v-if="createUserDialogDisable === true" type="primary" @click="createUserDialog">
               <i class="el-icon-plus" />{{ this.$t('RolePermissionPage.CreateRole') }}
             </el-button>
+            <el-button v-if="createUserDialogDisable === true" type="success" @click="addEnableRolesDialog">
+              {{ this.$t('RolePermissionPage.EnableSwitchRoles') }}
+            </el-button>
           </div>
         </el-col>
         <el-col :span="8">
@@ -19,14 +22,6 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
-              <el-button
-                size="small"
-                icon="el-icon-warning-outline"
-                circle
-                @click="helpTips"
-              />
-            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>
@@ -139,17 +134,24 @@
       </span>
     </el-dialog>
 
-    <!-- <el-dialog
+    <el-dialog
       v-el-drag-dialog
-      :title="$t('TablePage.BtnViewInstruction')"
-      :visible.sync="helpDialogVisible"
-      width="60%"
+      :title="$t('RolePermissionPage.EnableSwitchRoles')"
+      :visible.sync="addEnableRolesDialogVisible"
+      :before-close="handleAddEnableRolesClose"
+      width="70%"
       @dragDialog="handleDrag"
     >
+      <el-row>
+        <el-checkbox-group v-model="choose_role_list">
+          <el-checkbox v-for="line in all_roles_list" :key="line" :label="line" name="type" />
+        </el-checkbox-group>
+      </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="helpDialogVisible = false">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button @click="handleAddEnableRolesClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="addEnableSwitchRoles">{{ this.$t('PublicBtn.Confirm') }}</el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
 
   </div>
 </template>
@@ -157,7 +159,7 @@
 import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetAllRoleInfo, CreateRole, ModifyRoleInfo, DeleteRole } from '@/api/Permission/RolePermission'
+import { GetAllRoleInfo, CreateRole, ModifyRoleInfo, DeleteRole, AddEnableSwitchRoles } from '@/api/Permission/RolePermission'
 export default {
   name: 'RolePermission',
   directives: { elDragDialog },
@@ -183,7 +185,10 @@ export default {
       handleDeleteRoleDisable: true,
       rolePermissionDialogVisible: false,
       createOrModify: true,
-      row_id: -1
+      row_id: -1,
+      choose_role_list: [], // 允许切换语言的角色列表
+      all_roles_list: [], // 所有角色名称
+      addEnableRolesDialogVisible: false
     }
   },
   computed: {
@@ -226,6 +231,8 @@ export default {
           this.role_data_list = res.role_data_list
           this.role_menu_dict = res.role_menu_dict
           this.menu_role_dict = res.menu_role_dict
+          this.all_roles_list = res.all_roles_list
+          this.choose_role_list = res.choose_role_list
           this.loading = false
         }
       })
@@ -339,11 +346,33 @@ export default {
     // 关闭表单dialog的一些操作
     closeFormDialog() {
       this.dataDialogVisible = false
+    },
+    // 添加按默认锁定时间的线体
+    handleAddEnableRolesClose() {
+      this.addEnableRolesDialogVisible = false
+    },
+    addEnableRolesDialog() {
+      this.addEnableRolesDialogVisible = true
+    },
+    addEnableSwitchRoles() {
+      // 上传后端
+      const data = {
+        'enable_roles_list': this.choose_role_list
+      }
+      AddEnableSwitchRoles(data).then((res) => {
+        if (res.code === 20000) {
+          this.$notify({
+            title: res.message,
+            type: 'success'
+          })
+        }
+      }).catch(err => {
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
+          type: 'error'
+        })
+      })
     }
-    // 帮助提示按钮
-    // helpTips() {
-    //   this.helpDialogVisible = true
-    // }
   }
 }
 </script>

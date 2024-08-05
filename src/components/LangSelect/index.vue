@@ -1,6 +1,6 @@
 <template>
   <div class="ChannelSelected mr">
-    <el-dropdown split-button placement="bottom-start" @command="beforeSwitchLanguage">
+    <el-dropdown v-if="switch_language_enable === true" split-button placement="bottom-start" @command="beforeSwitchLanguage">
       <span class="el-dropdown-link">
         {{ language }}
       </span>
@@ -13,13 +13,20 @@
 </template>
 <script>
 import { SwitchLanguage, GetLanguage, GetRunFlag } from '@/api/common'
+import { mapGetters } from 'vuex'
 export default {
   name: 'LanguageSelect',
   data() {
     return {
       language: '',
-      t: this.$i18n.locale
+      t: this.$i18n.locale,
+      switch_language_enable: false
     }
+  },
+  computed: {
+    ...mapGetters([
+      'name'
+    ])
   },
   created() {
     this.getLanguage()
@@ -28,13 +35,17 @@ export default {
   methods: {
     // 获取语言
     getLanguage() {
-      GetLanguage().then(res => {
+      const data = {
+        'user_name': this.name
+      }
+      GetLanguage(data).then(res => {
         if (res.language_code === 'zh') {
           this.language = '中文'
         } else {
           this.language = 'English'
         }
         sessionStorage.setItem('lang', res.language_code)
+        this.switch_language_enable = res.switch_language_enable
       }).catch(err => {
         console.log(err)
         // 获取失败则默认设置为中文

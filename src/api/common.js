@@ -48,9 +48,10 @@ export function GetRunFlag() {
   })
 }
 // 获取语言
-export function GetLanguage() {
+export function GetLanguage(data) {
   return request({
     url: `/${API_URL_FIRST}/get_language_code/`,
-    method: 'get'
+    method: 'post',
+    data
   })
 }
