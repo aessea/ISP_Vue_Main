@@ -95,15 +95,6 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <!-- <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
-                    <el-button
-                      type="danger"
-                      size="mini"
-                      icon="el-icon-refresh"
-                      circle
-                      @click="restoreDefault(scope.$index, scope.row)"
-                    />
-                  </el-tooltip> -->
                 </template>
               </el-table-column>
             </el-table>
@@ -162,15 +153,6 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <!-- <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
-                    <el-button
-                      type="danger"
-                      size="mini"
-                      icon="el-icon-refresh"
-                      circle
-                      @click="restoreDefault(scope.$index, scope.row)"
-                    />
-                  </el-tooltip> -->
                 </template>
               </el-table-column>
             </el-table>
@@ -228,15 +210,6 @@
                       @click="handleModify(scope.$index, scope.row)"
                     />
                   </el-tooltip>
-                  <!-- <el-tooltip class="item" effect="dark" :content="$t('ParamsConfigPage.BtnRestoreDefault')" placement="top">
-                    <el-button
-                      type="danger"
-                      size="mini"
-                      icon="el-icon-refresh"
-                      circle
-                      @click="restoreDefault(scope.$index, scope.row)"
-                    />
-                  </el-tooltip> -->
                 </template>
               </el-table-column>
             </el-table>
@@ -266,21 +239,9 @@
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.param_classify" prop="param_classify" :label="$t('ParamsConfigPage.param_classify')">
-              <!-- <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" style="width: 100%">
-                <el-option
-                  v-for="item in param_classify_options"
-                  :key="item.value"
-                  :label="item.label"
-                />
-              </el-select> -->
               <el-select v-model="model.param_classify" :placeholder="$t('Placeholder.Select')" :style="{width: '100%'}">
                 <el-option v-for="(item) in param_classify_options" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_name_front" prop="param_name_front" :label="$t('ParamsConfigPage.param_name_front')">
-              <el-input v-model="model.param_name_front" :placeholder="$t('Placeholder.Enter')" clearable disabled />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
@@ -295,45 +256,25 @@
               <el-input v-else v-model="model.param_value" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfigPage.param_before_value')">
-              <el-input v-if="model.show_value === false" v-model="model.param_before_value" show-password disabled />
-              <el-input v-else v-model="model.param_before_value" disabled />
-            </el-form-item>
-          </el-col>
-          <!-- <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_default_value" prop="param_default_value" :label="$t('ParamsConfigPage.param_default_value')">
-              <el-input v-if="model.show_value === false" v-model="model.param_default_value" show-password disabled />
-              <el-input v-else v-model="model.param_default_value" disabled />
-            </el-form-item>
-          </el-col> -->
-          <!-- <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_default_name" prop="param_default_name" :label="$t('ParamsConfigPage.param_default_name')">
-              <el-input v-model="model.param_default_name" placeholder="" />
-            </el-form-item>
-          </el-col> -->
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.serial_number" prop="serial_number" :label="$t('ParamsConfigPage.serial_number')">
               <el-input v-model="model.serial_number" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="24" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.param_description" prop="param_description" :label="$t('ParamsConfigPage.param_description')">
-              <el-input v-model="model.param_description" :placeholder="$t('Placeholder.Enter')" :rows="1" type="textarea" clearable disabled />
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.param_before_value" prop="param_before_value" :label="$t('ParamsConfigPage.param_before_value')">
+              <el-input v-if="model.show_value === false" v-model="model.param_before_value" show-password disabled />
+              <el-input v-else v-model="model.param_before_value" disabled />
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.update_user" prop="update_user" :label="$t('ParamsConfigPage.update_user')">
               <el-input v-model="model.update_user" :placeholder="$t('ParamsConfigPage.update_user')" disabled />
             </el-form-item>
           </el-col>
-          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+          <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.update_time" prop="update_time" :label="$t('ParamsConfigPage.update_time')">
               <el-input v-model="model.update_time" :placeholder="$t('ParamsConfigPage.update_time')" disabled />
             </el-form-item>
@@ -394,7 +335,7 @@ import XLSX from 'xlsx'
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
-import { GetTableData, ModifyData, ExportData, RestoreDefault, SyncDatabaseData, DeleteAllJobdataBackup } from '@/api/Control/ParamsConfig'
+import { GetTableData, ModifyData, ExportData, SyncDatabaseData, DeleteAllJobdataBackup } from '@/api/Control/ParamsConfig'
 import { isEqual } from '@/utils/common'
 export default {
   name: 'ParamConfigManage',
@@ -436,9 +377,7 @@ export default {
         param_name_front: null,
         param_value: null,
         param_value_type: null,
-        param_default_value: null,
         param_before_value: null,
-        param_default_name: null,
         update_time: null,
         update_user: null,
         serial_number: null,
@@ -456,8 +395,6 @@ export default {
         param_name_front: null,
         param_value: null,
         param_value_type: null,
-        param_default_value: null,
-        param_default_name: null,
         param_before_value: null,
         update_time: null,
         update_user: null,
@@ -468,11 +405,6 @@ export default {
         show_value: null
       },
       rules: {
-        param_name_front: [{
-          required: true,
-          message: this.$t('Form.NotNull'),
-          trigger: 'blur'
-        }],
         param_value: [{
           required: true,
           message: this.$t('Form.NotNull'),
@@ -619,35 +551,6 @@ export default {
       this.dataDialogVisible = true
       this.isClick = false
     },
-    // 恢复默认值
-    restoreDefault(index, row) {
-      for (const key in this.model) {
-        this.model[key] = row[key]
-      }
-      this.$confirm(this.$t('ParamsConfigPage.ConfirmRestoreDefau'), this.$t('PublicText.TitleTip'), {
-        confirmButtonText: this.$t('PublicBtn.Confirm'),
-        cancelButtonText: this.$t('PublicBtn.Cancel'),
-        type: 'warning'
-      }).then(() => {
-        const data = this.model
-        data['user_name'] = this.name
-        RestoreDefault(data).then(res => {
-          if (res.code === 20000) {
-            this.$notify({
-              title: this.$t('PublicText.TitleTip'),
-              message: res.message,
-              type: res.message_type
-            })
-            this.refreshTableData()
-          }
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: this.$t('PublicText.TextCancel')
-        })
-      })
-    },
     // 编辑数据发送到后端保存
     modifyData() {
       if (!this.checkFormChange()) {
@@ -660,6 +563,7 @@ export default {
       this.isClick = true
       const data = this.model
       data['user_name'] = this.name
+      data['is_manage'] = true
       this.$refs['$form'].validate((valid) => {
         if (valid) {
           ModifyData(data).then(res => {
