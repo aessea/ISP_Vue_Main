@@ -12,15 +12,15 @@
         @click.middle.native="!isAffix(tag)?closeSelectedTag(tag):''"
         @contextmenu.prevent.native="openMenu(tag,$event)"
       >
-        {{ tag.title }}
+        {{ generateTitle(tag.title) }}
         <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">刷新页面</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭当前标签</li>
-      <li @click="closeOthersTags">关闭其他标签</li>
-      <li @click="closeAllTags(selectedTag)">关闭所有标签</li>
+      <li @click="refreshSelectedTag(selectedTag)">{{ $t('Msg.RefreshPage') }}</li>
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">{{ $t('Msg.CloseThisTag') }}</li>
+      <li @click="closeOthersTags">{{ $t('Msg.CloseOtherTag') }}</li>
+      <li @click="closeAllTags(selectedTag)">{{ $t('Msg.CloseAllTag') }}</li>
     </ul>
   </div>
 </template>
@@ -28,7 +28,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import path from 'path'
-
+import { generateTitle } from '@/utils/i18n'
 export default {
   components: { ScrollPane },
   data() {
@@ -66,6 +66,7 @@ export default {
     this.addTags()
   },
   methods: {
+    generateTitle,
     isActive(route) {
       return route.path === this.$route.path
     },

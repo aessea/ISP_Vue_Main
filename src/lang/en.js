@@ -31,7 +31,11 @@ export default {
     DownloadSuccess: 'Download successfully', // 下载成功
     DownloadFail: 'Download failed', // 下载失败
     BeginDownload: 'Begin Download', // 开始下载
-    DownloadError: 'Download Request Error' // 下载请求出错
+    DownloadError: 'Download Request Error', // 下载请求出错
+    RefreshPage: 'Refresh Page', // 刷新页面
+    CloseThisTag: 'Close This Tag', // 关闭当前标签
+    CloseOtherTag: 'Close Other Tag', // 关闭其他标签
+    CloseAllTag: 'Close All Tag' // 关闭所有标签
   },
   // 表单验证
   Form: {
