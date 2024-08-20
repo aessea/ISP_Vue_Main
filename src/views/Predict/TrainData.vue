@@ -11,7 +11,7 @@
               <i class="el-icon-delete" />{{ $t('TablePage.BtnDelete') }}
             </el-button>
             <el-button v-if="buttons.includes('TrainData/delete')" type="danger" @click="deleteAllData">
-              <i class="el-icon-delete" />清空所有数据
+              <i class="el-icon-delete" />{{ $t('TablePage.BtnDeleteAllData') }}
             </el-button>
             <el-button v-if="buttons.includes('TrainData/import')" @click="importDataDialog">
               <i class="el-icon-upload2" />{{ $t('TablePage.BtnImport') }}
@@ -292,6 +292,25 @@
       </span>
     </el-dialog>
 
+    <!-- <el-dialog
+      v-el-drag-dialog
+      :title="$t('TablePage.TitleExportData')"
+      :visible.sync="exportDialogVisible"
+      :before-close="handleExportClose"
+      width="45%"
+      @dragDialog="handleDrag"
+    >
+      <el-row>
+        <span>{{ $t('PublicBtn.ConfirmModify') }}</span>
+        <el-radio-group v-model="exportRadio">
+          <el-radio label="xlsx">.xlsx</el-radio>
+        </el-radio-group>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
+        <el-button type="primary" @click="exportData">{{ $t('TablePage.BtnConfirmExport') }}</el-button>
+      </span>
+    </el-dialog> -->
     <el-dialog
       v-el-drag-dialog
       :title="$t('TablePage.TitleExportData')"
@@ -300,6 +319,16 @@
       width="45%"
       @dragDialog="handleDrag"
     >
+      <el-row style="margin-bottom: 10px;">
+        <span class="demonstration">{{ $t('ProductionReportDataPage.ExportDateRange') }}</span>
+        <el-date-picker
+          v-model="date_range"
+          type="daterange"
+          :range-separator="$t('PublicText.To')"
+          :start-placeholder="$t('BlockTimeDataPage.DateStart')"
+          :end-placeholder="$t('BlockTimeDataPage.DateEnd')"
+        />
+      </el-row>
       <el-row>
         <span>{{ $t('PublicBtn.ConfirmModify') }}</span>
         <el-radio-group v-model="exportRadio">
@@ -722,8 +751,8 @@ export default {
       }
     },
     deleteAllData() {
-      this.$confirm('确定要清空所有数据？', '警告', {
-        confirmButtonText: '确定清空',
+      this.$confirm(this.$t('TablePage.MsgDeleteDataAllData'), this.$t('PublicText.TextWarn'), {
+        confirmButtonText: this.$t('PublicBtn.Confirm'),
         cancelButtonText: this.$t('PublicBtn.Cancel'),
         confirmButtonClass: 'btnDanger',
         type: 'warning'
@@ -796,7 +825,10 @@ export default {
     // 确认导出
     exportData() {
       this.loadingInstance = Loading.service(this.exportLoading)
-      ExportData().then(res => {
+      const data = {
+        'date_range': this.date_range
+      }
+      ExportData(data).then(res => {
         if (res.code === 20000) {
           const dataCount = res.data_count
           const sheetData = res.table_data
@@ -820,8 +852,11 @@ export default {
           }, 1000)
         }
       }).catch(err => {
-        console.log(err)
         this.loadingInstance.close() // 清除动画
+        this.$alert(err, this.$t('PublicText.TextError'), {
+          confirmButtonText: this.$t('PublicBtn.Confirm'),
+          type: 'error'
+        })
       })
     },
     // 导入数据窗口关闭

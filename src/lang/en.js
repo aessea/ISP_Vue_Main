@@ -320,6 +320,7 @@ export default {
     // 按钮
     BtnAppend: 'Append', // 添加
     BtnDelete: 'Delete', // 删除
+    BtnDeleteAllData: 'Delete All Data', // 清空所有数据
     BtnImport: 'Import', // 导入
     BtnExport: 'Export', // 导出
     BtnClose: 'Close', // 关闭
@@ -363,7 +364,8 @@ export default {
     MsgImportData2: ' pieces of data were imported', // 条数据
     MsgExportSuccess: 'Export Successful', // 导出成功
     MsgExportData1: 'A total of ', // 本次共导出了
-    MsgExportData2: ' pieces of data were exported' // 条数据
+    MsgExportData2: ' pieces of data were exported', // 条数据
+    MsgDeleteDataAllData: 'Are you sure you want to delete all data?' // 确定要清空所有数据？
   },
   // 分析排程页面
   AnalysisControlPage: {
