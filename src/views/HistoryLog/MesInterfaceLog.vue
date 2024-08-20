@@ -317,7 +317,7 @@ export default {
             XLSX.writeFile(wb, tableName + '.xlsx')
             this.loading = false
             this.$notify({
-              title: this.$t('tablepage.msgexportsuccess'),
+              title: this.$t('TablePage.MsgExportSuccess'),
               message: this.$t('TablePage.MsgExportData1') + dataCount + this.$t('TablePage.MsgExportData2'),
               type: 'success'
             })
@@ -357,7 +357,7 @@ export default {
             XLSX.writeFile(wb, tableName + '.xlsx')
             this.loading = false
             this.$notify({
-              title: this.$t('tablepage.msgexportsuccess'),
+              title: this.$t('TablePage.MsgExportSuccess'),
               message: this.$t('TablePage.MsgExportData1') + dataCount + this.$t('TablePage.MsgExportData2'),
               type: 'success'
             })
@@ -398,7 +398,7 @@ export default {
           XLSX.utils.book_append_sheet(wb, sheet, tableName)
           XLSX.writeFile(wb, tableName + '.xlsx')
           this.$notify({
-            title: this.$t('tablepage.msgexportsuccess'),
+            title: this.$t('TablePage.MsgExportSuccess'),
             message: this.$t('TablePage.MsgExportData1') + dataCount + this.$t('TablePage.MsgExportData2'),
             type: 'success'
           })
