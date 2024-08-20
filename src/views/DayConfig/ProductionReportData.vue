@@ -384,7 +384,7 @@
         <el-date-picker
           v-model="date_range"
           type="daterange"
-          range-separator="$t('PublicText.To')"
+          :range-separator="$t('PublicText.To')"
           :start-placeholder="$t('BlockTimeDataPage.DateStart')"
           :end-placeholder="$t('BlockTimeDataPage.DateEnd')"
         />
