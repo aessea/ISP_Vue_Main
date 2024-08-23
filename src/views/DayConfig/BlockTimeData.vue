@@ -950,7 +950,7 @@ export default {
         if (res.code === 20000) {
           this.$notify({
             title: this.$t('PublicText.TitleTip'),
-            message: this.$t('PublicText.MsgAppendData1') + res.count + this.$t('PublicText.MsgAppendData2'),
+            message: this.$t('BlockTimeDataPage.MsgAppendData1') + res.count + this.$t('BlockTimeDataPage.MsgAppendData2'),
             type: 'success'
           })
           this.refreshTableData(true)

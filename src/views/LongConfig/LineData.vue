@@ -144,7 +144,12 @@
           <el-table-column prop="default_threshould_of_big_small_line" :label="lang_dict.default_threshould_of_big_small_line" width="170" />
           <el-table-column prop="type_of_big_small_line" :label="lang_dict.type_of_big_small_line" width="160" />
           <el-table-column prop="fixed_ct" :label="lang_dict.fixed_ct" width="160" />
-          <el-table-column prop="is_open_program" :label="lang_dict.is_open_program" width="120" />
+          <el-table-column prop="is_open_program" :label="lang_dict.is_open_program" width="100">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_open_program === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_open_program === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
