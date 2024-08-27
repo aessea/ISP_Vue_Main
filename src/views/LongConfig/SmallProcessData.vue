@@ -50,6 +50,8 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" />
+          <el-table-column prop="name" :label="lang_dict.name" width="120" sortable fixed />
+          <el-table-column prop="TB" :label="lang_dict.TB" width="50" />
           <el-table-column prop="paired_process" :label="lang_dict.paired_process" width="100" />
           <el-table-column prop="grouping_factor_day" :label="lang_dict.grouping_factor_day" width="240" />
           <el-table-column prop="grouping_factor_overtime" :label="lang_dict.grouping_factor_overtime" width="160" />
