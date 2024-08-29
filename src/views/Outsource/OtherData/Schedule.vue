@@ -252,7 +252,6 @@ import { mapGetters } from 'vuex'
 // import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData } from '@/api/Outsource/OtherData/Schedule'
-import { LineOptions } from '@/utils/items'
 import { deepClone } from '@/utils'
 export default {
   name: 'Schedule',
@@ -363,7 +362,6 @@ export default {
           trigger: 'blur'
         }]
       },
-      line_name_data: LineOptions, // 维护线别
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页

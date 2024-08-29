@@ -305,7 +305,7 @@ import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
 import elDragDialog from '@/directive/el-drag-dialog'
 import { GetTableData, AddData, ModifyData, DeleteData, HandleDelete, ExportData, ImportData, GetLangDict } from '@/api/Predict/TrainLEDTData'
-import { LineOptions, ProcessOptions } from '@/utils/items'
+import { GetLineProcess } from '@/api/common'
 import { deepClone } from '@/utils'
 export default {
   name: 'TrainLEDTData',
@@ -477,8 +477,8 @@ export default {
           trigger: 'change'
         }]
       },
-      lineOptions: LineOptions, // 维护线别
-      processOptions: ProcessOptions, // 制程
+      lineOptions: [], // 维护线别
+      processOptions: [], // 制程
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
       currentPage: 1, // 当前在第几页
@@ -496,6 +496,7 @@ export default {
     GetLangDict().then(res => {
       this.lang_dict = res.lang_dict
     })
+    this.getLineProcess()
     this.getTableData(this.currentPage, this.pageSize)
   },
   mounted() {
@@ -506,6 +507,16 @@ export default {
     // dialog可拖拽
     handleDrag() {
       // this.$refs.select.blur()
+    },
+    getLineProcess() {
+      GetLineProcess().then(res => {
+        for (const key in res.all_line_list) {
+          this.lineOptions.push({ value: res.all_line_list[key], label: res.all_line_list[key] })
+        }
+        for (const key in res.all_process_list) {
+          this.processOptions.push({ value: res.all_process_list[key], label: res.all_process_list[key] })
+        }
+      })
     },
     // 分页
     handlePageChange(val) {
