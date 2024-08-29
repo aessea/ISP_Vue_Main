@@ -51,9 +51,9 @@
         >
           <el-table-column type="selection" width="55" />
           <el-table-column prop="check_status" :label="lang_dict.check_status" sortable />
-          <el-table-column prop="model_name" :label="lang_dict.SMT_machine_name" width="130" sortable />
+          <el-table-column prop="model_name" :label="lang_dict.model_name" width="130" sortable />
           <el-table-column prop="program_line_type" :label="lang_dict.program_line_type" sortable />
-          <el-table-column prop="board_no" :label="lang_dict.board" sortable />
+          <el-table-column prop="board_no" :label="lang_dict.board_no" sortable />
           <el-table-column prop="size" :label="lang_dict.size" sortable />
           <el-table-column prop="workmanship" :label="lang_dict.workmanship" sortable />
           <el-table-column prop="connecting_plates" :label="lang_dict.connecting_plates" sortable />
@@ -110,7 +110,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.model_name" prop="model_name" :label="lang_dict.SMT_machine_name">
+            <el-form-item :rules="rules.model_name" prop="model_name" :label="lang_dict.model_name">
               <el-input v-model="model.model_name" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
@@ -122,7 +122,7 @@
         </el-row>
         <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
           <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
-            <el-form-item :rules="rules.board_no" prop="board_no" :label="lang_dict.board">
+            <el-form-item :rules="rules.board_no" prop="board_no" :label="lang_dict.board_no">
               <el-input v-model="model.board_no" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
