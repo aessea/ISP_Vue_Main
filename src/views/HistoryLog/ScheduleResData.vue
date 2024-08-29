@@ -9,7 +9,7 @@
             </el-button>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="8">
           <div style="float: right;">
             <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnRefreshTable')" placement="top">
               <el-button
@@ -19,14 +19,6 @@
                 @click="refreshTableData"
               />
             </el-tooltip>
-            <!-- <el-tooltip class="item" effect="dark" :content="$t('TablePage.BtnViewInstruction')" placement="top">
-              <el-button
-                size="small"
-                icon="el-icon-warning-outline"
-                circle
-                @click="helpTips"
-              />
-            </el-tooltip> -->
           </div>
         </el-col>
       </el-row>

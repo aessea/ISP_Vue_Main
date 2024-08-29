@@ -18,7 +18,7 @@
             </el-button>
             <el-input
               v-model="SMT_machine_value"
-              placeholder="按照SMT机种名搜索"
+              :placeholder="$t('PublicText.TextSearchSMTMachine')"
               prefix-icon="el-icon-search"
               style="width: 200px;margin-left: 10px;"
               clearable
@@ -29,7 +29,7 @@
               style="margin-left: 10px;"
               @click="searchData"
             >
-              搜索
+              {{ $t('PublicBtn.Search') }}
             </el-button>
           </div>
         </el-col>

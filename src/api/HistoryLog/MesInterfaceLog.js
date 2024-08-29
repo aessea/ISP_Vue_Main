@@ -35,7 +35,6 @@ export function GetReceiveData(data) {
     data
   })
 }
-
 export function FilterTableData(data) {
   return request({
     url: '/HistoryLog/MesInterfaceLog/delete_history_data/',

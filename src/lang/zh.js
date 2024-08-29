@@ -87,7 +87,8 @@ export default {
     Enabled: '已启用', // 已启用
     NotEnabled: '未启用', // 未启用
     Yes: '是', // 是
-    No: '否' // 否
+    No: '否', // 否
+    TextSearchSMTMachine: '搜索SMT机种名' // 搜索SMT机种名
   },
   // 通用按钮
   PublicBtn: {
