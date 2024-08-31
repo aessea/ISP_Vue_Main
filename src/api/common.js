@@ -48,9 +48,16 @@ export function GetRunFlag() {
   })
 }
 // 获取语言
-export function GetLanguage(data) {
+export function GetLanguage() {
   return request({
     url: `/${API_URL_FIRST}/get_language_code/`,
+    method: 'post'
+  })
+}
+// 获取修改语言权限
+export function GetLanguagePermission(data) {
+  return request({
+    url: `/${API_URL_FIRST}/get_language_permission/`,
     method: 'post',
     data
   })

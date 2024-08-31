@@ -2,7 +2,7 @@
   <div class="ChannelSelected mr">
     <el-dropdown v-if="switch_language_enable === true" split-button placement="bottom-start" @command="beforeSwitchLanguage">
       <span class="el-dropdown-link">
-        {{ language }}
+        {{ current_language }}
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="zh">中文</el-dropdown-item>
@@ -12,49 +12,38 @@
   </div>
 </template>
 <script>
-import { SwitchLanguage, GetLanguage, GetRunFlag } from '@/api/common'
+import { SwitchLanguage, GetRunFlag, GetLanguagePermission } from '@/api/common'
 import { mapGetters } from 'vuex'
 export default {
   name: 'LanguageSelect',
   data() {
     return {
-      language: '',
+      current_language: '',
       t: this.$i18n.locale,
       switch_language_enable: false
     }
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'language'
     ])
   },
   created() {
-    this.getLanguage()
-    // this.language = this.$i18n.locale === 'zh' ? '中文' : 'English'
+    this.getLanguagePermission()
+    this.current_language = this.language === 'zh' ? '中文' : 'English'
   },
   methods: {
     // 获取语言
-    getLanguage() {
+    getLanguagePermission() {
       const data = {
         'user_name': this.name
       }
-      GetLanguage(data).then(res => {
-        if (res.language_code === 'zh') {
-          this.language = '中文'
-        } else {
-          this.language = 'English'
-        }
-        sessionStorage.setItem('lang', res.language_code)
+      // 获取改角色是否有修改权限
+      GetLanguagePermission(data).then(res => {
         this.switch_language_enable = res.switch_language_enable
       }).catch(err => {
         console.log(err)
-        // 获取失败则默认设置为中文
-        this.language = '中文'
-        sessionStorage.setItem('lang', 'zh')
-        this.$message({
-          type: 'info',
-          message: '默认设置为中文'
-        })
       })
     },
     beforeSwitchLanguage(command) {
@@ -88,15 +77,16 @@ export default {
 
           })
           if (command === 'zh') {
-            this.language = '中文'
+            this.current_language = '中文'
           } else {
-            this.language = 'English'
+            this.current_language = 'English'
           }
           this.$i18n.locale = command
-          // console.log('this.$i18n.locale', this.$i18n.locale)
-          sessionStorage.setItem('lang', command)
-          // console.log(sessionStorage.getItem('lang'))
-          window.location.reload()
+          this.$store.dispatch('app/setLanguage', command)
+          // 重新加载
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
           this.$message({
             type: 'success',
             message: this.$t('Msg.LangSwitchSuccess')
