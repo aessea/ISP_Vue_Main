@@ -113,6 +113,12 @@
               <el-tag v-else-if="scope.row.is_cannot_binding_line === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
+          <el-table-column prop="need_process_idle" :label="lang_dict.need_process_idle" width="160">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.need_process_idle === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.need_process_idle === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="min_min_threshold" :label="lang_dict.min_min_threshold" width="110" />
           <el-table-column prop="min_threshold" :label="lang_dict.min_threshold" width="110" />
           <el-table-column prop="max_threshold" :label="lang_dict.max_threshold" width="110" />
@@ -321,6 +327,11 @@
             <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_cannot_binding_line" prop="is_cannot_binding_line" :label="lang_dict.is_cannot_binding_line">
                 <el-switch v-model="model.is_cannot_binding_line" style="width: 100%" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="8" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.need_process_idle" prop="need_process_idle" :label="lang_dict.need_process_idle">
+                <el-switch v-model="model.need_process_idle" style="width: 100%" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -536,6 +547,7 @@ export default {
         is_Non_big_line: false,
         is_special_line: false,
         is_cannot_binding_line: false,
+        need_process_idle: false,
         big_setup: undefined,
         small_setup: undefined,
         setup_program: undefined,
@@ -575,6 +587,7 @@ export default {
         is_Non_big_line: false,
         is_special_line: false,
         is_cannot_binding_line: false,
+        need_process_idle: false,
         big_setup: undefined,
         small_setup: undefined,
         setup_program: undefined,
@@ -687,6 +700,11 @@ export default {
           trigger: 'blur'
         }],
         is_cannot_binding_line: [{
+          required: true,
+          message: this.$t('Form.NotNull'),
+          trigger: 'blur'
+        }],
+        need_process_idle: [{
           required: true,
           message: this.$t('Form.NotNull'),
           trigger: 'blur'
