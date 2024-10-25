@@ -992,7 +992,7 @@ export default {
       form.append('import_mode', this.importMode)
       ImportData(form).then(res => {
         if (res.code === 20000) {
-          this.$alert(this.$t('TablePage.MsgExportData1') + res.data_count + this.$t('TablePage.MsgExportData2'), res.message, {
+          this.$alert(this.$t('TablePage.MsgImportData1') + res.data_count + this.$t('TablePage.MsgImportData2'), res.message, {
             confirmButtonText: this.$t('PublicBtn.Confirm'),
             type: 'success'
           })
