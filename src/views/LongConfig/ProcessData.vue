@@ -87,6 +87,12 @@
               <el-tag v-else-if="scope.row.deleted_process_flag === false" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
           </el-table-column>
+          <el-table-column prop="is_threshold_constraint" :label="lang_dict.is_threshold_constraint" width="200">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.is_threshold_constraint === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.is_threshold_constraint === false" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="locked_buffer_time" :label="lang_dict.locked_buffer_time" width="200" />
           <el-table-column prop="netboard_buffer_time" :label="lang_dict.netboard_buffer_time" width="180" />
           <el-table-column prop="ct_predict_lower" :label="lang_dict.ct_predict_lower" width="120" />
@@ -94,6 +100,7 @@
           <el-table-column prop="process_sequence" :label="lang_dict.process_sequence" width="120" />
           <el-table-column prop="process_order" :label="lang_dict.process_order" width="120" sortable />
           <el-table-column prop="switch_name" :label="lang_dict.switch_name" width="120" sortable />
+          <el-table-column prop="change_to_forced_and_infeasible_lines" :label="lang_dict.change_to_forced_and_infeasible_lines" width="150" sortable />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -238,9 +245,21 @@
                 <el-input v-model="model.switch_name" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
+          </el-row>
+          <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.deleted_process_flag" prop="deleted_process_flag" :label="lang_dict.deleted_process_flag">
                 <el-switch v-model="model.deleted_process_flag" style="width: 100%" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.is_threshold_constraint" prop="is_threshold_constraint" :label="lang_dict.is_threshold_constraint">
+                <el-switch v-model="model.is_threshold_constraint" style="width: 100%" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+              <el-form-item :rules="rules.change_to_forced_and_infeasible_lines" prop="change_to_forced_and_infeasible_lines" :label="lang_dict.change_to_forced_and_infeasible_lines">
+                <el-input v-model="model.change_to_forced_and_infeasible_lines" :placeholder="$t('Placeholder.Enter')" clearable />
               </el-form-item>
             </el-col>
           </el-row>
@@ -387,7 +406,9 @@ export default {
         process_sequence: null,
         onehot_code: null,
         switch_name: null,
-        deleted_process_flag: false
+        deleted_process_flag: false,
+        is_threshold_constraint: true,
+        change_to_forced_and_infeasible_lines: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
@@ -411,7 +432,9 @@ export default {
         process_sequence: null,
         onehot_code: null,
         switch_name: null,
-        deleted_process_flag: false
+        deleted_process_flag: false,
+        is_threshold_constraint: true,
+        change_to_forced_and_infeasible_lines: null
       },
       modelBackup: {},
       rules: {
@@ -506,7 +529,17 @@ export default {
           required: true,
           message: this.$t('Form.NotNull'),
           trigger: 'blur'
-        }]
+        }],
+        is_threshold_constraint: [{
+          required: true,
+          message: this.$t('Form.NotNull'),
+          trigger: 'blur'
+        }],
+        /*change_to_forced_and_infeasible_lines: [{
+          required: true,
+          message: this.$t('Form.NotNull'),
+          trigger: 'blur'
+        }]*/
       },
       // 分页相关
       total_num: 0, // 总共有多少条数据(后端返回)
