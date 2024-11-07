@@ -334,6 +334,37 @@
                 </el-col>
               </el-row>
             </el-tab-pane>
+            <el-tab-pane :label="$t('SchedulePanelPage.AblDownload')" name="abl">
+              <el-row>
+                <el-col :span="24">
+                  <el-alert
+                    :title="$t('SchedulePanelPage.TitleDownloadNewAbl')"
+                    type="info"
+                    :closable="false"
+                  />
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('result_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadAbl') }}
+                    </el-button>
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('idle_info_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadIdle') }}
+                    </el-button>
+                  </el-row>
+                  <el-row class="button-row">
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('statistics_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadStastic') }}
+                    </el-button>
+                    <el-button v-if="buttons.includes('SchedulePanel/downloadScheduleFiles')" type="primary" plain @click="downloadFileBackend('no_program_file_path_main')">
+                      <i class="el-icon-download" />
+                      {{ $t('SchedulePanelPage.BtnDownloadNoPro') }}
+                    </el-button>
+                  </el-row>
+                </el-col>
+              </el-row>
+            </el-tab-pane>
             <el-tab-pane :label="$t('SchedulePanelPage.LogDownload')" name="log">
               <el-row>
                 <el-col :span="24">
@@ -935,13 +966,10 @@ export default {
       stopScheduleDialog: false, // 终止计算排程dialog
       stopInput: '', // 确认终止
       trainDateTip: '', // 训练日期提示
-
-      activeName: 'main',
+      activeName: process.env.VUE_APP_BASE_SCHEDULE_TYPE,
       mainUploadName: this.$t('SchedulePanelPage.TextMainUploadName'),
       smallUploadName: this.$t('SchedulePanelPage.TextSmallUploadName'),
-
       saveApsOutPutCountTip: this.$t('PublicText.MesApiPush'),
-
       clickComputeCount: 0, // 点击计算排程的次数
       pack_holiday_day_list: []
     }
@@ -2420,14 +2448,14 @@ export default {
     },
     // 导出ABL
     exportScheduleDataABL() {
-      if (!this.isImportSmall && !this.isImportBoth) {
+      if (!this.isImportABL && !this.isImportBoth) {
         this.$message({
           message: this.$t('SchedulePanelPage.TextExportTip1'),
           type: 'warning'
         })
         return
       }
-      ExportMainScheduleData().then(res => {
+      ExportSmallScheduleData().then(res => {
         this.downloadFile(res)
         this.$message({
           message: this.$t('Msg.BeginDownload'),
@@ -2520,7 +2548,7 @@ export default {
         }
       }
       var tip_message = this.$t('SchedulePanelPage.TextBucklePoints2')
-      if (this.apsMoProgData !== this.$t('PublicText.MesApiNotUpdate')) {
+      if (this.apsMoProgData !== this.$t('PublicText.MesApiUpdate')) {
         tip_message = this.$t('SchedulePanelPage.TextBucklePoints3')
       }
       this.doBucklePoints(upload_file_name, tip_message)

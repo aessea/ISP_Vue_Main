@@ -1,6 +1,5 @@
-
 module.exports = {
-  title: 'SMT',
+  title: '',
   // title: this.$t('title.text'),
   /**
    * @type {boolean} true | false

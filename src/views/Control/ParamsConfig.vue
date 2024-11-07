@@ -270,7 +270,7 @@ export default {
       table_data_main: [], // 主板配置
       table_data_small: [], // 小板配置
       table_data_other: [], // 其它配置
-      activeName: 'main',
+      activeName: process.env.VUE_APP_BASE_CONFIG_TYPE,
       dialogTitle: '', // 表单dialog标题
       dataDialogVisible: false, // 表单dialog显示
       dialogBtnType: true, // 表单dialog按钮 true为添加按钮 false为保存按钮

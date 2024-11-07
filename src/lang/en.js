@@ -204,10 +204,12 @@ export default {
     MainDowload: 'Download MainBoard', // 主板下载
     SmallDowload: 'Download SmallBoard', // 小板下载
     LogDownload: 'Download Log', // 日志下载
+    AblDownload: 'Download ABL', // ABL下载
     Config: 'Config', // 配置
     TitleDownloadNewMain: 'Download the latest output file', // 下载主板最新排程
     TitleDownloadNewSmall: 'Download the latest output file', // 下载小板最新排程
     TitleDownloadNewLog: 'Download the latest log file', // 下载最新日志
+    TitleDownloadNewAbl: 'Download the latest ABL file', // 下载最新ABL
     TitleComputeBoth: 'Calculate MainBoard and SmallBoard', // 计算主板和小板排程
     TitleComputeMain: 'Calculate MainBoard', // 计算主板排程
     TitleComputeSmall: 'Calculate SmallBoard', // 计算小板排程
@@ -293,6 +295,7 @@ export default {
     BtnPushStatistics: 'Push Stastic', // 推送量化结果
     BtnDownloadMain: 'Schedule File', // 下载主板排程
     BtnDownloadSmall: 'Schedule File', // 下载小板排程
+    BtnDownloadAbl: 'Schedule File', // 下载ABL排程
     BtnDownloadIdle: 'Idle Detail File', // 下载idle明细
     BtnDownloadStastic: 'Quantized File', // 下载量化结果
     BtnDownloadNoPro: 'NoProgram File', // 下载无程序表

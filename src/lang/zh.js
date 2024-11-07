@@ -204,10 +204,12 @@ export default {
     MainDowload: '下载主板', // 下载主板
     SmallDowload: '下载小板', // 下载小板
     LogDownload: '下载日志', // 下载日志
+    AblDownload: '下载ABL', // 下载ABL
     Config: '配置', // 配置
     TitleDownloadNewMain: '下载最新主板排程', // 下载最新主板排程
     TitleDownloadNewSmall: '下载最新小板排程', // 下载最新小板排程
     TitleDownloadNewLog: '下载最新日志', // 下载最新日志
+    TitleDownloadNewAbl: '下载最新ABL', // 下载最新ABL
     TitleComputeBoth: '计算主板和小板', // 计算主板和小板排程
     TitleComputeMain: '计算主板', // 计算主板排程
     TitleComputeSmall: '计算小板', // 计算小板排程
@@ -293,6 +295,7 @@ export default {
     BtnPushStatistics: '推送量化结果', // 推送量化结果
     BtnDownloadMain: '下载主板排程', // 下载主板排程
     BtnDownloadSmall: '下载小板排程', // 下载小板排程
+    BtnDownloadAbl: '下载ABL排程', // 下载ABL排程
     BtnDownloadIdle: '下载idle明细', // 下载idle明细
     BtnDownloadStastic: '下载量化结果', // 下载量化结果
     BtnDownloadNoPro: '下载无程序表', // 下载无程序表
