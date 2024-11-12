@@ -850,7 +850,7 @@ export default {
           const newData = [fields_display, ...sheetData]
           const sheet = XLSX.utils.json_to_sheet(newData, { header: fields, skipHeader: true })
           const wb = XLSX.utils.book_new()
-          XLSX.utils.book_append_sheet(wb, sheet, "sheet1")
+          XLSX.utils.book_append_sheet(wb, sheet, 'sheet1')
           XLSX.writeFile(wb, tableName + '.xlsx')
           this.$notify({
             title: this.$t('TablePage.MsgExportSuccess'),
