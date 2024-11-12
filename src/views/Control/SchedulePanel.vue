@@ -2530,7 +2530,7 @@ export default {
     // },
     beforeDoBucklePoints(upload_file_name) {
       if (upload_file_name.includes(this.$t('FileKeyWord.MainWord'))) {
-        if (this.isImportMain === false) {
+        if (this.isImportMain === false && this.isImportBoth === false) {
           this.$message({
             type: 'warning',
             message: this.$t('SchedulePanelPage.TextBucklePoints1')
@@ -2539,7 +2539,7 @@ export default {
         }
       }
       if (upload_file_name.includes(this.$t('FileKeyWord.SmallWord'))) {
-        if (this.isImportSmall === false) {
+        if (this.isImportSmall === false && this.isImportBoth === false) {
           this.$message({
             type: 'warning',
             message: this.$t('SchedulePanelPage.TextBucklePoints1')
