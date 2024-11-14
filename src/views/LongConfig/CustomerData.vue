@@ -53,6 +53,14 @@
           <el-table-column type="selection" width="55" />
           <el-table-column prop="name" :label="lang_dict.name" sortable />
           <el-table-column prop="identification" :label="lang_dict.identification" />
+          <el-table-column prop="days_in_advance" :label="lang_dict.days_in_advance" />
+          <el-table-column prop="wheather_alter_MD" :label="lang_dict.wheather_alter_MD">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.wheather_alter_MD === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
+              <el-tag v-else-if="scope.row.wheather_alter_MD === false" size="small" type="info">{{ $t('PublicText.No') }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="more_setup_time" :label="lang_dict.more_setup_time" />
           <el-table-column width="110" fixed="right" :label="$t('TablePage.TitleOperate')">
             <template slot-scope="scope">
               <el-button
@@ -104,6 +112,21 @@
           <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
             <el-form-item :rules="rules.identification" prop="identification" :label="lang_dict.identification">
               <el-input v-model="model.identification" :placeholder="$t('Placeholder.Enter')" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.days_in_advance" prop="days_in_advance" :label="lang_dict.days_in_advance">
+              <el-input v-model="model.days_in_advance" :placeholder="$t('Placeholder.Enter')" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.wheather_alter_MD" prop="wheather_alter_MD" :label="lang_dict.wheather_alter_MD">
+              <el-input v-model="model.wheather_alter_MD" :placeholder="$t('Placeholder.Enter')" clearable />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="0" :push="0" :pull="0" tag="div">
+            <el-form-item :rules="rules.more_setup_time" prop="more_setup_time" :label="lang_dict.more_setup_time">
+              <el-input v-model="model.more_setup_time" :placeholder="$t('Placeholder.Enter')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
@@ -231,13 +254,19 @@ export default {
       model: {
         id: null,
         name: null,
-        identification: null
+        identification: null,
+        days_in_advance: null,
+        wheather_alter_MD: null,
+        more_setup_time: null
       },
       // 修改前的表单内容，用于对比表单前后的变化（应用：关闭前提示修改未保存）
       modelOriginal: {
         id: null,
         name: null,
-        identification: null
+        identification: null,
+        days_in_advance: null,
+        wheather_alter_MD: null,
+        more_setup_time: null
       },
       modelBackup: {},
       rules: {
@@ -247,6 +276,21 @@ export default {
           trigger: 'blur'
         }],
         identification: [{
+          required: true,
+          message: this.$t('Form.NotNull'),
+          trigger: 'blur'
+        }],
+        days_in_advance: [{
+          required: true,
+          message: this.$t('Form.NotNull'),
+          trigger: 'blur'
+        }],
+        wheather_alter_MD: [{
+          required: true,
+          message: this.$t('Form.NotNull'),
+          trigger: 'blur'
+        }],
+        more_setup_time: [{
           required: true,
           message: this.$t('Form.NotNull'),
           trigger: 'blur'

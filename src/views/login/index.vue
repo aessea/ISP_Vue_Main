@@ -57,12 +57,12 @@
 </template>
 
 <script>
-import { title } from '@/settings'
+//import { title } from '@/settings'
 export default {
   name: 'Login',
   data() {
     return {
-      title: title,
+      title: process.env.VUE_APP_BASE_TITLE,
       loginForm: {
         username: '',
         password: ''
