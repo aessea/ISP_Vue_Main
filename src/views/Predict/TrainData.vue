@@ -330,7 +330,7 @@
         />
       </el-row>
       <el-row>
-        <span>{{ $t('PublicBtn.ConfirmModify') }}</span>
+        <span>{{ $t('PublicBtn.Export') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>

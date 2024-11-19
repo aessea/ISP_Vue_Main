@@ -318,14 +318,14 @@
       @dragDialog="handleDrag"
     >
       <el-row>
-        <span>{{ $t('PublicBtn.ConfirmModify') }}</span>
+        <span>{{ $t('PublicBtn.Export') }}</span>
         <el-radio-group v-model="exportRadio">
           <el-radio label="xlsx">.xlsx</el-radio>
         </el-radio-group>
       </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleExportClose">{{ $t('PublicBtn.Close') }}</el-button>
-        <el-button type="primary" @click="exportData">{{ $t('PublicBtn.ConfirmModify') }}</el-button>
+        <el-button type="primary" @click="exportData">{{ $t('TablePage.BtnConfirmExport') }}</el-button>
       </span>
     </el-dialog>
   </div>
