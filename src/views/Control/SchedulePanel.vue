@@ -1328,7 +1328,7 @@ export default {
           })
         } else {
           this.listenProgress()
-          TrainModel({ 'end_time': this.trainDate }).then(res => {
+          TrainModel({ 'end_time': this.trainDate,'user_name': this.name }).then(res => {
             if (res.code === 20000) {
               this.$message({
                 message: res.message,
@@ -1970,7 +1970,10 @@ export default {
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
-        GetApsMtool().then(res => {
+        const form = {
+          'user_name': this.name
+        }
+        GetApsMtool(form).then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, this.$t('PublicText.TitleTip'), {
@@ -2066,7 +2069,10 @@ export default {
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
-        GetApsProgram().then(res => {
+        const form = {
+          'user_name': this.name
+        }
+        GetApsProgram(form).then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, this.$t('PublicText.TitleTip'), {
@@ -2162,7 +2168,10 @@ export default {
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
-        GetApsMoBaseData().then(res => {
+        const form = {
+          'user_name': this.name
+        }
+        GetApsMoBaseData(form).then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, this.$t('PublicText.TitleTip'), {
@@ -2258,7 +2267,10 @@ export default {
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
-        GetApsMoProgData().then(res => {
+        const form = {
+          'user_name': this.name
+        }
+        GetApsMoProgData(form).then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(res.message, this.$t('PublicText.TitleTip'), {
@@ -2354,7 +2366,10 @@ export default {
           background: 'rgba(0, 0, 0, 0.5)'
         }
         this.loadingInstance = Loading.service(updateLoading)
-        GetApsDeliveryDay().then(res => {
+        const form = {
+          'user_name': this.name
+        }
+        GetApsDeliveryDay(form).then(res => {
           if (res.code === 20000) {
             this.loadingInstance.close()
             this.$alert(this.$t('SchedulePanelPage.TextApiUploadTip7'), this.$t('PublicText.TitleTip'), {
@@ -2547,6 +2562,15 @@ export default {
           return
         }
       }
+      if (upload_file_name.includes(this.$t('FileKeyWord.AblWord'))) {
+        if (this.isImportABL === false) {
+          this.$message({
+            type: 'warning',
+            message: this.$t('SchedulePanelPage.TextBucklePoints1')
+          })
+          return
+        }
+      }
       var tip_message = this.$t('SchedulePanelPage.TextBucklePoints2')
       if (this.apsMoProgData !== this.$t('PublicText.MesApiUpdate')) {
         tip_message = this.$t('SchedulePanelPage.TextBucklePoints3')
@@ -2567,7 +2591,8 @@ export default {
         } // 导入排程动画
         this.loadingInstance = Loading.service(pushLoading)
         const form = {
-          'file_name': upload_file_name
+          'file_name': upload_file_name,
+          'user_name': this.name
         }
         DoBucklePoints(form).then(res => {
           if (res.code === 20000) {

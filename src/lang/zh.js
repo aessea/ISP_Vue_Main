@@ -2,6 +2,7 @@ export default {
   FileKeyWord: {
     MainWord: '主板', // 主板
     SmallWord: '小板', // 小板
+    AblWord:'ABL',//ABL
     DulySchedule: '正排', // 正排
     PrepSchedule: '预排', // 预排
     Holiday: '放假' // 放假
