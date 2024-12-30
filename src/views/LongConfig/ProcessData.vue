@@ -75,12 +75,12 @@
             </template>
           </el-table-column>
           <el-table-column prop="buffer_time" :label="lang_dict.buffer_time" width="130" />
-          <el-table-column prop="is_point" :label="lang_dict.is_point" width="100">
+          <!--<el-table-column prop="is_point" :label="lang_dict.is_point" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_point === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
               <el-tag v-else-if="scope.row.is_point === false" size="small" type="danger">{{ $t('PublicText.No') }}</el-tag>
             </template>
-          </el-table-column>
+          </el-table-column>-->
           <el-table-column prop="deleted_process_flag" :label="lang_dict.deleted_process_flag" width="200">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.deleted_process_flag === true" size="small" type="success">{{ $t('PublicText.Yes') }}</el-tag>
@@ -235,11 +235,11 @@
                 <el-input-number v-model="model.buffer_time" :placeholder="$t('Placeholder.Enter')" :style="{width: '100%'}" />
               </el-form-item>
             </el-col>
-            <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
+            <!--<el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_point" prop="is_point" :label="lang_dict.is_point">
                 <el-switch v-model="model.is_point" style="width: 100%" />
               </el-form-item>
-            </el-col>
+            </el-col>-->
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.switch_name" prop="switch_name" :label="lang_dict.switch_name">
                 <el-input v-model="model.switch_name" :placeholder="$t('Placeholder.Enter')" clearable />
@@ -534,8 +534,8 @@ export default {
           required: true,
           message: this.$t('Form.NotNull'),
           trigger: 'blur'
-        }],
-        /*change_to_forced_and_infeasible_lines: [{
+        }]
+        /* change_to_forced_and_infeasible_lines: [{
           required: true,
           message: this.$t('Form.NotNull'),
           trigger: 'blur'

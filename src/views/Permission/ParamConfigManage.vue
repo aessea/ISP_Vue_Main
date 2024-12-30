@@ -633,8 +633,27 @@ export default {
           const sheetData = res.table_data
           const fields = res.fields
           const tableName = res.table_name
-          const fields_display = res.fields_display
-          const newData = [fields_display, ...sheetData]
+          const fields_display = this.$t('ParamsConfigPage')
+          const newFieldsDisplay = {}
+          fields.forEach((field) => {
+            if (Object.hasOwn(fields_display, field)) {
+              newFieldsDisplay[field] = fields_display[field]
+            }
+          })
+          const filteredSheetData = sheetData.map((dataRow) => {
+            const filteredRow = {}
+            fields.forEach((field) => {
+              if (Object.hasOwn(dataRow, field)) {
+                filteredRow[field] = dataRow[field]
+                if (Array.isArray(dataRow[field])) {
+                  filteredRow[field] = dataRow[field].join(',')
+                }
+              }
+            })
+            return filteredRow
+          })
+          const newData = [newFieldsDisplay, ...filteredSheetData]
+          // const newData = [fields_display, ...sheetData]
           const sheet = XLSX.utils.json_to_sheet(newData, { header: fields, skipHeader: true })
           const wb = XLSX.utils.book_new()
           XLSX.utils.book_append_sheet(wb, sheet, 'sheet1')

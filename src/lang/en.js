@@ -2,7 +2,7 @@ export default {
   FileKeyWord: {
     MainWord: 'MainBoard', // 主板
     SmallWord: 'SmallBoard', // 小板
-    AblWord:'ABLBoard',//ABL
+    AblWord: 'ABLBoard', // ABL
     DulySchedule: 'Duly', // 正排
     PrepSchedule: 'Prep', // 预排
     Holiday: 'Holiday' // 放假
@@ -358,6 +358,7 @@ export default {
     MsgDeleteMultiDataWarn3: 'The selected ', // 成功删除选中的
     MsgDeleteMultiDataWarn4: ' pieces of data were deleted', // 条数据
     MsgModifyInfo: 'The data is not modified, does not need to be submitted', // 数据未修改，无需提交
+    MsgButtonConflict: 'The two buttons cannot be turned on at the same time', // 这两个按钮不能同时开启
     MsgModifySuccess: 'The data was modified', // 数据已修改
     MsgModifyError: 'Submission failed, please fill in the data as required!', // 提交失败，请按照要求填写数据！
     MsgModifyCloseWarn: 'Data is not committed, are you sure to close the window?', // 数据未提交，确定要关闭窗口？
@@ -450,6 +451,12 @@ export default {
     param_classify: 'Config Classification', // 配置分类
     param_name_front: 'Config Name', // 配置名
     param_value: 'Config Value', // 配置值
+    param_type: 'Config Type', // 配置类别
+    param_name_backend: 'Backend Config Name', // 后端配置名
+    show_in_front: 'Whether to Show in Front', // 是否在前端显示
+    show_value: 'Whether to Show Value', // 是否显示具体值
+    param_value_type: 'Config Value Type', // 配置值类型
+    config_enable: 'Whether Can Config', // 是否可修改
     param_description: 'Config Description', // 配置描述
     param_before_value: 'The Last Config Value', // 上一次配置值
     param_default_value: 'Default Config Value', // 配置默认值

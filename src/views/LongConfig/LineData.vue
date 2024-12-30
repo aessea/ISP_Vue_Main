@@ -304,12 +304,12 @@
           <el-row :gutter="20" type="flex" justify="start" align="top" tag="div">
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_Big_line_remove22" prop="is_Big_line_remove22" :label="lang_dict.is_Big_line_remove22">
-                <el-switch v-model="model.is_Big_line_remove22" style="width: 100%" />
+                <el-switch v-model="model.is_Big_line_remove22" style="width: 100%" @change="toggleSwitch0" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
               <el-form-item :rules="rules.is_Non_big_line" prop="is_Non_big_line" :label="lang_dict.is_Non_big_line">
-                <el-switch v-model="model.is_Non_big_line" style="width: 100%" />
+                <el-switch v-model="model.is_Non_big_line" style="width: 100%" @change="toggleSwitch1" />
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="0" :push="0" :pull="0" tag="div">
@@ -933,6 +933,16 @@ export default {
       // 显示dialog
       this.dataDialogVisible = true
       this.isClick = false
+    },
+    toggleSwitch0() {
+      if (this.model.is_Big_line_remove22) {
+        this.model.is_Non_big_line = false
+      }
+    },
+    toggleSwitch1() {
+      if (this.model.is_Non_big_line) {
+        this.model.is_Big_line_remove22 = false
+      }
     },
     // 编辑数据发送到后端保存
     modifyData() {

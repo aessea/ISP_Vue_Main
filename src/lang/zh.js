@@ -2,7 +2,7 @@ export default {
   FileKeyWord: {
     MainWord: '主板', // 主板
     SmallWord: '小板', // 小板
-    AblWord:'ABL',//ABL
+    AblWord: 'ABL', // ABL
     DulySchedule: '正排', // 正排
     PrepSchedule: '预排', // 预排
     Holiday: '放假' // 放假
@@ -358,6 +358,7 @@ export default {
     MsgDeleteMultiDataWarn3: '成功删除选中的', // 成功删除选中的
     MsgDeleteMultiDataWarn4: ' 条数据', // 条数据
     MsgModifyInfo: '数据未修改，无需提交', // 数据未修改，无需提交
+    MsgButtonConflict: '这两个按钮不能同时开启', // 这两个按钮不能同时开启
     MsgModifySuccess: '数据已修改', // 数据已修改
     MsgModifyError: '提交失败，请按照要求填写数据！', // 提交失败，请按照要求填写数据！
     MsgModifyCloseWarn: '数据未提交，确定要关闭窗口？', // 数据未提交，确定要关闭窗口？
@@ -450,6 +451,12 @@ export default {
     param_classify: '配置分类', // 配置分类
     param_name_front: '配置名', // 配置名
     param_value: '配置值', // 配置值
+    param_type: '配置类别', // 配置类别
+    param_name_backend: '后端配置名', // 后端配置名
+    show_in_front: '是否在前端显示', // 是否在前端显示
+    show_value: '是否显示具体值', // 是否显示具体值
+    param_value_type: '配置值类型', // 配置值类型
+    config_enable: '是否可修改', // 是否可修改
     param_description: '配置描述', // 配置描述
     param_before_value: '上一次配置值', // 上一次配置值
     param_default_value: '配置默认值', // 配置默认值
